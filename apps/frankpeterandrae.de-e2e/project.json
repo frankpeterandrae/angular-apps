@@ -1,0 +1,33 @@
+{
+  "name": "frankpeterandrae.de-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/frankpeterandrae.de-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/frankpeterandrae.de-e2e/cypress.config.ts",
+        "devServerTarget": "frankpeterandrae.de:serve:development",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "frankpeterandrae.de:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "frankpeterandrae.de:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/frankpeterandrae.de-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["frankpeterandrae.de"]
+}
