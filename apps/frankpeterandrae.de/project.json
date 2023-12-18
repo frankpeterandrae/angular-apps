@@ -1,101 +1,85 @@
 {
-  "name": "frankpeterandrae.de",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "application",
-  "prefix": "frankpeterandrae.de",
-  "sourceRoot": "apps/frankpeterandrae.de/src",
-  "tags": [],
-  "targets": {
-    "build": {
-      "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/apps/frankpeterandrae.de",
-        "index": "apps/frankpeterandrae.de/src/index.html",
-        "main": "apps/frankpeterandrae.de/src/main.ts",
-        "polyfills": ["zone.js"],
-        "tsConfig": "apps/frankpeterandrae.de/tsconfig.app.json",
-        "assets": [
-          "apps/frankpeterandrae.de/src/favicon.ico",
-          "apps/frankpeterandrae.de/src/assets"
-        ],
-        "styles": ["apps/frankpeterandrae.de/src/styles.scss"],
-        "scripts": []
-      },
-      "configurations": {
-        "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
-            },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
-            }
-          ],
-          "outputHashing": "all"
-        },
-        "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
-      "configurations": {
-        "production": {
-          "browserTarget": "frankpeterandrae.de:build:production"
-        },
-        "development": {
-          "browserTarget": "frankpeterandrae.de:build:development"
-        }
-      },
-      "defaultConfiguration": "development"
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "browserTarget": "frankpeterandrae.de:build"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "apps/frankpeterandrae.de/**/*.ts",
-          "apps/frankpeterandrae.de/**/*.html"
-        ]
-      }
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "apps/frankpeterandrae.de/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
-      }
-    },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
-      "options": {
-        "buildTarget": "frankpeterandrae.de:build"
-      }
-    }
-  }
+	"name": "frankpeterandrae.de",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "application",
+	"prefix": "frankpeterandrae-de",
+	"sourceRoot": "apps/frankpeterandrae.de/src",
+	"tags": [],
+	"targets": {
+		"build": {
+			"executor": "@angular-devkit/build-angular:browser",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/apps/frankpeterandrae.de",
+				"index": "apps/frankpeterandrae.de/src/index.html",
+				"main": "apps/frankpeterandrae.de/src/main.ts",
+				"polyfills": ["zone.js"],
+				"tsConfig": "apps/frankpeterandrae.de/tsconfig.app.json",
+				"assets": ["apps/frankpeterandrae.de/src/favicon.ico", "apps/frankpeterandrae.de/src/assets"],
+				"styles": ["apps/frankpeterandrae.de/src/styles.scss"],
+				"scripts": []
+			},
+			"configurations": {
+				"production": {
+					"budgets": [
+						{
+							"type": "initial",
+							"maximumWarning": "500kb",
+							"maximumError": "1mb"
+						},
+						{
+							"type": "anyComponentStyle",
+							"maximumWarning": "2kb",
+							"maximumError": "4kb"
+						}
+					],
+					"outputHashing": "all"
+				},
+				"development": {
+					"buildOptimizer": false,
+					"optimization": false,
+					"vendorChunk": true,
+					"extractLicenses": false,
+					"sourceMap": true,
+					"namedChunks": true
+				}
+			},
+			"defaultConfiguration": "production"
+		},
+		"serve": {
+			"executor": "@angular-devkit/build-angular:dev-server",
+			"configurations": {
+				"production": {
+					"buildTarget": "frankpeterandrae.de:build:production"
+				},
+				"development": {
+					"buildTarget": "frankpeterandrae.de:build:development"
+				}
+			},
+			"defaultConfiguration": "development"
+		},
+		"extract-i18n": {
+			"executor": "@angular-devkit/build-angular:extract-i18n",
+			"options": {
+				"buildTarget": "frankpeterandrae.de:build"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"]
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "apps/frankpeterandrae.de/jest.config.ts"
+			}
+		},
+		"serve-static": {
+			"executor": "@nx/web:file-server",
+			"options": {
+				"buildTarget": "frankpeterandrae.de:build"
+			}
+		}
+	}
 }

@@ -3,12 +3,12 @@ import { RouterModule } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
 
 @Component({
-  standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
-  selector: 'frankpeterandrae.de-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+	standalone: true,
+	imports: [NxWelcomeComponent, RouterModule],
+	selector: 'frankpeterandrae-de-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'frankpeterandrae.de';
+	title = 'frankpeterandrae.de';
 }
