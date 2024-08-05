@@ -1,8 +1,5 @@
 {
 	"$schema": "./node_modules/nx/schemas/nx-schema.json",
-	"affected": {
-		"defaultBase": "master"
-	},
 	"targetDefaults": {
 		"build": {
 			"cache": true,
@@ -79,5 +76,6 @@
 		}
 	},
 	"nxCloudAccessToken": "YjQ2YjIyZTktZDhhMy00Y2JkLWJkZDItNjBjNDhkZDE5YzMyfHJlYWQtd3JpdGU=",
-	"useInferencePlugins": false
+	"useInferencePlugins": false,
+	"defaultBase": "master"
 }
