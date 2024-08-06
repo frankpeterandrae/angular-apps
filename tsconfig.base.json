@@ -22,7 +22,8 @@
 		"sourceMap": true,
 		"target": "es2021",
 		"paths": {
-			"@fpa/generators": ["libs/generators/src/index.ts"]
+			"@angular-monorepo/generators": ["libs/generators/src/index.ts"],
+			"@angular-monorepo/homepage/domain": ["libs/homepage/domain/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]

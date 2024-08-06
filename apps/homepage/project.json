@@ -4,18 +4,24 @@
 	"projectType": "application",
 	"prefix": "fpa",
 	"sourceRoot": "apps/homepage/src",
-	"tags": [],
+	"tags": ["domain:homepage", "type:app"],
 	"targets": {
 		"build": {
-			"executor": "@angular-devkit/build-angular:browser",
+			"executor": "@angular-devkit/build-angular:application",
 			"outputs": ["{options.outputPath}"],
 			"options": {
 				"outputPath": "dist/apps/homepage",
 				"index": "apps/homepage/src/index.html",
-				"main": "apps/homepage/src/main.ts",
+				"browser": "apps/homepage/src/main.ts",
 				"polyfills": ["zone.js"],
 				"tsConfig": "apps/homepage/tsconfig.app.json",
-				"assets": ["apps/homepage/src/favicon.ico", "apps/homepage/src/assets"],
+				"inlineStyleLanguage": "scss",
+				"assets": [
+					{
+						"glob": "**/*",
+						"input": "apps/homepage/public"
+					}
+				],
 				"styles": ["apps/homepage/src/styles.scss"],
 				"scripts": []
 			},
@@ -36,12 +42,9 @@
 					"outputHashing": "all"
 				},
 				"development": {
-					"buildOptimizer": false,
 					"optimization": false,
-					"vendorChunk": true,
 					"extractLicenses": false,
-					"sourceMap": true,
-					"namedChunks": true
+					"sourceMap": true
 				}
 			},
 			"defaultConfiguration": "production"
@@ -65,20 +68,13 @@
 			}
 		},
 		"lint": {
-			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"]
+			"executor": "@nx/eslint:lint"
 		},
 		"test": {
 			"executor": "@nx/jest:jest",
 			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
 			"options": {
 				"jestConfig": "apps/homepage/jest.config.ts"
-			}
-		},
-		"serve-static": {
-			"executor": "@nx/web:file-server",
-			"options": {
-				"buildTarget": "homepage:build"
 			}
 		}
 	}

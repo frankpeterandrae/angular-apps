@@ -1,8 +1,9 @@
 {
 	"name": "homepage-e2e",
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
-	"sourceRoot": "apps/homepage-e2e/src",
 	"projectType": "application",
+	"sourceRoot": "apps/homepage-e2e/src",
+	"implicitDependencies": ["homepage"],
 	"targets": {
 		"e2e": {
 			"executor": "@nx/cypress:cypress",
@@ -21,10 +22,7 @@
 			}
 		},
 		"lint": {
-			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"]
+			"executor": "@nx/eslint:lint"
 		}
-	},
-	"tags": [],
-	"implicitDependencies": ["homepage"]
+	}
 }

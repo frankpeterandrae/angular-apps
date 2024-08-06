@@ -35,6 +35,10 @@
 							{
 								"sourceTag": "domain:shared",
 								"onlyDependOnLibsWithTags": ["domain:shared"]
+							},
+							{
+								"sourceTag": "domain:homepage",
+								"onlyDependOnLibsWithTags": ["domain:homepage", "domain:shared"]
 							}
 						]
 					}
