@@ -21,7 +21,9 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"target": "es2021",
-		"paths": {}
+		"paths": {
+			"@fpa/generators": ["libs/generators/src/index.ts"]
+		}
 	},
 	"exclude": ["node_modules", "tmp"]
 }

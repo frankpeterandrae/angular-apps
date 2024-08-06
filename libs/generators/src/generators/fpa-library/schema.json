@@ -1,0 +1,44 @@
+{
+	"$schema": "http://json-schema.org/schema",
+	"$id": "FpaLibrary",
+	"title": "Create a TypeScript Library",
+	"description": "Create a TypeScript Library",
+	"type": "object",
+	"examples": [
+		{
+			"command": "nx g lib my-lib -directory=myapp",
+			"description": "Create a library in the libs/myapp/my-lib directory"
+		}
+	],
+	"properties": {
+		"name": {
+			"type": "string",
+			"description": "The name of the library.",
+			"$default": {
+				"$source": "argv",
+				"index": 0
+			},
+			"x-prompt": "What name would you like to use for the library?",
+			"pattern": "^[a-zA-Z]*$"
+		},
+		"feature": {
+			"type": "boolean",
+			"description": "Library is a feature library.",
+			"$default": false
+		},
+		"directory": {
+			"type": "string",
+			"description": "The directory of the new library."
+		},
+		"tags": {
+			"type": "string",
+			"description": "Add tags to the library (used for linting)."
+		},
+		"onlyConfig": {
+			"type": "boolean",
+			"description": "Only add the library to the workspace's configuration.",
+			"$default": false
+		}
+	},
+	"required": ["name"]
+}

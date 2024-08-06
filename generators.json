@@ -1,9 +1,0 @@
-{
-	"generators": {
-		"fpa-library": {
-			"factory": "./tool/generators/fpa-library/generator",
-			"schema": "./tool/generators/fpa-library/schema.json",
-			"description": "Create a new library"
-		}
-	}
-}
