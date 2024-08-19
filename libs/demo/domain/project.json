@@ -1,0 +1,20 @@
+{
+	"name": "demo-domain",
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/demo/domain/src",
+	"prefix": "demo",
+	"projectType": "library",
+	"tags": ["domain:demo", "type:domain-logic"],
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "libs/demo/domain/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	}
+}

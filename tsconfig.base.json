@@ -22,6 +22,7 @@
 		"sourceMap": true,
 		"target": "es2021",
 		"paths": {
+			"@angular-monorepo/demo/domain": ["libs/demo/domain/src/index.ts"],
 			"@angular-monorepo/generators": ["libs/generators/src/index.ts"],
 			"@angular-monorepo/homepage/domain": ["libs/homepage/domain/src/index.ts"],
 			"@angular-monorepo/shared/ui-theme": ["libs/shared/ui-theme/src/index.ts"]

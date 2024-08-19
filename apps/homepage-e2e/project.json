@@ -7,6 +7,7 @@
 	"targets": {
 		"e2e": {
 			"executor": "@nx/cypress:cypress",
+			"outputs": ["{workspaceRoot}/dist/.cypress/apps/homepage-e2e"],
 			"options": {
 				"cypressConfig": "apps/homepage-e2e/cypress.config.ts",
 				"devServerTarget": "homepage:serve:development",

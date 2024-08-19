@@ -1,28 +1,28 @@
 {
-	"name": "homepage",
+	"name": "demo",
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"projectType": "application",
-	"prefix": "fpa",
-	"sourceRoot": "apps/homepage/src",
-	"tags": ["domain:homepage", "type:app"],
+	"prefix": "app",
+	"sourceRoot": "apps/demo/src",
+	"tags": ["domain:demo", "type:app"],
 	"targets": {
 		"build": {
 			"executor": "@angular-devkit/build-angular:application",
 			"outputs": ["{options.outputPath}"],
 			"options": {
-				"outputPath": "dist/apps/homepage",
-				"index": "apps/homepage/src/index.html",
-				"browser": "apps/homepage/src/main.ts",
+				"outputPath": "dist/apps/demo",
+				"index": "apps/demo/src/index.html",
+				"browser": "apps/demo/src/main.ts",
 				"polyfills": ["zone.js"],
-				"tsConfig": "apps/homepage/tsconfig.app.json",
+				"tsConfig": "apps/demo/tsconfig.app.json",
 				"inlineStyleLanguage": "scss",
 				"assets": [
 					{
 						"glob": "**/*",
-						"input": "apps/homepage/public"
+						"input": "apps/demo/public"
 					}
 				],
-				"styles": ["apps/homepage/src/styles.scss", "libs/shared/ui-theme/src/lib/theme/styles.scss"],
+				"styles": ["apps/demo/src/styles.scss", "libs/shared/ui-theme/src/lib/theme/styles.scss"],
 				"scripts": []
 			},
 			"configurations": {
@@ -53,10 +53,10 @@
 			"executor": "@angular-devkit/build-angular:dev-server",
 			"configurations": {
 				"production": {
-					"buildTarget": "homepage:build:production"
+					"buildTarget": "demo:build:production"
 				},
 				"development": {
-					"buildTarget": "homepage:build:development"
+					"buildTarget": "demo:build:development"
 				}
 			},
 			"defaultConfiguration": "development"
@@ -64,7 +64,7 @@
 		"extract-i18n": {
 			"executor": "@angular-devkit/build-angular:extract-i18n",
 			"options": {
-				"buildTarget": "homepage:build"
+				"buildTarget": "demo:build"
 			}
 		},
 		"lint": {
@@ -74,7 +74,7 @@
 			"executor": "@nx/jest:jest",
 			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
 			"options": {
-				"jestConfig": "apps/homepage/jest.config.ts"
+				"jestConfig": "apps/demo/jest.config.ts"
 			}
 		}
 	}

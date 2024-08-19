@@ -1,0 +1,31 @@
+<p>colors works!</p>
+
+<table>
+	@for (color of colors; track color) {
+		<tr>
+			<td>{{ color }}</td>
+
+			@for (shade of shades; track shade) {
+				<td>
+					@if (shade === 0) {
+						<div class="demo--colors-block" [ngClass]="'fpa-bg-' + color"></div>
+					} @else {
+						<div class="demo--colors-block" [ngClass]="'fpa-bg-' + color + '-s' + shade"></div>
+					}
+				</td>
+			}
+		</tr>
+		<tr>
+			<td></td>
+			@for (shade of shades; track shade) {
+				<td>
+					@if (shade === 0) {
+						<div class="demo--colors-block" [ngClass]="'fpa-bg-' + color"></div>
+					} @else {
+						<div class="demo--colors-block" [ngClass]="'fpa-bg-' + color + '-t' + shade"></div>
+					}
+				</td>
+			}
+		</tr>
+	}
+</table>

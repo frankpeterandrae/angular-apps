@@ -1,0 +1,29 @@
+{
+	"name": "demo-e2e",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "application",
+	"sourceRoot": "apps/demo-e2e/src",
+	"implicitDependencies": ["demo"],
+	"targets": {
+		"e2e": {
+			"executor": "@nx/cypress:cypress",
+			"outputs": ["{workspaceRoot}/dist/.cypress/apps/demo-e2e"],
+			"options": {
+				"cypressConfig": "apps/demo-e2e/cypress.config.ts",
+				"devServerTarget": "demo:serve:development",
+				"testingType": "e2e"
+			},
+			"configurations": {
+				"production": {
+					"devServerTarget": "demo:serve:production"
+				},
+				"ci": {
+					"devServerTarget": "demo:serve-static"
+				}
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	}
+}

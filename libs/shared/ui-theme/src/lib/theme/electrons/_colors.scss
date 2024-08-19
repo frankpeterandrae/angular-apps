@@ -1,0 +1,45 @@
+@import '../base/prefix';
+@import '../base/variables';
+@import '../base/utility';
+
+$colors: (
+	desert-storm: $desert-storm,
+	porsche: $porsche,
+	flush-mahogany: $flush-mahogany,
+	schooner: $schooner,
+	bastille: $bastille,
+);
+
+@each $name, $color in $colors {
+	.#{$prefix}bg-#{'' + $name} {
+		background-color: $color;
+	}
+
+	@for $i from 1 through 9 {
+		.#{$prefix}bg-#{'' + $name}-t#{$i} {
+			background-color: tint($color, $i);
+		}
+	}
+
+	@for $i from 1 through 9 {
+		.#{$prefix}bg-#{'' + $name}-s#{$i} {
+			background-color: shade($color, $i);
+		}
+	}
+
+	.#{$prefix}#{'' + $name} {
+		color: $color;
+	}
+
+	@for $i from 1 through 9 {
+		.#{$prefix}#{'' + $name}-t#{$i} {
+			color: tint($color, $i);
+		}
+	}
+
+	@for $i from 1 through 9 {
+		.#{$prefix}#{'' + $name}-s#{$i} {
+			color: shade($color, $i);
+		}
+	}
+}
