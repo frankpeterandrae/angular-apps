@@ -1,0 +1,54 @@
+/*!
+ * Copyright (c) 2024. Frank-Peter Andrae
+ */
+@use 'sass:meta';
+
+@import '../../theme/base/variables';
+
+@mixin gradient($args...) {
+	@each $name, $list in meta.keywords($args) {
+		.fpa-gradient-#{$name} {
+			box-shadow: 0 10px 14px -7px nth($list, 1);
+			background: nth($list, 2) linear-gradient(to bottom, nth($list, 2) 5%, nth($list, 3) 100%);
+			border-color: nth($list, 4);
+			color: nth($list, 6);
+			text-shadow: 0 1px 0 nth($list, 5);
+		}
+
+		.fpa-gradient-#{$name}:hover {
+			background: nth($list, 3) linear-gradient(to bottom, nth($list, 3) 5%, nth($list, 2) 100%);
+		}
+
+		.#{$name} ::ng-deep .ng-fa-icon .svg-inline--fa {
+			filter: drop-shadow(0 1.5px 0 nth($list, 5));
+		}
+	}
+}
+
+:host {
+	.fpa-button {
+		border-radius: $border-radius;
+		border-width: 0;
+		display: inline-block;
+		cursor: pointer;
+		font-family: Arial, serif;
+		font-size: 20px;
+		font-weight: bold;
+		text-decoration: none;
+	}
+
+	.fpa-button:active {
+		position: relative;
+		top: 1px;
+	}
+
+	@include gradient(
+		$desert-storm: $desert-storm shade($desert-storm, 2) shade($desert-storm, 5) shade($desert-storm, 6)
+			tint($desert-storm, 6) $dark-text,
+		$porsche: $porsche shade($porsche, 2) shade($porsche, 5) shade($porsche, 6) tint($porsche, 6) $dark-text,
+		$flush-mahogany: $flush-mahogany shade($flush-mahogany, 2) shade($flush-mahogany, 5) shade($flush-mahogany, 6)
+			tint($flush-mahogany, 6) $dark-text,
+		$schooner: $schooner shade($schooner, 2) shade($schooner, 5) shade($schooner, 6) tint($schooner, 6) $dark-text,
+		$bastille: $bastille shade($bastille, 2) shade($bastille, 5) shade($bastille, 6) tint($bastille, 6) $light-text
+	);
+}

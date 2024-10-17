@@ -1,5 +1,5 @@
 {
-	"name": "@fpa/generators",
+	"name": "@angular-apps/generators",
 	"version": "0.0.1",
 	"dependencies": {
 		"@nx/devkit": "19.6.1",

@@ -10,18 +10,25 @@ $colors: (
 	bastille: $bastille,
 );
 
+// Define empty maps to store shades and tints
+$color-shades: ();
+$color-tints: ();
+
+$shades-count: 9;
+$tints-count: 9;
+
 @each $name, $color in $colors {
 	.#{$prefix}bg-#{'' + $name} {
 		background-color: $color;
 	}
 
-	@for $i from 1 through 9 {
+	@for $i from 1 through $tints-count {
 		.#{$prefix}bg-#{'' + $name}-t#{$i} {
 			background-color: tint($color, $i);
 		}
 	}
 
-	@for $i from 1 through 9 {
+	@for $i from 1 through $shades-count {
 		.#{$prefix}bg-#{'' + $name}-s#{$i} {
 			background-color: shade($color, $i);
 		}

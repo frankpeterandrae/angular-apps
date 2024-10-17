@@ -1,5 +1,5 @@
+import { libraryGenerator } from '@nx/angular/generators';
 import { formatFiles, generateFiles, getWorkspaceLayout, joinPathFragments, names, Tree } from '@nx/devkit';
-import { libraryGenerator } from '@nx/js';
 import { deleteGenreratedFiles } from '../common';
 import { FpaLibraryGeneratorSchema } from './schema';
 

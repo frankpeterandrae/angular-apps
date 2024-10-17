@@ -20,26 +20,38 @@
 					{
 						"glob": "**/*",
 						"input": "apps/homepage/public"
+					},
+					{
+						"glob": "**/*",
+						"input": "libs/colour-rack/src/assets",
+						"output": "assets"
 					}
 				],
 				"styles": ["apps/homepage/src/styles.scss", "libs/shared/ui-theme/src/lib/theme/styles.scss"],
-				"scripts": []
+				"scripts": [],
+				"extractLicenses": false,
+				"sourceMap": true,
+				"optimization": false,
+				"namedChunks": true
 			},
 			"configurations": {
 				"production": {
+					"optimization": true,
+					"outputHashing": "all",
+					"sourceMap": false,
+					"namedChunks": false,
+					"baseHref": "/newHp/",
 					"budgets": [
 						{
 							"type": "initial",
-							"maximumWarning": "500kb",
-							"maximumError": "1mb"
+							"maximumWarning": "2mb",
+							"maximumError": "5mb"
 						},
 						{
 							"type": "anyComponentStyle",
-							"maximumWarning": "2kb",
-							"maximumError": "4kb"
+							"maximumError": "6kb"
 						}
-					],
-					"outputHashing": "all"
+					]
 				},
 				"development": {
 					"optimization": false,
@@ -60,6 +72,29 @@
 				}
 			},
 			"defaultConfiguration": "development"
+		},
+		"build-production": {
+			"executor": "nx:run-commands",
+			"options": {
+				"parallel": false,
+				"commands": [
+					{
+						"command": "rmdir /S /Q dist\\production"
+					},
+					{
+						"command": "mkdir dist\\production"
+					},
+					{
+						"command": "nx build homepage --configuration=production"
+					},
+					{
+						"command": "xcopy dist\\apps\\homepage\\browser dist\\production\\ /E /I /Y"
+					},
+					{
+						"command": "xcopy apps\\php-api dist\\production\\php-api\\ /E /I /Y"
+					}
+				]
+			}
 		},
 		"extract-i18n": {
 			"executor": "@angular-devkit/build-angular:extract-i18n",

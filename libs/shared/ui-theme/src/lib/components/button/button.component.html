@@ -1,0 +1,18 @@
+<!--
+~ Copyright (c) 2024. Frank-Peter Andrae
+-->
+
+<button class="fpa-button fpa-mx-05 fpa-px-1 fpa-py-05" [ngClass]="buttonClasses" (click)="callback()">
+	<div class="fpa-df fpa-df-dr" [ngClass]="contentClasses">
+		@if (icon()?.iconName) {
+			<fa-icon class="fpa-mx-05" [icon]="icon()!"></fa-icon>
+		}
+		@if (buttonText()) {
+			@if (buttonText()) {
+				<span>
+					{{ buttonText() }}
+				</span>
+			}
+		}
+	</div>
+</button>

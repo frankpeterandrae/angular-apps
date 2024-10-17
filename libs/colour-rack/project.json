@@ -1,0 +1,20 @@
+{
+	"name": "colour-rack",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/colour-rack/src",
+	"prefix": "lib",
+	"projectType": "library",
+	"tags": ["domain:homepage", "type:feature"],
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "libs/colour-rack/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		}
+	}
+}

@@ -1,31 +1,25 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
-		"allowSyntheticDefaultImports": true,
-		"baseUrl": ".",
+		"rootDir": ".",
+		"sourceMap": true,
 		"declaration": false,
+		"moduleResolution": "node",
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
-		"forceConsistentCasingInFileNames": false,
 		"importHelpers": true,
-		"lib": ["es2021", "dom", "ES2021.String"],
+		"target": "es2015",
 		"module": "esnext",
-		"moduleResolution": "node",
-		"noFallthroughCasesInSwitch": true,
-		"noImplicitOverride": true,
-		"noImplicitReturns": true,
-		"noPropertyAccessFromIndexSignature": true,
-		"resolveJsonModule": true,
-		"rootDir": ".",
-		"skipDefaultLibCheck": true,
+		"lib": ["es2020", "dom"],
 		"skipLibCheck": true,
-		"sourceMap": true,
-		"target": "es2021",
+		"skipDefaultLibCheck": true,
+		"baseUrl": ".",
 		"paths": {
-			"@angular-monorepo/demo/domain": ["libs/demo/domain/src/index.ts"],
-			"@angular-monorepo/generators": ["libs/generators/src/index.ts"],
-			"@angular-monorepo/homepage/domain": ["libs/homepage/domain/src/index.ts"],
-			"@angular-monorepo/shared/ui-theme": ["libs/shared/ui-theme/src/index.ts"]
+			"@angular-apps/colour-rack": ["libs/colour-rack/src/index.ts"],
+			"@angular-apps/demo/domain": ["libs/demo/domain/src/index.ts"],
+			"@angular-apps/generators": ["libs/generators/src/index.ts"],
+			"@angular-apps/homepage/domain": ["libs/homepage/domain/src/index.ts"],
+			"@angular-apps/shared/ui-theme": ["libs/shared/ui-theme/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]
