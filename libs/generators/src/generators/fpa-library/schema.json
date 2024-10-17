@@ -19,7 +19,7 @@
 				"index": 0
 			},
 			"x-prompt": "What name would you like to use for the library?",
-			"pattern": "^[a-zA-Z]*$"
+			"pattern": "^[a-zA-Z0-9_-]*$"
 		},
 		"feature": {
 			"type": "boolean",

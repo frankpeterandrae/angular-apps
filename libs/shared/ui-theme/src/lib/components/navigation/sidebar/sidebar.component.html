@@ -1,0 +1,12 @@
+<nav>
+	<ul class="menu">
+		@for (item of menuItems; track item) {
+			<li class="menu-item">
+				<a [routerLink]="item.route">
+					<i class="icon">{{ item.icon }}</i>
+					<span>{{ item.label }}</span>
+				</a>
+			</li>
+		}
+	</ul>
+</nav>

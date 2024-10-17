@@ -1,0 +1,1442 @@
+[
+	{
+		"name": "Berserker Red",
+		"alternativeNames": ["Word Bearers Red (GW)", "Chaotic Red (AP)", "Nocturnal Red (VGC)"],
+		"type": "S",
+		"mainColor": "#4d1c16",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Sanguine Scarlet",
+		"alternativeNames": ["Mephiston Red (GW)", "Vampire Red (AP)", "Scarlet Blood (VGC)"],
+		"type": "M",
+		"mainColor": "#991915",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Demon Red",
+		"alternativeNames": ["Evil Sunz Scarlet (GW)", "Pure Red (AP)", "Bloody Red (VGC)"],
+		"type": "H",
+		"mainColor": "#d31217",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Amphora Red",
+		"alternativeNames": ["Gal Vorbak Red (GW)", "N/A (AP)", "Evil Red (VGC)"],
+		"type": "S",
+		"mainColor": "#502626",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Emperor Red",
+		"alternativeNames": ["Wazdakka Red (GW)", "Wyvern Fury (AP)", "Gory Red (VGC)"],
+		"type": "M",
+		"mainColor": "#a42d39",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Centurion Red",
+		"alternativeNames": ["Wild Rider Red (GW)", "Blood Chalice (AP)", "Bloody Red (VGC)"],
+		"type": "H",
+		"mainColor": "#e12626",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Dread Red",
+		"alternativeNames": ["Gal Vorbak Red (GW)", "Crusted Sore (AP)", "Nocturnal Red (VGC)"],
+		"type": "S",
+		"mainColor": "#784241",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Asmodeus Red",
+		"alternativeNames": ["Khorne Red (GW)", "Chaotic Red (AP)", "Succubus Skin (VGC)"],
+		"type": "M",
+		"mainColor": "#964844",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Evil Eye Red",
+		"alternativeNames": ["Wazdakka Red (GW)", "Abomination Gore  (AP)", "Gory Red (VGC)"],
+		"type": "H",
+		"mainColor": "#c45948",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Red Rage",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#733629",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Apocalypse Sky",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#e04134",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Inferno Orange",
+		"alternativeNames": ["N/A (GW)", "Molten Lava (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#ce3f25",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Rust Orange",
+		"alternativeNames": ["Squig Orange (GW)", "Dry Rust (AP)", "N/A (VGC)"],
+		"type": "S",
+		"mainColor": "#bb4d38",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Fanatic Orange",
+		"alternativeNames": ["Troll Slayer Orange (GW)", "Lava Orange (AP)", "Hot Orange (VGC)"],
+		"type": "M",
+		"mainColor": "#d94b2e",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Orange Flare",
+		"alternativeNames": ["Fire Dragon Bright (GW),", "Mythical Orange  (AP)", "Orange Fire (VGC)"],
+		"type": "H",
+		"mainColor": "#ec7241",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Dark Sun Yellow",
+		"alternativeNames": ["Averland Sunset (GW)", "Basilisk Brown (AP)", "N/A (VMC),"],
+		"type": "S",
+		"mainColor": "#c4873a",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Skulker Yellow",
+		"alternativeNames": ["Yriel Yellow (GW)", "Daemonic Yellow (AP)", "Gold Yellow (VGC),"],
+		"type": "M",
+		"mainColor": "#f69f00",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Yellow Flame",
+		"alternativeNames": ["Flash Gitz Yellow (GW)", "Babe Blonde (AP)", "Moon Yellow (VGC)"],
+		"type": "H",
+		"mainColor": "#f9b22d",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Panzer Yellow",
+		"alternativeNames": ["N/A (GW)", "Wasteland Clay (AP)", "Middlestone (VMC)"],
+		"type": "S",
+		"mainColor": "#ad9137",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Flak Gun Yellow",
+		"alternativeNames": ["N/A (GW)", "Burnt Turf (AP)", "Dark Sand (VMC)"],
+		"type": "M",
+		"mainColor": "#cdaf52",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Ambush Yellow",
+		"alternativeNames": ["N/A (GW)", "Barren Dune (AP)", "Pale Sand (VMC)"],
+		"type": "H",
+		"mainColor": "#ead06f",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Serpent Eye Yellow",
+		"alternativeNames": ["Phalanx Yellow (GW)", "Warped Yellow (AP)", "Lemon Yellow (VMC)"],
+		"type": "S",
+		"mainColor": "#f9d400",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Sun Bleach Yellow",
+		"alternativeNames": ["Dorn Yellow (GW)", "Space Dust (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#fae544",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Twin Suns Yellow",
+		"alternativeNames": ["N/A (GW)", "Ice Yellow (AP)", "Ice Yellow (VMC)"],
+		"type": "H",
+		"mainColor": "#edebb3",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Field Grey",
+		"alternativeNames": ["Vulkan Green (GW)", "Crypt Wraith (AP)", "Field Grey (VMC)"],
+		"type": "S",
+		"mainColor": "#787760",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Ranger Cloak",
+		"alternativeNames": ["Sons of Horus Green (GW)", "Venom Worm (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#88874e",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Kobold Grey",
+		"alternativeNames": ["Krieg Khaki (GW)", "Combat Fatigues (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#919177",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Fury Green",
+		"alternativeNames": ["Castellan Green (GW)", "Elf Green (AP)", "Cayman Green (VGC)"],
+		"type": "S",
+		"mainColor": "#76714b",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Gung-ho Green",
+		"alternativeNames": ["Warboss Green (GW)", "Goblin Green (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#b1a75e",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Green Beret",
+		"alternativeNames": ["Straken Green (GW)", "Scaly Hide (AP)", "Camouflage Green (VGC)"],
+		"type": "H",
+		"mainColor": "#b5b289",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Contagion Green",
+		"alternativeNames": ["Death Guard Green (GW)", "Olive Drab (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#96a27c",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Zombie Rot",
+		"alternativeNames": ["Ionrach Skin (GW)", "Necrotic Flesh (AP)", "Pastel Green (VMC)"],
+		"type": "M",
+		"mainColor": "#bcbb75",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Pestilence Green",
+		"alternativeNames": ["Deepkin Flesh (GW)", "Grotesque Green (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#dde397",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Orc Hide",
+		"alternativeNames": ["Waaagh! Flesh (GW)", "Greenskin (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#819d62",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Goblinoid Green",
+		"alternativeNames": ["Warboss Green (GW)", "Goblin Green (AP)", "Sick Green (VGC)"],
+		"type": "M",
+		"mainColor": "#92b75f",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Troll Snot Green",
+		"alternativeNames": ["Skarsnik Green (GW)", "Mouldy Clothes (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#a8c46c",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Wyvern Green",
+		"alternativeNames": ["Caliban Green (GW)", "Angel Green (AP)", "Dark Green (VGC)"],
+		"type": "S",
+		"mainColor": "#404b43",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Emerald Green",
+		"alternativeNames": ["Warpstone Glow (GW)", "Greenskin (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#3d5c43",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Ethereal Green",
+		"alternativeNames": ["Moot Green (GW)", "Jungle Green (AP)", "Scorpy Green (VGC)"],
+		"type": "H",
+		"mainColor": "#587f30",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "War Master Green",
+		"alternativeNames": ["Lupercal Green (GW)", "Scarab Green (AP)", "Black Green (VMC)"],
+		"type": "S",
+		"mainColor": "#404443",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Traitor Green",
+		"alternativeNames": ["Sons of Horus Green (GW)", "Temple Gate Teal (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#34544f",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Legion Green",
+		"alternativeNames": ["Sybarite Green (GW)", "Pharaoh Guard (AP)", "Aquamarine (VGC)"],
+		"type": "H",
+		"mainColor": "#2c6b66",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Hydra Green",
+		"alternativeNames": ["Incubi Darkness (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#3c5051",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Jade Green",
+		"alternativeNames": ["Kabalite Green (GW)", "Wizards Orb (AP)", "Scurvy Green (VGC)"],
+		"type": "M",
+		"mainColor": "#327864",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Ghoul Green",
+		"alternativeNames": ["Sybarite Green (GW)", "Elemental Bolt (AP)", "Foul Green (VGC)"],
+		"type": "H",
+		"mainColor": "#5bb892",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Oxidation Green",
+		"alternativeNames": ["Stegadon Scale Green (GW)", "Scarab Green (AP)", "Abyssal Turquoise (VMC)"],
+		"type": "S",
+		"mainColor": "#3a464e",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Antiquity Green",
+		"alternativeNames": ["Sotek Green (GW)", "Pharaoh Guard (AP)", "Turquoise (VGC)"],
+		"type": "M",
+		"mainColor": "#347c7d",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Mythic Turquoise",
+		"alternativeNames": ["Temple Guard Blue (GW)", "Talisman Teal (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#5b9d9e",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Sentient Turquoise",
+		"alternativeNames": ["Thousand Sons Blue (GW)", "Hydra Turquoise (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#3b84a4",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Cursed Blue",
+		"alternativeNames": ["Ahriman Blue (GW)", "Royal Cloak (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#4498b7",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Ray Gun Glow",
+		"alternativeNames": ["Baharroth Blue (GW)", "Toxic Mist (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#52afc5",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Eldar Robe",
+		"alternativeNames": ["Caledor Sky (GW)", "Royal Blue (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#28509a",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Relic Blue",
+		"alternativeNames": ["Teclis Blue (GW)", "Crystal Blue (AP)", "Deep Sky Blue (VMC)"],
+		"type": "M",
+		"mainColor": "#287cbc",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Seafarer Blue",
+		"alternativeNames": ["Lothern Blue (GW)", "Arctic Gem (AP)", "Sky Blue (VMC)"],
+		"type": "H",
+		"mainColor": "#4e9dca",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Abyss Blue",
+		"alternativeNames": ["Kantor Blue (GW)", "Deep Blue (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#394967",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Witching Hour Blue",
+		"alternativeNames": ["Caledor Sky (GW)", "Viking Blue (AP)", "Magic Blue (VGC)"],
+		"type": "M",
+		"mainColor": "#3764ad",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Leviathan Blue",
+		"alternativeNames": ["Hoeth Blue (GW)", "Voidshield Blue (AP)", "Electric Blue (VGC)"],
+		"type": "H",
+		"mainColor": "#417abe",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Marine Blue",
+		"alternativeNames": ["Macragge Blue (GW)", "Dark Sky (AP)", "Imperial Blue (VGC)"],
+		"type": "S",
+		"mainColor": "#444a70",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Elysium Blue",
+		"alternativeNames": ["Altdorf Guard Blue (GW)", "Ultramarine Blue (AP)", "Elfic Blue (VGC)"],
+		"type": "M",
+		"mainColor": "#537aac",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Celestial Blue",
+		"alternativeNames": ["Calgar Blue (GW)", "Electric Blue (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#6994c0",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Faust Blue",
+		"alternativeNames": ["Dark Reaper (GW)", "Night Sky (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#4c525c",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Shadow Blue",
+		"alternativeNames": ["Thunderhawk Blue (GW)", "Thunderous Blue (AP)", "Grey Blue (VMC)"],
+		"type": "M",
+		"mainColor": "#52656d",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Frost Blue",
+		"alternativeNames": ["Fenrisian Grey (GW)", "Frost Blue (AP)", "Steel Grey (VGC)"],
+		"type": "H",
+		"mainColor": "#7f9aa2",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Cold Corpse Blue",
+		"alternativeNames": ["The Fang (GW)", "Dungeon Grey (AP)", "Sombre Grey (VGC)"],
+		"type": "S",
+		"mainColor": "#51575c",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Wolf Grey",
+		"alternativeNames": ["Russ Grey (GW)", "Wolf Grey (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#63768a",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Gravestone Blue",
+		"alternativeNames": ["Fenrisian Grey (GW)", "Ice Storm (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#7b8b99",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Incubus Purple",
+		"alternativeNames": ["Daemonette Hide (GW)", "Hexed Violet (AP)", "Alien Purple (VGC)"],
+		"type": "S",
+		"mainColor": "#716c6e",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Enticing Purple",
+		"alternativeNames": ["Warpfiend Grey (GW)", "Violet Coven (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#877d8e",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Decadent Purple",
+		"alternativeNames": ["Slaanesh Grey (GW)", "Kraken Lavender (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#cdc7dc",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Amethyst Rayne",
+		"alternativeNames": ["Xereus Purple (GW)", "Alien Purple (AP)", "Hexed Lichen (VGC)"],
+		"type": "S",
+		"mainColor": "#534169",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Sorcerer's Cloak",
+		"alternativeNames": ["Genestealer Purple (GW)", "Oozing Purple (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#7a598e",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Runic Purple",
+		"alternativeNames": ["Kakophoni Purple (GW)", "Toxic Boils (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#9d8eb4",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Von Evile Purple",
+		"alternativeNames": ["Naggaroth Night (GW)", "Terrestrial Titan (AP)", "Royal Purple (VGC)"],
+		"type": "S",
+		"mainColor": "#2b182c",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Enchantress Purple",
+		"alternativeNames": ["Phoenician Purple (GW)", "Diabolic Plumb (AP)", "Midnight Purple (VGC)"],
+		"type": "M",
+		"mainColor": "#5c335f",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Spectral Purple",
+		"alternativeNames": ["Kakophoni Purple (GW)", "Cultist Purple (AP)", "Blue Violet (VMC)"],
+		"type": "H",
+		"mainColor": "#a05495",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Royal Cloak",
+		"alternativeNames": ["Barak-Nar Burgundy (GW)", "Crusted Sore (AP)", "Deep Magenta (VGC)"],
+		"type": "S",
+		"mainColor": "#5b444b",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Sword Hilt Burgundy",
+		"alternativeNames": ["Screamer Pink (GW)", "Wasteland Soil (AP)", "Warlord Purple (VGC)"],
+		"type": "M",
+		"mainColor": "#995878",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Glistening Gums",
+		"alternativeNames": ["Pink Horror (GW)", "Wasteland Soil (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#995878",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Perisher Pink",
+		"alternativeNames": ["Pink Horror (GW)", "Warlock Purple (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#bf6066",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Hot Pink",
+		"alternativeNames": ["Emperor's Children (GW)", "Pixie Pink (AP)", "Squid Pink (VGC)"],
+		"type": "M",
+		"mainColor": "#e485a9",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Neo Pink",
+		"alternativeNames": ["Fulgrim Pink (GW)", "Centaur Skin (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#f4c4dd",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Druid Flesh",
+		"alternativeNames": ["Catachan Flesh (GW)", "Onyx Skin (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#5d4334",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Paladin Flesh",
+		"alternativeNames": ["Blood Reaver Flesh (GW)", "Mocca Skin (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#8a5f4a",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Bard Skin",
+		"alternativeNames": ["Knight Questor Flesh (GW)", "Jasper Skin (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#9f7664",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Argonaut Skin",
+		"alternativeNames": ["N/A (GW)", "Dorado Skin (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#b1966f",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Kronos Flesh",
+		"alternativeNames": ["N/A (GW)", "Amber Skin (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#c7a170",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Ares Flesh",
+		"alternativeNames": ["N/A (GW)", "Banshee Brown (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#e4c889",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Barbarian Brawn",
+		"alternativeNames": ["Bugman's Glow (GW)", "Fur Brown (AP)", "Anthea Skin (VGC)"],
+		"type": "S",
+		"mainColor": "#906056",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Dwarven Skin",
+		"alternativeNames": ["Cadian Fleshtone (GW)", "Tanned Skin (AP)", "Skin Tone (VGC)"],
+		"type": "M",
+		"mainColor": "#b27d63",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Elven Skin",
+		"alternativeNames": ["Kislev Flesh (GW)", "Kobold Skin (AP)", "Pale Flesh (VGC)"],
+		"type": "H",
+		"mainColor": "#c59974",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Doom Death Black",
+		"alternativeNames": ["Abaddon Black (GW)", "Matt Black (AP)", "Black (VGC)"],
+		"type": "S",
+		"mainColor": "#3e3937",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Death Reaper",
+		"alternativeNames": ["Corvus Black (GW)", "Necromancer Cloak (AP)", "Charcoal (VGC)"],
+		"type": "M",
+		"mainColor": "#434142",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Dungeon Stone Grey",
+		"alternativeNames": ["Mechanicus Standard Grey (GW)", "Dungeon Grey (AP)", "Neutral Grey (VMC)"],
+		"type": "H",
+		"mainColor": "#5c5e61",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Wizard Grey",
+		"alternativeNames": ["Dawnstone (GW)", "Uniform Grey (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#6e6c6d",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Carcharodon Grey",
+		"alternativeNames": ["Administratum Grey (GW)", "Ash Grey (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#979798",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "White Star",
+		"alternativeNames": ["White Scar (GW)", "Matt White (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#f9faf9",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Dragon Fang",
+		"alternativeNames": ["Zandri Dust (GW)", "Skeleton Bone (AP)", "Khaki (VGC)"],
+		"type": "S",
+		"mainColor": "#9e8560",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Skeleton Legion",
+		"alternativeNames": ["Ushabti Bone (GW)", "Skeleton Bone (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#b2986d",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Vampire Fang",
+		"alternativeNames": ["Screaming Skull (GW)", "Skeleton Bone (AP)", "Bone White (VGC)"],
+		"type": "H",
+		"mainColor": "#cdba9b",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Griffon Claw",
+		"alternativeNames": ["Rakarth Flesh (GW)", "Banshee Brown (AP)", "Warm Grey (VGC)"],
+		"type": "S",
+		"mainColor": "#a19186",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Ivory Tusk",
+		"alternativeNames": ["Pallid Wych Flesh (GW)", "Brainmatter Beige (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#d4cac1",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Trooper White",
+		"alternativeNames": ["Corax White (GW)", "Spaceship Exterior (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#efede2",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Ashen Grey",
+		"alternativeNames": ["Eshin Grey (GW)", "Necromancer Cloak (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#58584c",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Eidolon Grey",
+		"alternativeNames": ["Skavenblight Dinge (GW)", "Hardened Carapace (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#5d5a4b",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Rodent Grey",
+		"alternativeNames": ["Stormvermin Fur (GW)", "Castle Grey (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#7b7867",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Dust Bowl",
+		"alternativeNames": ["Steel Legion Drab (GW)", "Basilisk Brown (AP)", "Earth (VGC)"],
+		"type": "S",
+		"mainColor": "#5d4334",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Sandstone",
+		"alternativeNames": ["Morghast Bone (GW)", "Desert Yellow (AP)", "N/A (VMC )"],
+		"type": "M",
+		"mainColor": "#937c68",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Temple Stone",
+		"alternativeNames": ["Karak Stone (GW)", "Skeleton Bone (AP)", "Stonewall Grey (VGC)"],
+		"type": "H",
+		"mainColor": "#a49179",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Cuirass Leather",
+		"alternativeNames": ["Rhinox Hide (GW)", "Oak Brown (AP)", "Dark Fleshtone (VGC)"],
+		"type": "S",
+		"mainColor": "#53433b",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Boar Hide",
+		"alternativeNames": ["Doombull Brown (GW)", "Dirt Spatter (AP)", "Dark Fleshtone (VGC)"],
+		"type": "M",
+		"mainColor": "#734539",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Fur Cloak",
+		"alternativeNames": ["Tuskgor Fur (GW)", "Leather Brown (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#93544e",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Scorched Earth",
+		"alternativeNames": ["Dryad Bark (GW)", "Oak Brown (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#5a4d4a",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Ancient Forest",
+		"alternativeNames": ["Gorthor Brown (GW)", "Werewolf Fur (AP)", "N/A (VMC)"],
+		"type": "M",
+		"mainColor": "#725b52",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Wasteland Brown",
+		"alternativeNames": ["Baneblade Brown (GW)", "Monster Brown (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#866c5c",
+		"secondaryColor": "",
+		"wave": "1"
+	},
+	{
+		"name": "Noble Steed Brown",
+		"alternativeNames": ["Mournfang Brown (GW)", "Dirt Spatter (AP)", "Gorgone Brown (VGC)"],
+		"type": "S",
+		"mainColor": "#815939",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Dry Rust Brown",
+		"alternativeNames": ["Skrag Brown (GW)", "Fur Brown (AP)", "Parasite Brown (VGC)"],
+		"type": "M",
+		"mainColor": "#be7737",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Satyr Brown",
+		"alternativeNames": ["Deathclaw Brown (GW)", "Troll Claws (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#da9a52",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Gyzmo Fur",
+		"alternativeNames": ["XV-88 (GW)", "Fur Brown (AP)", "Leather Brown (VGC)"],
+		"type": "S",
+		"mainColor": "#d68b49",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Manticore Ochre",
+		"alternativeNames": ["Tau Light Ochre (GW)", "Troll Claws (AP)", "Bronze Brown (VGC)"],
+		"type": "M",
+		"mainColor": "#db9a3a",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Cerberus Brown",
+		"alternativeNames": ["Ungor Flesh (GW)", "Barbarian Flesh (AP)", "N/A (VMC)"],
+		"type": "H",
+		"mainColor": "#e4b351",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Scabbard Brown",
+		"alternativeNames": ["Thondia Brown (GW)", "Bootstrap Brown (AP)", "Leather Brown (VMC)"],
+		"type": "S",
+		"mainColor": "#846145",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Boot Strap Brown",
+		"alternativeNames": ["Gorthor Brown (GW)", "Leather Brown (AP)", "Saddle Brown (VMC)"],
+		"type": "M",
+		"mainColor": "#8c6342",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Vambrace Brown",
+		"alternativeNames": ["Baneblade Brown (GW)", "Paratrooper Tan (AP)", "Cork Brown (VMC)"],
+		"type": "H",
+		"mainColor": "#a57859",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Oblivion Black Wash",
+		"alternativeNames": ["Nuln Oil (GW)", "Dark Tone (AP)", "Black Wash (VGC)"],
+		"type": "W",
+		"mainColor": "#9c9593",
+		"secondaryColor": "#423c3a",
+		"wave": "1"
+	},
+	{
+		"name": "Battle Mud Wash",
+		"alternativeNames": ["Agrax Earthshade (GW)", "Strong Tone (AP)", "Umber Wash (VGC)"],
+		"type": "W",
+		"mainColor": "#b9aca1",
+		"secondaryColor": "#67513e",
+		"wave": "1"
+	},
+	{
+		"name": "Flesh Wash",
+		"alternativeNames": ["Reikland Fleshshade (GW)", "Flesh Tone (AP)", "Flesh Wash (VGC)"],
+		"type": "W",
+		"mainColor": "#d2c0b1",
+		"secondaryColor": "#a37f63",
+		"wave": "1"
+	},
+	{
+		"name": "Orc Flesh Wash",
+		"alternativeNames": ["Biel-Tan Green (GW)", "Green Tone (AP)", "N/A (VMC)"],
+		"type": "W",
+		"mainColor": "#a7b89b",
+		"secondaryColor": "#3d7a40",
+		"wave": "1"
+	},
+	{
+		"name": "Necrosis Green Wash",
+		"alternativeNames": ["Athonian Camoshade (GW)", "Military Shade (AP)", "N/A (VMC)"],
+		"type": "W",
+		"mainColor": "#b8bda8",
+		"secondaryColor": "#70815a",
+		"wave": "1"
+	},
+	{
+		"name": "Archaic Sepia Wash",
+		"alternativeNames": ["Seraphim Sepia (GW)", "Soft Tone (AP)", "N/A (VMC)"],
+		"type": "W",
+		"mainColor": "#efe4d4",
+		"secondaryColor": "#c7a469",
+		"wave": "1"
+	},
+	{
+		"name": "Hellion Red Wash",
+		"alternativeNames": ["Carroburg Crimson (GW)", "Red Tone (AP)", "Red Wash (VGC)"],
+		"type": "W",
+		"mainColor": "#7b3433",
+		"secondaryColor": "#e2d5d4",
+		"wave": "2"
+	},
+	{
+		"name": "Tempest Blue Wash",
+		"alternativeNames": ["Drakenhof Nightshade (GW)", "Blue Tone (AP)", "Blue Wash (VGC)"],
+		"type": "W",
+		"mainColor": "#36445a",
+		"secondaryColor": "#d6cdd1",
+		"wave": "2"
+	},
+	{
+		"name": "Magi Purple Wash",
+		"alternativeNames": ["Druchii Violet (GW)", "Purple Tone (AP)", "Violet Wash (VGC)"],
+		"type": "W",
+		"mainColor": "#562e49",
+		"secondaryColor": "#e5dcdd",
+		"wave": "2"
+	},
+	{
+		"name": "Smoke Grey Wash",
+		"alternativeNames": ["Soulblight Grey (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "W",
+		"mainColor": "#ffffff",
+		"secondaryColor": "#b8b1a4",
+		"wave": "3"
+	},
+	{
+		"name": "Hazard Yellow Wash",
+		"alternativeNames": ["Casandora Yellow (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "W",
+		"mainColor": "#ffffff",
+		"secondaryColor": "#bb5830",
+		"wave": "3"
+	},
+	{
+		"name": "Aztec Turquoise Wash",
+		"alternativeNames": ["Coelia Greenshade (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "W",
+		"mainColor": "#f6f6f7",
+		"secondaryColor": "#405453",
+		"wave": "3"
+	},
+	{
+		"name": "Bone Wash",
+		"alternativeNames": ["N/A (GW)", "Rust Tone (AP)", "N/A (VMC)"],
+		"type": "S",
+		"mainColor": "#fefdfd",
+		"secondaryColor": "#5d392e",
+		"wave": "3"
+	},
+	{
+		"name": "Matt Varnish",
+		"alternativeNames": ["N/A (GW)", "Matt Varnish (AP)", "Matt Varnish (VMC)"],
+		"type": "E",
+		"mainColor": "#2f2c29",
+		"secondaryColor": "#ffffff",
+		"wave": "3"
+	},
+	{
+		"name": "Gloss Varnish",
+		"alternativeNames": ["N/A (GW)", "Gloss Varnish (AP)", "Gloss Varnish (VMC)"],
+		"type": "E",
+		"mainColor": "#fbfafb",
+		"secondaryColor": "#403837",
+		"wave": "3"
+	},
+	{
+		"name": "Red Glaze",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "Red Ink (VGC)"],
+		"type": "g",
+		"mainColor": "#f8bca2",
+		"secondaryColor": "#eb5e3b",
+		"wave": "2"
+	},
+	{
+		"name": "Yellow Glaze",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "Yellow Ink (VGC)"],
+		"type": "G",
+		"mainColor": "#fff6b5",
+		"secondaryColor": "#fdec44",
+		"wave": "2"
+	},
+	{
+		"name": "Blue Glaze",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "Blue Ink (VGC)"],
+		"type": "G",
+		"mainColor": "#b2b6dd",
+		"secondaryColor": "#576bb1",
+		"wave": "2"
+	},
+	{
+		"name": "Orange Glaze",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "G",
+		"mainColor": "#fbcc9e",
+		"secondaryColor": "#f28926",
+		"wave": "2"
+	},
+	{
+		"name": "Green Glaze",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "Green Ink (VGC)"],
+		"type": "G",
+		"mainColor": "#e2edcf",
+		"secondaryColor": "#8fc14d",
+		"wave": "2"
+	},
+	{
+		"name": "Purple Glaze",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "Violet Ink (VGC)"],
+		"type": "G",
+		"mainColor": "#ead5e6",
+		"secondaryColor": "#c887b1",
+		"wave": "2"
+	},
+	{
+		"name": "Hellspawn Red",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "B",
+		"mainColor": "#bd3222",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Craven Yellow",
+		"alternativeNames": ["N/A (GW)", "Moondust (AP)", "Toxic Yellow (VGC)"],
+		"type": "B",
+		"mainColor": "#f3e95e",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Gigawatt Blue",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "Sunrise Blue (VGC)"],
+		"type": "B",
+		"mainColor": "#66b9e8",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Flaming Forge Orange",
+		"alternativeNames": ["N/A (GW)", "Phoenix Flames (AP)", "N/A (VMC)"],
+		"type": "B",
+		"mainColor": "#eba739",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Talisman Green",
+		"alternativeNames": ["N/A (GW)", "Poisonous Cloud (AP)", "N/A (VMC)"],
+		"type": "B",
+		"mainColor": "#81bb27",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Amulet Purple",
+		"alternativeNames": ["Dechala Lilac (GW)", "Oozing Purple (AP)", "Lustful Purple (VGC)"],
+		"type": "B",
+		"mainColor": "#cab5d9",
+		"secondaryColor": "",
+		"wave": "2"
+	},
+	{
+		"name": "Cyber Pink",
+		"alternativeNames": ["Fulgrim Pink (GW)", "Impish Rogue (AP)", "N/A (VMC)"],
+		"type": "B",
+		"mainColor": "#c84384",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Elixir Green",
+		"alternativeNames": ["Gauss Blaster Green (GW)", "Mossy Green (AP)", "Green Sky (VMC)"],
+		"type": "B",
+		"mainColor": "#88c48a",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Solar Flare",
+		"alternativeNames": ["Lugganath Orange (GW)", "Inner Light (AP)", "N/A (VMC)"],
+		"type": "B",
+		"mainColor": "#ec7a02",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Ion Blue",
+		"alternativeNames": ["Blue Horror (GW)", "Frost Blue (AP)", "Glacier Blue (VGC)"],
+		"type": "B",
+		"mainColor": "#c5dde0",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Septic Green",
+		"alternativeNames": ["N/A (GW)", "Vivid Volt (AP)", "Yellow Green (VMC)"],
+		"type": "B",
+		"mainColor": "#b4b319",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Pale Skin",
+		"alternativeNames": ["Flayed One Flesh (GW)", "Pearl Skin (AP)", "Light Flesh (VMC)"],
+		"type": "B",
+		"mainColor": "#d1b07a",
+		"secondaryColor": "",
+		"wave": "3"
+	},
+	{
+		"name": "Overlord Brass",
+		"alternativeNames": ["Screaming Bell (GW)", "Weapon Bronze (AP)", "Brassy Brass (VGC)"],
+		"type": "S-ME",
+		"mainColor": "#e97238",
+		"secondaryColor": "#984e22",
+		"wave": "2"
+	},
+	{
+		"name": "Spartan Bronze",
+		"alternativeNames": ["Balthazar Gold (GW)", "True Copper (AP)", "Bright Bronze (VGC)"],
+		"type": "M-ME",
+		"mainColor": "#815235",
+		"secondaryColor": "#2b2723",
+		"wave": "1"
+	},
+	{
+		"name": "Dragon's Gold",
+		"alternativeNames": ["Retributor Armour (GW)", "Greedy Gold (AP)", "Glorious Gold (VGC)"],
+		"type": "H-ME",
+		"mainColor": "#eebc4c",
+		"secondaryColor": "#2a2723",
+		"wave": "1"
+	},
+	{
+		"name": "Heirloom Gold",
+		"alternativeNames": ["Skullcrusher Brass (GW)", "Bright Gold (AP)", "N/A (VMC)"],
+		"type": "S-ME",
+		"mainColor": "#d3a751",
+		"secondaryColor": "#2d2a24",
+		"wave": "3"
+	},
+	{
+		"name": "Ancient Gold",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "M-ME",
+		"mainColor": "#876f3e",
+		"secondaryColor": "#2b2723",
+		"wave": "3"
+	},
+	{
+		"name": "Glistening Gold",
+		"alternativeNames": ["Liberator Gold (GW)", "Bright Gold (AP)", "Polished Gold (VGC)"],
+		"type": "H-ME",
+		"mainColor": "#e8c793",
+		"secondaryColor": "#2d2924",
+		"wave": "1"
+	},
+	{
+		"name": "Bitz O'Tin",
+		"alternativeNames": ["Runelord Brass (GW)", "Rough Iron (AP)", "Tinny Tin (VGC)"],
+		"type": "S-ME",
+		"mainColor": "#a68c76",
+		"secondaryColor": "#312d28",
+		"wave": "3"
+	},
+	{
+		"name": "Chaos Bronze",
+		"alternativeNames": ["Brass Scorpion (GW)", "Evil Chrome (AP)", "N/A (VMC)"],
+		"type": "M-ME",
+		"mainColor": "#b79770",
+		"secondaryColor": "#302c27",
+		"wave": "3"
+	},
+	{
+		"name": "Steampunk Copper",
+		"alternativeNames": ["Castellax Bronze (GW)", "N/A (AP)", "Hammered Copper (VGC)"],
+		"type": "H-ME",
+		"mainColor": "#e8c391",
+		"secondaryColor": "#ae8f63",
+		"wave": "2"
+	},
+	{
+		"name": "Top Brass",
+		"alternativeNames": ["Sycorax Bronze (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "S-ME",
+		"mainColor": "#f5c467",
+		"secondaryColor": "#b1893e",
+		"wave": "2"
+	},
+	{
+		"name": "Battle Axe Brass",
+		"alternativeNames": ["Runelord Brass (GW)", "N/A (AP)", "Bright Bronze (VGC)"],
+		"type": "M-ME",
+		"mainColor": "#e8bd88",
+		"secondaryColor": "#ab895a",
+		"wave": "2"
+	},
+	{
+		"name": "Platinum Crown",
+		"alternativeNames": ["Canoptek Alloy (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "H-ME",
+		"mainColor": "#f8eede",
+		"secondaryColor": "#d9caa9",
+		"wave": "2"
+	},
+	{
+		"name": "Doom Metal",
+		"alternativeNames": ["N/A (GW)", "Death Metal (AP)", "N/A (VMC)"],
+		"type": "ME",
+		"mainColor": "#746c5c",
+		"secondaryColor": "#2f2c26",
+		"wave": "3"
+	},
+	{
+		"name": "Dwarven Iron",
+		"alternativeNames": ["Iron Warriors (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "ME",
+		"mainColor": "#746e60",
+		"secondaryColor": "#3d3e40",
+		"wave": "2"
+	},
+	{
+		"name": "Sir Coates Silver",
+		"alternativeNames": ["Leadbelcher (GW)", "Gun Metal (AP)", "Dark Gunmetal (VGC)"],
+		"type": "ME",
+		"mainColor": "#6a6869",
+		"secondaryColor": "#2c2924",
+		"wave": "1"
+	},
+	{
+		"name": "Blue Steel",
+		"alternativeNames": ["Grey Knights Steel (GW)", "Cobalt Metal (AP)", "N/A (VMC)"],
+		"type": "ME",
+		"mainColor": "#8b9694",
+		"secondaryColor": "#2f2c28",
+		"wave": "3"
+	},
+	{
+		"name": "Plate Armour",
+		"alternativeNames": ["Ironbreaker (GW)", "Plate Mail Metal (AP)", "Chainmail (VGC)"],
+		"type": "ME",
+		"mainColor": "#969596",
+		"secondaryColor": "#2d2a25",
+		"wave": "1"
+	},
+	{
+		"name": "Mythril Blade",
+		"alternativeNames": ["Stormhost Silver (GW)", "Shining Sliver (AP)", "Chainmail (VGC)"],
+		"type": "H",
+		"mainColor": "#ccccce",
+		"secondaryColor": "#2d2925",
+		"wave": "1"
+	},
+	{
+		"name": "Scarab Red",
+		"alternativeNames": ["N/A (GW)", "Gemstone Red (AP)", "N/A (VMC)"],
+		"type": "ME",
+		"mainColor": "#bb3c3e",
+		"secondaryColor": "#302a25",
+		"wave": "3"
+	},
+	{
+		"name": "Omega Blue",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "ME",
+		"mainColor": "#63bbbd",
+		"secondaryColor": "#2d2c27",
+		"wave": "3"
+	},
+	{
+		"name": "Enchantment Blue",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "ME",
+		"mainColor": "#327eb0",
+		"secondaryColor": "#2c2a26",
+		"wave": "3"
+	},
+	{
+		"name": "Emperor's Purple",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "ME",
+		"mainColor": "#865f8e",
+		"secondaryColor": "#2a2723",
+		"wave": "3"
+	},
+	{
+		"name": "Carapace Green",
+		"alternativeNames": ["N/A (GW)", "Glittering Green (AP)", "N/A (VMC)"],
+		"type": "ME",
+		"mainColor": "#4f954e",
+		"secondaryColor": "#2c2a24",
+		"wave": "3"
+	},
+	{
+		"name": "Fire Opal",
+		"alternativeNames": ["N/A (GW)", "N/A (AP)", "N/A (VMC)"],
+		"type": "ME",
+		"mainColor": "#c96e44",
+		"secondaryColor": "#2a2723",
+		"wave": "3"
+	}
+]

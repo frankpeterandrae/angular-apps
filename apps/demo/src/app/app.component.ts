@@ -1,14 +1,16 @@
-import { ColorsComponent } from '@angular-monorepo/demo/domain';
-import { CommonModule } from '@angular/common';
+import { ColorsComponent } from '@angular-apps/demo/domain';
+
+import { ButtonComponent, ColorDefinition } from '@angular-apps/shared/ui-theme';
 import { Component } from '@angular/core';
 
 @Component({
 	standalone: true,
-	imports: [CommonModule, ColorsComponent],
-	selector: 'app-root',
+	imports: [ColorsComponent, ButtonComponent],
+	selector: 'demo-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-	title = 'demo';
+	public title = 'demo';
+	protected readonly ColorDefinition = ColorDefinition;
 }

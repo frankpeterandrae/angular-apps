@@ -60,8 +60,28 @@ module.exports = [
 		files: ['**/*.ts', '**/*.tsx'],
 		rules: {
 			...config.rules,
+			'@typescript-eslint/no-explicit-any': 'off',
 			'@/no-extra-semi': 'error',
-			'no-extra-semi': 'off',
+			'@typescript-eslint/explicit-function-return-type': 'error',
+			'@typescript-eslint/explicit-member-accessibility': [
+				'error',
+				{
+					ignoredMethodNames: [
+						'ngOnInit',
+						'ngOnChanges',
+						'ngAfterViewInit',
+						'ngAfterViewChecked',
+						'ngOnDestroy',
+						'ngAfterContentInit',
+						'onResize',
+						'ngDoCheck',
+					],
+					overrides: {
+						properties: 'explicit',
+						constructors: 'no-public',
+					},
+				},
+			],
 		},
 	})),
 	...compat.config({ extends: ['plugin:@nx/javascript'] }).map((config) => ({

@@ -1,0 +1,36 @@
+.grid-container {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 5px;
+}
+
+.color-tile {
+	position: relative;
+	width: 100%;
+	padding-top: 100%; // Für quadratische Kacheln
+	cursor: pointer;
+}
+
+.color-tile.highlighted {
+	border: 3px solid yellow;
+}
+
+.color-name {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	//background: rgba(255, 255, 255, 0.7);
+	padding: 2px 5px;
+	border-radius: 3px;
+	font-size: 12px;
+}
+
+.storage-location {
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	background: rgba(255, 255, 255, 0.7);
+	padding: 2px 5px;
+	border-radius: 3px;
+	font-size: 12px;
+}

@@ -1,0 +1,27 @@
+<div class="grid-container">
+	@for (color of colors(); track color.name; let idx = $index) {
+		<div
+			class="color-tile"
+			[ngStyle]="{
+				background: color.secondaryColor
+					? 'radial-gradient(circle,' + color.mainColor + ', ' + color.secondaryColor + ')'
+					: color.mainColor,
+			}"
+			[class.highlighted]="color.highlighted"
+		>
+			<div class="color-name">
+				<h3>{{ color.name }}</h3>
+				<!-- <div class="color-rgb">{{ color.alternativeNames[0] }}</div>
+         <div class="color-rgb">{{ color.alternativeNames[1] }}</div>
+         <div class="color-rgb">{{ color.alternativeNames[2] }}</div>
+         <p class="color-rgb">{{ color.mainColor }}</p>
+         <p class="color-rgb">{{ color.hsv |json }}</p>-->
+				<p class="color-rgb">{{ color.type }}</p>
+			</div>
+
+			<div class="storage-location">
+				{{ calculatedStorageLocation(idx) }}
+			</div>
+		</div>
+	}
+</div>
