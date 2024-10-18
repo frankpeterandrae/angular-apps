@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 

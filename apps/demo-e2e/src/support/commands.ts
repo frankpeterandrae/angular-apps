@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite

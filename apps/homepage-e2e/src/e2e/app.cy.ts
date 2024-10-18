@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 import { getGreeting } from '../support/app.po';
 
 describe('homepage', () => {

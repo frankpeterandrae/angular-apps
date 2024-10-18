@@ -1,13 +1,15 @@
 /*!
- * Copyright (c) 2024. Frank-Peter Andrae
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
  */
 @use 'sass:meta';
 
+@import '../../theme/base/prefix';
 @import '../../theme/base/variables';
 
 @mixin gradient($args...) {
 	@each $name, $list in meta.keywords($args) {
-		.fpa-gradient-#{$name} {
+		.#{$prefix}gradient-#{$name} {
 			box-shadow: 0 10px 14px -7px nth($list, 1);
 			background: nth($list, 2) linear-gradient(to bottom, nth($list, 2) 5%, nth($list, 3) 100%);
 			border-color: nth($list, 4);
@@ -15,7 +17,7 @@
 			text-shadow: 0 1px 0 nth($list, 5);
 		}
 
-		.fpa-gradient-#{$name}:hover {
+		.#{$prefix}gradient-#{$name}:hover {
 			background: nth($list, 3) linear-gradient(to bottom, nth($list, 3) 5%, nth($list, 2) 100%);
 		}
 
@@ -26,7 +28,7 @@
 }
 
 :host {
-	.fpa-button {
+	.#{$prefix}button {
 		border-radius: $border-radius;
 		border-width: 0;
 		display: inline-block;
@@ -37,7 +39,7 @@
 		text-decoration: none;
 	}
 
-	.fpa-button:active {
+	.#{$prefix}button:active {
 		position: relative;
 		top: 1px;
 	}

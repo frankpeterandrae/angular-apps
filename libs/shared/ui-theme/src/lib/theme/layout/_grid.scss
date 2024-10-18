@@ -1,24 +1,31 @@
-.fpa-grid {
+/*!
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
+@import '../base/prefix';
+
+.#{$prefix}grid {
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
 }
 
 @for $i from 1 through 12 {
 	// column spans
-	.fpa-col-sm-#{$i} {
+	.#{$prefix}col-sm-#{$i} {
 		grid-column-end: span #{$i};
 	}
 
 	// column placement
-	.fpa-col-start-sm-#{$i} {
+	.#{$prefix}col-start-sm-#{$i} {
 		grid-column-start: #{$i};
 	}
 }
 
-.fpa-col-sm-auto {
+.#{$prefix}col-sm-auto {
 	grid-column-end: auto;
 }
 
-.fpa-col-start-sm-auto {
+.#{$prefix}col-start-sm-auto {
 	grid-column-start: auto;
 }

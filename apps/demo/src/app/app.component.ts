@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 import { ColorsComponent } from '@angular-apps/demo/domain';
 
 import { ButtonComponent, ColorDefinition } from '@angular-apps/shared/ui-theme';

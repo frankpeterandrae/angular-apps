@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 import { SidebarComponent } from '@angular-apps/shared/ui-theme';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';

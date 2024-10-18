@@ -1,4 +1,9 @@
 <?php
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 header('Content-Type: application/json');
 
 // Connect to the database

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 export default {
 	displayName: 'shared-ui-theme',
 	preset: '../../../jest.preset.js',
