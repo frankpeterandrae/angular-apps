@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 // ***********************************************************
 // This example support/index.js is processed and
 // loaded automatically before your test files.

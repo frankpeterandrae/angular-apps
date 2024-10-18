@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 import { ButtonComponent, ColorDefinition } from '@angular-apps/shared/ui-theme';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';

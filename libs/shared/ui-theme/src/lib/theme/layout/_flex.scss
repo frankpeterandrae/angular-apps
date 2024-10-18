@@ -1,176 +1,183 @@
-.fpa-df {
+/*!
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
+@import '../base/prefix';
+
+.#{$prefix}flex {
 	display: flex;
 }
 
-.fpa-df-dc {
+.#{$prefix}flex-column {
 	flex-direction: column;
 }
 
-.fpa-df-dcr {
+.#{$prefix}flex-column-reverse {
 	flex-direction: column-reverse;
 }
 
-.fpa-df-dr {
+.#{$prefix}flex-row {
 	flex-direction: row;
 }
 
-.fpa-df-drr {
+#{$prefix}flex-row-reverse {
 	flex-direction: row-reverse;
 }
 
-.fpa-df-wrap {
+.#{$prefix}flex-wrap {
 	flex-wrap: wrap;
 }
 
-.fpa-df-wrap-reverse {
+.#{$prefix}flex-wrap-reverse {
 	flex-wrap: wrap-reverse;
 }
 
-.fpa-df-jc-fs {
+.#{$prefix}flex-justify-flex-start {
 	justify-content: flex-start;
 }
 
-.fpa-df-jc-fe {
+.#{$prefix}flex-justify-flex-end {
 	justify-content: flex-end;
 }
 
-.fpa-df-jc-c {
+.#{$prefix}flex-justify-center {
 	justify-content: center;
 }
 
-.fpa-df-jc-sb {
+.#{$prefix}flex-justify-space-between {
 	justify-content: space-between;
 }
 
-.fpa-df-jc-sa {
+.#{$prefix}flex-justify-space-around {
 	justify-content: space-around;
 }
 
-.fpa-df-jc-se {
+.#{$prefix}flex-justify-space-evenly {
 	justify-content: space-evenly;
 }
 
-.fpa-df-jc-s {
+.#{$prefix}flex-justify-star {
 	justify-content: start;
 }
 
-.fpa-df-jc-e {
+.#{$prefix}flex-justify-end {
 	justify-content: end;
 }
 
-.fpa-df-jc-l {
+.#{$prefix}flex-justify-left {
 	justify-content: left;
 }
 
-.fpa-df-jc-r {
+.#{$prefix}flex-justify-right {
 	justify-content: right;
 }
 
-.fpa-df-ai-stretch {
+.#{$prefix}flex-align-items-stretch {
 	align-items: stretch;
 }
 
-.fpa-df-ai-fs {
+.#{$prefix}flex-align-items-flex-start {
 	align-items: flex-start;
 }
 
-.fpa-df-ai-fe {
+.#{$prefix}flex-align-items-fe {
 	align-items: flex-end;
 }
 
-.fpa-df-ai-c {
+.#{$prefix}flex-align-items-center {
 	align-items: center;
 }
 
-.fpa-df-ai-b {
+.#{$prefix}flex-align-items-baseline {
 	align-items: baseline;
 }
 
-.fpa-df-ai-fs {
+.#{$prefix}flex-align-items-flex-start {
 	align-items: first baseline;
 }
 
-.fpa-df-ai-ls {
+.#{$prefix}flex-align-items-last-baseline {
 	align-items: last baseline;
 }
 
-.fpa-df-ai-s {
+.#{$prefix}flex-align-items-star {
 	align-items: start;
 }
 
-.fpa-df-ai-e {
+.#{$prefix}flex-align-items-end {
 	align-items: end;
 }
 
-.fpa-df-ai-ss {
+.#{$prefix}flex-align-items-self-start {
 	align-items: self-start;
 }
 
-.fpa-df-ai-se {
+.#{$prefix}flex-align-items-space-evenly {
 	align-items: self-end;
 }
 
-.fpa-df-ac-fs {
+.#{$prefix}flex-align-content-flex-start {
 	align-content: flex-start;
 }
 
-.fpa-df-ac-fe {
+.#{$prefix}flex-align-content-flex-end {
 	align-content: flex-end;
 }
 
-.fpa-df-ac-c {
+.#{$prefix}flex-align-content-center {
 	align-content: center;
 }
 
-.fpa-df-ac-sb {
+.#{$prefix}flex-align-content-space-between {
 	align-content: space-between;
 }
 
-.fpa-df-ac-sa {
+.#{$prefix}flex-align-content-space-around {
 	align-content: space-around;
 }
 
-.fpa-df-ac-se {
+.#{$prefix}flex-align-content-space-evenly {
 	align-content: space-evenly;
 }
 
-.fpa-df-ac-stretch {
+.#{$prefix}flex-align-content-stretch {
 	align-content: stretch;
 }
 
-.fpa-df-ac-s {
+.#{$prefix}flex-align-content-star {
 	align-content: start;
 }
 
-.fpa-df-ac-e {
+.#{$prefix}flex-align-content-end {
 	align-content: end;
 }
 
-.fpa-df-ac-b {
+.#{$prefix}flex-align-content-baseline {
 	align-content: baseline;
 }
 
-.fpa-df-ac-fb {
+.#{$prefix}flex-align-content-first-baseline {
 	align-content: first baseline;
 }
 
-.fpa-df-ac-lb {
+.#{$prefix}flex-align-content-last-baseline {
 	align-content: last baseline;
 }
 
-.fpa-db {
+.#{$prefix}block {
 	display: block;
 }
 
-.fpa-pos-rel {
+.#{$prefix}pos-rel {
 	position: relative;
 }
 
-.fpa-pos-abs {
+.#{$prefix}pos-abs {
 	position: absolute;
 }
 
-.fpa-with-max {
+.#{$prefix}with-max {
 	width: 100%;
 }
 

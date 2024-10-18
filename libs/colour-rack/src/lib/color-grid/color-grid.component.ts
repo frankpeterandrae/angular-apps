@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 import { NgStyle } from '@angular/common';
 import { Component, input, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
 import { Color } from '../models/color.model';

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 import { Injectable } from '@angular/core';
 import { fromEvent, map, merge, of } from 'rxjs';
 

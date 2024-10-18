@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2024. Frank-Peter Andrae
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
  */
 
 export * from './color-definition';

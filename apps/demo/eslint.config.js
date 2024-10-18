@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 const { FlatCompat } = require('@eslint/eslintrc');
 const baseConfig = require('../../eslint.config.js');
 const js = require('@eslint/js');

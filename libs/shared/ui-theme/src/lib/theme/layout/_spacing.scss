@@ -1,11 +1,13 @@
 /*!
- * Copyright (c) 2024. Frank-Peter Andrae
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
  */
 @use 'sass:meta';
+@import '../base/prefix';
 
 @mixin margin($args...) {
 	@each $name, $margin in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			margin: $margin;
 		}
 	}
@@ -15,7 +17,7 @@
 
 @mixin margin-top($args...) {
 	@each $name, $margin in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			margin-top: $margin;
 		}
 	}
@@ -25,7 +27,7 @@
 
 @mixin margin-bottom($args...) {
 	@each $name, $margin in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			margin-bottom: $margin;
 		}
 	}
@@ -35,7 +37,7 @@
 
 @mixin margin-left($args...) {
 	@each $name, $margin in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			margin-left: $margin;
 		}
 	}
@@ -45,7 +47,7 @@
 
 @mixin margin-right($args...) {
 	@each $name, $margin in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			margin-right: $margin;
 		}
 	}
@@ -55,7 +57,7 @@
 
 @mixin margin-x($args...) {
 	@each $name, $margin in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			margin-right: $margin;
 			margin-left: $margin;
 		}
@@ -66,7 +68,7 @@
 
 @mixin margin-y($args...) {
 	@each $name, $margin in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			margin-top: $margin;
 			margin-bottom: $margin;
 		}
@@ -77,7 +79,7 @@
 
 @mixin padding($args...) {
 	@each $name, $padding in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			padding: $padding;
 		}
 	}
@@ -87,7 +89,7 @@
 
 @mixin padding-top($args...) {
 	@each $name, $padding in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			padding-top: $padding;
 		}
 	}
@@ -97,7 +99,7 @@
 
 @mixin padding-bottom($args...) {
 	@each $name, $padding in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			padding-bottom: $padding;
 		}
 	}
@@ -107,7 +109,7 @@
 
 @mixin padding-left($args...) {
 	@each $name, $padding in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			padding-left: $padding;
 		}
 	}
@@ -117,7 +119,7 @@
 
 @mixin padding-right($args...) {
 	@each $name, $padding in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			padding-right: $padding;
 		}
 	}
@@ -127,7 +129,7 @@
 
 @mixin padding-x($args...) {
 	@each $name, $padding in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			padding-right: $padding;
 			padding-left: $padding;
 		}
@@ -138,7 +140,7 @@
 
 @mixin padding-y($args...) {
 	@each $name, $padding in meta.keywords($args) {
-		.fpa-#{$name} {
+		.#{$prefix}#{$name} {
 			padding-top: $padding;
 			padding-bottom: $padding;
 		}

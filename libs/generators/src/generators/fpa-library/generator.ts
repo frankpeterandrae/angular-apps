@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 import { libraryGenerator } from '@nx/angular/generators';
 import { formatFiles, generateFiles, getWorkspaceLayout, joinPathFragments, names, Tree } from '@nx/devkit';
 import { deleteGenreratedFiles } from '../common';
