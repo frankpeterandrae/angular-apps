@@ -2,9 +2,8 @@
  * Copyright (c) 2024. Frank-Peter Andrä
  * All rights reserved.
  */
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Environment } from '../../model/environment.model';
 import { DataConnectionService } from '@angular-apps/services';
 import { ButtonComponent } from '../button/button.component';
 import { ColorDefinition } from '../../enums';
@@ -19,9 +18,6 @@ import { ColorDefinition } from '../../enums';
 export class LoginComponent {
 	protected readonly ColorDefinition = ColorDefinition;
 
-	@Input()
-	public environment: Environment | undefined;
-
 	public loginForm: FormGroup;
 
 	constructor(
@@ -35,9 +31,9 @@ export class LoginComponent {
 	}
 
 	public login(): void {
-		if (this.loginForm.valid && this.environment) {
+		if (this.loginForm.valid) {
 			const { email, password } = this.loginForm.value;
-			this.dataConnection.login({ email, password }, this.environment).subscribe((data) => {
+			this.dataConnection.login({ email, password }).subscribe((data) => {
 				console.log(data);
 			});
 		}

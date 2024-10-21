@@ -40,7 +40,13 @@
 					"outputHashing": "all",
 					"sourceMap": false,
 					"namedChunks": false,
-					"baseHref": "/newHp/",
+					"baseHref": "/",
+					"fileReplacements": [
+						{
+							"replace": "libs/shared/config/src/lib/config/environments/environment.ts",
+							"with": "libs/shared/config/src/lib/config/environments/environment.prod.ts"
+						}
+					],
 					"budgets": [
 						{
 							"type": "initial",
@@ -65,12 +71,6 @@
 			"executor": "@angular-devkit/build-angular:dev-server",
 			"configurations": {
 				"production": {
-					"fileReplacements": [
-						{
-							"replace": "apps/xy-theme-demo/src/environments/environment.ts",
-							"with": "apps/xy-theme-demo/src/environments/environment.prod.ts"
-						}
-					],
 					"buildTarget": "homepage:build:production"
 				},
 				"development": {
@@ -103,7 +103,10 @@
 						"command": "del dist\\production\\php-api\\encryption.php"
 					},
 					{
-						"command": "xcopy apps\\homepage\\src\\environments\\.htaccess dist\\production\\ /E /I /Y"
+						"command": "xcopy libs\\shared\\config\\src\\lib\\htaccess\\.htaccess dist\\production\\ /E /I /Y"
+					},
+					{
+						"command": "xcopy libs\\shared\\config\\src\\lib\\config\\google1fa4ec9361425ee2.html dist\\production\\ /E /I /Y"
 					}
 				]
 			}
@@ -122,6 +125,13 @@
 			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
 			"options": {
 				"jestConfig": "apps/homepage/jest.config.ts"
+			}
+		},
+		"stylelint": {
+			"executor": "nx-stylelint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["apps/homepage/**/*.css", "apps/homepage/**/*.scss"]
 			}
 		}
 	}

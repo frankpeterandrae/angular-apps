@@ -34,7 +34,7 @@ export class ButtonComponent implements OnInit {
 		}
 
 		if (this.iconEnd()) {
-			this.contentClasses.push('fpa-df-drr');
+			this.contentClasses.push('fpa-df-direction-row-reverse');
 		}
 	}
 

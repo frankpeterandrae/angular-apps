@@ -23,6 +23,13 @@
 				"cwd": "libs/shared/ui-theme",
 				"parallel": false
 			}
+		},
+		"stylelint": {
+			"executor": "nx-stylelint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["libs/shared/ui-theme/**/*.css", "libs/shared/ui-theme/**/*.scss"]
+			}
 		}
 	}
 }

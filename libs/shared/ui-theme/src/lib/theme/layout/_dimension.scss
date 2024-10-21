@@ -14,7 +14,7 @@ body {
 @each $name, $width in variables.$breakpoints {
 	$breakpoint-prefix: '-' + $name;
 
-	@if $name == sm {
+	@if $name == uw {
 		$breakpoint-prefix: '';
 	}
 
