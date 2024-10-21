@@ -3,17 +3,17 @@
   ~ All rights reserved.
   -->
 
-<div class="fpa-flex fpa-flex-column">
-	<header>HIER KOMMT DER HEADER HIN</header>
+<div class="fpa-flex fpa-flex-column fpa-height-100">
+  <theme-header class="fpa-flex-shrink-1"></theme-header>
 
-	<div class="fpa-grid xy-overflow-y-hidden xy-height-100">
+	<div class="fpa-grid-12 fpa-overflow-y-hidden fpa-flex-1">
 		<theme-sidebar
-			class="fpa-col-12 fpa-col-sm-2 xy-bg-grey-t9 xy-overflow-hidden xy-d-flex xy-flex-column"
+			class="fpa-col-2 fpa-overflow-hidden xy-d-flex fpa-flex-column"
 		></theme-sidebar>
 
-		<div class="fpa-col-12 fpa-col-sm-10 xy-overflow-y-hidden">
+		<div class="fpa-col-10 fpa-overflow-y-hidden">
 			<router-outlet></router-outlet>
 		</div>
 	</div>
-	<footer>HIER KOMMT DER FOOTER HIN</footer>
+  <theme-footer class="fpa-flex-shrink-1"></theme-footer>
 </div>

@@ -16,11 +16,13 @@
 		"affected:lint": "nx affected:lint",
 		"affected:dep-graph": "nx affected:dep-graph",
 		"affected": "nx affected",
-		"format:fix": "prettier --config .prettierrc --write \"{apps,libs,src,e2e}/**/*{.ts,.js,.json,.scss,.html}\"",
+		"format:fix": "prettier --config .prettierrc --write \"{apps,libs,src,e2e}/**/*{.ts,.js,.json,.scss,.html,.php}\"",
 		"update": "nx migrate latest",
 		"dep-graph": "nx dep-graph",
 		"help": "nx help",
-		"prepare": "husky"
+		"prepare": "husky",
+		"watch:shared-styles": "node libs/shared/ui-theme/scripts/watch-css.js",
+		"serve:main-with-watch": "concurrently \"nx run start\" \"nx run shared-ui-theme:watch-css\""
 	},
 	"private": true,
 	"dependencies": {
@@ -62,6 +64,7 @@
 		"@nx/js": "20.0.0",
 		"@nx/web": "20.0.0",
 		"@nx/workspace": "20.0.0",
+		"@prettier/plugin-php": "^0.22.2",
 		"@schematics/angular": "18.2.9",
 		"@swc-node/register": "~1.10.9",
 		"@swc/core": "~1.7.36",
@@ -72,6 +75,7 @@
 		"@typescript-eslint/parser": "^8.10.0",
 		"@typescript-eslint/utils": "^8.10.0",
 		"angular-eslint": "^18.3.1",
+		"concurrently": "^9.0.1",
 		"cypress": "^13.15.0",
 		"eslint": "~9.12.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -82,7 +86,10 @@
 		"jest-preset-angular": "~14.2.4",
 		"lint-staged": "^15.2.10",
 		"nx": "20.0.0",
-		"prettier": "3.3.3",
+		"nx-stylelint": "^18.0.0",
+		"prettier": "^3.3.3",
+		"sass": "^1.80.3",
+		"sass-migrator": "^2.2.0",
 		"ts-jest": "^29.2.5",
 		"ts-node": "10.9.2",
 		"typescript": "5.5.4"

@@ -10,11 +10,13 @@
 // organisms
 
 // layout
-@import './layout/flex';
-@import './layout/grid';
-@import './layout/spacing';
+@use './layout/dimension';
+@use './layout/display';
+@use './layout/flex';
+@use './layout/grid';
+@use './layout/spacing';
 
 // utility
-@import './electrons/colors';
+@use './electrons/colors';
 
 // theme

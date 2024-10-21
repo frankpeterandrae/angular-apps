@@ -45,12 +45,12 @@
 	}
 
 	@include gradient(
-		$desert-storm: $desert-storm shade($desert-storm, 2) shade($desert-storm, 5) shade($desert-storm, 6)
-			tint($desert-storm, 6) $dark-text,
-		$porsche: $porsche shade($porsche, 2) shade($porsche, 5) shade($porsche, 6) tint($porsche, 6) $dark-text,
-		$flush-mahogany: $flush-mahogany shade($flush-mahogany, 2) shade($flush-mahogany, 5) shade($flush-mahogany, 6)
-			tint($flush-mahogany, 6) $dark-text,
-		$schooner: $schooner shade($schooner, 2) shade($schooner, 5) shade($schooner, 6) tint($schooner, 6) $dark-text,
-		$bastille: $bastille shade($bastille, 2) shade($bastille, 5) shade($bastille, 6) tint($bastille, 6) $light-text
+		$linen: $linen shade($linen, 2) shade($linen, 5) shade($linen, 6) tint($linen, 6) $dark-text,
+		$sandy-brown: $sandy-brown shade($sandy-brown, 2) shade($sandy-brown, 5) shade($sandy-brown, 6)
+			tint($sandy-brown, 6) $dark-text,
+		$crimson: $crimson shade($crimson, 2) shade($crimson, 5) shade($crimson, 6) tint($crimson, 6) $dark-text,
+		$slate-gray: $slate-gray shade($slate-gray, 2) shade($slate-gray, 5) shade($slate-gray, 6) tint($slate-gray, 6)
+			$dark-text,
+		$ebony: $ebony shade($ebony, 2) shade($ebony, 5) shade($ebony, 6) tint($ebony, 6) $light-text
 	);
 }

@@ -4,9 +4,9 @@
  */
 
 export enum ColorDefinition {
-	DESERT_STORM = 'desert-storm',
-	PORSCHE = 'porsche',
-	FLUSH_MAHOGANY = 'flush-mahogany',
-	SCHOONER = 'schooner',
-	BASTILLE = 'bastille',
+	LINEN = 'linen',
+	SANDY_BROWN = 'sandy-brown',
+	CRIMSON = 'crimson',
+	SLATE_GRAY = 'slate-gray',
+	EBONY = 'ebony',
 }

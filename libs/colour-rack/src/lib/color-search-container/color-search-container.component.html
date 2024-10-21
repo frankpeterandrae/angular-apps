@@ -3,5 +3,9 @@
   ~ All rights reserved.
   -->
 
+<div class="fpa-bg-ebony fpa-flex fpa-flex-column fpa-height-100">
+  <h1 class="fpa-text-center fpa-text-white">Colour Rack</h1>
+  <p class="fpa-text-center fpa-text-white">A place to find your favourite colours</p>
 <cr-color-search (searchEvent)="updateSearchQuery($event)"></cr-color-search>
-<cr-color-grid [searchQuery]="searchQuery()"></cr-color-grid>
+<cr-color-grid class="fpa-flex-1 fpa-overflow-y-auto" [searchQuery]="searchQuery()"></cr-color-grid>
+</div>

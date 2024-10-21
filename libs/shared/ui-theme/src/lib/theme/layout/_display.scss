@@ -1,0 +1,27 @@
+/*!
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+@use '../base/prefix';
+
+.#{prefix.$prefix}block {
+	display: block;
+}
+
+.#{prefix.$prefix}pos-rel {
+	position: relative;
+}
+
+.#{prefix.$prefix}pos-abs {
+	position: absolute;
+}
+
+.#{prefix.$prefix}with-max {
+	width: 100%;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}

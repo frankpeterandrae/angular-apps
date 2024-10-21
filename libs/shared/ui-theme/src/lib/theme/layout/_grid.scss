@@ -3,29 +3,42 @@
  * All rights reserved.
  */
 
-@import '../base/prefix';
+@use '../base/prefix';
+@use '../base/variables';
 
-.#{$prefix}grid {
-	display: grid;
-	grid-template-columns: repeat(12, 1fr);
-}
+$columns: 12;
 
-@for $i from 1 through 12 {
-	// column spans
-	.#{$prefix}col-sm-#{$i} {
-		grid-column-end: span #{$i};
-	}
-
-	// column placement
-	.#{$prefix}col-start-sm-#{$i} {
-		grid-column-start: #{$i};
+@for $i from 1 through $columns {
+	.#{prefix.$prefix}grid-#{ $i } {
+		display: grid;
+		grid-template-columns: repeat($i, 1fr);
 	}
 }
 
-.#{$prefix}col-sm-auto {
-	grid-column-end: auto;
-}
+@each $name, $width in variables.$breakpoints {
+	$breakpoint-prefix: '-' + $name;
 
-.#{$prefix}col-start-sm-auto {
-	grid-column-start: auto;
+	@if $name == sm {
+		$breakpoint-prefix: '';
+	}
+
+	@for $i from 1 through $columns {
+		// column spans
+		.#{prefix.$prefix}col#{$breakpoint-prefix}-#{$i} {
+			grid-column-end: span #{$i};
+		}
+
+		// column placement
+		.#{prefix.$prefix}col-start#{$breakpoint-prefix}-#{$i} {
+			grid-column-start: #{$i};
+		}
+	}
+
+	.#{prefix.$prefix}col#{$breakpoint-prefix}-auto {
+		grid-column-end: auto;
+	}
+
+	.#{prefix.$prefix}col-start#{$breakpoint-prefix}-auto {
+		grid-column-start: auto;
+	}
 }
