@@ -4,28 +4,21 @@
  */
 
 nav {
-	width: 250px;
-	height: 100vh;
-	background-color: var(--sidebar-bg);
-	color: var(--sidebar-color);
 	transition:
 		background-color 0.3s,
 		color 0.3s;
 
 	.menu {
 		list-style: none;
-		padding: 0;
 
 		.menu-item {
 			a {
 				display: flex;
 				align-items: center;
-				padding: 15px;
 				text-decoration: none;
 				color: inherit;
 
 				.icon {
-					margin-right: 10px;
 				}
 
 				&:hover {
@@ -34,24 +27,4 @@ nav {
 			}
 		}
 	}
-
-	.theme-toggle {
-		margin: 20px;
-		padding: 10px;
-		cursor: pointer;
-	}
-}
-
-// Light Theme Variables
-.light-theme {
-	--sidebar-bg: #ffffff;
-	--sidebar-color: #333333;
-	--sidebar-hover-bg: #f0f0f0;
-}
-
-// Dark Theme Variables
-.dark-theme {
-	--sidebar-bg: #2c2c2c;
-	--sidebar-color: #ffffff;
-	--sidebar-hover-bg: #3d3d3d;
 }

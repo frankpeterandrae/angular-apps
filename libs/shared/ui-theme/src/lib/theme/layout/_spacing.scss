@@ -3,148 +3,159 @@
  * All rights reserved.
  */
 @use 'sass:meta';
-@import '../base/prefix';
 
-@mixin margin($args...) {
-	@each $name, $margin in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@use '../base/prefix';
+@use '../base/variables';
+
+@mixin margin($breakpoint-prefix, $map) {
+	@each $name, $margin in $map {
+		.#{prefix.$prefix}m#{$breakpoint-prefix}-#{$name} {
 			margin: $margin;
 		}
 	}
 }
 
-@include margin($m-0: 0, $m-05: 0.5rem, $m-1: 1rem, $m-15: 1.5rem, $m-2: 2rem);
-
-@mixin margin-top($args...) {
-	@each $name, $margin in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@mixin margin-top($breakpoint-prefix, $map) {
+	@each $name, $margin in $map {
+		.#{prefix.$prefix}mt#{$breakpoint-prefix}-#{$name} {
 			margin-top: $margin;
 		}
 	}
 }
 
-@include margin-top($mt-0: 0, $mt-05: 0.5rem, $mt-1: 1rem, $mt-15: 1.5rem, $mt-2: 2rem);
-
-@mixin margin-bottom($args...) {
-	@each $name, $margin in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@mixin margin-bottom($breakpoint-prefix, $map) {
+	@each $name, $margin in $map {
+		.#{prefix.$prefix}mb#{$breakpoint-prefix}-#{$name} {
 			margin-bottom: $margin;
 		}
 	}
 }
 
-@include margin-bottom($mb-0: 0, $mb-05: 0.5rem, $mb-1: 1rem, $mb-15: 1.5rem, $mb-2: 2rem);
-
-@mixin margin-left($args...) {
-	@each $name, $margin in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@mixin margin-left($breakpoint-prefix, $map) {
+	@each $name, $margin in $map {
+		.#{prefix.$prefix}ml#{$breakpoint-prefix}-#{$name} {
 			margin-left: $margin;
 		}
 	}
 }
 
-@include margin-left($ml-0: 0, $ml-05: 0.5rem, $ml-1: 1rem, $ml-15: 1.5rem, $ml-2: 2rem);
-
-@mixin margin-right($args...) {
-	@each $name, $margin in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@mixin margin-right($breakpoint-prefix, $map) {
+	@each $name, $margin in $map {
+		.#{prefix.$prefix}mr#{$breakpoint-prefix}-#{$name} {
 			margin-right: $margin;
 		}
 	}
 }
 
-@include margin-right($mr-0: 0, $mr-05: 0.5rem, $mr-1: 1rem, $mr-15: 1.5rem, $mr-2: 2rem);
-
-@mixin margin-x($args...) {
-	@each $name, $margin in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@mixin margin-x($breakpoint-prefix, $map) {
+	@each $name, $margin in $map {
+		.#{prefix.$prefix}mx#{$breakpoint-prefix}-#{$name} {
 			margin-right: $margin;
 			margin-left: $margin;
 		}
 	}
 }
 
-@include margin-x($mx-0: 0, $mx-05: 0.5rem, $mx-1: 1rem, $mx-15: 1.5rem, $mx-2: 2rem);
-
-@mixin margin-y($args...) {
-	@each $name, $margin in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@mixin margin-y($breakpoint-prefix, $map) {
+	@each $name, $margin in $map {
+		.#{prefix.$prefix}my#{$breakpoint-prefix}-#{$name} {
 			margin-top: $margin;
 			margin-bottom: $margin;
 		}
 	}
 }
 
-@include margin-y($my-0: 0, $my-05: 0.5rem, $my-1: 1rem, $my-15: 1.5rem, $my-2: 2rem);
-
-@mixin padding($args...) {
-	@each $name, $padding in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@mixin padding($breakpoint-prefix, $map) {
+	@each $name, $padding in $map {
+		.#{prefix.$prefix}p#{$breakpoint-prefix}-#{$name} {
 			padding: $padding;
 		}
 	}
 }
 
-@include padding($p-0: 0, $p-05: 0.5rem, $p-1: 1rem, $p-15: 1.5rem, $p-2: 2rem);
-
-@mixin padding-top($args...) {
-	@each $name, $padding in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@mixin padding-top($breakpoint-prefix, $map) {
+	@each $name, $padding in $map {
+		.#{prefix.$prefix}pt#{$breakpoint-prefix}-#{$name} {
 			padding-top: $padding;
 		}
 	}
 }
 
-@include padding-top($pt-0: 0, $pt-05: 0.5rem, $pt-1: 1rem, $pt-15: 1.5rem, $pt-2: 2rem);
-
-@mixin padding-bottom($args...) {
-	@each $name, $padding in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@mixin padding-bottom($breakpoint-prefix, $map) {
+	@each $name, $padding in $map {
+		.#{prefix.$prefix}pb#{$breakpoint-prefix}-#{$name} {
 			padding-bottom: $padding;
 		}
 	}
 }
 
-@include padding-bottom($pb-0: 0, $pb-05: 0.5rem, $pb-1: 1rem, $pb-15: 1.5rem, $pb-2: 2rem);
-
-@mixin padding-left($args...) {
-	@each $name, $padding in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@mixin padding-left($breakpoint-prefix, $map) {
+	@each $name, $padding in $map {
+		.#{prefix.$prefix}pl#{$breakpoint-prefix}-#{$name} {
 			padding-left: $padding;
 		}
 	}
 }
 
-@include padding-left($pl-0: 0, $pl-05: 0.5rem, $pl-1: 1rem, $pl-15: 1.5rem, $pl-2: 2rem);
-
-@mixin padding-right($args...) {
-	@each $name, $padding in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@mixin padding-right($breakpoint-prefix, $map) {
+	@each $name, $padding in $map {
+		.#{prefix.$prefix}pr#{$breakpoint-prefix}-#{$name} {
 			padding-right: $padding;
 		}
 	}
 }
 
-@include padding-right($pr-0: 0, $pr-05: 0.5rem, $pr-1: 1rem, $pr-15: 1.5rem, $pr-2: 2rem);
-
-@mixin padding-x($args...) {
-	@each $name, $padding in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@mixin padding-x($breakpoint-prefix, $map) {
+	@each $name, $padding in $map {
+		.#{prefix.$prefix}px#{$breakpoint-prefix}-#{$name} {
 			padding-right: $padding;
 			padding-left: $padding;
 		}
 	}
 }
 
-@include padding-x($px-0: 0, $px-05: 0.5rem, $px-1: 1rem, $px-15: 1.5rem, $px-2: 2rem);
-
-@mixin padding-y($args...) {
-	@each $name, $padding in meta.keywords($args) {
-		.#{$prefix}#{$name} {
+@mixin padding-y($breakpoint-prefix, $map) {
+	@each $name, $padding in $map {
+		.#{prefix.$prefix}py#{$breakpoint-prefix}-#{$name} {
 			padding-top: $padding;
 			padding-bottom: $padding;
 		}
 	}
 }
+$values: (
+	'0': 0,
+	'05': 0.5rem,
+	'1': 1rem,
+	'15': 1.5rem,
+	'2': 2rem,
+	'3': 3rem,
+	'4': 4rem,
+);
 
-@include padding-y($py-0: 0, $py-05: 0.5rem, $py-1: 1rem, $py-15: 1.5rem, $py-2: 2rem);
+* {
+	margin: 0;
+	padding: 0;
+}
+
+@each $name, $width in variables.$breakpoints {
+	$breakpoint-prefix: '-' + $name;
+
+	@if $name == sm {
+		$breakpoint-prefix: '';
+	}
+
+	@include margin($breakpoint-prefix, $values);
+	@include margin-top($breakpoint-prefix, $values);
+	@include margin-bottom($breakpoint-prefix, $values);
+	@include margin-left($breakpoint-prefix, $values);
+	@include margin-right($breakpoint-prefix, $values);
+	@include margin-x($breakpoint-prefix, $values);
+	@include margin-y($breakpoint-prefix, $values);
+	@include padding($breakpoint-prefix, $values);
+	@include padding-top($breakpoint-prefix, $values);
+	@include padding-bottom($breakpoint-prefix, $values);
+	@include padding-left($breakpoint-prefix, $values);
+	@include padding-right($breakpoint-prefix, $values);
+	@include padding-x($breakpoint-prefix, $values);
+	@include padding-y($breakpoint-prefix, $values);
+}

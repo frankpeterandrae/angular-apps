@@ -21,6 +21,8 @@ export class ButtonComponent implements OnInit {
 	public icon = input<IconDefinition>();
 	public color = input.required<ColorDefinition>();
 	public iconEnd = input<boolean>(false);
+	public disabled = input<boolean>(false);
+	public type = input<'submit' | 'reset' | 'button'>('button');
 
 	public buttonClasses: string[] = [];
 	public contentClasses: string[] = [];

@@ -3,55 +3,61 @@
  * All rights reserved.
  */
 
-@import '../base/prefix';
-@import '../base/variables';
-@import '../base/utility';
+@use '../base/prefix';
+@use '../base/variables';
+@use '../base/utility';
 
 $colors: (
-	desert-storm: $desert-storm,
-	porsche: $porsche,
-	flush-mahogany: $flush-mahogany,
-	schooner: $schooner,
-	bastille: $bastille,
+	linen: variables.$linen,
+	sandy-brown: variables.$sandy-brown,
+	crimson: variables.$crimson,
+	slate-gray: variables.$slate-gray,
+	ebony: variables.$ebony,
 );
 
-// Define empty maps to store shades and tints
-$color-shades: ();
-$color-tints: ();
+$colorsWithVariants: (
+	linen: variables.$linen,
+	sandy-brown: variables.$sandy-brown,
+	crimson: variables.$crimson,
+	slate-gray: variables.$slate-gray,
+	ebony: variables.$ebony,
+);
+
+@each $name, $color in $colors {
+	.#{prefix.$prefix}bg-#{'' + $name} {
+		background-color: $color;
+	}
+
+	.#{prefix.$prefix}#{'' + $name} {
+		color: $color;
+	}
+}
 
 $shades-count: 9;
 $tints-count: 9;
 
-@each $name, $color in $colors {
-	.#{$prefix}bg-#{'' + $name} {
-		background-color: $color;
-	}
-
+@each $name, $color in $colorsWithVariants {
 	@for $i from 1 through $tints-count {
-		.#{$prefix}bg-#{'' + $name}-t#{$i} {
-			background-color: tint($color, $i);
+		.#{prefix.$prefix}bg-#{'' + $name}-t#{$i} {
+			background-color: utility.tint($color, $i);
 		}
 	}
 
 	@for $i from 1 through $shades-count {
-		.#{$prefix}bg-#{'' + $name}-s#{$i} {
-			background-color: shade($color, $i);
-		}
-	}
-
-	.#{$prefix}#{'' + $name} {
-		color: $color;
-	}
-
-	@for $i from 1 through 9 {
-		.#{$prefix}#{'' + $name}-t#{$i} {
-			color: tint($color, $i);
+		.#{prefix.$prefix}bg-#{'' + $name}-s#{$i} {
+			background-color: utility.shade($color, $i);
 		}
 	}
 
 	@for $i from 1 through 9 {
-		.#{$prefix}#{'' + $name}-s#{$i} {
-			color: shade($color, $i);
+		.#{prefix.$prefix}#{'' + $name}-t#{$i} {
+			color: utility.tint($color, $i);
+		}
+	}
+
+	@for $i from 1 through 9 {
+		.#{prefix.$prefix}#{'' + $name}-s#{$i} {
+			color: utility.shade($color, $i);
 		}
 	}
 }

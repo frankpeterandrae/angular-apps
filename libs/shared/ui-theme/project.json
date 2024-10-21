@@ -15,6 +15,14 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint"
+		},
+		"watch-css": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "npm run watch:shared-styles",
+				"cwd": "libs/shared/ui-theme",
+				"parallel": false
+			}
 		}
 	}
 }

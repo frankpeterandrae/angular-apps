@@ -1,0 +1,16 @@
+<!--
+  ~ Copyright (c) 2024. Frank-Peter Andrä
+  ~ All rights reserved.
+  -->
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+	<div>
+		<label for="email">Email:</label>
+		<input type="email" id="email" formControlName="email" required />
+	</div>
+	<div>
+		<label for="password">Password:</label>
+		<input type="password" id="password" formControlName="password" required />
+	</div>
+	<theme-button [type]="'submit'" [color]="ColorDefinition.CRIMSON">Login</theme-button>
+</form>

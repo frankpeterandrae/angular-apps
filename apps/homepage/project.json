@@ -65,6 +65,12 @@
 			"executor": "@angular-devkit/build-angular:dev-server",
 			"configurations": {
 				"production": {
+					"fileReplacements": [
+						{
+							"replace": "apps/xy-theme-demo/src/environments/environment.ts",
+							"with": "apps/xy-theme-demo/src/environments/environment.prod.ts"
+						}
+					],
 					"buildTarget": "homepage:build:production"
 				},
 				"development": {
@@ -92,6 +98,12 @@
 					},
 					{
 						"command": "xcopy apps\\php-api dist\\production\\php-api\\ /E /I /Y"
+					},
+					{
+						"command": "del dist\\production\\php-api\\encryption.php"
+					},
+					{
+						"command": "xcopy apps\\homepage\\src\\environments\\.htaccess dist\\production\\ /E /I /Y"
 					}
 				]
 			}
