@@ -1,0 +1,13 @@
+# Enable the Rewrite Engine
+RewriteEngine On
+
+# Set the base URL for all subsequent rules
+RewriteBase /
+
+# Redirect all requests to index.html except for existing files and directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ /index.html [L]
+
+# Optional: Custom 404 Error Page (handled by Angular)
+ErrorDocument 404 /index.html

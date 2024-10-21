@@ -13,11 +13,11 @@
 @each $name, $width in variables.$breakpoints {
 	$breakpoint-prefix: '-' + $name;
 
-	@if $name == sm {
+	@if $name == uw {
 		$breakpoint-prefix: '';
 	}
 
-	@media (min-width: #{$width}) {
+	@media (max-width: #{$width}) {
 		.#{prefix.$prefix}flex#{$breakpoint-prefix}-column {
 			flex-direction: column;
 		}

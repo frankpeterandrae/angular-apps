@@ -3,7 +3,6 @@
  * All rights reserved.
  */
 @use 'sass:meta';
-
 @use '../base/prefix';
 @use '../base/variables';
 
@@ -122,6 +121,7 @@
 		}
 	}
 }
+
 $values: (
 	'0': 0,
 	'05': 0.5rem,
@@ -140,7 +140,7 @@ $values: (
 @each $name, $width in variables.$breakpoints {
 	$breakpoint-prefix: '-' + $name;
 
-	@if $name == sm {
+	@if $name == uw {
 		$breakpoint-prefix: '';
 	}
 

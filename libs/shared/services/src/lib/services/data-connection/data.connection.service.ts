@@ -6,7 +6,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Environment } from '../../model/environment.model';
+import { environment } from '@angular-apps/config';
 
 @Injectable({
 	providedIn: 'root',
@@ -18,11 +18,11 @@ export class DataConnectionService {
 
 	constructor(private http: HttpClient) {}
 
-	public getData(environment: Environment): Observable<any> {
+	public getData(): Observable<any> {
 		return this.http.get(`${environment.baseUrl}${this.apiUrl}`, { params: { action: 'getData' } });
 	}
 
-	public addData(list: string, environment: Environment): Observable<any> {
+	public addData(list: string): Observable<any> {
 		const body = new FormData();
 		body.append('action', 'addData');
 		body.append('list', list);
@@ -31,7 +31,7 @@ export class DataConnectionService {
 		return this.http.post(`${environment.baseUrl}${this.apiUrl}`, body, { withCredentials: true });
 	}
 
-	public deleteData(id: number, environment: Environment): Observable<any> {
+	public deleteData(id: number): Observable<any> {
 		const body = new FormData();
 		body.append('action', 'deleteData');
 		body.append('id', id.toString());
@@ -39,10 +39,7 @@ export class DataConnectionService {
 		return this.http.post(`${environment.baseUrl}${this.apiUrl}`, body, { withCredentials: true });
 	}
 
-	public addUser(
-		userInfo: { user: string; password: string; email: string },
-		environment: Environment,
-	): Observable<any> {
+	public addUser(userInfo: { user: string; password: string; email: string }): Observable<any> {
 		const body = new FormData();
 		body.append('action', 'addUser');
 		body.append('username', userInfo.user);
@@ -52,7 +49,7 @@ export class DataConnectionService {
 		return this.http.post(`${environment.baseUrl}${this.addUserUrl}`, body, { withCredentials: true });
 	}
 
-	public login(param: { password: string; email: string }, environment: Environment): Observable<any> {
+	public login(param: { password: string; email: string }): Observable<any> {
 		const body = new FormData();
 		body.append('action', 'login');
 		body.append('email', param.email);

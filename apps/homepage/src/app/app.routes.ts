@@ -6,21 +6,17 @@
 import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
+	{ path: '', redirectTo: 'home', pathMatch: 'full' },
 	{
 		path: 'home',
-		loadComponent: () => import('./home/home.component').then((m) => m.HomeComponent),
+		loadComponent: () => import('@angular-apps/homepage-feature').then((m) => m.HomeComponent),
 	},
 	{
 		path: 'paint-rack',
 		loadComponent: () => import('@angular-apps/colour-rack').then((m) => m.ColorSearchContainerComponent),
 	},
 	{
-		path: '',
-		pathMatch: 'full',
-		redirectTo: 'home',
-	},
-	{
-		path: '*',
-		redirectTo: 'home',
+		path: '**',
+		loadComponent: () => import('@angular-apps/homepage-feature').then((m) => m.Error404Component),
 	},
 ];

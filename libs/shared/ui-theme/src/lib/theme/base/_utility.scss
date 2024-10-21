@@ -1,9 +1,9 @@
-@use 'sass:color';
 /*!
  * Copyright (c) 2024. Frank-Peter Andrä
  * All rights reserved.
  */
 
+@use 'sass:color';
 @use 'sass:math';
 
 @function shade($color, $percentage) {

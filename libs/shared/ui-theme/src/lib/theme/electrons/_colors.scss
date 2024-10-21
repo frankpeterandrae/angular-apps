@@ -14,8 +14,7 @@ $colors: (
 	slate-gray: variables.$slate-gray,
 	ebony: variables.$ebony,
 );
-
-$colorsWithVariants: (
+$colors-with-variants: (
 	linen: variables.$linen,
 	sandy-brown: variables.$sandy-brown,
 	crimson: variables.$crimson,
@@ -36,7 +35,7 @@ $colorsWithVariants: (
 $shades-count: 9;
 $tints-count: 9;
 
-@each $name, $color in $colorsWithVariants {
+@each $name, $color in $colors-with-variants {
 	@for $i from 1 through $tints-count {
 		.#{prefix.$prefix}bg-#{'' + $name}-t#{$i} {
 			background-color: utility.tint($color, $i);
@@ -60,4 +59,14 @@ $tints-count: 9;
 			color: utility.shade($color, $i);
 		}
 	}
+}
+
+// text colors
+
+.#{prefix.$prefix}light-text {
+	color: variables.$light-text;
+}
+
+.#{prefix.$prefix}dark-text {
+	color: variables.$dark-text;
 }
