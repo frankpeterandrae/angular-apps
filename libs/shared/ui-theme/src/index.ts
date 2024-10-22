@@ -8,3 +8,5 @@ export * from './lib/components/header/header.component';
 export * from './lib/components/login/login.component';
 export * from './lib/components/navigation/sidebar/sidebar.component';
 export * from './lib/enums';
+
+export * from './lib/components/card/card.component';

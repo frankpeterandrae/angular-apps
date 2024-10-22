@@ -8,11 +8,22 @@
 @use '../base/utility';
 
 $colors: (
-	linen: variables.$linen,
-	sandy-brown: variables.$sandy-brown,
+	crimson-highlight: variables.$crimson-highlight,
 	crimson: variables.$crimson,
-	slate-gray: variables.$slate-gray,
+	danger: variables.$danger,
+	default: variables.$default,
+	ebony-highlight: variables.$ebony-highlight,
 	ebony: variables.$ebony,
+	info: variables.$info,
+	linen-highlight: variables.$linen-highlight,
+	linen: variables.$linen,
+	primary: variables.$primary,
+	sandy-brown-highligh: variables.$sandy-brown-highlight,
+	sandy-brown: variables.$sandy-brown,
+	slate-gray-highlight: variables.$slate-gray-highlight,
+	slate-gray: variables.$slate-gray,
+	success: variables.$success,
+	warning: variables.$warning,
 );
 $colors-with-variants: (
 	linen: variables.$linen,
@@ -27,7 +38,7 @@ $colors-with-variants: (
 		background-color: $color;
 	}
 
-	.#{prefix.$prefix}#{'' + $name} {
+	.#{prefix.$prefix}color-#{'' + $name} {
 		color: $color;
 	}
 }

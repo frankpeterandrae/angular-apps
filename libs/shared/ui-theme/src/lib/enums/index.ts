@@ -4,4 +4,4 @@
  */
 
 export * from './color-definition';
-export * from './route-definition';
+export * from './icon-definition';

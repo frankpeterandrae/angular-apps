@@ -14,6 +14,11 @@ export const appConfig: ApplicationConfig = {
 		provideZoneChangeDetection({ eventCoalescing: true }),
 		provideRouter(appRoutes),
 		provideHttpClient(),
-		provideFastSVG({ url: (name: string) => `assets/svg-assets/${name}.svg` }),
+		provideFastSVG({
+			url: (name: string) => {
+				console.log('name', name);
+				return `/assets/svg-assets/${name}.svg`;
+			},
+		}),
 	],
 };
