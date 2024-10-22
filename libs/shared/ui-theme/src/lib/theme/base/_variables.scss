@@ -7,14 +7,29 @@
 
 // base colors
 $linen: #f0e8e6;
+$linen-highlight: #f0e8e6;
 $sandy-brown: #e8a554;
+$sandy-brown-highlight: #ffb55d;
 $crimson: #c93642;
+$crimson-highlight: #c93642;
 $slate-gray: #968e8b;
+$slate-gray-highlight: #a59c99;
 $ebony: #2b222d;
-$border-radius: 0.5rem;
-$border-radius-small: 0.25rem;
+$ebony-highlight: #2f2531;
+$default: #999;
+$primary: #c93642;
+$info: #2b222d;
+$success: #728b4c;
+$warning: #ef7b14;
+$danger: #c93642;
+
+// text colors
 $light-text: utility.tint($linen, 8);
 $dark-text: utility.shade($ebony, 8);
+
+// standard radius
+$border-radius: 0.5rem;
+$border-radius-small: 0.25rem;
 
 // viewport sizes
 $small-mobile: 40rem; // Ideal for smaller smartphones, especially in landscape mode.

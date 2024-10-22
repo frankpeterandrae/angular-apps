@@ -8,7 +8,9 @@
 		@for (item of menuItems; track item) {
 			<li class="menu-item">
 				<a [routerLink]="item.route">
-					<i class="icon">{{ item.icon }}</i>
+					@if (item.icon) {
+						<fast-svg class="fpa-color-crimson" [name]="item.icon" [size]="'32'"></fast-svg>
+					}
 					<span>{{ item.label }}</span>
 				</a>
 			</li>
@@ -16,4 +18,4 @@
 	</ul>
 </nav>
 
-{{environment | json}}
+{{ environment | json }}

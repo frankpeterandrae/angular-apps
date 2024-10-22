@@ -25,6 +25,11 @@
 						"glob": "**/*",
 						"input": "libs/colour-rack/src/assets",
 						"output": "assets"
+					},
+					{
+						"glob": "**/*",
+						"input": "libs/shared/ui-theme/src/lib/theme/assets",
+						"output": "assets"
 					}
 				],
 				"styles": ["apps/homepage/src/styles.scss", "libs/shared/ui-theme/src/lib/theme/styles.scss"],
