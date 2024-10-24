@@ -26,14 +26,16 @@ export class AppComponent {
 
 	public menuItems: MenuItem[] = [
 		{ label: 'Home', icon: IconDefinition.house, route: '/home' },
-		...(!environment.production ? [{ label: 'Farbregal', icon: IconDefinition.palette, route: '/paint-rack' }] : []),
 		...(!environment.production
 			? [
 					{
-						label: 'Test',
+						label: 'In Entwicklung',
 						icon: IconDefinition.palette,
-						route: '/test',
-						children: [{ label: 'child', route: '/test/child' }],
+						route: '/dev',
+						children: [
+							{ label: 'Farbregal', icon: IconDefinition.palette, route: '/dev/paint-rack' },
+							{ label: 'child', route: '/dev/test' },
+						],
 					},
 				]
 			: []),
