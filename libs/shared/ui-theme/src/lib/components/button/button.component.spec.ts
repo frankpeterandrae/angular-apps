@@ -5,7 +5,7 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonComponent } from './button.component';
-import { ColorDefinition } from '../../enums';
+import { ButtonColorDefinition } from '../../enums';
 
 describe('ButtonComponent', () => {
 	let component: ButtonComponent;
@@ -26,7 +26,7 @@ describe('ButtonComponent', () => {
 
 	it('should render the button with default settings', () => {
 		fixture.componentRef.setInput('buttonText', 'Click Me');
-		fixture.componentRef.setInput('color', ColorDefinition.PRIMARY);
+		fixture.componentRef.setInput('color', ButtonColorDefinition.PRIMARY);
 		fixture.detectChanges();
 		const buttonElement: HTMLButtonElement = fixture.nativeElement.querySelector('button');
 		expect(buttonElement).toBeTruthy();
@@ -34,16 +34,16 @@ describe('ButtonComponent', () => {
 	});
 
 	it('should apply correct classes based on color input', () => {
-		fixture.componentRef.setInput('color', ColorDefinition.SUCCESS);
+		fixture.componentRef.setInput('color', ButtonColorDefinition.SUCCESS);
 		component.ngOnInit(); // Call ngOnInit to initialize classes
 		fixture.detectChanges();
 
 		const buttonElement: HTMLButtonElement = fixture.nativeElement.querySelector('button');
-		expect(buttonElement.classList).toContain('fpa-gradient-success'); // Ensure class matches format
+		expect(buttonElement.classList).toContain('fpa-success'); // Ensure class matches format
 	});
 
 	it('should emit onClick event when button is clicked', () => {
-		fixture.componentRef.setInput('color', ColorDefinition.SUCCESS);
+		fixture.componentRef.setInput('color', ButtonColorDefinition.SUCCESS);
 		const onClickSpy = jest.spyOn(component.onClick, 'emit');
 		fixture.detectChanges();
 
@@ -54,7 +54,7 @@ describe('ButtonComponent', () => {
 	});
 
 	it('should render icon if icon input is provided', () => {
-		fixture.componentRef.setInput('color', ColorDefinition.SUCCESS);
+		fixture.componentRef.setInput('color', ButtonColorDefinition.SUCCESS);
 		fixture.componentRef.setInput('icon', 'test-icon');
 		fixture.detectChanges();
 
@@ -64,7 +64,7 @@ describe('ButtonComponent', () => {
 	});
 
 	it('should render button text when buttonText input is provided', () => {
-		fixture.componentRef.setInput('color', ColorDefinition.SUCCESS);
+		fixture.componentRef.setInput('color', ButtonColorDefinition.SUCCESS);
 		fixture.componentRef.setInput('buttonText', 'Test Button');
 		fixture.detectChanges();
 
@@ -74,12 +74,33 @@ describe('ButtonComponent', () => {
 	});
 
 	it('should add "fpa-df-direction-row-reverse" class when iconEnd is true', () => {
-		fixture.componentRef.setInput('color', ColorDefinition.SUCCESS);
+		fixture.componentRef.setInput('color', ButtonColorDefinition.SUCCESS);
 		fixture.componentRef.setInput('iconEnd', true);
 		component.ngOnInit(); // Apply classes
 		fixture.detectChanges();
 
 		const contentDiv = fixture.nativeElement.querySelector('button .fpa-flex');
-		expect(contentDiv.classList).toContain('fpa-df-direction-row-reverse');
+		expect(contentDiv.classList).toContain('fpa-flex-row-reverse');
+	});
+
+	it('should add "fpa-disabled" class when disabled is true', () => {
+		fixture.componentRef.setInput('color', ButtonColorDefinition.SUCCESS);
+		fixture.componentRef.setInput('disabled', true);
+		component.ngOnInit();
+		fixture.detectChanges();
+
+		const buttonElement: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+		fixture.componentRef.setInput('color', ButtonColorDefinition.SUCCESS);
+		expect(buttonElement.classList).toContain('fpa-disabled');
+	});
+
+	it('should not add "fpa-disabled" class when disabled is false', () => {
+		fixture.componentRef.setInput('color', ButtonColorDefinition.SUCCESS);
+		fixture.componentRef.setInput('disabled', false);
+		component.ngOnInit();
+		fixture.detectChanges();
+
+		const buttonElement: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+		expect(buttonElement.classList).not.toContain('fpa-disabled');
 	});
 });

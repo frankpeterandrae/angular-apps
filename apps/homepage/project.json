@@ -32,7 +32,11 @@
 						"output": "assets"
 					}
 				],
-				"styles": ["apps/homepage/src/styles.scss", "libs/shared/ui-theme/src/lib/theme/styles.scss"],
+				"styles": [
+					"apps/homepage/src/styles.scss",
+					"libs/shared/ui-theme/src/lib/theme/styles.scss",
+					"node_modules/@angular/cdk/overlay-prebuilt.css"
+				],
 				"scripts": [],
 				"extractLicenses": false,
 				"sourceMap": true,
@@ -74,6 +78,9 @@
 		},
 		"serve": {
 			"executor": "@angular-devkit/build-angular:dev-server",
+			"options": {
+				"port": 4200
+			},
 			"configurations": {
 				"production": {
 					"buildTarget": "homepage:build:production"
@@ -90,40 +97,43 @@
 				"parallel": false,
 				"commands": [
 					{
-						"command": "rmdir /S /Q dist\\production"
+						"command": "shx rm -rf dist/production"
 					},
 					{
-						"command": "mkdir dist\\production"
+						"command": "shx mkdir -p dist/production"
 					},
 					{
 						"command": "nx build homepage --configuration=production"
 					},
 					{
-						"command": "xcopy dist\\apps\\homepage\\browser dist\\production\\ /E /I /Y"
+						"command": "shx cp -r dist/apps/homepage/browser/. dist/production/"
 					},
 					{
-						"command": "xcopy apps\\php-api dist\\production\\php-api\\ /E /I /Y"
+						"command": "echo shx cp -r apps/php-api dist/production/php-api/"
 					},
 					{
-						"command": "del dist\\production\\php-api\\encryption.php"
+						"command": "echo shx rm -f dist/production/php-api/encryption.php"
 					},
 					{
-						"command": "node .\\scripts\\generate-htaccess.js"
+						"command": "node ./scripts/generate-htaccess.js"
 					},
 					{
-						"command": "xcopy libs\\shared\\config\\src\\lib\\htaccess\\.htaccess dist\\production\\ /E /I /Y"
+						"command": "shx cp -r libs/shared/config/src/lib/htaccess/.htaccess dist/production/"
 					},
 					{
-						"command": "node .\\scripts\\generate-sitemap.js"
+						"command": "node ./scripts/generate-sitemap.js"
 					},
 					{
-						"command": "xcopy libs\\shared\\config\\src\\lib\\sitemap\\sitemap.xml dist\\production\\ /E /I /Y"
+						"command": "shx cp -r libs/shared/config/src/lib/sitemap/sitemap.xml dist/production/"
 					},
 					{
-						"command": "xcopy libs\\shared\\config\\src\\lib\\robots\\robots.txt dist\\production\\ /E /I /Y"
+						"command": "shx cp -r libs/shared/config/src/lib/robots/robots.txt dist/production/"
 					},
 					{
-						"command": "xcopy libs\\shared\\config\\src\\lib\\config\\google1fa4ec9361425ee2.html dist\\production\\ /E /I /Y"
+						"command": "shx cp -r libs/shared/config/src/lib/config/google1fa4ec9361425ee2.html dist/production/"
+					},
+					{
+						"command": "npm run foss"
 					}
 				]
 			}

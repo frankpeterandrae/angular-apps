@@ -4,11 +4,12 @@
  */
 
 import { Component } from '@angular/core';
-import { ButtonComponent, ColorDefinition } from '@angular-apps/shared/ui-theme';
+import { ButtonColorDefinition, ButtonComponent } from '@angular-apps/shared/ui-theme';
 import { Router } from '@angular/router';
 
 /**
  * Component for displaying a 404 error page.
+ * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'homepage-feature-error404',
@@ -18,7 +19,7 @@ import { Router } from '@angular/router';
 	styleUrl: './error404.component.scss',
 })
 export class Error404Component {
-	protected readonly ColorDefinition = ColorDefinition;
+	protected readonly ButtonColorDefinition = ButtonColorDefinition;
 
 	/**
 	 * Constructor for Error404Component.
@@ -30,6 +31,8 @@ export class Error404Component {
 	 * Navigates to the home page.
 	 */
 	public routeToHome(): void {
+		// TODO: Add Logger
+		// eslint-disable-next-line no-console
 		this.router.navigate(['/']).catch((error) => console.error(error));
 	}
 }

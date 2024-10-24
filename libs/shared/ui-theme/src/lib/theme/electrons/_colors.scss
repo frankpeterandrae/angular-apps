@@ -34,7 +34,8 @@ $colors-with-variants: (
 );
 
 @each $name, $color in $colors {
-	.#{prefix.$prefix}bg-#{'' + $name} {
+	.#{prefix.$prefix}bg-#{'' + $name},
+	%#{prefix.$prefix}bg-#{'' + $name} {
 		background-color: $color;
 	}
 
@@ -74,10 +75,12 @@ $tints-count: 9;
 
 // text colors
 
-.#{prefix.$prefix}light-text {
+.#{prefix.$prefix}light-text,
+%#{prefix.$prefix}light-text {
 	color: variables.$light-text;
 }
 
-.#{prefix.$prefix}dark-text {
+.#{prefix.$prefix}dark-text,
+%#{prefix.$prefix}dark-text {
 	color: variables.$dark-text;
 }

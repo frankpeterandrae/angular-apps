@@ -6,10 +6,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DataConnectionService } from '@angular-apps/services';
 import { ButtonComponent } from '../button/button.component';
-import { ColorDefinition } from '../../enums';
+import { ButtonColorDefinition } from '../../enums';
 
 /**
  * Component for the login form.
+ * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'theme-login',
@@ -21,7 +22,7 @@ export class LoginComponent {
 	/**
 	 * Enum for color definitions.
 	 */
-	protected readonly ColorDefinition = ColorDefinition;
+	protected readonly ButtonColorDefinition = ButtonColorDefinition;
 
 	/**
 	 * Form group for the login form.
@@ -50,7 +51,7 @@ export class LoginComponent {
 		if (this.loginForm.valid) {
 			const { email, password } = this.loginForm.value;
 			this.dataConnection.login({ email, password }).subscribe((data) => {
-				console.log(data);
+				throw new Error(`Not implemented: ${data}`);
 			});
 		}
 	}

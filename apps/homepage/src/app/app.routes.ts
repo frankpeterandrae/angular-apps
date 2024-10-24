@@ -16,21 +16,8 @@ import { EnvGuard } from '@angular-apps/services';
  */
 const devRoutes: Route[] = [
 	{
-		path: 'dev/paint-rack',
-		/**
-		 * Lazy loads the ColorSearchContainerComponent for the paint rack route.
-		 * @returns {Promise<any>} A promise that resolves to the ColorSearchContainerComponent.
-		 */
-		loadComponent: () => import('@angular-apps/colour-rack').then((m) => m.ColorSearchContainerComponent),
-		/**
-		 * Guards the route to ensure it is only accessible in the appropriate environment.
-		 */
-		canActivate: [EnvGuard],
-	},
-	{
 		path: 'dev/test',
 		/**
-		 * /**
 		 * Lazy loads the Error404Component for the test route.
 		 * @returns {Promise<any>} A promise that resolves to the Error404Component.
 		 */
@@ -49,20 +36,26 @@ export const appRoutes: Route[] = [
 	{
 		path: 'home',
 		/**
-		 * /**
 		 * Lazy loads the HomeComponent for the home route.
 		 * @returns {Promise<any>} A promise that resolves to the HomeComponent.
 		 */
-		loadComponent: () => import('@angular-apps/homepage-feature').then((m) => m.HomeComponent),
+		loadComponent: (): Promise<any> => import('@angular-apps/homepage-feature').then((m) => m.HomeComponent),
+	},
+	{
+		path: 'paint-rack',
+		/**
+		 * Lazy loads the ColorSearchContainerComponent for the paint rack route.
+		 * @returns {Promise<any>} A promise that resolves to the ColorSearchContainerComponent.
+		 */
+		loadComponent: (): Promise<any> => import('@angular-apps/colour-rack').then((m) => m.ColorSearchContainerComponent),
 	},
 	...(environment.production ? [] : devRoutes),
 	{
 		path: '**',
 		/**
-		 * /**
 		 * Lazy loads the Error404Component for handling unknown routes.
 		 * @returns {Promise<any>} A promise that resolves to the Error404Component.
 		 */
-		loadComponent: () => import('@angular-apps/homepage-feature').then((m) => m.Error404Component),
+		loadComponent: (): Promise<any> => import('@angular-apps/homepage-feature').then((m) => m.Error404Component),
 	},
 ];

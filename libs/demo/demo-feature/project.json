@@ -1,0 +1,27 @@
+{
+	"name": "demo-feature",
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/demo/demo-feature/src",
+	"prefix": "lib",
+	"projectType": "library",
+	"tags": ["domain:demo", "type:feature"],
+	"targets": {
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "libs/demo/demo-feature/jest.config.ts"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		},
+		"stylelint": {
+			"executor": "nx-stylelint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["libs/demo-feature/**/*.css", "libs/demo-feature/**/*.scss"]
+			}
+		}
+	}
+}

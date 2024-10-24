@@ -3,14 +3,14 @@
   ~ All rights reserved.
   -->
 
-<button class="fpa-button fpa-mx-05 fpa-px-1 fpa-py-05" [type]="type()" [ngClass]="buttonClasses" (click)="callback()">
+<button class="fpa-button fpa-px-1 fpa-py-05" [type]="type()" [ngClass]="buttonClasses" (click)="callback()">
 	<div class="fpa-flex fpa-flex-row" [ngClass]="contentClasses">
 		@if (icon()) {
-			<fast-svg class="fpa-color-crimson fpa-mx-05" [name]="icon()!" />
+			<fast-svg [name]="icon()!" [size]="'16'" />
 		}
 		@if (buttonText()) {
 			@if (buttonText()) {
-				<span>
+				<span class="fpa-flex-align-content-center">
 					{{ buttonText() }}
 				</span>
 			}

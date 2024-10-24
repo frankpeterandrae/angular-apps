@@ -6,19 +6,23 @@
 @use '../base/prefix';
 @use '../base/variables';
 
-.#{prefix.$prefix}flex {
+.#{prefix.$prefix}flex,
+%#{prefix.$prefix}flex {
 	display: flex;
 }
 
 @each $name, $width in variables.$breakpoints {
 	$breakpoint-prefix: '-' + $name;
+	$min-width: $width;
 
-	@if $name == uw {
+	@if $name == xs {
 		$breakpoint-prefix: '';
+		$min-width: 0;
 	}
 
-	@media (max-width: #{$width}) {
-		.#{prefix.$prefix}flex#{$breakpoint-prefix}-column {
+	@media (min-width: #{$min-width}) {
+		.#{prefix.$prefix}flex#{$breakpoint-prefix}-column,
+		%#{prefix.$prefix}flex#{$breakpoint-prefix}-column {
 			flex-direction: column;
 		}
 
@@ -30,7 +34,7 @@
 			flex-direction: row;
 		}
 
-		#{prefix.$prefix}flex#{$breakpoint-prefix}-row-reverse {
+		.#{prefix.$prefix}flex#{$breakpoint-prefix}-row-reverse {
 			flex-direction: row-reverse;
 		}
 
@@ -174,6 +178,42 @@
 			align-content: last baseline;
 		}
 
+		.#{prefix.$prefix}flex#{$breakpoint-prefix}-align-self-flex-start {
+			align-self: flex-start;
+		}
+
+		.#{prefix.$prefix}flex#{$breakpoint-prefix}-align-self-flex-end {
+			align-self: flex-end;
+		}
+
+		.#{prefix.$prefix}flex#{$breakpoint-prefix}-align-self-center {
+			align-self: center;
+		}
+
+		.#{prefix.$prefix}flex#{$breakpoint-prefix}-align-self-stretch {
+			align-self: stretch;
+		}
+
+		.#{prefix.$prefix}flex#{$breakpoint-prefix}-align-self-star {
+			align-self: start;
+		}
+
+		.#{prefix.$prefix}flex#{$breakpoint-prefix}-align-self-end {
+			align-self: end;
+		}
+
+		.#{prefix.$prefix}flex#{$breakpoint-prefix}-align-self-baseline {
+			align-self: baseline;
+		}
+
+		.#{prefix.$prefix}flex#{$breakpoint-prefix}-align-self-first-baseline {
+			align-self: first baseline;
+		}
+
+		.#{prefix.$prefix}flex#{$breakpoint-prefix}-align-self-last-baseline {
+			align-self: last baseline;
+		}
+
 		@for $i from 0 through 5 {
 			.#{prefix.$prefix}flex-shrink-#{ $i } {
 				flex-shrink: $i;
@@ -181,6 +221,10 @@
 
 			.#{prefix.$prefix}flex-#{ $i } {
 				flex: $i;
+			}
+
+			.#{prefix.$prefix}flex-grow-#{ $i } {
+				flex-grow: $i;
 			}
 		}
 	}

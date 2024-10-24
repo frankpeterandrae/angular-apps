@@ -21,6 +21,7 @@ RewriteRule ^(robots\.txt|sitemap\.xml)$ - [L]
 # List of known client-side routes
 RewriteRule ^$ /index.html [L]
 RewriteRule ^home$ /index.html [L]
+RewriteRule ^paint-rack$ /index.html [L]
 
 # For all other routes, serve index.html with a 404 status
 RewriteRule ^ /index.html [R=404,L]

@@ -17,6 +17,7 @@
 		"paths": {
 			"@angular-apps/colour-rack": ["libs/colour-rack/src/index.ts"],
 			"@angular-apps/config": ["libs/shared/config/src/index.ts"],
+			"@angular-apps/demo-feature": ["libs/demo/demo-feature/src/index.ts"],
 			"@angular-apps/demo/domain": ["libs/demo/domain/src/index.ts"],
 			"@angular-apps/homepage-domain": ["libs/homepage/domain/src/index.ts"],
 			"@angular-apps/homepage-feature": ["libs/homepage/feature/src/index.ts"],

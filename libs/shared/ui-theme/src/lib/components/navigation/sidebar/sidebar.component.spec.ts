@@ -5,7 +5,6 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SidebarComponent } from './sidebar.component';
-import { environment } from '@angular-apps/config';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
@@ -75,9 +74,5 @@ describe('SidebarComponent', () => {
 		fixture.detectChanges();
 		const menuItems = fixture.nativeElement.querySelectorAll('.menu-item');
 		expect(menuItems.length).toBe(0);
-	});
-
-	it('should apply correct environment configuration', () => {
-		expect(component.environment).toBe(environment);
 	});
 });

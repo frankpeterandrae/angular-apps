@@ -20,7 +20,7 @@
 		@if (navigationItem.children) {
 			<div class="nva-dropdown">
 				<a
-					class="nva-dropdown fpa-p-1 fpa-link fpa-light-text"
+					class="nva-dropdown fpa-p-1 fpa-light-text fpa-link"
 					[ngClass]="{ 'link-active': getCurrentRoute().includes(navigationItem.route) }"
 					(click)="toggleNavigation(navigationItem.route)"
 				>
@@ -39,7 +39,7 @@
 			</div>
 		} @else if (navigationItem.route) {
 			<a
-				class="fpa-p-1 fpa-link fpa-light-text"
+				class="fpa-p-1 fpa-light-text fpa-link"
 				[routerLink]="navigationItem.route"
 				[ngClass]="{ 'link-active': getCurrentRoute() === navigationItem.route }"
 				(click)="resetDropdowns()"

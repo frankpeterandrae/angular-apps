@@ -10,5 +10,9 @@ export interface Color {
 	mainColor: string;
 	secondaryColor?: string;
 	highlighted?: boolean;
-	wave: string;
+	wave?: string;
+	sku?: string;
+	barcode?: string;
+	row?: number;
+	column?: number;
 }

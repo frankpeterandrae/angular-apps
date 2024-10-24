@@ -20,6 +20,11 @@
 					{
 						"glob": "**/*",
 						"input": "apps/demo/public"
+					},
+					{
+						"glob": "**/*",
+						"input": "libs/shared/ui-theme/src/lib/theme/assets",
+						"output": "assets"
 					}
 				],
 				"styles": ["apps/demo/src/styles.scss", "libs/shared/ui-theme/src/lib/theme/styles.scss"],
@@ -51,6 +56,9 @@
 		},
 		"serve": {
 			"executor": "@angular-devkit/build-angular:dev-server",
+			"options": {
+				"port": 4250
+			},
 			"configurations": {
 				"production": {
 					"buildTarget": "demo:build:production"

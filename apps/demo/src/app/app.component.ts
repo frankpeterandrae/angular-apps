@@ -3,17 +3,17 @@
  * All rights reserved.
  */
 
-import { ColorsComponent } from '@angular-apps/demo/domain';
-
-import { ButtonComponent, ColorDefinition } from '@angular-apps/shared/ui-theme';
+import { MenuItem, SidebarComponent } from '@angular-apps/shared/ui-theme';
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 /**
  * The root component of the demo application.
+ * @author Frank-Peter Andrä
  */
 @Component({
 	standalone: true,
-	imports: [ColorsComponent, ButtonComponent],
+	imports: [SidebarComponent, RouterOutlet],
 	selector: 'demo-root',
 	templateUrl: './app.component.html',
 })
@@ -22,5 +22,18 @@ export class AppComponent {
 	public title = 'demo';
 
 	/** The color definitions used in the application. */
-	public readonly ColorDefinition = ColorDefinition;
+	public menuItems: MenuItem[];
+
+	/**
+	 * Constructor for the AppComponent.
+	 * Initializes the menu items with their respective labels and routes.
+	 */
+	constructor() {
+		this.menuItems = [
+			{ label: 'Button', route: 'button' },
+			{ label: 'Colors', route: 'colors' },
+			{ label: 'Icons', route: 'icons' },
+			{ label: 'Typography', route: 'typography' },
+		];
+	}
 }

@@ -1,0 +1,31 @@
+/*!
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
+.demo--colors-block {
+	height: 3rem;
+	width: 3rem;
+}
+
+.color-container {
+	display: table;
+	width: 100%;
+}
+
+.color-name,
+.color-shade {
+	display: table-cell;
+	padding: 0.5rem;
+}
+
+.color-name {
+	width: 8rem;
+	height: 3rem;
+	align-content: center;
+}
+
+.demo-colors-block {
+	height: 3rem;
+	width: 3rem;
+}

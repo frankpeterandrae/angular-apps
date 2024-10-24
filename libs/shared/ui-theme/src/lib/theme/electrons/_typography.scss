@@ -1,0 +1,146 @@
+/*!
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
+@use '../base/prefix';
+
+.h1,
+h1 {
+	font-size: 3rem;
+	line-height: 1.25;
+
+	@extend %#{prefix.$prefix}font-weight-bold;
+	@extend %letter-spacing-005;
+}
+
+.h2,
+h2 {
+	font-size: 2.25rem;
+	line-height: 1.3;
+
+	@extend %#{prefix.$prefix}font-weight-bold;
+	@extend %letter-spacing-005;
+}
+
+.h3,
+h3 {
+	font-size: 1.875rem;
+	line-height: 1.375;
+
+	@extend %#{prefix.$prefix}font-weight-bold;
+	@extend %letter-spacing-005;
+}
+
+.h4,
+h4 {
+	font-size: 1.5rem;
+	line-height: 1.375;
+
+	@extend %#{prefix.$prefix}font-weight-bold;
+	@extend %letter-spacing-005;
+}
+
+.h5,
+h5 {
+	font-size: 1.25rem;
+	line-height: 1.375;
+
+	@extend %#{prefix.$prefix}font-weight-bold;
+}
+
+.h6,
+h6 {
+	font-size: 1rem;
+	line-height: 1.625;
+
+	@extend %#{prefix.$prefix}font-weight-bold;
+}
+
+.#{prefix.$prefix}lead {
+	font-size: 1.25rem;
+	line-height: 1.625;
+
+	@extend %#{prefix.$prefix}font-weight-normal;
+}
+
+.#{prefix.$prefix}paragraph,
+p {
+	font-size: 1rem;
+	line-height: 1.625;
+
+	@extend %#{prefix.$prefix}font-weight-normal;
+}
+
+.#{prefix.$prefix}small {
+	font-size: 0.875rem;
+	line-height: 1.5;
+
+	@extend %#{prefix.$prefix}font-weight-normal;
+}
+
+.#{prefix.$prefix}tiny,
+%#{prefix.$prefix}tiny {
+	font-size: 0.75rem;
+	line-height: 1.25;
+
+	@extend %#{prefix.$prefix}font-weight-normal;
+}
+
+.#{prefix.$prefix}font-weight-thin,
+%#{prefix.$prefix}font-weight-thin {
+	font-weight: 100;
+}
+
+.#{prefix.$prefix}font-weight-extra-light,
+%#{prefix.$prefix}font-weight-extra-light {
+	font-weight: 200;
+}
+
+.#{prefix.$prefix}font-weight-light,
+%#{prefix.$prefix}font-weight-light {
+	font-weight: 300;
+}
+
+.#{prefix.$prefix}font-weight-normal,
+%#{prefix.$prefix}font-weight-normal {
+	font-weight: 400;
+}
+
+.#{prefix.$prefix}font-weight-medium,
+%#{prefix.$prefix}font-weight-medium {
+	font-weight: 500;
+}
+
+.#{prefix.$prefix}font-weight-semi-bold,
+%#{prefix.$prefix}font-weight-semi-bold {
+	font-weight: 600;
+}
+
+.#{prefix.$prefix}font-weight-bold,
+%#{prefix.$prefix}font-weight-bold {
+	font-weight: 700;
+}
+
+.#{prefix.$prefix}font-weight-extra-bold,
+%#{prefix.$prefix}font-weight-extra-bold {
+	font-weight: 800;
+}
+
+.#{prefix.$prefix}font-weight-black,
+%#{prefix.$prefix}font-weight-black {
+	font-weight: 900;
+}
+
+.#{prefix.$prefix}font-weight-extra-black,
+%#{prefix.$prefix}font-weight-extra-black {
+	font-weight: 950;
+}
+
+%letter-spacing-005 {
+	letter-spacing: -0.05rem;
+}
+
+.#{prefix.$prefix}text-uppercase {
+	text-transform: uppercase;
+}
