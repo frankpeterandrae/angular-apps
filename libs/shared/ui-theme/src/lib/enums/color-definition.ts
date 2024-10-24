@@ -14,10 +14,4 @@ export enum ColorDefinition {
 	SLATE_GRAY_HIGHLIGHT = 'slate-gray-highlight',
 	EBONY = 'ebony',
 	EBONY_HIGHLIGHT = 'ebony-highlight',
-	DANGER = 'danger',
-	DEFAULT = 'default',
-	INFO = 'info',
-	PRIMARY = 'primary',
-	SUCCESS = 'success',
-	WARNING = 'warning',
 }

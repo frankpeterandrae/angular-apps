@@ -16,6 +16,10 @@
 	position: absolute;
 }
 
+.#{prefix.$prefix}pos-fix {
+	position: fixed;
+}
+
 .#{prefix.$prefix}with-max {
 	width: 100%;
 }

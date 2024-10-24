@@ -8,6 +8,7 @@ import { NgClass } from '@angular/common';
 
 /**
  * Component representing a color palette with various shades.
+ * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'demo-colors',

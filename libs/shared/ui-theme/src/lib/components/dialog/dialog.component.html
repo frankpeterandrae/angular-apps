@@ -1,0 +1,16 @@
+<!--
+  ~ Copyright (c) 2024. Frank-Peter Andrä
+  ~ All rights reserved.
+  -->
+
+<div class="fpa-pos-fix fpa-back-drop" (click)="backdropClick()" (keyup)="backdropClick()"></div>
+
+<div class="fpa-flex fpa-flex-column fpa-bg-linen fpa-box-shadow fpa-dark-text fpa-p-1">
+	<header>
+		<h2>{{ data.settings.title }}</h2>
+	</header>
+	<ng-content></ng-content>
+	<footer>
+		<button (click)="close()">Close</button>
+	</footer>
+</div>

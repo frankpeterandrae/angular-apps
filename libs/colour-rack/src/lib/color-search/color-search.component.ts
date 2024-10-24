@@ -3,26 +3,23 @@
  * All rights reserved.
  */
 
-import { ButtonComponent, ColorDefinition } from '@angular-apps/shared/ui-theme';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ButtonComponent, IconDefinition, InputComponent } from '@angular-apps/shared/ui-theme';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 /**
  * Component for searching colors.
+ * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'cr-color-search',
 	templateUrl: './color-search.component.html',
 	styleUrls: ['./color-search.component.scss'],
 	standalone: true,
-	imports: [FormsModule, ButtonComponent],
+	imports: [ButtonComponent, NgClass, InputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorSearchComponent {
-	/**
-	 * The text to search for.
-	 */
-	public searchText = '';
-
 	/**
 	 * Event emitted when a search is performed.
 	 */
@@ -30,15 +27,13 @@ export class ColorSearchComponent {
 
 	/**
 	 * Emits the search event with the current search text.
+	 * @param $event - The current search text.
 	 */
-	public onSearch(): void {
-		if (this.searchText != null) {
-			this.searchEvent.emit(this.searchText);
+	public onSearchTermChange($event: string): void {
+		if ($event != null) {
+			this.searchEvent.emit($event);
 		}
 	}
 
-	/**
-	 * Reference to the ColorDefinition class.
-	 */
-	protected readonly ColorDefinition = ColorDefinition;
+	protected readonly IconDefinition = IconDefinition;
 }

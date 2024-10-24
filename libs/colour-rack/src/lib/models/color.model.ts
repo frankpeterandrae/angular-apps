@@ -11,4 +11,6 @@ export interface Color {
 	secondaryColor?: string;
 	highlighted?: boolean;
 	wave: string;
+	row: number;
+	column: number;
 }

@@ -1,0 +1,10 @@
+/*!
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+@use '../base/prefix';
+@use '../electrons/colors';
+
+input {
+	@extend %#{prefix.$prefix}light-text;
+}

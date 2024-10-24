@@ -41,7 +41,6 @@ export const appConfig: ApplicationConfig = {
 			 * @returns {string} The URL to the SVG file.
 			 */
 			url: (name: string) => {
-				console.log('name', name);
 				return `/assets/svg-assets/${name}.svg`;
 			},
 		}),

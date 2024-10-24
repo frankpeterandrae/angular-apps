@@ -13,6 +13,7 @@ import { MenuItem } from '../../../model/menu-item.model';
 /**
  * SidebarComponent is a standalone component that represents the sidebar navigation.
  * It uses CommonModule, RouterLink, and FastSvgComponent.
+ * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'theme-sidebar',

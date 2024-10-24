@@ -16,6 +16,7 @@ import { environment } from '@angular-apps/config';
 
 /**
  * The root component of the application.
+ * @author Frank-Peter Andrä
  */
 @Component({
 	standalone: true,
@@ -35,17 +36,15 @@ export class AppComponent {
 	 * @type {MenuItem[]}
 	 */
 	public menuItems: MenuItem[] = [
-		{ label: 'Home', icon: IconDefinition.house, route: '/home' },
+		{ label: 'Home', icon: IconDefinition.HOUSE, route: '/home' },
+		{ label: 'Farbregal', icon: IconDefinition.PALETTE, route: '/paint-rack' },
 		...(!environment.production
 			? [
 					{
 						label: 'In Entwicklung',
-						icon: IconDefinition.palette,
+						icon: IconDefinition.PALETTE,
 						route: '/dev',
-						children: [
-							{ label: 'Farbregal', icon: IconDefinition.palette, route: '/dev/paint-rack' },
-							{ label: 'child', route: '/dev/test' },
-						],
+						children: [{ label: 'child', route: '/dev/test' }],
 					},
 				]
 			: []),

@@ -1,0 +1,18 @@
+<!--
+  ~ Copyright (c) 2024. Frank-Peter Andrä
+  ~ All rights reserved.
+  -->
+<theme-dialog>
+	@if (data?.componentData?.alternativeNames) {
+		@for (alternativeNames of data.componentData.alternativeNames; track alternativeNames; let idx = $index) {
+			<div class="fpa-flex fpa-flex-row fpa-justify-between fpa-mb-05">
+				<p>{{ alternativeNames }}</p>
+			</div>
+		}
+	}
+
+	<div class="fpa-flex fpa-flex-row fpa-justify-between fpa-mb-05">
+		<p>Type:</p>
+		<p>{{ colorType() }}</p>
+	</div>
+</theme-dialog>
