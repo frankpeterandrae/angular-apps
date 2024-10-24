@@ -4,7 +4,9 @@
  */
 
 export enum IconDefinition {
-	house = 'house-chimney-solid',
-	palette = 'palette-solid',
-	brush = 'paint-brush-solid',
+	HOUSE = 'house-chimney-solid',
+	PALETTE = 'palette-solid',
+	BRUSH = 'paint-brush-solid',
+	SEARCH = 'search',
+	NONE = '',
 }

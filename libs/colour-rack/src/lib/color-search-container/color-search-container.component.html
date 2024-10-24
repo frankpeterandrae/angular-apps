@@ -3,9 +3,31 @@
   ~ All rights reserved.
   -->
 
-<div class="fpa-bg-ebony fpa-flex fpa-flex-column fpa-height-100">
-	<h1 class="fpa-text-center fpa-text-white">Colour Rack</h1>
-	<p class="fpa-text-center fpa-text-white">A place to find your favourite colours</p>
+<div class="fpa-content">
+	<h1 class="fpa-flex-align-self-center">Tow Thin Coats</h1>
+	<p>Ich habe auf dieser Seite, eine Übersicht über Duncan Roades' Tow Thin Coats Farben erstellt.</p>
+	<p>Diese Seite bietet folgende Funktionen:</p>
+	<ol>
+		<li>
+			<p>
+				<span class="fpa-font-weight-bold">Farbsuche:</span> Benutzer können eine Farbeingabe verwenden, um nach
+				bestimmten Farben zu suchen. Die Suchergebnisse werden in einem Raster angezeigt.
+			</p>
+		</li>
+		<li>
+			<p>
+				<span class="fpa-font-weight-bold">Farbraster:</span> Die gefundenen Farben werden in einem Raster dargestellt.
+				Jede Farbe kann angeklickt werden, um weitere Details anzuzeigen.
+			</p>
+		</li>
+		<li>
+			<p>
+				<span class="fpa-font-weight-bold">Farbdetails:</span> Beim Klicken auf eine Farbe im Raster öffnet sich ein
+				Dialog, der detaillierte Informationen über die ausgewählte Farbe anzeigt, einschließlich alternativer Namen und
+				Farbtypen.
+			</p>
+		</li>
+	</ol>
 	<cr-color-search (searchEvent)="updateSearchQuery($event)"></cr-color-search>
-	<cr-color-grid class="fpa-flex-1 fpa-overflow-y-auto" [searchQuery]="searchQuery()"></cr-color-grid>
+	<cr-color-grid class="fpa-flex-grow-1" [searchQuery]="searchQuery()"></cr-color-grid>
 </div>

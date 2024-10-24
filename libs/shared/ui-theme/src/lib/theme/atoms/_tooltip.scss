@@ -1,0 +1,19 @@
+/*!
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+@use '../base/prefix';
+@use '../base/variables';
+@use '../electrons/typography';
+.#{prefix.$prefix}tooltip {
+	position: absolute;
+	background-color: variables.$slate-gray;
+	color: variables.$dark-text;
+	padding: 5px;
+	border-radius: variables.$border-radius;
+	white-space: nowrap;
+	z-index: 1000;
+	pointer-events: none; /* Ensure the tooltip does not interfere with pointer events */
+
+	@extend %#{prefix.$prefix}tiny;
+}

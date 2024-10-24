@@ -22,6 +22,7 @@ function compileSass() {
 				// Include additional options if necessary
 			});
 
+			result.css = result.css.replace(/\/\*!.*?Frank-Peter Andrä.*?\*\//gs, '');
 			// Write the compiled CSS to the desired output file
 			await fs.writeFile(path.join(path.dirname(cssOutputPath), outputFileName), result.css);
 

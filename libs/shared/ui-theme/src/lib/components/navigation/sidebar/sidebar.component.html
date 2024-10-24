@@ -7,7 +7,7 @@
 	<ul class="menu fpa-m-0">
 		@for (item of menuItems(); track item) {
 			<li class="menu-item">
-				<a [routerLink]="item.route">
+				<a class="fpa-p-1 fpa-light-text fpa-link" [routerLink]="item.route">
 					@if (item.icon) {
 						<fast-svg class="fpa-color-crimson" [name]="item.icon" [size]="'32'"></fast-svg>
 					}
@@ -17,5 +17,3 @@
 		}
 	</ul>
 </nav>
-
-{{ environment | json }}

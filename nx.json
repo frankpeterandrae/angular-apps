@@ -89,5 +89,14 @@
 	],
 	"neverConnectToCloud": true,
 	"useInferencePlugins": false,
-	"defaultBase": "main"
+	"defaultBase": "main",
+	"generators": {
+		"@nx/angular:component": {
+			"style": "css"
+		},
+		"@nx/angular:library": {
+			"linter": "eslint",
+			"unitTestRunner": "jest"
+		}
+	}
 }

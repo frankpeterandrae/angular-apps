@@ -3,7 +3,9 @@
  * All rights reserved.
  */
 
+/* stylelint-disable */
 @use 'libs/shared/ui-theme/src/lib/theme/base/_variables.scss';
+/* stylelint-enable */
 
 :host {
 	.spinner {
@@ -13,12 +15,14 @@
 		width: 60px;
 		height: 60px;
 		animation: spin 2s linear infinite;
-		margin: 0 auto 30px auto;
+		margin: 0 auto 30px;
 	}
+
 	@keyframes spin {
 		0% {
 			transform: rotate(0deg);
 		}
+
 		100% {
 			transform: rotate(360deg);
 		}

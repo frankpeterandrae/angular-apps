@@ -17,18 +17,8 @@ module.exports = [
 	...compat.extends('plugin:cypress/recommended'),
 	{
 		files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
-		rules: {},
-	},
-	{
-		files: ['**/*.ts', '**/*.tsx'],
-		rules: {},
-	},
-	{
-		files: ['**/*.js', '**/*.jsx'],
-		rules: {},
-	},
-	{
-		files: ['src/**/*.{ts,js,tsx,jsx}'],
-		rules: {},
+		rules: {
+			'no-console': 'off',
+		},
 	},
 ];

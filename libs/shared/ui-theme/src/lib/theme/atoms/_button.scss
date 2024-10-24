@@ -1,0 +1,52 @@
+/*!
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+@use '../base/prefix';
+@use '../base/variables';
+@use '../electrons/colors';
+
+.#{prefix.$prefix}default {
+	background-color: #{variables.$default};
+
+	@extend %#{prefix.$prefix}dark-text;
+}
+
+.#{prefix.$prefix}primary {
+	background-color: #{variables.$primary};
+
+	@extend %#{prefix.$prefix}light-text;
+}
+
+.#{prefix.$prefix}info {
+	background-color: #{variables.$info};
+
+	@extend %#{prefix.$prefix}light-text;
+}
+
+.#{prefix.$prefix}success {
+	background-color: #{variables.$success};
+
+	@extend %#{prefix.$prefix}light-text;
+}
+
+.#{prefix.$prefix}warning {
+	background-color: #{variables.$warning};
+
+	@extend %#{prefix.$prefix}light-text;
+}
+
+.#{prefix.$prefix}danger {
+	background-color: #{variables.$danger};
+
+	@extend %#{prefix.$prefix}light-text;
+}
+
+.#{prefix.$prefix}disabled {
+	background-color: #{variables.$default};
+	cursor: not-allowed;
+}
+
+.#{prefix.$prefix}no-color {
+	background-color: transparent;
+}

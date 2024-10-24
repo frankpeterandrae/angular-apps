@@ -5,6 +5,7 @@
 
 @use '../base/prefix';
 @use '../base/variables';
+@use '../base/utility';
 
 .#{prefix.$prefix}box-shadow {
 	box-shadow:
@@ -13,4 +14,40 @@
 		0 8px 10px -5px rgb(0 0 0 / 20%);
 	border: 0;
 	border-radius: variables.$border-radius-small;
+}
+
+.#{prefix.$prefix}border-bottom {
+	border-bottom: 1px solid;
+}
+
+.#{prefix.$prefix}border-top {
+	border-top: 1px solid;
+}
+
+.#{prefix.$prefix}border-left {
+	border-left: 1px solid;
+}
+
+.#{prefix.$prefix}border-right {
+	border-right: 1px solid;
+}
+
+.#{prefix.$prefix}border-grey-t6 {
+	border-color: utility.tint(variables.$info, 6);
+}
+
+.#{prefix.$prefix}border-primary {
+	border-color: variables.$primary;
+}
+
+.#{prefix.$prefix}border-success {
+	border-color: variables.$success;
+}
+
+.#{prefix.$prefix}border-warning {
+	border-color: variables.$warning;
+}
+
+.#{prefix.$prefix}border-danger {
+	border-color: variables.$danger;
 }

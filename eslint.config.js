@@ -66,6 +66,7 @@ module.exports = [
 		rules: {
 			...config.rules,
 			'@typescript-eslint/no-explicit-any': 'off',
+			'no-console': 'error',
 			'@/no-extra-semi': 'error',
 			'@typescript-eslint/explicit-function-return-type': 'error',
 			'@typescript-eslint/explicit-member-accessibility': [
@@ -113,8 +114,8 @@ module.exports = [
 			'jsdoc/no-types': ['off'],
 			'jsdoc/no-undefined-types': ['off'],
 			'jsdoc/require-asterisk-prefix': ['warn'],
-			'jsdoc/require-description': ['warn'],
-			'jsdoc/require-description-complete-sentence': ['warn'],
+			'jsdoc/require-description': ['error'],
+			'jsdoc/require-description-complete-sentence': ['error'],
 			'jsdoc/require-example': ['off'],
 			'jsdoc/require-file-overview': ['off'],
 			'jsdoc/require-hyphen-before-param-description': ['warn'],

@@ -8,7 +8,8 @@
 
 @mixin margin($breakpoint-prefix, $map) {
 	@each $name, $margin in $map {
-		.#{prefix.$prefix}m#{$breakpoint-prefix}-#{$name} {
+		.#{prefix.$prefix}m#{$breakpoint-prefix}-#{$name},
+		%#{prefix.$prefix}m#{$breakpoint-prefix}-#{$name} {
 			margin: $margin;
 		}
 	}
@@ -24,7 +25,8 @@
 
 @mixin margin-bottom($breakpoint-prefix, $map) {
 	@each $name, $margin in $map {
-		.#{prefix.$prefix}mb#{$breakpoint-prefix}-#{$name} {
+		.#{prefix.$prefix}mb#{$breakpoint-prefix}-#{$name},
+		%#{prefix.$prefix}mb#{$breakpoint-prefix}-#{$name} {
 			margin-bottom: $margin;
 		}
 	}
@@ -139,23 +141,27 @@ $values: (
 
 @each $name, $width in variables.$breakpoints {
 	$breakpoint-prefix: '-' + $name;
+	$min-width: $width;
 
-	@if $name == uw {
+	@if $name == xs {
 		$breakpoint-prefix: '';
+		$min-width: 0;
 	}
 
-	@include margin($breakpoint-prefix, $values);
-	@include margin-top($breakpoint-prefix, $values);
-	@include margin-bottom($breakpoint-prefix, $values);
-	@include margin-left($breakpoint-prefix, $values);
-	@include margin-right($breakpoint-prefix, $values);
-	@include margin-x($breakpoint-prefix, $values);
-	@include margin-y($breakpoint-prefix, $values);
-	@include padding($breakpoint-prefix, $values);
-	@include padding-top($breakpoint-prefix, $values);
-	@include padding-bottom($breakpoint-prefix, $values);
-	@include padding-left($breakpoint-prefix, $values);
-	@include padding-right($breakpoint-prefix, $values);
-	@include padding-x($breakpoint-prefix, $values);
-	@include padding-y($breakpoint-prefix, $values);
+	@media (min-width: #{$min-width}) {
+		@include margin($breakpoint-prefix, $values);
+		@include margin-top($breakpoint-prefix, $values);
+		@include margin-bottom($breakpoint-prefix, $values);
+		@include margin-left($breakpoint-prefix, $values);
+		@include margin-right($breakpoint-prefix, $values);
+		@include margin-x($breakpoint-prefix, $values);
+		@include margin-y($breakpoint-prefix, $values);
+		@include padding($breakpoint-prefix, $values);
+		@include padding-top($breakpoint-prefix, $values);
+		@include padding-bottom($breakpoint-prefix, $values);
+		@include padding-left($breakpoint-prefix, $values);
+		@include padding-right($breakpoint-prefix, $values);
+		@include padding-x($breakpoint-prefix, $values);
+		@include padding-y($breakpoint-prefix, $values);
+	}
 }

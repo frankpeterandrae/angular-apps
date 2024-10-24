@@ -9,6 +9,7 @@ import { CardComponent } from '@angular-apps/shared/ui-theme';
 
 /**
  * Component representing the homepage feature.
+ * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'homepage-feature',
@@ -29,7 +30,7 @@ export class HomeComponent {
 	 */
 	public addData(): void {
 		this.apiService.addData('Hello World').subscribe((data) => {
-			console.log(data);
+			throw new Error(`Not implemented: ${data}`);
 		});
 	}
 
@@ -39,7 +40,7 @@ export class HomeComponent {
 	 */
 	public deleteData(id: number): void {
 		this.apiService.deleteData(id).subscribe((data) => {
-			console.log(data);
+			throw new Error(`Not implemented: ${data}`);
 		});
 	}
 
@@ -50,7 +51,7 @@ export class HomeComponent {
 		this.apiService
 			.addUser({ email: 'info@frankpeterandrae.de', user: '7fandrae', password: '123456' })
 			.subscribe((data) => {
-				console.log(data);
+				throw new Error(`Not implemented: ${data}`);
 			});
 	}
 
@@ -59,7 +60,7 @@ export class HomeComponent {
 	 */
 	public login(): void {
 		this.apiService.login({ email: 'info@frankpeterandrae.de', password: '123456' }).subscribe((data) => {
-			console.log(data);
+			throw new Error(`Not implemented: ${data}`);
 		});
 	}
 }

@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 
 /**
  * FooterComponent is a standalone Angular component that represents the footer section of the theme.
+ * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'theme-footer',

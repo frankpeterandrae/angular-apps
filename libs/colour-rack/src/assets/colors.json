@@ -5,7 +5,9 @@
 		"type": "S",
 		"mainColor": "#4d1c16",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10001,
+		"barcode": 5060951920005
 	},
 	{
 		"name": "Sanguine Scarlet",
@@ -13,7 +15,9 @@
 		"type": "M",
 		"mainColor": "#991915",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10002,
+		"barcode": 5060951920012
 	},
 	{
 		"name": "Demon Red",
@@ -21,7 +25,9 @@
 		"type": "H",
 		"mainColor": "#d31217",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10003,
+		"barcode": 5060951920029
 	},
 	{
 		"name": "Amphora Red",
@@ -29,7 +35,9 @@
 		"type": "S",
 		"mainColor": "#502626",
 		"secondaryColor": "",
-		"wave": "3"
+		"wave": "3",
+		"sku": 10121,
+		"barcode": 5060951921279
 	},
 	{
 		"name": "Emperor Red",
@@ -37,7 +45,9 @@
 		"type": "M",
 		"mainColor": "#a42d39",
 		"secondaryColor": "",
-		"wave": "3"
+		"wave": "3",
+		"sku": 10122,
+		"barcode": 5060951921286
 	},
 	{
 		"name": "Centurion Red",
@@ -45,7 +55,9 @@
 		"type": "H",
 		"mainColor": "#e12626",
 		"secondaryColor": "",
-		"wave": "3"
+		"wave": "3",
+		"sku": 10123,
+		"barcode": 5060951921293
 	},
 	{
 		"name": "Dread Red",
@@ -53,7 +65,9 @@
 		"type": "S",
 		"mainColor": "#784241",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10064,
+		"barcode": 5060951920661
 	},
 	{
 		"name": "Asmodeus Red",
@@ -61,7 +75,9 @@
 		"type": "M",
 		"mainColor": "#964844",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10065,
+		"barcode": 5060951920678
 	},
 	{
 		"name": "Evil Eye Red",
@@ -69,7 +85,9 @@
 		"type": "H",
 		"mainColor": "#c45948",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10066,
+		"barcode": 5060951920685
 	},
 	{
 		"name": "Red Rage",
@@ -77,7 +95,9 @@
 		"type": "S",
 		"mainColor": "#733629",
 		"secondaryColor": "",
-		"wave": "3"
+		"wave": "3",
+		"sku": 10124,
+		"barcode": 5060951921309
 	},
 	{
 		"name": "Apocalypse Sky",
@@ -85,7 +105,9 @@
 		"type": "M",
 		"mainColor": "#e04134",
 		"secondaryColor": "",
-		"wave": "3"
+		"wave": "3",
+		"sku": 10125,
+		"barcode": 5060951921316
 	},
 	{
 		"name": "Inferno Orange",
@@ -93,7 +115,9 @@
 		"type": "H",
 		"mainColor": "#ce3f25",
 		"secondaryColor": "",
-		"wave": "3"
+		"wave": "3",
+		"sku": 10026,
+		"barcode": 5060951921323
 	},
 	{
 		"name": "Rust Orange",
@@ -101,7 +125,9 @@
 		"type": "S",
 		"mainColor": "#bb4d38",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10010,
+		"barcode": 5060951920098
 	},
 	{
 		"name": "Fanatic Orange",
@@ -109,7 +135,9 @@
 		"type": "M",
 		"mainColor": "#d94b2e",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10011,
+		"barcode": 5060951920104
 	},
 	{
 		"name": "Orange Flare",
@@ -117,7 +145,9 @@
 		"type": "H",
 		"mainColor": "#ec7241",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10012,
+		"barcode": 5060951920111
 	},
 	{
 		"name": "Dark Sun Yellow",
@@ -125,7 +155,9 @@
 		"type": "S",
 		"mainColor": "#c4873a",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10004,
+		"barcode": 5060951920036
 	},
 	{
 		"name": "Skulker Yellow",
@@ -133,7 +165,9 @@
 		"type": "M",
 		"mainColor": "#f69f00",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10005,
+		"barcode": 5060951920043
 	},
 	{
 		"name": "Yellow Flame",
@@ -141,7 +175,9 @@
 		"type": "H",
 		"mainColor": "#f9b22d",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10006,
+		"barcode": 5060951920050
 	},
 	{
 		"name": "Panzer Yellow",
@@ -197,7 +233,9 @@
 		"type": "S",
 		"mainColor": "#787760",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10076,
+		"barcode": 5060951920784
 	},
 	{
 		"name": "Ranger Cloak",
@@ -205,7 +243,9 @@
 		"type": "M",
 		"mainColor": "#88874e",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10077,
+		"barcode": 5060951920791
 	},
 	{
 		"name": "Kobold Grey",
@@ -213,7 +253,9 @@
 		"type": "H",
 		"mainColor": "#919177",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10078,
+		"barcode": 5060951920807
 	},
 	{
 		"name": "Fury Green",
@@ -221,7 +263,9 @@
 		"type": "S",
 		"mainColor": "#76714b",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10079,
+		"barcode": 5060951920814
 	},
 	{
 		"name": "Gung-ho Green",
@@ -229,7 +273,9 @@
 		"type": "M",
 		"mainColor": "#b1a75e",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10080,
+		"barcode": 5060951920821
 	},
 	{
 		"name": "Green Beret",
@@ -237,7 +283,9 @@
 		"type": "H",
 		"mainColor": "#b5b289",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10081,
+		"barcode": 5060951920838
 	},
 	{
 		"name": "Contagion Green",
@@ -269,7 +317,9 @@
 		"type": "S",
 		"mainColor": "#819d62",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10073,
+		"barcode": 5060951920753
 	},
 	{
 		"name": "Goblinoid Green",
@@ -277,7 +327,9 @@
 		"type": "M",
 		"mainColor": "#92b75f",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10074,
+		"barcode": 5060951920760
 	},
 	{
 		"name": "Troll Snot Green",
@@ -285,7 +337,9 @@
 		"type": "H",
 		"mainColor": "#a8c46c",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10075,
+		"barcode": 5060951920777
 	},
 	{
 		"name": "Wyvern Green",
@@ -293,7 +347,9 @@
 		"type": "S",
 		"mainColor": "#404b43",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10013,
+		"barcode": 5060951920128
 	},
 	{
 		"name": "Emerald Green",
@@ -301,7 +357,9 @@
 		"type": "M",
 		"mainColor": "#3d5c43",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10014,
+		"barcode": 5060951920135
 	},
 	{
 		"name": "Ethereal Green",
@@ -309,7 +367,9 @@
 		"type": "H",
 		"mainColor": "#587f30",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10015,
+		"barcode": 5060951920142
 	},
 	{
 		"name": "War Master Green",
@@ -341,7 +401,9 @@
 		"type": "S",
 		"mainColor": "#3c5051",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10082,
+		"barcode": 5060951920845
 	},
 	{
 		"name": "Jade Green",
@@ -349,7 +411,9 @@
 		"type": "M",
 		"mainColor": "#327864",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10083,
+		"barcode": 5060951920852
 	},
 	{
 		"name": "Ghoul Green",
@@ -357,7 +421,9 @@
 		"type": "H",
 		"mainColor": "#5bb892",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10084,
+		"barcode": 5060951920869
 	},
 	{
 		"name": "Oxidation Green",
@@ -389,7 +455,9 @@
 		"type": "S",
 		"mainColor": "#3b84a4",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10067,
+		"barcode": 5060951920692
 	},
 	{
 		"name": "Cursed Blue",
@@ -397,7 +465,9 @@
 		"type": "M",
 		"mainColor": "#4498b7",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10068,
+		"barcode": 5060951920708
 	},
 	{
 		"name": "Ray Gun Glow",
@@ -405,7 +475,9 @@
 		"type": "H",
 		"mainColor": "#52afc5",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10069,
+		"barcode": 5060951920715
 	},
 	{
 		"name": "Eldar Robe",
@@ -437,7 +509,9 @@
 		"type": "S",
 		"mainColor": "#394967",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10070,
+		"barcode": 5060951920722
 	},
 	{
 		"name": "Witching Hour Blue",
@@ -445,7 +519,9 @@
 		"type": "M",
 		"mainColor": "#3764ad",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10071,
+		"barcode": 5060951920739
 	},
 	{
 		"name": "Leviathan Blue",
@@ -453,7 +529,9 @@
 		"type": "H",
 		"mainColor": "#417abe",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10072,
+		"barcode": 5060951920746
 	},
 	{
 		"name": "Marine Blue",
@@ -461,7 +539,9 @@
 		"type": "S",
 		"mainColor": "#444a70",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10007,
+		"barcode": 5060951920067
 	},
 	{
 		"name": "Elysium Blue",
@@ -469,7 +549,9 @@
 		"type": "M",
 		"mainColor": "#537aac",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10008,
+		"barcode": 5060951920074
 	},
 	{
 		"name": "Celestial Blue",
@@ -477,7 +559,9 @@
 		"type": "H",
 		"mainColor": "#6994c0",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10009,
+		"barcode": 5060951920081
 	},
 	{
 		"name": "Faust Blue",
@@ -509,7 +593,9 @@
 		"type": "S",
 		"mainColor": "#51575c",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10049,
+		"barcode": 5060951920487
 	},
 	{
 		"name": "Wolf Grey",
@@ -517,7 +603,9 @@
 		"type": "M",
 		"mainColor": "#63768a",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10050,
+		"barcode": 5060951920494
 	},
 	{
 		"name": "Gravestone Blue",
@@ -525,7 +613,9 @@
 		"type": "H",
 		"mainColor": "#7b8b99",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10051,
+		"barcode": 5060951920500
 	},
 	{
 		"name": "Incubus Purple",
@@ -557,7 +647,9 @@
 		"type": "S",
 		"mainColor": "#534169",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10016,
+		"barcode": 5060951920159
 	},
 	{
 		"name": "Sorcerer's Cloak",
@@ -573,7 +665,9 @@
 		"type": "H",
 		"mainColor": "#9d8eb4",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10018,
+		"barcode": 5060951920173
 	},
 	{
 		"name": "Von Evile Purple",
@@ -605,7 +699,9 @@
 		"type": "S",
 		"mainColor": "#5b444b",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10046,
+		"barcode": 5060951920456
 	},
 	{
 		"name": "Sword Hilt Burgundy",
@@ -613,7 +709,9 @@
 		"type": "M",
 		"mainColor": "#995878",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10047,
+		"barcode": 5060951920463
 	},
 	{
 		"name": "Glistening Gums",
@@ -621,7 +719,9 @@
 		"type": "H",
 		"mainColor": "#995878",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10048,
+		"barcode": 5060951920470
 	},
 	{
 		"name": "Perisher Pink",
@@ -629,7 +729,9 @@
 		"type": "S",
 		"mainColor": "#bf6066",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10061,
+		"barcode": 5060951920630
 	},
 	{
 		"name": "Hot Pink",
@@ -637,7 +739,9 @@
 		"type": "M",
 		"mainColor": "#e485a9",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10062,
+		"barcode": 5060951920647
 	},
 	{
 		"name": "Neo Pink",
@@ -645,7 +749,9 @@
 		"type": "H",
 		"mainColor": "#f4c4dd",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10063,
+		"barcode": 5060951920654
 	},
 	{
 		"name": "Druid Flesh",
@@ -653,7 +759,9 @@
 		"type": "S",
 		"mainColor": "#5d4334",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10097,
+		"barcode": 5060951920999
 	},
 	{
 		"name": "Paladin Flesh",
@@ -661,7 +769,9 @@
 		"type": "M",
 		"mainColor": "#8a5f4a",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10098,
+		"barcode": 5060951921002
 	},
 	{
 		"name": "Bard Skin",
@@ -669,7 +779,9 @@
 		"type": "H",
 		"mainColor": "#9f7664",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10099,
+		"barcode": 5060951921019
 	},
 	{
 		"name": "Argonaut Skin",
@@ -677,7 +789,9 @@
 		"type": "S",
 		"mainColor": "#b1966f",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10094,
+		"barcode": 5060951920968
 	},
 	{
 		"name": "Kronos Flesh",
@@ -685,7 +799,9 @@
 		"type": "M",
 		"mainColor": "#c7a170",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10095,
+		"barcode": 5060951920975
 	},
 	{
 		"name": "Ares Flesh",
@@ -693,7 +809,9 @@
 		"type": "H",
 		"mainColor": "#e4c889",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10096,
+		"barcode": 5060951920982
 	},
 	{
 		"name": "Barbarian Brawn",
@@ -701,7 +819,9 @@
 		"type": "S",
 		"mainColor": "#906056",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10025,
+		"barcode": 5060951920241
 	},
 	{
 		"name": "Dwarven Skin",
@@ -709,7 +829,9 @@
 		"type": "M",
 		"mainColor": "#b27d63",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10026,
+		"barcode": 5060951920258
 	},
 	{
 		"name": "Elven Skin",
@@ -717,7 +839,9 @@
 		"type": "H",
 		"mainColor": "#c59974",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10027,
+		"barcode": 5060951920265
 	},
 	{
 		"name": "Doom Death Black",
@@ -725,7 +849,9 @@
 		"type": "S",
 		"mainColor": "#3e3937",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10019,
+		"barcode": 5060951920180
 	},
 	{
 		"name": "Death Reaper",
@@ -733,7 +859,9 @@
 		"type": "M",
 		"mainColor": "#434142",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10020,
+		"barcode": 5060951920197
 	},
 	{
 		"name": "Dungeon Stone Grey",
@@ -741,7 +869,9 @@
 		"type": "H",
 		"mainColor": "#5c5e61",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10021,
+		"barcode": 5060951920203
 	},
 	{
 		"name": "Wizard Grey",
@@ -749,7 +879,9 @@
 		"type": "S",
 		"mainColor": "#6e6c6d",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10022,
+		"barcode": 5060951920210
 	},
 	{
 		"name": "Carcharodon Grey",
@@ -757,7 +889,9 @@
 		"type": "M",
 		"mainColor": "#979798",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10023,
+		"barcode": 5060951920227
 	},
 	{
 		"name": "White Star",
@@ -765,7 +899,9 @@
 		"type": "H",
 		"mainColor": "#f9faf9",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10024,
+		"barcode": 5060951920234
 	},
 	{
 		"name": "Dragon Fang",
@@ -773,7 +909,9 @@
 		"type": "S",
 		"mainColor": "#9e8560",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10031,
+		"barcode": 5060951920302
 	},
 	{
 		"name": "Skeleton Legion",
@@ -781,7 +919,9 @@
 		"type": "M",
 		"mainColor": "#b2986d",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10032,
+		"barcode": 5060951920319
 	},
 	{
 		"name": "Vampire Fang",
@@ -789,7 +929,9 @@
 		"type": "H",
 		"mainColor": "#cdba9b",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10033,
+		"barcode": 5060951920326
 	},
 	{
 		"name": "Griffon Claw",
@@ -797,7 +939,9 @@
 		"type": "S",
 		"mainColor": "#a19186",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10034,
+		"barcode": 5060951920333
 	},
 	{
 		"name": "Ivory Tusk",
@@ -805,7 +949,9 @@
 		"type": "M",
 		"mainColor": "#d4cac1",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10035,
+		"barcode": 5060951920340
 	},
 	{
 		"name": "Trooper White",
@@ -813,7 +959,9 @@
 		"type": "H",
 		"mainColor": "#efede2",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10036,
+		"barcode": 5060951920357
 	},
 	{
 		"name": "Ashen Grey",
@@ -821,7 +969,9 @@
 		"type": "S",
 		"mainColor": "#58584c",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10085,
+		"barcode": 5060951920876
 	},
 	{
 		"name": "Eidolon Grey",
@@ -829,7 +979,9 @@
 		"type": "M",
 		"mainColor": "#5d5a4b",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10086,
+		"barcode": 5060951920883
 	},
 	{
 		"name": "Rodent Grey",
@@ -837,7 +989,9 @@
 		"type": "H",
 		"mainColor": "#7b7867",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10087,
+		"barcode": 5060951920890
 	},
 	{
 		"name": "Dust Bowl",
@@ -845,7 +999,9 @@
 		"type": "S",
 		"mainColor": "#5d4334",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10037,
+		"barcode": 5060951920364
 	},
 	{
 		"name": "Sandstone",
@@ -853,7 +1009,9 @@
 		"type": "M",
 		"mainColor": "#937c68",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10038,
+		"barcode": 5060951920371
 	},
 	{
 		"name": "Temple Stone",
@@ -861,7 +1019,9 @@
 		"type": "H",
 		"mainColor": "#a49179",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10039,
+		"barcode": 5060951920388
 	},
 	{
 		"name": "Cuirass Leather",
@@ -869,7 +1029,9 @@
 		"type": "S",
 		"mainColor": "#53433b",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10028,
+		"barcode": 5060951920272
 	},
 	{
 		"name": "Boar Hide",
@@ -877,7 +1039,9 @@
 		"type": "M",
 		"mainColor": "#734539",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10029,
+		"barcode": 5060951920289
 	},
 	{
 		"name": "Fur Cloak",
@@ -885,7 +1049,9 @@
 		"type": "H",
 		"mainColor": "#93544e",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10030,
+		"barcode": 5060951920296
 	},
 	{
 		"name": "Scorched Earth",
@@ -893,7 +1059,9 @@
 		"type": "S",
 		"mainColor": "#5a4d4a",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10052,
+		"barcode": 5060951920517
 	},
 	{
 		"name": "Ancient Forest",
@@ -901,7 +1069,9 @@
 		"type": "M",
 		"mainColor": "#725b52",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10053,
+		"barcode": 5060951920524
 	},
 	{
 		"name": "Wasteland Brown",
@@ -909,7 +1079,9 @@
 		"type": "H",
 		"mainColor": "#866c5c",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10054,
+		"barcode": 5060951920531
 	},
 	{
 		"name": "Noble Steed Brown",
@@ -917,7 +1089,9 @@
 		"type": "S",
 		"mainColor": "#815939",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10088,
+		"barcode": 5060951920906
 	},
 	{
 		"name": "Dry Rust Brown",
@@ -925,7 +1099,9 @@
 		"type": "M",
 		"mainColor": "#be7737",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10089,
+		"barcode": 5060951920913
 	},
 	{
 		"name": "Satyr Brown",
@@ -933,7 +1109,9 @@
 		"type": "H",
 		"mainColor": "#da9a52",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10090,
+		"barcode": 5060951920920
 	},
 	{
 		"name": "Gyzmo Fur",
@@ -941,7 +1119,9 @@
 		"type": "S",
 		"mainColor": "#d68b49",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10091,
+		"barcode": 5060951920937
 	},
 	{
 		"name": "Manticore Ochre",
@@ -949,7 +1129,9 @@
 		"type": "M",
 		"mainColor": "#db9a3a",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10092,
+		"barcode": 5060951920944
 	},
 	{
 		"name": "Cerberus Brown",
@@ -957,7 +1139,9 @@
 		"type": "H",
 		"mainColor": "#e4b351",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10093,
+		"barcode": 5060951920951
 	},
 	{
 		"name": "Scabbard Brown",
@@ -989,7 +1173,9 @@
 		"type": "W",
 		"mainColor": "#9c9593",
 		"secondaryColor": "#423c3a",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10055,
+		"barcode": 5060951920548
 	},
 	{
 		"name": "Battle Mud Wash",
@@ -997,7 +1183,9 @@
 		"type": "W",
 		"mainColor": "#b9aca1",
 		"secondaryColor": "#67513e",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10056,
+		"barcode": 5060951920555
 	},
 	{
 		"name": "Flesh Wash",
@@ -1005,7 +1193,9 @@
 		"type": "W",
 		"mainColor": "#d2c0b1",
 		"secondaryColor": "#a37f63",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10057,
+		"barcode": 5060951920562
 	},
 	{
 		"name": "Orc Flesh Wash",
@@ -1013,7 +1203,9 @@
 		"type": "W",
 		"mainColor": "#a7b89b",
 		"secondaryColor": "#3d7a40",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10058,
+		"barcode": 5060951920579
 	},
 	{
 		"name": "Necrosis Green Wash",
@@ -1021,7 +1213,9 @@
 		"type": "W",
 		"mainColor": "#b8bda8",
 		"secondaryColor": "#70815a",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10059,
+		"barcode": 5060951920586
 	},
 	{
 		"name": "Archaic Sepia Wash",
@@ -1029,7 +1223,9 @@
 		"type": "W",
 		"mainColor": "#efe4d4",
 		"secondaryColor": "#c7a469",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10060,
+		"barcode": 5060951920593
 	},
 	{
 		"name": "Hellion Red Wash",
@@ -1037,7 +1233,9 @@
 		"type": "W",
 		"mainColor": "#7b3433",
 		"secondaryColor": "#e2d5d4",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10112,
+		"barcode": 5060951921149
 	},
 	{
 		"name": "Tempest Blue Wash",
@@ -1045,7 +1243,9 @@
 		"type": "W",
 		"mainColor": "#36445a",
 		"secondaryColor": "#d6cdd1",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10113,
+		"barcode": 5060951921156
 	},
 	{
 		"name": "Magi Purple Wash",
@@ -1053,7 +1253,9 @@
 		"type": "W",
 		"mainColor": "#562e49",
 		"secondaryColor": "#e5dcdd",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10114,
+		"barcode": 5060951921163
 	},
 	{
 		"name": "Smoke Grey Wash",
@@ -1157,7 +1359,9 @@
 		"type": "B",
 		"mainColor": "#bd3222",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10100,
+		"barcode": 5060951921026
 	},
 	{
 		"name": "Craven Yellow",
@@ -1165,7 +1369,9 @@
 		"type": "B",
 		"mainColor": "#f3e95e",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10101,
+		"barcode": 5060951921033
 	},
 	{
 		"name": "Gigawatt Blue",
@@ -1173,7 +1379,9 @@
 		"type": "B",
 		"mainColor": "#66b9e8",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10102,
+		"barcode": 5060951921040
 	},
 	{
 		"name": "Flaming Forge Orange",
@@ -1181,7 +1389,9 @@
 		"type": "B",
 		"mainColor": "#eba739",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10103,
+		"barcode": 5060951921057
 	},
 	{
 		"name": "Talisman Green",
@@ -1189,7 +1399,9 @@
 		"type": "B",
 		"mainColor": "#81bb27",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10104,
+		"barcode": 5060951921064
 	},
 	{
 		"name": "Amulet Purple",
@@ -1197,7 +1409,9 @@
 		"type": "B",
 		"mainColor": "#cab5d9",
 		"secondaryColor": "",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10105,
+		"barcode": 5060951921071
 	},
 	{
 		"name": "Cyber Pink",
@@ -1253,7 +1467,9 @@
 		"type": "S-ME",
 		"mainColor": "#e97238",
 		"secondaryColor": "#984e22",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10109,
+		"barcode": 5060951921118
 	},
 	{
 		"name": "Spartan Bronze",
@@ -1261,7 +1477,9 @@
 		"type": "M-ME",
 		"mainColor": "#815235",
 		"secondaryColor": "#2b2723",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10043,
+		"barcode": 5060951920425
 	},
 	{
 		"name": "Dragon's Gold",
@@ -1293,7 +1511,9 @@
 		"type": "H-ME",
 		"mainColor": "#e8c793",
 		"secondaryColor": "#2d2924",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10045,
+		"barcode": 5060951920449
 	},
 	{
 		"name": "Bitz O'Tin",
@@ -1317,7 +1537,9 @@
 		"type": "H-ME",
 		"mainColor": "#e8c391",
 		"secondaryColor": "#ae8f63",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10108,
+		"barcode": 5060951921101
 	},
 	{
 		"name": "Top Brass",
@@ -1325,7 +1547,9 @@
 		"type": "S-ME",
 		"mainColor": "#f5c467",
 		"secondaryColor": "#b1893e",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10110,
+		"barcode": 5060951921125
 	},
 	{
 		"name": "Battle Axe Brass",
@@ -1333,7 +1557,9 @@
 		"type": "M-ME",
 		"mainColor": "#e8bd88",
 		"secondaryColor": "#ab895a",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10107,
+		"barcode": 5060951921095
 	},
 	{
 		"name": "Platinum Crown",
@@ -1341,7 +1567,9 @@
 		"type": "H-ME",
 		"mainColor": "#f8eede",
 		"secondaryColor": "#d9caa9",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10111,
+		"barcode": 5060951921132
 	},
 	{
 		"name": "Doom Metal",
@@ -1357,7 +1585,9 @@
 		"type": "ME",
 		"mainColor": "#746e60",
 		"secondaryColor": "#3d3e40",
-		"wave": "2"
+		"wave": "2",
+		"sku": 10106,
+		"barcode": 5060951921088
 	},
 	{
 		"name": "Sir Coates Silver",
@@ -1365,7 +1595,9 @@
 		"type": "ME",
 		"mainColor": "#6a6869",
 		"secondaryColor": "#2c2924",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10040,
+		"barcode": 5060951920395
 	},
 	{
 		"name": "Blue Steel",
@@ -1381,7 +1613,9 @@
 		"type": "ME",
 		"mainColor": "#969596",
 		"secondaryColor": "#2d2a25",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10041,
+		"barcode": 5060951920401
 	},
 	{
 		"name": "Mythril Blade",
@@ -1389,7 +1623,9 @@
 		"type": "H",
 		"mainColor": "#ccccce",
 		"secondaryColor": "#2d2925",
-		"wave": "1"
+		"wave": "1",
+		"sku": 10042,
+		"barcode": 5060951920418
 	},
 	{
 		"name": "Scarab Red",
@@ -1437,6 +1673,8 @@
 		"type": "ME",
 		"mainColor": "#c96e44",
 		"secondaryColor": "#2a2723",
-		"wave": "3"
+		"wave": "3",
+		"sku": 10114,
+		"barcode": 5060951921163
 	}
 ]

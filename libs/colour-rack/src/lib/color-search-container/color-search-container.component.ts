@@ -9,6 +9,7 @@ import { ColorSearchComponent } from '../color-search/color-search.component';
 
 /**
  * Component for the color search container.
+ * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'cr-color-search-container',

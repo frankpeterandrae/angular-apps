@@ -2,42 +2,22 @@
  * Copyright (c) 2024. Frank-Peter Andrä
  * All rights reserved.
  */
-@use 'sass:meta';
-@use 'sass:list';
 @use '../../theme/base/prefix';
 @use '../../theme/base/variables';
-@use '../../theme/base/utility';
-
-@mixin gradient($args...) {
-	@each $name, $list in meta.keywords($args) {
-		.#{prefix.$prefix}gradient-#{$name} {
-			box-shadow: 0 10px 14px -7px list.nth($list, 1);
-			background: list.nth($list, 2) linear-gradient(to bottom, list.nth($list, 2) 5%, list.nth($list, 3) 100%);
-			border-color: list.nth($list, 4);
-			color: list.nth($list, 6);
-			text-shadow: 0 1px 0 list.nth($list, 5);
-		}
-
-		.#{prefix.$prefix}gradient-#{$name}:hover {
-			background: list.nth($list, 3) linear-gradient(to bottom, list.nth($list, 3) 5%, list.nth($list, 2) 100%);
-		}
-
-		.#{$name} ::ng-deep .ng-fa-icon .svg-inline--fa {
-			filter: drop-shadow(0 1.5px 0 list.nth($list, 5));
-		}
-	}
-}
 
 :host {
 	.#{prefix.$prefix}button {
-		border-radius: variables.$border-radius;
-		border-width: 0;
-		display: inline-block;
+		border: none;
+		border-radius: 3px;
+		position: relative;
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0;
+		will-change: box-shadow, transform;
+		transition:
+			box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1),
+			background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 		cursor: pointer;
-		font-family: Arial, serif;
-		font-size: 20px;
-		font-weight: bold;
-		text-decoration: none;
 	}
 
 	.#{prefix.$prefix}button:active {
@@ -45,17 +25,8 @@
 		top: 1px;
 	}
 
-	@include gradient(
-		$linen: variables.$linen utility.shade(variables.$linen, 2) utility.shade(variables.$linen, 5)
-			utility.shade(variables.$linen, 6) utility.tint(variables.$linen, 6) variables.$dark-text,
-		$sandy-brown: variables.$sandy-brown utility.shade(variables.$sandy-brown, 2)
-			utility.shade(variables.$sandy-brown, 5) utility.shade(variables.$sandy-brown, 6)
-			utility.tint(variables.$sandy-brown, 6) variables.$dark-text,
-		$crimson: variables.$crimson utility.shade(variables.$crimson, 2) utility.shade(variables.$crimson, 5)
-			utility.shade(variables.$crimson, 6) utility.tint(variables.$crimson, 6) variables.$light-text,
-		$slate-gray: variables.$slate-gray utility.shade(variables.$slate-gray, 2) utility.shade(variables.$slate-gray, 5)
-			utility.shade(variables.$slate-gray, 6) utility.tint(variables.$slate-gray, 6) variables.$dark-text,
-		$ebony: variables.$ebony utility.shade(variables.$ebony, 2) utility.shade(variables.$ebony, 5)
-			utility.shade(variables.$ebony, 6) utility.tint(variables.$ebony, 6) variables.$light-text
-	);
+	span {
+		margin: 3px;
+		height: 16px;
+	}
 }

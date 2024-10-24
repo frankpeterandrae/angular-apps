@@ -3,25 +3,37 @@
   ~ All rights reserved.
   -->
 
-<div class="grid-container fpa-overflow-y-auto">
-	@for (color of colors(); track color.name; let idx = $index) {
-		<div
-			class="color-tile"
-			[ngStyle]="{
-				background: color.secondaryColor
-					? 'radial-gradient(circle,' + color.mainColor + ', ' + color.secondaryColor + ')'
-					: color.mainColor,
-			}"
-			[class.highlighted]="color.highlighted"
-		>
-			<div class="color-name">
-				<h3>{{ color.name }}</h3>
-				<p class="color-rgb">{{ color.type }}</p>
-			</div>
+<cdk-virtual-scroll-viewport
+	[itemSize]="itemSize"
+	[minBufferPx]="itemSize"
+	[maxBufferPx]="itemSize"
+	class="mobile-height"
+>
+	<div *cdkVirtualFor="let colorItems of colors()" class="fpa-grid-12 fpa-grid-gap fpa-mb-05 fpa-mr-05">
+		@for (color of colorItems; track color.name) {
+			<a
+				class="color-tile fpa-grid-col-end-6 fpa-grid-col-end-sm-4 fpa-grid-col-end-md-2 fpa-grid-col-end-lg-2 fpa-grid-col-end-xl-1"
+				[ngStyle]="{
+					background: color.secondaryColor
+						? 'radial-gradient(circle,' + color.mainColor + ', ' + color.secondaryColor + ')'
+						: color.mainColor,
+				}"
+				(click)="openDetails(color)"
+				(keydown.enter)="openDetails(color)"
+				(keydown.space)="openDetails(color)"
+				tabindex="0"
+			>
+				<div class="color-name fpa-dark-text">
+					<h3>{{ color.name }}</h3>
+				</div>
 
-			<div class="storage-location">
-				{{ calculatedStorageLocation(idx) }}
-			</div>
-		</div>
-	}
-</div>
+				<div class="storage-location fpa-dark-text fpa-paragraph fpa-font-weight-extra-black">
+					{{ color.row }} - {{ color.column }}
+				</div>
+				@if (searchQuery() && !color.highlighted) {
+					<div class="grayed-out"></div>
+				}
+			</a>
+		}
+	</div>
+</cdk-virtual-scroll-viewport>
