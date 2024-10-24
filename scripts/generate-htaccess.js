@@ -47,17 +47,21 @@ RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
+# Exclude specific files from being rewritten
+RewriteRule ^(robots\\.txt|sitemap\\.xml)$ - [L]
+
+# List of known client-side routes
 `;
 
 routes.forEach((route) => {
-	if (route !== '**') {
-		// Exclude wildcard
+	if (route !== '**' && !route.startsWith('dev')) {
 		htaccessContent += `RewriteRule ^${route}$ /index.html [L]\n`;
 	}
 });
 
 // Handle unknown routes with 404
 htaccessContent += `
+# For all other routes, serve index.html with a 404 status
 RewriteRule ^ /index.html [R=404,L]
 
 # Custom 404 Error Page
