@@ -1,0 +1,16 @@
+/*!
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+@use '../base/prefix';
+@use '../base/variables';
+
+.#{prefix.$prefix}link {
+	text-decoration: none;
+	color: variables.$sandy-brown;
+	transition: color 0.3s;
+
+	&:hover {
+		color: var(--link-hover-color);
+	}
+}

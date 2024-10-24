@@ -4,12 +4,12 @@
   -->
 
 <div class="fpa-flex fpa-flex-column fpa-height-100">
-	<theme-header class="fpa-flex-shrink-1"></theme-header>
+	<theme-header class="fpa-flex-shrink-1" [menuItems]="menuItems"></theme-header>
 
 	<div class="fpa-grid-12 fpa-overflow-y-hidden fpa-flex-1">
-		<theme-sidebar class="fpa-col-2 fpa-overflow-hidden xy-d-flex fpa-flex-column"></theme-sidebar>
+	<!--	<theme-sidebar [menuItems]="menuItems" class="fpa-col-2 fpa-overflow-hidden xy-d-flex fpa-flex-column"></theme-sidebar>-->
 
-		<div class="fpa-col-10 fpa-overflow-y-hidden">
+		<div class="fpa-col-12 fpa-overflow-y-hidden">
 			<router-outlet></router-outlet>
 		</div>
 	</div>

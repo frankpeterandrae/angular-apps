@@ -5,11 +5,12 @@
 
 import { Component } from '@angular/core';
 import { DataConnectionService } from '@angular-apps/services';
+import { CardComponent } from '@angular-apps/shared/ui-theme';
 
 @Component({
 	selector: 'homepage-feature',
 	standalone: true,
-	imports: [],
+	imports: [CardComponent],
 	templateUrl: './home.component.html',
 	styleUrl: './home.component.scss',
 })

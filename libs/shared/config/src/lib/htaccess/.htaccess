@@ -18,6 +18,7 @@ RewriteRule ^ - [L]
 RewriteRule ^$ /index.html [L]
 RewriteRule ^home$ /index.html [L]
 RewriteRule ^paint-rack$ /index.html [L]
+RewriteRule ^test/test$ /index.html [L]
 
 RewriteRule ^ /index.html [R=404,L]
 
