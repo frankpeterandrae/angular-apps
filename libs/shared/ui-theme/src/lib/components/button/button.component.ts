@@ -5,20 +5,20 @@
 
 import { CommonModule } from '@angular/common';
 import { Component, input, OnInit, output } from '@angular/core';
-import { FaIconComponent, IconDefinition } from '@fortawesome/angular-fontawesome';
 import { ColorDefinition } from '../../enums';
+import { FastSvgComponent } from '@push-based/ngx-fast-svg';
 
 @Component({
 	selector: 'theme-button',
 	standalone: true,
-	imports: [CommonModule, FaIconComponent],
+	imports: [CommonModule, FastSvgComponent],
 	templateUrl: './button.component.html',
 	styleUrl: './button.component.scss',
 })
 export class ButtonComponent implements OnInit {
 	public onClick = output();
 	public buttonText = input<string>();
-	public icon = input<IconDefinition>();
+	public icon = input<string>();
 	public color = input.required<ColorDefinition>();
 	public iconEnd = input<boolean>(false);
 	public disabled = input<boolean>(false);
