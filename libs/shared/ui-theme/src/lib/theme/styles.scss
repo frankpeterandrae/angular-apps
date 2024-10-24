@@ -4,6 +4,7 @@
  */
 
 // atoms
+@use './atoms/link';
 
 // molecules
 
@@ -16,7 +17,8 @@
 @use './layout/grid';
 @use './layout/spacing';
 
-// utility
+// electrons
+@use './electrons/border';
 @use './electrons/colors';
 
 // theme

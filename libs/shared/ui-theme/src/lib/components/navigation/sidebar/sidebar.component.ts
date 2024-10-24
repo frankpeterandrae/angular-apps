@@ -4,18 +4,11 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { environment } from '@angular-apps/config';
 import { FastSvgComponent } from '@push-based/ngx-fast-svg';
-import { IconDefinition } from '../../../enums';
-
-// Define a type for menu items
-interface MenuItem {
-	label: string;
-	icon?: string;
-	route: string;
-}
+import { MenuItem } from '../../../model/menu-item.model';
 
 @Component({
 	selector: 'theme-sidebar',
@@ -25,10 +18,6 @@ interface MenuItem {
 	styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
-	// Sample menu items
-	public menuItems: MenuItem[] = [
-		{ label: 'Home', icon: IconDefinition.house, route: '/home' },
-		...(!environment.production ? [{ label: 'Farbregal', icon: IconDefinition.palette, route: '/paint-rack' }] : []),
-	];
+	public menuItems = input.required<MenuItem[]>();
 	protected readonly environment = environment;
 }

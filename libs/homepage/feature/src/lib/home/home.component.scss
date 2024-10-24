@@ -3,10 +3,12 @@
  * All rights reserved.
  */
 
+@use 'libs/shared/ui-theme/src/lib/theme/base/_variables.scss';
+
 :host {
 	.spinner {
-		border: 8px solid #f3f3f3;
-		border-top: 8px solid #3498db;
+		border: 8px solid variables.$crimson;
+		border-top: 8px solid variables.$sandy-brown;
 		border-radius: 50%;
 		width: 60px;
 		height: 60px;

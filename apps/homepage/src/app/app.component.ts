@@ -3,9 +3,16 @@
  * All rights reserved.
  */
 
-import { FooterComponent, HeaderComponent, SidebarComponent } from '@angular-apps/shared/ui-theme';
+import {
+	FooterComponent,
+	HeaderComponent,
+	IconDefinition,
+	MenuItem,
+	SidebarComponent,
+} from '@angular-apps/shared/ui-theme';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { environment } from '@angular-apps/config';
 
 @Component({
 	standalone: true,
@@ -16,4 +23,19 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
 	public title = 'homepage';
+
+	public menuItems: MenuItem[] = [
+		{ label: 'Home', icon: IconDefinition.house, route: '/home' },
+		...(!environment.production ? [{ label: 'Farbregal', icon: IconDefinition.palette, route: '/paint-rack' }] : []),
+		...(!environment.production
+			? [
+					{
+						label: 'Test',
+						icon: IconDefinition.palette,
+						route: '/test',
+						children: [{ label: 'child', route: '/test/child' }],
+					},
+				]
+			: []),
+	];
 }

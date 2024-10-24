@@ -16,6 +16,10 @@ export const appRoutes: Route[] = [
 		loadComponent: () => import('@angular-apps/colour-rack').then((m) => m.ColorSearchContainerComponent),
 	},
 	{
+		path: 'test/test',
+		loadComponent: () => import('@angular-apps/homepage-feature').then((m) => m.Error404Component),
+	},
+	{
 		path: '**',
 		loadComponent: () => import('@angular-apps/homepage-feature').then((m) => m.Error404Component),
 	},
