@@ -6,13 +6,6 @@
 	"projectType": "library",
 	"tags": ["domain:homepage", "type:feature"],
 	"targets": {
-		"build": {
-			"options": {
-				"stylePreprocessorOptions": {
-					"includePaths": ["libs/shared/ui-theme/src/lib/theme"]
-				}
-			}
-		},
 		"test": {
 			"executor": "@nx/jest:jest",
 			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],

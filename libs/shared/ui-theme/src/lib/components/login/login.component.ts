@@ -8,6 +8,9 @@ import { DataConnectionService } from '@angular-apps/services';
 import { ButtonComponent } from '../button/button.component';
 import { ColorDefinition } from '../../enums';
 
+/**
+ * Component for the login form.
+ */
 @Component({
 	selector: 'theme-login',
 	standalone: true,
@@ -16,10 +19,21 @@ import { ColorDefinition } from '../../enums';
 	styleUrl: './login.component.css',
 })
 export class LoginComponent {
+	/**
+	 * Enum for color definitions.
+	 */
 	protected readonly ColorDefinition = ColorDefinition;
 
+	/**
+	 * Form group for the login form.
+	 */
 	public loginForm: FormGroup;
 
+	/**
+	 * Constructor for LoginComponent.
+	 * @param dataConnection - Service for data connection.
+	 * @param formBuilder - Service to create form groups.
+	 */
 	constructor(
 		private dataConnection: DataConnectionService,
 		private formBuilder: FormBuilder,
@@ -30,6 +44,9 @@ export class LoginComponent {
 		});
 	}
 
+	/**
+	 * Method to handle login action.
+	 */
 	public login(): void {
 		if (this.loginForm.valid) {
 			const { email, password } = this.loginForm.value;

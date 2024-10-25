@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
 import { ButtonComponent, ColorDefinition } from '@angular-apps/shared/ui-theme';
 import { Router } from '@angular/router';
 
+/**
+ * Component for displaying a 404 error page.
+ */
 @Component({
 	selector: 'homepage-feature-error404',
 	standalone: true,
@@ -17,8 +20,15 @@ import { Router } from '@angular/router';
 export class Error404Component {
 	protected readonly ColorDefinition = ColorDefinition;
 
+	/**
+	 * Constructor for Error404Component.
+	 * @param router - The Angular Router service.
+	 */
 	constructor(private router: Router) {}
 
+	/**
+	 * Navigates to the home page.
+	 */
 	public routeToHome(): void {
 		this.router.navigate(['/']).catch((error) => console.error(error));
 	}
