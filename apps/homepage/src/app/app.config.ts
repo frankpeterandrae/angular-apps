@@ -9,12 +9,37 @@ import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideFastSVG } from '@push-based/ngx-fast-svg';
 
+/**
+ * Application configuration object.
+ */
 export const appConfig: ApplicationConfig = {
 	providers: [
+		/**
+		 * Provides zone change detection with event coalescing enabled.
+		 */
 		provideZoneChangeDetection({ eventCoalescing: true }),
+
+		/**
+		 * Provides the router configuration.
+		 */
 		provideRouter(appRoutes),
+
+		/**
+		 * Provides the HTTP client.
+		 */
 		provideHttpClient(),
+
+		/**
+		 * Provides the FastSVG configuration.
+		 * @param {string} name - The name of the SVG file.
+		 * @returns {string} The URL to the SVG file.
+		 */
 		provideFastSVG({
+			/**
+			 * Generates the URL for the SVG file.
+			 * @param {string} name - The name of the SVG file.
+			 * @returns {string} The URL to the SVG file.
+			 */
 			url: (name: string) => {
 				console.log('name', name);
 				return `/assets/svg-assets/${name}.svg`;

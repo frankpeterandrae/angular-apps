@@ -14,6 +14,9 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { environment } from '@angular-apps/config';
 
+/**
+ * The root component of the application.
+ */
 @Component({
 	standalone: true,
 	imports: [SidebarComponent, RouterOutlet, HeaderComponent, FooterComponent],
@@ -22,8 +25,15 @@ import { environment } from '@angular-apps/config';
 	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+	/**
+	 * The title of the application.
+	 */
 	public title = 'homepage';
 
+	/**
+	 * The menu items to be displayed in the sidebar.
+	 * @type {MenuItem[]}
+	 */
 	public menuItems: MenuItem[] = [
 		{ label: 'Home', icon: IconDefinition.house, route: '/home' },
 		...(!environment.production

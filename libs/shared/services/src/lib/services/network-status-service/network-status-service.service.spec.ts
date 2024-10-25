@@ -8,10 +8,16 @@ import { TestBed } from '@angular/core/testing';
 import { NetworkStatusServiceService } from './network-status-service.service';
 import { take } from 'rxjs';
 
+/**
+ * Test suite for NetworkStatusServiceService.
+ */
 describe('NetworkStatusServiceService', () => {
 	let service: NetworkStatusServiceService;
 
-	// Utility function to mock navigator.onLine
+	/**
+	 * Utility function to mock navigator.onLine.
+	 * @param value - The value to set for navigator.onLine.
+	 */
 	const mockNavigatorOnLine = (value: boolean): void => {
 		Object.defineProperty(navigator, 'onLine', {
 			value,
@@ -19,6 +25,9 @@ describe('NetworkStatusServiceService', () => {
 		});
 	};
 
+	/**
+	 * Sets up the testing module and injects the service before each test.
+	 */
 	beforeEach(() => {
 		mockNavigatorOnLine(true);
 
@@ -28,20 +37,27 @@ describe('NetworkStatusServiceService', () => {
 		service = TestBed.inject(NetworkStatusServiceService);
 	});
 
+	/**
+	 * Resets all mocks after each test to avoid interference.
+	 */
 	afterEach(() => {
-		// Reset all mocks after each test to avoid interference
 		jest.resetAllMocks();
 	});
 
+	/**
+	 * Test to check if the service is created.
+	 */
 	it('should be created', () => {
 		expect(service).toBeTruthy();
 	});
 
+	/**
+	 * Test to check if the service emits the initial online status.
+	 * @param done - Callback to indicate the test is complete.
+	 */
 	it('should emit the initial online status', (done) => {
-		// Ensure navigator.onLine is true
 		mockNavigatorOnLine(true);
 
-		// Re-initialize the service to pick up the updated navigator.onLine value
 		TestBed.resetTestingModule();
 		TestBed.configureTestingModule({
 			providers: [NetworkStatusServiceService],
@@ -54,11 +70,13 @@ describe('NetworkStatusServiceService', () => {
 		});
 	});
 
+	/**
+	 * Test to check if the service emits the initial offline status.
+	 * @param done - Callback to indicate the test is complete.
+	 */
 	it('should emit the initial offline status', (done) => {
-		// Mock navigator.onLine to false
 		mockNavigatorOnLine(false);
 
-		// Re-initialize the service to pick up the updated navigator.onLine value
 		TestBed.resetTestingModule();
 		TestBed.configureTestingModule({
 			providers: [NetworkStatusServiceService],
@@ -71,11 +89,13 @@ describe('NetworkStatusServiceService', () => {
 		});
 	});
 
+	/**
+	 * Test to check if the service emits true when the online event is dispatched.
+	 * @param done - Callback to indicate the test is complete.
+	 */
 	it('should emit true when online event is dispatched', (done) => {
-		// Initially offline
 		mockNavigatorOnLine(false);
 
-		// Re-initialize the service
 		TestBed.resetTestingModule();
 		TestBed.configureTestingModule({
 			providers: [NetworkStatusServiceService],
@@ -93,15 +113,16 @@ describe('NetworkStatusServiceService', () => {
 			}
 		});
 
-		// Dispatch 'online' event
 		window.dispatchEvent(new Event('online'));
 	});
 
+	/**
+	 * Test to check if the service emits false when the offline event is dispatched.
+	 * @param done - Callback to indicate the test is complete.
+	 */
 	it('should emit false when offline event is dispatched', (done) => {
-		// Initially online
 		mockNavigatorOnLine(true);
 
-		// Re-initialize the service
 		TestBed.resetTestingModule();
 		TestBed.configureTestingModule({
 			providers: [NetworkStatusServiceService],
@@ -119,15 +140,16 @@ describe('NetworkStatusServiceService', () => {
 			}
 		});
 
-		// Dispatch 'offline' event
 		window.dispatchEvent(new Event('offline'));
 	});
 
+	/**
+	 * Test to check if the service handles multiple online and offline events correctly.
+	 * @param done - Callback to indicate the test is complete.
+	 */
 	it('should handle multiple online and offline events correctly', (done) => {
-		// Initially offline
 		mockNavigatorOnLine(false);
 
-		// Re-initialize the service
 		TestBed.resetTestingModule();
 		TestBed.configureTestingModule({
 			providers: [NetworkStatusServiceService],
@@ -146,7 +168,6 @@ describe('NetworkStatusServiceService', () => {
 			}
 		});
 
-		// Dispatch events in sequence
 		window.dispatchEvent(new Event('online'));
 		window.dispatchEvent(new Event('offline'));
 		window.dispatchEvent(new Event('online'));

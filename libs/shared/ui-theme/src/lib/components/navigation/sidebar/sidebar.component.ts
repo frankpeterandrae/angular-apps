@@ -10,6 +10,10 @@ import { environment } from '@angular-apps/config';
 import { FastSvgComponent } from '@push-based/ngx-fast-svg';
 import { MenuItem } from '../../../model/menu-item.model';
 
+/**
+ * SidebarComponent is a standalone component that represents the sidebar navigation.
+ * It uses CommonModule, RouterLink, and FastSvgComponent.
+ */
 @Component({
 	selector: 'theme-sidebar',
 	standalone: true,
@@ -18,6 +22,13 @@ import { MenuItem } from '../../../model/menu-item.model';
 	styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
+	/**
+	 * An array of menu items to be displayed in the sidebar.
+	 */
 	public menuItems = input.required<MenuItem[]>();
+
+	/**
+	 * The environment configuration.
+	 */
 	protected readonly environment = environment;
 }
