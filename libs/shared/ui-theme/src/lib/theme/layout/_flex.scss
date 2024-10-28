@@ -102,7 +102,7 @@
 			align-items: baseline;
 		}
 
-		.#{prefix.$prefix}flex#{$breakpoint-prefix}-align-items-flex-start {
+		.#{prefix.$prefix}flex#{$breakpoint-prefix}-align-items-flex-baseline {
 			align-items: first baseline;
 		}
 

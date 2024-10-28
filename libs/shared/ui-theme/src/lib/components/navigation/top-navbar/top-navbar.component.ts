@@ -17,10 +17,10 @@ import { ColorDefinition } from '../../../enums';
 	selector: 'theme-topnavbar',
 	standalone: true,
 	imports: [CommonModule, FastSvgComponent, RouterLink],
-	templateUrl: './topnavbar.component.html',
-	styleUrl: './topnavbar.component.scss',
+	templateUrl: './top-navbar.component.html',
+	styleUrl: './top-navbar.component.scss',
 })
-export class TopnavbarComponent {
+export class TopNavbarComponent {
 	/**
 	 * Array of menu items to be displayed in the navigation bar.
 	 */
@@ -40,7 +40,7 @@ export class TopnavbarComponent {
 	 * Constructor to inject the Router service.
 	 * @param router - The Angular Router service.
 	 */
-	constructor(private router: Router) {}
+	constructor(public readonly router: Router) {}
 
 	/**
 	 * Gets the current route URL.

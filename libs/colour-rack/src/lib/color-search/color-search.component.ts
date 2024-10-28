@@ -32,7 +32,9 @@ export class ColorSearchComponent {
 	 * Emits the search event with the current search text.
 	 */
 	public onSearch(): void {
-		this.searchEvent.emit(this.searchText);
+		if (this.searchText != null) {
+			this.searchEvent.emit(this.searchText);
+		}
 	}
 
 	/**

@@ -4,6 +4,7 @@
  */
 
 import { Component } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 /**
  * Component representing a color palette with various shades.
@@ -11,7 +12,7 @@ import { Component } from '@angular/core';
 @Component({
 	selector: 'demo-colors',
 	standalone: true,
-	imports: [],
+	imports: [NgClass],
 	templateUrl: './colors.component.html',
 	styleUrl: './colors.component.scss',
 })

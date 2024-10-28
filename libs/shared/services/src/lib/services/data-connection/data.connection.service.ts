@@ -15,15 +15,15 @@ import { environment } from '@angular-apps/config';
 	providedIn: 'root',
 })
 export class DataConnectionService {
-	private apiUrl = '/php-api/api.php'; // Use the environment-specific API URL
-	private addUserUrl = '/php-api/encryption.php'; // Use the environment-specific API URL
-	private loginUrl = '/php-api/login.php'; // Use the environment-specific API URL
+	private readonly apiUrl = '/php-api/api.php'; // Use the environment-specific API URL
+	private readonly addUserUrl = '/php-api/encryption.php'; // Use the environment-specific API URL
+	private readonly loginUrl = '/php-api/login.php'; // Use the environment-specific API URL
 
 	/**
 	 * Constructor for DataConnectionService.
 	 * @param {HttpClient} http - The HTTP client for making requests.
 	 */
-	constructor(private http: HttpClient) {}
+	constructor(private readonly http: HttpClient) {}
 
 	/**
 	 * Fetches data from the server.

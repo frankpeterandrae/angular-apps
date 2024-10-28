@@ -16,12 +16,11 @@ import { Component } from '@angular/core';
 	imports: [ColorsComponent, ButtonComponent],
 	selector: 'demo-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
 	/** The title of the application. */
 	public title = 'demo';
 
 	/** The color definitions used in the application. */
-	protected readonly ColorDefinition = ColorDefinition;
+	public readonly ColorDefinition = ColorDefinition;
 }

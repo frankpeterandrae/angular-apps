@@ -30,5 +30,5 @@ export class SidebarComponent {
 	/**
 	 * The environment configuration.
 	 */
-	protected readonly environment = environment;
+	public readonly environment = environment;
 }
