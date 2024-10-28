@@ -13,7 +13,6 @@ import { ColorSearchComponent } from '../color-search/color-search.component';
 @Component({
 	selector: 'cr-color-search-container',
 	templateUrl: './color-search-container.component.html',
-	styleUrls: ['./color-search-container.component.scss'],
 	standalone: true,
 	imports: [ColorSearchComponent, ColorGridComponent],
 })

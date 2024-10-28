@@ -19,7 +19,7 @@ export class EnvGuard implements CanActivate {
 	 * Constructor for EnvGuard.
 	 * @param {Router} router - The Angular Router service used for navigation.
 	 */
-	constructor(private router: Router) {}
+	constructor(private readonly router: Router) {}
 
 	/**
 	 * Determines if the route can be activated.

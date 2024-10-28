@@ -24,7 +24,7 @@ export class Error404Component {
 	 * Constructor for Error404Component.
 	 * @param router - The Angular Router service.
 	 */
-	constructor(private router: Router) {}
+	constructor(private readonly router: Router) {}
 
 	/**
 	 * Navigates to the home page.

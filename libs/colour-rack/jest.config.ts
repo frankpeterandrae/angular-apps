@@ -7,7 +7,7 @@ export default {
 	displayName: 'colour-rack',
 	preset: '../../jest.preset.js',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-	coverageDirectory: '../../coverage/libs/colour-rack',
+	coverageDirectory: '<rootDir>/../../coverage/libs/colour-rack',
 	transform: {
 		'^.+\\.(ts|mjs|js|html)$': [
 			'jest-preset-angular',

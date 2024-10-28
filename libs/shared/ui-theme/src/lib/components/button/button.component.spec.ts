@@ -5,6 +5,7 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonComponent } from './button.component';
+import { ColorDefinition } from '../../enums';
 
 describe('ButtonComponent', () => {
 	let component: ButtonComponent;
@@ -17,10 +18,68 @@ describe('ButtonComponent', () => {
 
 		fixture = TestBed.createComponent(ButtonComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should create', () => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should render the button with default settings', () => {
+		fixture.componentRef.setInput('buttonText', 'Click Me');
+		fixture.componentRef.setInput('color', ColorDefinition.PRIMARY);
+		fixture.detectChanges();
+		const buttonElement: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+		expect(buttonElement).toBeTruthy();
+		expect(buttonElement.textContent).toContain('Click Me');
+	});
+
+	it('should apply correct classes based on color input', () => {
+		fixture.componentRef.setInput('color', ColorDefinition.SUCCESS);
+		component.ngOnInit(); // Call ngOnInit to initialize classes
+		fixture.detectChanges();
+
+		const buttonElement: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+		expect(buttonElement.classList).toContain('fpa-gradient-success'); // Ensure class matches format
+	});
+
+	it('should emit onClick event when button is clicked', () => {
+		fixture.componentRef.setInput('color', ColorDefinition.SUCCESS);
+		const onClickSpy = jest.spyOn(component.onClick, 'emit');
+		fixture.detectChanges();
+
+		const buttonElement: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+		buttonElement.click();
+
+		expect(onClickSpy).toHaveBeenCalled();
+	});
+
+	it('should render icon if icon input is provided', () => {
+		fixture.componentRef.setInput('color', ColorDefinition.SUCCESS);
+		fixture.componentRef.setInput('icon', 'test-icon');
+		fixture.detectChanges();
+
+		const iconElement = fixture.nativeElement.querySelector('fast-svg');
+		expect(iconElement).toBeTruthy();
+		expect(iconElement.getAttribute('ng-reflect-name')).toBe('test-icon');
+	});
+
+	it('should render button text when buttonText input is provided', () => {
+		fixture.componentRef.setInput('color', ColorDefinition.SUCCESS);
+		fixture.componentRef.setInput('buttonText', 'Test Button');
+		fixture.detectChanges();
+
+		const spanElement = fixture.nativeElement.querySelector('button span');
+		expect(spanElement).toBeTruthy();
+		expect(spanElement.textContent).toContain('Test Button');
+	});
+
+	it('should add "fpa-df-direction-row-reverse" class when iconEnd is true', () => {
+		fixture.componentRef.setInput('color', ColorDefinition.SUCCESS);
+		fixture.componentRef.setInput('iconEnd', true);
+		component.ngOnInit(); // Apply classes
+		fixture.detectChanges();
+
+		const contentDiv = fixture.nativeElement.querySelector('button .fpa-flex');
+		expect(contentDiv.classList).toContain('fpa-df-direction-row-reverse');
 	});
 });

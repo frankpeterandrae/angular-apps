@@ -33,7 +33,7 @@ export class ColorGridComponent implements OnInit, OnChanges {
 	 * Constructor to inject the ColorService.
 	 * @param colorService - The service used to fetch colors.
 	 */
-	constructor(private colorService: ColorService) {}
+	constructor(private readonly colorService: ColorService) {}
 
 	/**
 	 * Lifecycle hook that is called after data-bound properties are initialized.
@@ -66,7 +66,7 @@ export class ColorGridComponent implements OnInit, OnChanges {
 	 * Highlights the colors that match the search query.
 	 * @param query - The search query to match against color names.
 	 */
-	private highlightMatchingColors(query: string): void {
+	public highlightMatchingColors(query: string): void {
 		this.colors().forEach((color) => {
 			const allNames = [color.name, ...color.alternativeNames];
 			color.highlighted = query ? allNames.some((name) => name.toLowerCase().includes(query.toLowerCase())) : false;

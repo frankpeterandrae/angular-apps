@@ -16,7 +16,6 @@ import { ColorDefinition } from '../../enums';
 	standalone: true,
 	imports: [ReactiveFormsModule, ButtonComponent],
 	templateUrl: './login.component.html',
-	styleUrl: './login.component.css',
 })
 export class LoginComponent {
 	/**
@@ -35,8 +34,8 @@ export class LoginComponent {
 	 * @param formBuilder - Service to create form groups.
 	 */
 	constructor(
-		private dataConnection: DataConnectionService,
-		private formBuilder: FormBuilder,
+		public dataConnection: DataConnectionService,
+		private readonly formBuilder: FormBuilder,
 	) {
 		this.loginForm = this.formBuilder.group({
 			email: ['', [Validators.required, Validators.email]],

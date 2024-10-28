@@ -6,7 +6,6 @@
 		"ng": "nx",
 		"start": "nx run homepage:serve",
 		"build": "nx exec -- nx build",
-		"test": "nx exec -- ng test --skipNxCache --detectOpenHandles --version",
 		"e2e": "ng e2e",
 		"affected:apps": "nx affected:apps",
 		"affected:libs": "nx affected:libs",
@@ -106,10 +105,18 @@
 		}
 	},
 	"lint-staged": {
-		"libs/**/index.ts": "node scripts/sort-exports.js",
-		"*.{js,ts,css,scss,md,json}": [
-			"prettier --config .prettierrc --write",
-			"nx affected:lint"
+		"*": "nx affected:lint",
+		"*.{css,scss}": [
+			"stylelint --fix",
+			"prettier --config .prettierrc --write"
+		],
+		"*.{js,jsx,ts}": [
+			"node scripts/sort-exports.js",
+			"eslint --fix",
+			"prettier --config .prettierrc --write"
+		],
+		"*.{md,json}": [
+			"prettier --config .prettierrc --write"
 		]
 	}
 }

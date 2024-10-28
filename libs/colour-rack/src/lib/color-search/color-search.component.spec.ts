@@ -23,4 +23,25 @@ describe('ColorSearchComponent', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
+
+	it('should emit searchEvent with searchText when onSearch is called', () => {
+		const searchEventSpy = jest.spyOn(component.searchEvent, 'emit');
+		component.searchText = 'blue';
+		component.onSearch();
+		expect(searchEventSpy).toHaveBeenCalledWith('blue');
+	});
+
+	it('should emit searchEvent with empty string when searchText is empty', () => {
+		const searchEventSpy = jest.spyOn(component.searchEvent, 'emit');
+		component.searchText = '';
+		component.onSearch();
+		expect(searchEventSpy).toHaveBeenCalledWith('');
+	});
+
+	it('should not emit searchEvent if searchText is null', () => {
+		const searchEventSpy = jest.spyOn(component.searchEvent, 'emit');
+		component.searchText = null;
+		component.onSearch();
+		expect(searchEventSpy).not.toHaveBeenCalled();
+	});
 });

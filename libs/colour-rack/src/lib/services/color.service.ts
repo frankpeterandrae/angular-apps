@@ -16,13 +16,13 @@ import { Color } from '../models/color.model';
 	providedIn: 'root',
 })
 export class ColorService {
-	private colorsUrl = 'assets/colors.json'; // Path to your JSON file
+	private readonly colorsUrl = 'assets/colors.json'; // Path to your JSON file
 
 	/**
 	 * Constructor for ColorService.
 	 * @param {HttpClient} http - The HTTP client used to make requests.
 	 */
-	constructor(private http: HttpClient) {}
+	constructor(private readonly http: HttpClient) {}
 
 	/**
 	 * Fetches the list of colors from the JSON file.
