@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
 
 /**
  * The root component of the demo application.
+ * @author Frank-Peter Andrä
  */
 @Component({
 	standalone: true,

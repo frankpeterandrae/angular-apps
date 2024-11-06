@@ -4,6 +4,8 @@
  */
 
 // atoms
+@use './atoms/back-drop';
+@use './atoms/input';
 @use './atoms/link';
 
 // molecules
@@ -11,6 +13,7 @@
 // organisms
 
 // layout
+@use './layout/component';
 @use './layout/dimension';
 @use './layout/display';
 @use './layout/flex';
@@ -20,5 +23,6 @@
 // electrons
 @use './electrons/border';
 @use './electrons/colors';
+@use './electrons/fonts';
 
 // theme

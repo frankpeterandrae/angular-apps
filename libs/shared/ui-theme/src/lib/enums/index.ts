@@ -3,5 +3,6 @@
  * All rights reserved.
  */
 
+export * from './button-color-definition';
 export * from './color-definition';
 export * from './icon-definition';

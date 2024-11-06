@@ -8,6 +8,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { ColorService } from './color.service';
 import { Color } from '../models/color.model';
 import { provideHttpClient } from '@angular/common/http';
+import { ColorType } from '../models/color-type.enum';
 
 describe('ColorService', () => {
 	let service: ColorService;
@@ -31,17 +32,21 @@ describe('ColorService', () => {
 				name: 'Red',
 				alternativeNames: [],
 				highlighted: false,
-				type: '',
+				type: ColorType.ME,
 				mainColor: '',
 				wave: '',
+				row: 1,
+				column: 2,
 			},
 			{
 				name: 'Blue',
 				alternativeNames: [],
 				highlighted: false,
-				type: '',
+				type: ColorType.S,
 				mainColor: '',
 				wave: '',
+				row: 3,
+				column: 4,
 			},
 		];
 

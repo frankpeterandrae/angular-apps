@@ -32,7 +32,11 @@
 						"output": "assets"
 					}
 				],
-				"styles": ["apps/homepage/src/styles.scss", "libs/shared/ui-theme/src/lib/theme/styles.scss"],
+				"styles": [
+					"apps/homepage/src/styles.scss",
+					"libs/shared/ui-theme/src/lib/theme/styles.scss",
+					"node_modules/@angular/cdk/overlay-prebuilt.css"
+				],
 				"scripts": [],
 				"extractLicenses": false,
 				"sourceMap": true,
@@ -124,6 +128,9 @@
 					},
 					{
 						"command": "xcopy libs\\shared\\config\\src\\lib\\config\\google1fa4ec9361425ee2.html dist\\production\\ /E /I /Y"
+					},
+					{
+						"command": "npm run foss"
 					}
 				]
 			}

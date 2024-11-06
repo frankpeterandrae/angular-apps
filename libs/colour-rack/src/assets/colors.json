@@ -5,7 +5,9 @@
 		"type": "S",
 		"mainColor": "#4d1c16",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"row": 1,
+		"column": 1
 	},
 	{
 		"name": "Sanguine Scarlet",
@@ -13,7 +15,9 @@
 		"type": "M",
 		"mainColor": "#991915",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"row": 1,
+		"column": 1
 	},
 	{
 		"name": "Demon Red",
@@ -21,7 +25,9 @@
 		"type": "H",
 		"mainColor": "#d31217",
 		"secondaryColor": "",
-		"wave": "1"
+		"wave": "1",
+		"row": 1,
+		"column": 1
 	},
 	{
 		"name": "Amphora Red",
@@ -29,7 +35,9 @@
 		"type": "S",
 		"mainColor": "#502626",
 		"secondaryColor": "",
-		"wave": "3"
+		"wave": "3",
+		"row": 1,
+		"column": 1
 	},
 	{
 		"name": "Emperor Red",
@@ -37,7 +45,9 @@
 		"type": "M",
 		"mainColor": "#a42d39",
 		"secondaryColor": "",
-		"wave": "3"
+		"wave": "3",
+		"row": 1,
+		"column": 1
 	},
 	{
 		"name": "Centurion Red",

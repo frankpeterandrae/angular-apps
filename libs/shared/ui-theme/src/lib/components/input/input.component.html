@@ -1,0 +1,29 @@
+<!--
+  ~ Copyright (c) 2024. Frank-Peter Andrä
+  ~ All rights reserved.
+  -->
+
+<div
+	class="fpa-input-group fpa-mt-1"
+	[ngClass]="{ 'fpa-input-group-dynamic': isDynamic(), 'fpa-is-filled': isFilled(), 'fpa-is-focused': inputFocused }"
+>
+	@if (label()) {
+		<label class="fpa-input-label" for="search-input">{{ label() }}</label>
+	}
+	@if (icon()) {
+		<span class="fpa-input-icon">
+			<fast-svg class="fpa-color-crimson" [name]="icon()" [size]="'16'"></fast-svg>
+		</span>
+	}
+	<input
+		#searchInput
+		class="fpa-input"
+		id="search-input"
+		[type]="type()"
+		[placeholder]="placeholder()"
+		[value]="value"
+		(focus)="onFocus()"
+		(blur)="onBlur()"
+		(input)="onInput($event)"
+	/>
+</div>

@@ -18,7 +18,7 @@ $ebony: #2b222d;
 $ebony-highlight: #2f2531;
 $default: #999;
 $primary: #c93642;
-$info: #2b222d;
+$info: #0f0d0f;
 $success: #728b4c;
 $warning: #ef7b14;
 $danger: #c93642;
@@ -40,10 +40,10 @@ $full-hd: 120rem; // Standard Full HD resolution for desktops.
 $ultra-wide: 160rem; // Suitable for ultra-wide monitors and high-resolution displays.
 
 $breakpoints: (
-	sm: $small-mobile,
-	tp: $tablet-portrait,
-	tl: $tablet-landscape,
-	dt: $desktop,
-	hd: $full-hd,
-	uw: $ultra-wide,
+	xs: $small-mobile,
+	sm: $tablet-portrait,
+	md: $tablet-landscape,
+	lg: $desktop,
+	xl: $full-hd,
+	xxl: $ultra-wide,
 );
