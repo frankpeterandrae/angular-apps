@@ -23,11 +23,11 @@
 				(keydown.space)="openDetails(color)"
 				tabindex="0"
 			>
-				<div class="color-name fpa-dark-text">
+				<div class="color-name fpa-dark-text fpa-text-shadow-light">
 					<h3>{{ color.name }}</h3>
 				</div>
 
-				<div class="storage-location fpa-dark-text fpa-paragraph fpa-font-weight-extra-black">
+				<div class="storage-location fpa-dark-text fpa-paragraph fpa-font-weight-extra-black fpa-text-shadow-light">
 					{{ color.row }} - {{ color.column }}
 				</div>
 				@if (searchQuery() && !color.highlighted) {

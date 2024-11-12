@@ -84,3 +84,23 @@ $tints-count: 9;
 %#{prefix.$prefix}dark-text {
 	color: variables.$dark-text;
 }
+
+.#{prefix.$prefix}text-shadow-light {
+	-webkit-text-stroke: 2px variables.$linen;
+	paint-order: stroke fill;
+}
+
+.#{prefix.$prefix}text-shadow-light-small {
+	-webkit-text-stroke: 1px variables.$linen;
+	paint-order: stroke fill;
+}
+
+.#{prefix.$prefix}text-shadow-dark {
+	-webkit-text-stroke: 2px variables.$ebony;
+	paint-order: stroke fill;
+}
+
+.#{prefix.$prefix}text-shadow-dark-small {
+	-webkit-text-stroke: 1px variables.$ebony;
+	paint-order: stroke fill;
+}
