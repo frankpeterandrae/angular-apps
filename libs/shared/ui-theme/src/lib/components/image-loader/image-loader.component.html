@@ -1,0 +1,19 @@
+<!--
+  ~ Copyright (c) 2024. Frank-Peter Andrä
+  ~ All rights reserved.
+  -->
+
+<div class="image-container">
+	<img
+		[src]="imageSrc"
+		[attr.srcset]="imageSrcSet()"
+		[attr.sizes]="imageSizes"
+		(load)="onLoad()"
+		(error)="onError()"
+		[alt]="alt()"
+		[class.loaded]="isLoaded"
+	/>
+	@if (!isLoaded) {
+		<div class="fpa-spinner"></div>
+	}
+</div>

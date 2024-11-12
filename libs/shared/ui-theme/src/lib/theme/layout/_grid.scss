@@ -8,6 +8,10 @@
 
 $columns: 12;
 
+.#{prefix.$prefix}grid-gutter {
+	gap: 1rem;
+}
+
 @for $i from 1 through $columns {
 	.#{prefix.$prefix}grid-#{ $i } {
 		display: grid;
