@@ -42,3 +42,5 @@ Thumbs.db
 .nx/workspace-data
 .angular
 /libs/shared/ui-theme/src/lib/styles.css
+/libs/shared/config/src/lib/htaccess/.htaccess
+/libs/shared/config/src/lib/sitemap/sitemap.xml
