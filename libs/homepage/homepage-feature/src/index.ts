@@ -3,5 +3,5 @@
  * All rights reserved.
  */
 
-export * from './lib/home/home.component';
 export * from './lib/error404/error404.component';
+export * from './lib/home/home.component';

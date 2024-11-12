@@ -1,0 +1,15 @@
+<!--
+  ~ Copyright (c) 2024. Frank-Peter Andrä
+  ~ All rights reserved.
+  -->
+
+<div class="fpa-flex fpa-flex-column fpa-height-100 fpa-flex-justify-center fpa-flex-align-items-center">
+	<theme-card>
+		<div class="fpa-flex fpa-flex-column fpa-flex-justify-center fpa-flex-align-items-center">
+			<h1 class="fpa-color-crimson">404</h1>
+			<h2>Seite nicht gefunden</h2>
+			<p class="fpa-mb-1">Die von dir aufgerufene Seite existiert möglicherweise nicht mehr oder wurde verschoben.</p>
+			<theme-button [color]="ButtonColorDefinition.PRIMARY" [buttonText]="'Zur Startseite'" (onClick)="routeToHome()" />
+		</div>
+	</theme-card>
+</div>

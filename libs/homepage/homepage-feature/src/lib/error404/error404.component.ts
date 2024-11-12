@@ -4,7 +4,7 @@
  */
 
 import { Component } from '@angular/core';
-import { ButtonColorDefinition, ButtonComponent } from '@angular-apps/shared/ui-theme';
+import { ButtonColorDefinition, ButtonComponent, CardComponent } from '@angular-apps/shared/ui-theme';
 import { Router } from '@angular/router';
 
 /**
@@ -14,9 +14,8 @@ import { Router } from '@angular/router';
 @Component({
 	selector: 'homepage-feature-error404',
 	standalone: true,
-	imports: [ButtonComponent],
+	imports: [ButtonComponent, CardComponent],
 	templateUrl: './error404.component.html',
-	styleUrl: './error404.component.scss',
 })
 export class Error404Component {
 	protected readonly ButtonColorDefinition = ButtonColorDefinition;
