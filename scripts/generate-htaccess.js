@@ -30,7 +30,45 @@ function extractRoutes(node) {
 extractRoutes(sourceFile);
 
 // Generate .htaccess rules
-let htaccessContent = `
+let htaccessContent = `# Set expiration headers for static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Cache images, fonts, and media files for one year
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType audio/ogg "access plus 1 year"
+    ExpiresByType video/mp4 "access plus 1 year"
+
+    # Cache JavaScript and CSS files for one month
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/css "access plus 1 month"
+
+    # Do not cache the main HTML file (index.html)
+    <FilesMatch "index\\.html$">
+        ExpiresByType text/html "access plus 0 seconds"
+    </FilesMatch>
+</IfModule>
+
+
+# Set cache control headers for better control
+<IfModule mod_headers.c>
+    # Enable caching for static assets
+    <FilesMatch "\\.(jpg|jpeg|png|gif|svg|webp|woff2|js|css)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+
+    # Disable caching for index.html
+    <FilesMatch "index\\.html$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
 # Enable the Rewrite Engine
 RewriteEngine On
 
@@ -40,7 +78,7 @@ RewriteBase /
 # Redirect all requests for /php-api to the PHP server
 # RewriteEngine On
 # RewriteCond %{REQUEST_URI} ^/php-api/ [NC]
-# RewriteRule ^ - [L]1
+# RewriteRule ^ - [L]
 
 # Allow direct access to existing files and directories
 RewriteCond %{REQUEST_FILENAME} -f [OR]
@@ -68,5 +106,6 @@ RewriteRule ^ /index.html [R=404,L]
 ErrorDocument 404 /index.html
 `;
 
+fs.mkdirSync('./libs/shared/config/src/lib/htaccess', { recursive: true });
 fs.writeFileSync('./libs/shared/config/src/lib/htaccess/.htaccess', htaccessContent);
 console.log('.htaccess file has been updated.');
