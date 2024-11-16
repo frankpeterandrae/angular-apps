@@ -30,6 +30,11 @@
 						"glob": "**/*",
 						"input": "libs/shared/ui-theme/src/lib/theme/assets",
 						"output": "assets"
+					},
+					{
+						"glob": "**/*",
+						"input": "libs/homepage/homepage-feature/src/lib/assets",
+						"output": "assets"
 					}
 				],
 				"styles": [

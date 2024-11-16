@@ -14,7 +14,6 @@ import { ButtonColorDefinition } from '../../enums';
 /**
  * This component serves as a dialog container.
  * It is used to display a dialog in the application.
- * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'theme-dialog',

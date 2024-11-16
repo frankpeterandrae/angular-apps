@@ -5,15 +5,16 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IconDemoComponent } from './icon-demo.component';
+import { setupTestingModule } from '../../test-setup';
 
 describe('IconComponent', () => {
 	let component: IconDemoComponent;
 	let fixture: ComponentFixture<IconDemoComponent>;
 
 	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+		await setupTestingModule({
 			imports: [IconDemoComponent],
-		}).compileComponents();
+		});
 
 		fixture = TestBed.createComponent(IconDemoComponent);
 		component = fixture.componentInstance;

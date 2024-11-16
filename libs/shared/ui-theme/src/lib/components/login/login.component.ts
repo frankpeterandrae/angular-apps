@@ -10,7 +10,6 @@ import { ButtonColorDefinition } from '../../enums';
 
 /**
  * Component for the login form.
- * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'theme-login',

@@ -7,10 +7,11 @@ import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { setupTestingModule } from '../test-setup';
 
 describe('AppComponent', () => {
 	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+		await setupTestingModule({
 			imports: [AppComponent],
 			providers: [
 				{
@@ -29,7 +30,7 @@ describe('AppComponent', () => {
 					},
 				},
 			],
-		}).compileComponents();
+		});
 	});
 
 	it('should create the app', () => {

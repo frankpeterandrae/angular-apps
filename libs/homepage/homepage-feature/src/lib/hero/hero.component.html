@@ -5,30 +5,20 @@
 
 <div class="hero-background fpa-overflow-auto fpa-content">
 	<h1 class="fpa-flex-align-self-center fpa-my-3 fpa-dark-text fpa-text-shadow-light-small">
-		Willkommen auf meiner Webseite
+		{{ 'HeroComponent.lbl.Title' | fpaTranslate: 'feature' | async }}
 	</h1>
 	<div class="fpa-flex-align-self-start fpa-width-100 fpa-p-1 fpa-my-3 fpa-width-md-50">
+		<p class="h4 fpa-my-2 fpa-text-shadow-dark" [innerHTML]="paragraph"></p>
 		<p class="h4 fpa-my-2 fpa-text-shadow-dark">
-			Ich bin Frank-Peter Andrä, ich habe eine große Begeisterung für
-			<span class="fpa-font-weight-extra-black">Warhammer</span>,
-			<span class="fpa-font-weight-extra-black">Modellbau</span>,
-			<span class="fpa-font-weight-extra-black">Fotografie</span> und
-			<span class="fpa-font-weight-extra-black">Eishockey</span>. Auf dieser Seite möchte ich vielfältigen Interessen
-			und mich vorstellen.
+			{{ 'HeroComponent.lbl.Paragraph2' | fpaTranslate: 'feature' | async }}
 		</p>
 		<p class="h4 fpa-my-2 fpa-text-shadow-dark">
-			WWenn ich nicht gerade arbeite, findet man mich oft beim Basteln an meinen Warhammer-Modellen, beim Festhalten
-			besonderer Momente mit meiner Kamera oder auf und neben dem Eis beim Eishockey. Diese Hobbys ermöglichen mir,
-			kreativ zu sein.
+			{{ 'HeroComponent.lbl.Paragraph3' | fpaTranslate: 'feature' | async }}
 		</p>
-		<p class="h4 fpa-my-2 fpa-text-shadow-dark">
-			Ich freue mich, dass du vorbeischaust und mehr über meine Projekte und mich erfahren möchtest. Schau dich gerne
-			um, entdecke meine Arbeiten und lass uns in Kontakt treten!
-		</p>
-		<p class="h4 fpa-my-4 fpa-text-shadow-dark">„Gemeinsam gestalten wir epische Welten.“</p>
-		<p class="fpa-text-shadow-dark">Zurzeit befindet sich diese Seite in einem kompletten Neuaufbau.</p>
+		<p class="h4 fpa-my-4 fpa-text-shadow-dark">„{{ 'HeroComponent.lbl.Quote' | fpaTranslate: 'feature' | async }}“</p>
+		<p class="fpa-text-shadow-dark">{{ 'HeroComponent.lbl.ReworkHint' | fpaTranslate: 'feature' | async }}</p>
 		<p class="fpa-text-shadow-dark">
-			Bei dringenden Anfragen kontaktieren Sie mich bitte unter
+			{{ 'HeroComponent.lbl.Contact' | fpaTranslate: 'feature' | async }}
 			<a class="fpa-link" href="mailto:admin@frankpeterandrae.de"
 				><span class="fpa-mail">admin&#64;frankpeterandrae.de</span></a
 			>.

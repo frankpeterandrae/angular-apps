@@ -11,7 +11,6 @@ import { DialogConfigModel } from '../../model/dialog-config.model';
 
 /**
  * Service to manage dialog operations.
- * @author Frank-Peter Andrä
  */
 @Injectable({
 	providedIn: 'root',

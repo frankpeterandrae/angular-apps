@@ -5,6 +5,7 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ImageLoaderComponent } from './image-loader.component';
+import { setupTestingModule } from '../../../test-setup';
 
 /**
  * Mock implementation of IntersectionObserver for testing purposes.
@@ -32,9 +33,9 @@ describe('ImageLoaderComponent', () => {
 	let fixture: ComponentFixture<ImageLoaderComponent>;
 
 	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+		await setupTestingModule({
 			imports: [ImageLoaderComponent],
-		}).compileComponents();
+		});
 
 		fixture = TestBed.createComponent(ImageLoaderComponent);
 		component = fixture.componentInstance;

@@ -12,7 +12,6 @@ import { ColorDefinition } from '../../../enums';
 
 /**
  * Component representing the top navigation bar.
- * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'theme-topnavbar',

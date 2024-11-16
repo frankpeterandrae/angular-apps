@@ -8,6 +8,7 @@ import { ColorDetailsComponent } from './color-details.component';
 import { DIALOG_DATA, DialogConfigModel } from '@angular-apps/shared/ui-theme';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { Color } from '../models/color.model';
+import { setupTestingModule } from '../../test-setup';
 
 describe('ColorDetailsComponent', () => {
 	let component: ColorDetailsComponent;
@@ -24,13 +25,13 @@ describe('ColorDetailsComponent', () => {
 			settings: { title: 'Test Dialog' },
 		};
 
-		await TestBed.configureTestingModule({
+		await setupTestingModule({
 			imports: [ColorDetailsComponent],
 			providers: [
 				{ provide: OverlayRef, useValue: overlayRefMock },
 				{ provide: DIALOG_DATA, useValue: mockDialogData },
 			],
-		}).compileComponents();
+		});
 
 		fixture = TestBed.createComponent(ColorDetailsComponent);
 		component = fixture.componentInstance;

@@ -10,4 +10,7 @@ module.exports = {
 	collectCoverage: true,
 	coverageDirectory: '<rootDir>/coverage',
 	coverageReporters: ['text', 'lcov', 'html'],
+	moduleNameMapper: {
+		'^flat': 'node_modules/flat/index.js',
+	},
 };

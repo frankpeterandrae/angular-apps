@@ -9,16 +9,17 @@ import { LoginComponent } from './login.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { of } from 'rxjs';
+import { setupTestingModule } from '../../../test-setup';
 
 describe('LoginComponent', () => {
 	let component: LoginComponent;
 	let fixture: ComponentFixture<LoginComponent>;
 
 	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+		await setupTestingModule({
 			imports: [LoginComponent],
 			providers: [provideHttpClient(), provideHttpClientTesting()],
-		}).compileComponents();
+		});
 
 		fixture = TestBed.createComponent(LoginComponent);
 		component = fixture.componentInstance;

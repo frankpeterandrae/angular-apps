@@ -6,16 +6,17 @@
 import { Component, signal } from '@angular/core';
 import { ColorGridComponent } from '../color-grid/color-grid.component';
 import { ColorSearchComponent } from '../color-search/color-search.component';
+import { TranslationPipe } from '@angular-apps/services';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Component for the color search container.
- * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'cr-color-search-container',
 	templateUrl: './color-search-container.component.html',
 	standalone: true,
-	imports: [ColorSearchComponent, ColorGridComponent],
+	imports: [ColorSearchComponent, ColorGridComponent, TranslationPipe, AsyncPipe],
 })
 export class ColorSearchContainerComponent {
 	/**

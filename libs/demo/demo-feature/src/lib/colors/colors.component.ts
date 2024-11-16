@@ -9,7 +9,6 @@ import { TooltipDirective } from '@angular-apps/shared/ui-theme';
 
 /**
  * Component representing a color palette with various shades.
- * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'demo-colors',

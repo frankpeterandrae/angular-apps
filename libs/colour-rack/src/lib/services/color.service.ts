@@ -11,7 +11,6 @@ import { Color } from '../models/color.model';
 /**
  * Service to handle color-related operations.
  * Provided in the root module.
- * @author Frank-Peter Andrä
  */
 @Injectable({
 	providedIn: 'root',

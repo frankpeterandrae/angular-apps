@@ -1,0 +1,20 @@
+{
+	"Error404Component": {
+		"lbl": {
+			"BackToStartpage": "Back to the home",
+			"PageNotFound": "Page not found",
+			"PageNotFoundDescription": "The page you have accessed may no longer exist or may have been moved."
+		}
+	},
+	"HeroComponent": {
+		"lbl": {
+			"Contact": "For urgent inquiries, please contact me at:",
+			"Paragraph1": "My name is Frank-Peter Andrä, I have a great enthusiasm for <span class=\"fpa-font-weight-extra-black\">Warhammer</span>, <span class=\"fpa-font-weight-extra-black\">model building</span>, <span class=\"fpa-font-weight-extra-black\">photography</span> and <span class=\"fpa-font-weight-extra-black\">ice hockey</span>. On this page, I would like to introduce my various interests and myself.",
+			"Paragraph2": "When I'm not working, you can often find me tinkering with my Warhammer models, capturing special moments with my camera or playing ice hockey on and off the ice. These hobbies allow me to be creative.",
+			"Paragraph3": "I have created this website to share my projects and experiences. If you would like to know more about me, please take a look at my projects or contact me directly.",
+			"Quote": "Together, we create epic worlds.",
+			"ReworkHint": "This page is currently undergoing a complete rebuild.",
+			"Title": "Welcome to my website"
+		}
+	}
+}

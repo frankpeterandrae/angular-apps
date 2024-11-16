@@ -1,0 +1,14 @@
+<!--
+  ~ Copyright (c) 2024. Frank-Peter Andrä
+  ~ All rights reserved.
+  -->
+
+<button class="fpa-button-no-style fpa-p-1" (click)="toggleLanguage()" (keyup)="toggleLanguage()">
+	@if (language() === 'de') {
+		<fast-svg [name]="IconDefinition.GERMAN" [size]="'22'"></fast-svg>
+		<fast-svg [name]="IconDefinition.ENGLISH_MONOCHROME" [size]="'16'"></fast-svg>
+	} @else {
+		<fast-svg [name]="IconDefinition.GERMAN_MONOCHROME" [size]="'16'"></fast-svg>
+		<fast-svg [name]="IconDefinition.ENGLISH" [size]="'22'"></fast-svg>
+	}
+</button>

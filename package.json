@@ -36,6 +36,7 @@
 		"@angular/platform-browser": "18.2.8",
 		"@angular/platform-browser-dynamic": "18.2.8",
 		"@angular/router": "18.2.8",
+		"@jsverse/transloco": "^7.5.0",
 		"@nx/angular": "20.0.5",
 		"@push-based/ngx-fast-svg": "^18.1.0",
 		"rxjs": "~7.8.1",

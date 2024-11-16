@@ -1,0 +1,12 @@
+{
+	"AppComponent": {
+		"menu": {
+			"lbl": {
+				"Home": "Home",
+				"InDevelopment": "In Development",
+				"PaintRack": "Paint rack",
+				"Test": "Test"
+			}
+		}
+	}
+}

@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
 /**
  * CardComponent is a standalone Angular component that represents a card UI element.
  * It uses the CommonModule and has an external HTML template and SCSS stylesheet.
- * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'theme-card',
