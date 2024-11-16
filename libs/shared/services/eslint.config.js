@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2024. Frank-Peter Andrä
+ * All rights reserved.
+ */
+
 const nx = require('@nx/eslint-plugin');
 const baseConfig = require('../../../eslint.config.js');
 
@@ -12,7 +17,7 @@ module.exports = [
 				'error',
 				{
 					type: 'attribute',
-					prefix: 'lib',
+					prefix: 'sharedServices',
 					style: 'camelCase',
 				},
 			],
@@ -20,8 +25,14 @@ module.exports = [
 				'error',
 				{
 					type: 'element',
-					prefix: 'lib',
+					prefix: 'shared-services',
 					style: 'kebab-case',
+				},
+			],
+			'@angular-eslint/pipe-prefix': [
+				'error',
+				{
+					prefixes: ['fpa'],
 				},
 			],
 		},

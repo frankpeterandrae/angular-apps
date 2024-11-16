@@ -4,15 +4,16 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ColorsComponent } from './colors.component';
+import { setupTestingModule } from '../../test-setup';
 
 describe('TypographyComponent', () => {
 	let component: ColorsComponent;
 	let fixture: ComponentFixture<ColorsComponent>;
 
 	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+		await setupTestingModule({
 			imports: [ColorsComponent],
-		}).compileComponents();
+		});
 
 		fixture = TestBed.createComponent(ColorsComponent);
 		component = fixture.componentInstance;

@@ -3,20 +3,20 @@
  * All rights reserved.
  */
 
-import { ButtonComponent, IconDefinition, InputComponent } from '@angular-apps/shared/ui-theme';
+import { IconDefinition, InputComponent } from '@angular-apps/shared/ui-theme';
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { TranslationPipe } from '@angular-apps/services';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Component for searching colors.
- * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'cr-color-search',
 	templateUrl: './color-search.component.html',
 	styleUrls: ['./color-search.component.scss'],
 	standalone: true,
-	imports: [ButtonComponent, NgClass, InputComponent],
+	imports: [InputComponent, TranslationPipe, AsyncPipe],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorSearchComponent {

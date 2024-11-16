@@ -10,7 +10,6 @@ import { TopNavbarComponent } from '../navigation/top-navbar/top-navbar.componen
 /**
  * HeaderComponent is a standalone component that represents the header section of the application.
  * It includes the TopNavbarComponent and uses an external HTML template and CSS stylesheet.
- * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'theme-header',

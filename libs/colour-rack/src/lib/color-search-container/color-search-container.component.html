@@ -4,27 +4,34 @@
   -->
 
 <div class="fpa-content">
-	<h1 class="fpa-flex-align-self-center">Tow Thin Coats</h1>
-	<p>Ich habe auf dieser Seite, eine Übersicht über Duncan Roades' Tow Thin Coats Farben erstellt.</p>
-	<p>Diese Seite bietet folgende Funktionen:</p>
+	<h1 class="fpa-flex-align-self-center">
+		{{ 'ColorSearchContainer.lbl.TwoThinCoats' | fpaTranslate: 'color-rack' | async }}
+	</h1>
+	<p>{{ 'ColorSearchContainer.lbl.Description' | fpaTranslate: 'color-rack' | async }}</p>
+	<p>{{ 'ColorSearchContainer.lbl.FunctionsDescription' | fpaTranslate: 'color-rack' | async }}:</p>
 	<ol>
 		<li>
 			<p>
-				<span class="fpa-font-weight-bold">Farbsuche:</span> Benutzer können eine Farbeingabe verwenden, um nach
-				bestimmten Farben zu suchen. Die Suchergebnisse werden in einem Raster angezeigt.
+				<span class="fpa-font-weight-bold"
+					>{{ 'ColorSearchContainer.lbl.ColorSearch' | fpaTranslate: 'color-rack' | async }}:</span
+				>
+				{{ 'ColorSearchContainer.lbl.ColorSearchDescription' | fpaTranslate: 'color-rack' | async }}
 			</p>
 		</li>
 		<li>
 			<p>
-				<span class="fpa-font-weight-bold">Farbraster:</span> Die gefundenen Farben werden in einem Raster dargestellt.
-				Jede Farbe kann angeklickt werden, um weitere Details anzuzeigen.
+				<span class="fpa-font-weight-bold"
+					>{{ 'ColorSearchContainer.lbl.ColorGrid' | fpaTranslate: 'color-rack' | async }}:</span
+				>
+				{{ 'ColorSearchContainer.lbl.ColorGridDescription' | fpaTranslate: 'color-rack' | async }}
 			</p>
 		</li>
 		<li>
 			<p>
-				<span class="fpa-font-weight-bold">Farbdetails:</span> Beim Klicken auf eine Farbe im Raster öffnet sich ein
-				Dialog, der detaillierte Informationen über die ausgewählte Farbe anzeigt, einschließlich alternativer Namen und
-				Farbtypen.
+				<span class="fpa-font-weight-bold"
+					>{{ 'ColorSearchContainer.lbl.ColorDetails' | fpaTranslate: 'color-rack' | async }}:</span
+				>
+				{{ 'ColorSearchContainer.lbl.ColorDetailsDescription' | fpaTranslate: 'color-rack' | async }}
 			</p>
 		</li>
 	</ol>

@@ -13,6 +13,8 @@ export * from './lib/components/header/header.component';
 export * from './lib/components/image-loader/image-loader.component';
 export * from './lib/components/image-loader/image-loader.component';
 export * from './lib/components/input/input.component';
+export * from './lib/components/language-toggle/language-toggle.component';
+export * from './lib/components/language-toggle/Mock';
 export * from './lib/components/login/login.component';
 export * from './lib/components/navigation/sidebar/sidebar.component';
 export * from './lib/components/navigation/top-navbar/top-navbar.component';

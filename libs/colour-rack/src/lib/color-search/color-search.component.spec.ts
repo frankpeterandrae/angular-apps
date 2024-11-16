@@ -5,15 +5,16 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ColorSearchComponent } from './color-search.component';
+import { setupTestingModule } from '../../test-setup';
 
 describe('ColorSearchComponent', () => {
 	let component: ColorSearchComponent;
 	let fixture: ComponentFixture<ColorSearchComponent>;
 
 	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+		await setupTestingModule({
 			imports: [ColorSearchComponent],
-		}).compileComponents();
+		});
 
 		fixture = TestBed.createComponent(ColorSearchComponent);
 		component = fixture.componentInstance;

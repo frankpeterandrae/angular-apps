@@ -7,13 +7,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TopNavbarComponent } from './top-navbar.component';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { setupTestingModule } from '../../../../test-setup';
 
 describe('TopnavbarComponent', () => {
 	let component: TopNavbarComponent;
 	let fixture: ComponentFixture<TopNavbarComponent>;
 
 	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+		await setupTestingModule({
 			imports: [TopNavbarComponent],
 			providers: [
 				{
@@ -32,7 +33,7 @@ describe('TopnavbarComponent', () => {
 					},
 				},
 			],
-		}).compileComponents();
+		});
 
 		fixture = TestBed.createComponent(TopNavbarComponent);
 		component = fixture.componentInstance;

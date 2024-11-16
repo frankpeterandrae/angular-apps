@@ -9,7 +9,6 @@ import { fromEvent, map, merge, of } from 'rxjs';
 /**
  * Injectable service to monitor network status changes.
  * Provides an observable `status$` that emits `true` when online and `false` when offline.
- * @author Frank-Peter Andrä
  */
 @Injectable({
 	providedIn: 'root',

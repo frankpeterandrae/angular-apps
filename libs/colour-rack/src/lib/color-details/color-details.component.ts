@@ -8,15 +8,15 @@ import { CommonModule } from '@angular/common';
 import { DIALOG_DATA, DialogComponent, DialogConfigModel } from '@angular-apps/shared/ui-theme';
 import { ColorType } from '../models/color-type.enum';
 import { Color } from '../models/color.model';
+import { TranslationPipe } from '@angular-apps/services';
 
 /**
  * Component representing the details of a color.
- * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'cr-color-details',
 	standalone: true,
-	imports: [CommonModule, DialogComponent],
+	imports: [CommonModule, DialogComponent, TranslationPipe],
 	templateUrl: './color-details.component.html',
 })
 export class ColorDetailsComponent {

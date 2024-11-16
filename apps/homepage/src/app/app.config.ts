@@ -8,6 +8,9 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideFastSVG } from '@push-based/ngx-fast-svg';
+import { provideTransloco } from '@jsverse/transloco';
+import { TranslocoHttpLoader } from '@angular-apps/services';
+import { translocoConfigFactory } from '@angular-apps/config';
 
 /**
  * Application configuration object.
@@ -43,6 +46,13 @@ export const appConfig: ApplicationConfig = {
 			url: (name: string) => {
 				return `/assets/svg-assets/${name}.svg`;
 			},
+		}),
+		/**
+		 * Provides the Transloco configuration.
+		 */
+		provideTransloco({
+			config: translocoConfigFactory,
+			loader: TranslocoHttpLoader,
 		}),
 	],
 };

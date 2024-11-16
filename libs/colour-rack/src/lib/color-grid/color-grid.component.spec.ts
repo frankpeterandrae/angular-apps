@@ -10,6 +10,7 @@ import { ColorService } from '../services/color.service';
 import { Color } from '../models/color.model';
 import { ColorType } from '../models/color-type.enum';
 import { ColorDetailsComponent } from '../color-details/color-details.component';
+import { setupTestingModule } from '../../test-setup';
 
 describe('ColorGridComponent', () => {
 	let component: ColorGridComponent;
@@ -21,10 +22,10 @@ describe('ColorGridComponent', () => {
 			getColors: jest.fn().mockReturnValue(of([])), // Ensure it returns an observable
 		};
 
-		await TestBed.configureTestingModule({
+		await setupTestingModule({
 			imports: [ColorGridComponent],
 			providers: [{ provide: ColorService, useValue: colorServiceMock }],
-		}).compileComponents();
+		});
 
 		fixture = TestBed.createComponent(ColorGridComponent);
 		component = fixture.componentInstance;

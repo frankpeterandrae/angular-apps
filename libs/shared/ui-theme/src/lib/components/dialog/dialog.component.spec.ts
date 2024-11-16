@@ -8,6 +8,7 @@ import { DialogComponent } from './dialog.component';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { DIALOG_DATA } from './dialog-tokens';
 import { DialogConfigModel } from '../../model/dialog-config.model';
+import { setupTestingModule } from '../../../test-setup';
 
 describe('DialogComponent', () => {
 	let component: DialogComponent;
@@ -23,13 +24,13 @@ describe('DialogComponent', () => {
 			settings: { title: 'Test Dialog' },
 		};
 
-		await TestBed.configureTestingModule({
+		await setupTestingModule({
 			imports: [DialogComponent],
 			providers: [
 				{ provide: OverlayRef, useValue: overlayRefMock },
 				{ provide: DIALOG_DATA, useValue: mockDialogData },
 			],
-		}).compileComponents();
+		});
 
 		fixture = TestBed.createComponent(DialogComponent);
 		component = fixture.componentInstance;

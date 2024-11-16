@@ -4,5 +4,7 @@
   -->
 
 <header class="fpa-bg-ebony-s2">
-	<theme-topnavbar [menuItems]="menuItems()"></theme-topnavbar>
+	<theme-topnavbar [menuItems]="menuItems()">
+		<ng-content></ng-content>
+	</theme-topnavbar>
 </header>

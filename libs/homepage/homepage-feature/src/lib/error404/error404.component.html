@@ -7,9 +7,9 @@
 	<theme-card>
 		<div class="fpa-flex fpa-flex-column fpa-flex-justify-center fpa-flex-align-items-center">
 			<h1 class="fpa-color-crimson">404</h1>
-			<h2>Seite nicht gefunden</h2>
-			<p class="fpa-mb-1">Die von dir aufgerufene Seite existiert möglicherweise nicht mehr oder wurde verschoben.</p>
-			<theme-button [color]="ButtonColorDefinition.PRIMARY" [buttonText]="'Zur Startseite'" (onClick)="routeToHome()" />
+			<h2>{{ 'Error404Component.lbl.PageNotFound' | fpaTranslate: 'feature' | async }}</h2>
+			<p class="fpa-mb-1">{{ 'Error404Component.lbl.PageNotFoundDescription' | fpaTranslate: 'feature' | async }}</p>
+			<theme-button [color]="ButtonColorDefinition.PRIMARY" [buttonText]="backtoStartpage" (onClick)="routeToHome()" />
 		</div>
 	</theme-card>
 </div>

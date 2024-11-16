@@ -1,0 +1,12 @@
+{
+	"AppComponent": {
+		"menu": {
+			"lbl": {
+				"Home": "Startseite",
+				"InDevelopment": "In Entwicklung",
+				"PaintRack": "Farbregal",
+				"Test": "Test"
+			}
+		}
+	}
+}

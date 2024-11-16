@@ -9,16 +9,17 @@ import { ColorSearchContainerComponent } from './color-search-container.componen
 import { ColorGridComponent } from '../color-grid/color-grid.component';
 import { ColorSearchComponent } from '../color-search/color-search.component';
 import { provideHttpClient } from '@angular/common/http';
+import { setupTestingModule } from '../../test-setup';
 
 describe('ColorSearchContainerComponent', () => {
 	let component: ColorSearchContainerComponent;
 	let fixture: ComponentFixture<ColorSearchContainerComponent>;
 
 	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+		await setupTestingModule({
 			imports: [ColorSearchContainerComponent, ColorSearchComponent, ColorGridComponent],
 			providers: [provideHttpClient(), provideHttpClientTesting()],
-		}).compileComponents();
+		});
 
 		fixture = TestBed.createComponent(ColorSearchContainerComponent);
 		component = fixture.componentInstance;

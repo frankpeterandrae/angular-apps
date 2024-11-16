@@ -63,8 +63,8 @@ let htaccessContent = `# Set expiration headers for static assets
         Header set Cache-Control "max-age=31536000, public"
     </FilesMatch>
 
-    # Disable caching for index.html
-    <FilesMatch "index\\.html$">
+    # Disable caching for index.html and JSON files
+    <FilesMatch "index\\.html$|\\.json$">
         Header set Cache-Control "no-cache, no-store, must-revalidate"
     </FilesMatch>
 </IfModule>

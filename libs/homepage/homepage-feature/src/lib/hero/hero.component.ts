@@ -3,16 +3,34 @@
  * All rights reserved.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { ScopedTranslationService, TranslationPipe } from '@angular-apps/services';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * Component decorator for defining the HeroComponent.
- * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'homepage-feature-hero',
 	standalone: true,
 	templateUrl: './hero.component.html',
 	styleUrl: './hero.component.scss',
+	imports: [TranslationPipe, AsyncPipe],
 })
-export class HeroComponent {}
+export class HeroComponent implements OnInit {
+	private readonly translocoService = inject(ScopedTranslationService);
+
+	/**
+	 * The translated paragraph text.
+	 */
+	public paragraph: string | undefined;
+
+	/**
+	 * Initializes the component and sets the translated paragraph text.
+	 */
+	ngOnInit(): void {
+		this.translocoService.translate('HeroComponent.lbl.Paragraph1', 'feature').subscribe((translation) => {
+			this.paragraph = translation;
+		});
+	}
+}

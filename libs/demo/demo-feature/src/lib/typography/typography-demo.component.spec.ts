@@ -5,15 +5,16 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TypographyDemoComponent } from './typography-demo.component';
+import { setupTestingModule } from '../../test-setup';
 
 describe('TypographyComponent', () => {
 	let component: TypographyDemoComponent;
 	let fixture: ComponentFixture<TypographyDemoComponent>;
 
 	beforeEach(async () => {
-		await TestBed.configureTestingModule({
+		await setupTestingModule({
 			imports: [TypographyDemoComponent],
-		}).compileComponents();
+		});
 
 		fixture = TestBed.createComponent(TypographyDemoComponent);
 		component = fixture.componentInstance;

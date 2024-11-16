@@ -10,7 +10,6 @@ import { environment } from '@angular-apps/config';
 
 /**
  * Injectable service for data connection operations.
- * @author Frank-Peter Andrä
  */
 @Injectable({
 	providedIn: 'root',

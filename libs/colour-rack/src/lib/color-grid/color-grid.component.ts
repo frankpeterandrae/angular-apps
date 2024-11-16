@@ -24,7 +24,6 @@ import { NumberInput } from '@angular/cdk/coercion';
 
 /**
  * Component representing a grid of colors.
- * @author Frank-Peter Andrä
  */
 @Component({
 	selector: 'cr-color-grid',

@@ -10,7 +10,6 @@ import { environment } from '@angular-apps/config';
 /**
  * Guard to check if the environment is in production mode.
  * If not in production, allows activation. Otherwise, redirects to a 404 page.
- * @author Frank-Peter Andrä
  */
 @Injectable({
 	providedIn: 'root',
