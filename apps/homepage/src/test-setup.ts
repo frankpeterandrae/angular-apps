@@ -2,15 +2,17 @@
  * Copyright (c) 2024. Frank-Peter Andrä
  * All rights reserved.
  */
-import { delay, Observable, of } from 'rxjs';
-import 'jest-preset-angular/setup-jest';
+
+import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
 import en from '../public/assets/i18n/en.json';
 import de from '../public/assets/i18n/de.json';
 import { TranslocoConfig, TranslocoTestingModule } from '@jsverse/transloco';
 import { TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { ModuleWithProviders, NO_ERRORS_SCHEMA, signal } from '@angular/core';
 import { ScopedTranslationService } from '@angular-apps/services';
+import { delay, Observable, of } from 'rxjs';
 
+setupZoneTestEnv();
 /**
  * Sets up the Angular testing module with the provided metadata.
  * @param {TestModuleMetadata} param0 - The metadata for the test module, including imports, providers, and declarations.

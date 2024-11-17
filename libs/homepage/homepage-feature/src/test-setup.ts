@@ -3,20 +3,14 @@
  * All rights reserved.
  */
 
-// @ts-expect-error https://thymikee.github.io/jest-preset-angular/docs/getting-started/test-environment
-globalThis.ngJest = {
-	testEnvironmentOptions: {
-		errorOnUnknownElements: true,
-		errorOnUnknownProperties: true,
-	},
-};
-import 'jest-preset-angular/setup-jest';
+import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
 import en from './lib/assets/i18n/feature/en.json';
 import de from './lib/assets/i18n/feature/de.json';
 import { TranslocoConfig, TranslocoTestingModule } from '@jsverse/transloco';
 import { TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { ModuleWithProviders, NO_ERRORS_SCHEMA } from '@angular/core';
 
+setupZoneTestEnv();
 /**
  * Sets up the Angular testing module with the provided metadata.
  * @param {TestModuleMetadata} param0 - The metadata for the test module, including imports, providers, and declarations.

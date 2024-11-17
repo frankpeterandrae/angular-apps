@@ -3,10 +3,12 @@
  * All rights reserved.
  */
 
-import 'jest-preset-angular/setup-jest';
+import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
 import { TranslocoConfig, TranslocoTestingModule } from '@jsverse/transloco';
 import { TestBed, TestModuleMetadata } from '@angular/core/testing';
 import { ModuleWithProviders, NO_ERRORS_SCHEMA } from '@angular/core';
+
+setupZoneTestEnv();
 
 /**
  * Sets up the Angular testing module with the provided metadata.
