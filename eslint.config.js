@@ -175,7 +175,7 @@ module.exports = [
 	})),
 	...compat.config({ env: { jest: true } }).map((config) => ({
 		...config,
-		files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.spec.js', '**/*.spec.jsx'],
+		files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.spec.js', '**/*.spec.jsx', '**/*jest.config.ts'],
 		rules: {
 			...config.rules,
 			'jsdoc/check-access': ['off'],
@@ -229,6 +229,14 @@ module.exports = [
 			'jsdoc/sort-tags': ['off'],
 			'jsdoc/tag-lines': ['off'],
 			'jsdoc/valid-types': ['off'],
+		},
+	})),
+	...compat.config({ env: { jest: true } }).map((config) => ({
+		...config,
+		files: ['**/*jest.config.ts'],
+		rules: {
+			...config.rules,
+			'@typescript-eslint/explicit-function-return-type': 'off',
 		},
 	})),
 ];
