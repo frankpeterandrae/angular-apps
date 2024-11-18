@@ -40,6 +40,10 @@ describe('Error404Component', () => {
 			.mockImplementation(() => Promise.reject('Navigation Error'));
 		await component.routeToHome();
 		expect(navigateSpy).toHaveBeenCalledWith(['/']);
-		expect(consoleErrorSpy).toHaveBeenCalledWith('Navigation Error');
+		expect(consoleErrorSpy).toHaveBeenCalledWith(
+			'[Error404Component]',
+			'Error while navigating to home page',
+			'Navigation Error',
+		);
 	});
 });

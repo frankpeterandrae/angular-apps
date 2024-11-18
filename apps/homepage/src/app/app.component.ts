@@ -13,7 +13,7 @@ import {
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { environment } from '@angular-apps/config';
-import { ScopedTranslationService } from '@angular-apps/services';
+import { Logger, ScopedTranslationService } from '@angular-apps/services';
 import { combineLatest } from 'rxjs';
 
 /**
@@ -45,6 +45,10 @@ export class AppComponent implements OnInit {
 	 * Initializes the component and sets up the menu items with translations.
 	 */
 	ngOnInit(): void {
+		if (environment.production) {
+			Logger.setProductionMode({ disable: true });
+		}
+
 		combineLatest([
 			this.translocoService.translate('AppComponent.menu.lbl.Home'),
 			this.translocoService.translate('AppComponent.menu.lbl.PaintRack'),

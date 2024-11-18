@@ -6,7 +6,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ButtonColorDefinition, ButtonComponent, CardComponent } from '@angular-apps/shared/ui-theme';
 import { Router } from '@angular/router';
-import { ScopedTranslationService, TranslationPipe } from '@angular-apps/services';
+import { Logger, ScopedTranslationService, TranslationPipe } from '@angular-apps/services';
 import { AsyncPipe } from '@angular/common';
 
 /**
@@ -22,6 +22,8 @@ export class Error404Component implements OnInit {
 	private readonly translationService = inject(ScopedTranslationService);
 	protected readonly ButtonColorDefinition = ButtonColorDefinition;
 	public backtoStartpage: string | undefined;
+
+	private readonly logger = new Logger('Error404Component');
 
 	/**
 	 * Constructor for Error404Component.
@@ -42,8 +44,6 @@ export class Error404Component implements OnInit {
 	 * Navigates to the home page.
 	 */
 	public routeToHome(): void {
-		// TODO: Add Logger
-		// eslint-disable-next-line no-console
-		this.router.navigate(['/']).catch((error) => console.error(error));
+		this.router.navigate(['/']).catch((error) => this.logger.error('Error while navigating to home page', error));
 	}
 }
