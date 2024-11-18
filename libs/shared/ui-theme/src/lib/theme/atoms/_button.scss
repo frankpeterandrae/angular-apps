@@ -24,16 +24,16 @@
 		box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1),
 		background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 	cursor: pointer;
+
+	span {
+		margin: 3px;
+		height: 16px;
+	}
 }
 
 .#{prefix.$prefix}button:active {
 	position: relative;
 	top: 1px;
-}
-
-span {
-	margin: 3px;
-	height: 16px;
 }
 
 .#{prefix.$prefix}default {

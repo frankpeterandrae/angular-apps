@@ -18,8 +18,6 @@
 			"@angular-apps/colour-rack": ["libs/colour-rack/src/index.ts"],
 			"@angular-apps/config": ["libs/shared/config/src/index.ts"],
 			"@angular-apps/demo-feature": ["libs/demo/demo-feature/src/index.ts"],
-			"@angular-apps/demo/domain": ["libs/demo/domain/src/index.ts"],
-			"@angular-apps/homepage-domain": ["libs/homepage/domain/src/index.ts"],
 			"@angular-apps/homepage-feature": ["libs/homepage/homepage-feature/src/index.ts"],
 			"@angular-apps/services": ["libs/shared/services/src/index.ts"],
 			"@angular-apps/shared/ui-theme": ["libs/shared/ui-theme/src/index.ts"]
