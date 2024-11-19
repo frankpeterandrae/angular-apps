@@ -6,7 +6,6 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuItem } from '../../../model/menu-item.model';
-import { FastSvgComponent } from '@push-based/ngx-fast-svg';
 import { Router, RouterLink } from '@angular/router';
 import { ColorDefinition } from '../../../enums';
 
@@ -16,7 +15,7 @@ import { ColorDefinition } from '../../../enums';
 @Component({
 	selector: 'theme-topnavbar',
 	standalone: true,
-	imports: [CommonModule, FastSvgComponent, RouterLink],
+	imports: [CommonModule, RouterLink],
 	templateUrl: './top-navbar.component.html',
 	styleUrl: './top-navbar.component.scss',
 })
@@ -38,13 +37,13 @@ export class TopNavbarComponent {
 
 	/**
 	 * Constructor to inject the Router service.
-	 * @param router - The Angular Router service.
+	 * @param {Router} router - The Angular Router service.
 	 */
 	constructor(public readonly router: Router) {}
 
 	/**
 	 * Gets the current route URL.
-	 * @returns The current route URL as a string.
+	 * @returns {string} - The current route URL as a string.
 	 */
 	public getCurrentRoute(): string {
 		return this.router.url;
@@ -52,7 +51,7 @@ export class TopNavbarComponent {
 
 	/**
 	 * Toggles the visibility of a dropdown menu.
-	 * @param route - The route associated with the dropdown menu.
+	 * @param {string} route - The route associated with the dropdown menu.
 	 */
 	public toggleNavigation(route: string): void {
 		this.showDropdown[route] = !this.showDropdown[route];

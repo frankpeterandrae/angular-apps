@@ -5,7 +5,7 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeroComponent } from './hero.component';
-import { setupTestingModule } from '../../test-setup';
+import { setupTestingModule } from '../../../test-setup';
 
 describe('HeroComponent', () => {
 	let component: HeroComponent;

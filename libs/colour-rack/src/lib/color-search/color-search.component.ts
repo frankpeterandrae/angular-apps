@@ -27,7 +27,7 @@ export class ColorSearchComponent {
 
 	/**
 	 * Emits the search event with the current search text.
-	 * @param $event - The current search text.
+	 * @param {string} $event - The current search text.
 	 */
 	public onSearchTermChange($event: string): void {
 		if ($event != null) {

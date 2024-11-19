@@ -4,7 +4,7 @@
  */
 
 import { AfterViewInit, Component, computed, ElementRef, Inject, input, OnDestroy } from '@angular/core';
-import { CommonModule, DOCUMENT, NgOptimizedImage } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 /**
@@ -13,7 +13,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 @Component({
 	selector: 'theme-image-loader',
 	standalone: true,
-	imports: [CommonModule, NgOptimizedImage],
+	imports: [CommonModule],
 	templateUrl: './image-loader.component.html',
 	styleUrl: './image-loader.component.scss',
 })
@@ -88,9 +88,9 @@ export class ImageLoaderComponent implements AfterViewInit, OnDestroy {
 	/**
 	 * Constructor for ImageLoaderComponent.
 	 * Initializes the component with the provided services and sets a placeholder image.
-	 * @param elementRef - Reference to the element.
-	 * @param sanitizer - Service to sanitize URLs.
-	 * @param document - Reference to the document.
+	 * @param {ElementRef} elementRef - Reference to the element.
+	 * @param {DomSanitizer} sanitizer - Service to sanitize URLs.
+	 * @param {Document} document - Reference to the document.
 	 */
 	constructor(
 		private readonly elementRef: ElementRef,

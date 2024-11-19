@@ -18,8 +18,8 @@ import { DialogConfigModel } from '../../model/dialog-config.model';
 export class DialogService {
 	/**
 	 * Constructor to inject the Overlay and Injector services.
-	 * @param overlay - The Overlay service to create and manage overlays.
-	 * @param injector - The Injector service to create custom injectors.
+	 * @param {Overlay} overlay - The Overlay service to create and manage overlays.
+	 * @param {Injector} injector - The Injector service to create custom injectors.
 	 */
 	constructor(
 		private readonly overlay: Overlay,
@@ -28,9 +28,9 @@ export class DialogService {
 
 	/**
 	 * Opens a dialog with the specified component and data.
-	 * @param component - The component to be displayed in the dialog.
-	 * @param data - The configuration data for the dialog.
-	 * @returns The reference to the created overlay.
+	 * @param {any} component - The component to be displayed in the dialog.
+	 * @param {DialogConfigModel<any>} data - The configuration data for the dialog.
+	 * @returns {OverlayRef} The reference to the created overlay.
 	 */
 	public open(component: any, data: DialogConfigModel<any>): OverlayRef {
 		const config: OverlayConfig = {

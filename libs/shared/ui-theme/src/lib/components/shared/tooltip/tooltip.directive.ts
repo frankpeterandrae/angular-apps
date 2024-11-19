@@ -22,8 +22,8 @@ export class TooltipDirective {
 
 	/**
 	 * Constructor for the TooltipDirective.
-	 * @param elementeRef - Reference to the element the directive is applied to.
-	 * @param renderer - Renderer2 instance for manipulating the DOM.
+	 * @param {ElementRef} elementeRef - Reference to the element the directive is applied to.
+	 * @param {Renderer2} renderer - Renderer2 instance for manipulating the DOM.
 	 */
 	constructor(
 		private readonly elementeRef: ElementRef,

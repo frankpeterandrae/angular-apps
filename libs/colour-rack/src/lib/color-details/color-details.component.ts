@@ -22,13 +22,13 @@ import { TranslationPipe } from '@angular-apps/services';
 export class ColorDetailsComponent {
 	/**
 	 * Constructor to inject the dialog configuration data.
-	 * @param data - The dialog configuration data containing color information.
+	 * @param {DialogConfigModel<Color>} data - The dialog configuration data containing color information.
 	 */
 	constructor(@Inject(DIALOG_DATA) public data: DialogConfigModel<Color>) {}
 
 	/**
 	 * Returns the color type as a string.
-	 * @returns The color type as a string.
+	 * @returns {string} - The color type as a string.
 	 */
 	public colorType(): string {
 		const types = this.data.componentData?.type?.split('-');

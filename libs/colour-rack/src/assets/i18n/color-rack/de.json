@@ -26,5 +26,11 @@
 			"FunctionsDescription": "Diese Seite bietet folgende Funktionen",
 			"TwoThinCoats": "Two Thin Coats"
 		}
+	},
+	"ColorSearchContainerComponent": {
+		"meta": {
+			"Description": "Farbsuche für Duncan Rhodes' Two Thin Coats Farben",
+			"Title": "Frank-Peter Andrä - Farbregal von frankpeterandrae.de"
+		}
 	}
 }

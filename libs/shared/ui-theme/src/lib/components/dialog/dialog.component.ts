@@ -25,8 +25,8 @@ import { ButtonColorDefinition } from '../../enums';
 export class DialogComponent {
 	/**
 	 * Constructor to inject the overlay reference and dialog data.
-	 * @param overlayRef - Reference to the overlay.
-	 * @param data - Configuration data for the dialog.
+	 * @param {OverlayRef} overlayRef - Reference to the overlay.
+	 * @param {DialogConfigModel<any>} data - Configuration data for the dialog.
 	 */
 	constructor(
 		private readonly overlayRef: OverlayRef,

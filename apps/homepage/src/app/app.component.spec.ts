@@ -92,7 +92,7 @@ describe('AppComponent', () => {
 		tick(100); // Simulate the delay in `translate`
 		fixture.detectChanges();
 		const homeItem = app.menuItems.find((item) => item.label === 'AppComponent.menu.lbl.Home');
-		expect(homeItem?.route).toBe('/home');
+		expect(homeItem?.route).toBe('/');
 	}));
 
 	it('should have correct route for "Paint Rack" menu item', fakeAsync(() => {

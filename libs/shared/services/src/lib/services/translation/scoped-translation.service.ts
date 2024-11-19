@@ -27,7 +27,6 @@ export class ScopedTranslationService implements ScopedTranslationServiceInterfa
 		this.translocoService.setActiveLang('de');
 		this.getActiveLang();
 	}
-
 	/**
 	 * Translates a given key within an optional scope and with optional parameters.
 	 * @param {string} key - The key to be translated.
@@ -35,7 +34,17 @@ export class ScopedTranslationService implements ScopedTranslationServiceInterfa
 	 * @param {Record<string, string>} [params] - The optional parameters for the translation.
 	 * @returns {Observable<string>} An observable that emits the translated string.
 	 */
-	public translate(key: string, scope?: string, params: Record<string, string> = {}): Observable<string> {
+	public translate(key: string, scope?: string, params: Record<string, string> = {}): string {
+		return this.translocoService.translate(key, params, scope);
+	}
+	/**
+	 * Translates a given key within an optional scope and with optional parameters.
+	 * @param {string} key - The key to be translated.
+	 * @param {string} [scope] - The optional scope for the translation.
+	 * @param {Record<string, string>} [params] - The optional parameters for the translation.
+	 * @returns {Observable<string>} An observable that emits the translated string.
+	 */
+	public selectTranslate(key: string, scope?: string, params: Record<string, string> = {}): Observable<string> {
 		return this.translocoService.selectTranslate(key, params, scope);
 	}
 

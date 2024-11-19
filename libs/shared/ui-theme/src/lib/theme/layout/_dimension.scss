@@ -5,11 +5,15 @@
 
 @use '../base/prefix';
 @use '../base/variables';
+@use '../electrons/colors';
 
 html,
 body {
 	height: 100%;
 	font-family: #{variables.$font-family};
+
+	@extend %#{prefix.$prefix}bg-ebony;
+	@extend %#{prefix.$prefix}light-text;
 }
 
 @each $name, $width in variables.$breakpoints {

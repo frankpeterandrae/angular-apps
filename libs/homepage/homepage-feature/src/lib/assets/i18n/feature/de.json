@@ -16,5 +16,11 @@
 			"ReworkHint": "Zurzeit befindet sich diese Seite in einem kompletten Neuaufbau.",
 			"Title": "Willkommen auf meiner Webseite"
 		}
+	},
+	"HomeComponent": {
+		"meta": {
+			"Description": "Willkommensseite zur Erklärung, worum es auf dieser Webseite geht.",
+			"Title": "Frank-Peter Andrä - Startseite von frankpeterandrae.de"
+		}
 	}
 }

@@ -30,8 +30,8 @@ export class LoginComponent {
 
 	/**
 	 * Constructor for LoginComponent.
-	 * @param dataConnection - Service for data connection.
-	 * @param formBuilder - Service to create form groups.
+	 * @param {DataConnectionService} dataConnection - Service for data connection.
+	 * @param {FormBuilder} formBuilder - Service to create form groups.
 	 */
 	constructor(
 		public dataConnection: DataConnectionService,

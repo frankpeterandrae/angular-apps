@@ -52,10 +52,9 @@ export class InputComponent implements ControlValueAccessor {
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	public onTouched: () => void = () => {};
 
-	// Handle input event
 	/**
 	 * Handles the input event and updates the component's value.
-	 * @param event - The input event.
+	 * @param {Event} event - The input event.
 	 */
 	public onInput(event: Event): void {
 		const input = event.target as HTMLInputElement;
@@ -65,7 +64,7 @@ export class InputComponent implements ControlValueAccessor {
 	}
 	/**
 	 * Checks if the input field is filled.
-	 * @returns True if the input field has a value, otherwise false.
+	 * @returns {boolean} - True if the input field has a value, otherwise false.
 	 */
 	public isFilled(): boolean {
 		return this.value.length > 0;
@@ -87,16 +86,16 @@ export class InputComponent implements ControlValueAccessor {
 
 	/**
 	 * Handles the change event on the input field.
-	 * @param $event - The change event.
+	 * @param {string} $event - The change event.
 	 */
-	public onChangeValue($event: any): void {
+	public onChangeValue($event: string): void {
 		this.value = $event;
 	}
 
 	/**
 	 * Registers a callback function to be called when the input value changes.
 	 * @internal
-	 * @param fn - The callback function.
+	 * @param {any} fn - The callback function.
 	 */
 	public registerOnChange(fn: any): void {
 		this.onChange = fn;
@@ -105,7 +104,7 @@ export class InputComponent implements ControlValueAccessor {
 	/**
 	 * Registers a callback function to be called when the input is touched.
 	 * @internal
-	 * @param fn - The callback function.
+	 * @param {any} fn - The callback function.
 	 */
 	public registerOnTouched(fn: any): void {
 		this.onTouched = fn;
@@ -114,9 +113,9 @@ export class InputComponent implements ControlValueAccessor {
 	/**
 	 * Writes a new value to the input field.
 	 * @internal
-	 * @param value - The new value.
+	 * @param {string} value - The new value.
 	 */
-	public writeValue(value: any): void {
+	public writeValue(value: string): void {
 		this.value = value;
 	}
 }

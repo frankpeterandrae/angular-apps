@@ -30,7 +30,8 @@ function extractRoutes(node) {
 extractRoutes(sourceFile);
 
 // Generate .htaccess rules
-let htaccessContent = `# Set expiration headers for static assets
+let htaccessContent = `
+# Set expiration headers for static assets
 <IfModule mod_expires.c>
     ExpiresActive On
 
@@ -52,6 +53,9 @@ let htaccessContent = `# Set expiration headers for static assets
     # Do not cache the main HTML file (index.html)
     <FilesMatch "index\\.html$">
         ExpiresByType text/html "access plus 0 seconds"
+    </FilesMatch>
+    <FilesMatch "\\.(html|htm)$">
+        AddType text/html; charset=UTF-8 .html
     </FilesMatch>
 </IfModule>
 

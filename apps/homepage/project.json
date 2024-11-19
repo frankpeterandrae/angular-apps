@@ -108,6 +108,9 @@
 						"command": "shx mkdir -p dist/production"
 					},
 					{
+						"command": "node ./scripts/replace-build-date.js"
+					},
+					{
 						"command": "nx build homepage --configuration=production"
 					},
 					{
