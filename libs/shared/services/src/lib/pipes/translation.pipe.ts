@@ -5,7 +5,7 @@
 
 import { inject, Pipe, PipeTransform } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ScopedTranslationService } from '../services/translation/scoped-tranlation.service';
+import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
 
 /**
  * TranslationPipe is an Angular pipe that transforms a given string value
@@ -16,7 +16,7 @@ import { ScopedTranslationService } from '../services/translation/scoped-tranlat
 	standalone: true,
 })
 export class TranslationPipe implements PipeTransform {
-	private readonly _translocoService = inject(ScopedTranslationService);
+	private readonly _translocoService = inject(ScopedTranslationServiceInterface);
 
 	/**
 	 * Transforms the input value to a translated string.

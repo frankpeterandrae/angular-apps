@@ -4,8 +4,9 @@
  */
 
 import { Component, inject, OnInit } from '@angular/core';
-import { ScopedTranslationService, TranslationPipe } from '@angular-apps/services';
+import { TranslationPipe } from '@angular-apps/services';
 import { AsyncPipe } from '@angular/common';
+import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
 
 /**
  * Component decorator for defining the HeroComponent.
@@ -18,7 +19,7 @@ import { AsyncPipe } from '@angular/common';
 	imports: [TranslationPipe, AsyncPipe],
 })
 export class HeroComponent implements OnInit {
-	private readonly translocoService = inject(ScopedTranslationService);
+	private readonly translocoService = inject(ScopedTranslationServiceInterface);
 
 	/**
 	 * The translated paragraph text.

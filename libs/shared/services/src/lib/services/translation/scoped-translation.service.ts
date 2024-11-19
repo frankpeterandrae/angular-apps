@@ -6,13 +6,14 @@
 import { TranslocoService } from '@jsverse/transloco';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
 
 /**
  * ScopedTranslationService is an Angular service that provides scoped translation functionality.
  * It uses the TranslocoService to fetch translations for specific keys within an optional scope.
  */
 @Injectable({ providedIn: 'root' })
-export class ScopedTranslationService {
+export class ScopedTranslationService implements ScopedTranslationServiceInterface {
 	private readonly translocoService = inject(TranslocoService);
 
 	readonly #currentLang = signal<string>('');

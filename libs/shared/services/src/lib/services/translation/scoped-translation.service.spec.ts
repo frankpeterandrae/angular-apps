@@ -4,15 +4,17 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { ScopedTranslationService } from './scoped-tranlation.service';
+import { ScopedTranslationService } from './scoped-translation.service';
 import { TranslocoService } from '@jsverse/transloco';
 import { of } from 'rxjs';
+import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
+import { setupTestingModule } from '../../../test-setup';
 
 describe('ScopedTranslationService', () => {
-	let service: ScopedTranslationService;
+	let service: ScopedTranslationServiceInterface;
 	let translocoService: jest.Mocked<TranslocoService>;
 
-	beforeEach(() => {
+	beforeEach(async () => {
 		const translocoServiceMock = {
 			setActiveLang: jest.fn(),
 			selectTranslate: jest.fn(),
@@ -20,7 +22,7 @@ describe('ScopedTranslationService', () => {
 			getActiveLang: jest.fn(),
 		};
 
-		TestBed.configureTestingModule({
+		await setupTestingModule({
 			providers: [ScopedTranslationService, { provide: TranslocoService, useValue: translocoServiceMock }],
 		});
 

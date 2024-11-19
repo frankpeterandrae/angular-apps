@@ -5,24 +5,25 @@
 
 import { TestBed } from '@angular/core/testing';
 import { TranslationPipe } from './translation.pipe';
-import { ScopedTranslationService } from '../services/translation/scoped-tranlation.service';
 import { of } from 'rxjs';
+import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
+import { setupTestingModule } from '../../test-setup';
 
 describe('TranslationPipe', () => {
 	let pipe: TranslationPipe;
-	let translationService: ScopedTranslationService;
+	let translationService: ScopedTranslationServiceInterface;
 
-	beforeEach(() => {
+	beforeEach(async () => {
 		const spy = {
 			translate: jest.fn(),
 		};
 
-		TestBed.configureTestingModule({
-			providers: [TranslationPipe, { provide: ScopedTranslationService, useValue: spy }],
+		await setupTestingModule({
+			providers: [TranslationPipe, { provide: ScopedTranslationServiceInterface, useValue: spy }],
 		});
 
 		pipe = TestBed.inject(TranslationPipe);
-		translationService = TestBed.inject(ScopedTranslationService);
+		translationService = TestBed.inject(ScopedTranslationServiceInterface);
 	});
 
 	it('transforms key to translated string', (done) => {

@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { TestBed } from '@angular/core/testing';
 import { DataConnectionService } from './data.connection.service';
+import { setupTestingModule } from '../../../test-setup';
 
 /**
  * Test suite for DataConnectionService.
@@ -15,8 +16,8 @@ describe('DataConnectionService', () => {
 	let httpClient: HttpClient;
 	let service: DataConnectionService;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await setupTestingModule({
 			providers: [DataConnectionService, { provide: HttpClient, useValue: { get: jest.fn(), post: jest.fn() } }],
 		});
 		httpClient = TestBed.inject(HttpClient);

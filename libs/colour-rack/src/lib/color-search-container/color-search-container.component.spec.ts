@@ -4,11 +4,9 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ColorSearchContainerComponent } from './color-search-container.component';
 import { ColorGridComponent } from '../color-grid/color-grid.component';
 import { ColorSearchComponent } from '../color-search/color-search.component';
-import { provideHttpClient } from '@angular/common/http';
 import { setupTestingModule } from '../../test-setup';
 
 describe('ColorSearchContainerComponent', () => {
@@ -18,7 +16,6 @@ describe('ColorSearchContainerComponent', () => {
 	beforeEach(async () => {
 		await setupTestingModule({
 			imports: [ColorSearchContainerComponent, ColorSearchComponent, ColorGridComponent],
-			providers: [provideHttpClient(), provideHttpClientTesting()],
 		});
 
 		fixture = TestBed.createComponent(ColorSearchContainerComponent);

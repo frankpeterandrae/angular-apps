@@ -7,7 +7,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FastSvgComponent } from '@push-based/ngx-fast-svg';
 import { IconDefinition } from '../../enums';
-import { ScopedTranslationService } from '@angular-apps/services';
+import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
 
 /**
  * Component for toggling the language of the application.
@@ -20,7 +20,7 @@ import { ScopedTranslationService } from '@angular-apps/services';
 })
 export class LanguageToggleComponent {
 	/** Service for handling translations and language changes. */
-	private readonly translationService = inject(ScopedTranslationService);
+	private readonly translationService = inject(ScopedTranslationServiceInterface);
 
 	/** Icon definitions used in the component. */
 	protected readonly IconDefinition = IconDefinition;

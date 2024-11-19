@@ -6,8 +6,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ButtonColorDefinition, ButtonComponent, CardComponent } from '@angular-apps/shared/ui-theme';
 import { Router } from '@angular/router';
-import { Logger, ScopedTranslationService, TranslationPipe } from '@angular-apps/services';
+import { Logger, TranslationPipe } from '@angular-apps/services';
 import { AsyncPipe } from '@angular/common';
+import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
 
 /**
  * Component for displaying a 404 error page.
@@ -19,7 +20,7 @@ import { AsyncPipe } from '@angular/common';
 	templateUrl: './error404.component.html',
 })
 export class Error404Component implements OnInit {
-	private readonly translationService = inject(ScopedTranslationService);
+	private readonly translationService = inject(ScopedTranslationServiceInterface);
 	protected readonly ButtonColorDefinition = ButtonColorDefinition;
 	public backtoStartpage: string | undefined;
 

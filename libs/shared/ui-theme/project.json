@@ -4,7 +4,7 @@
 	"sourceRoot": "libs/shared/ui-theme/src",
 	"prefix": "theme",
 	"projectType": "library",
-	"tags": ["domain:shared", "type:ui"],
+	"tags": ["lib:shared", "type:ui"],
 	"targets": {
 		"test": {
 			"executor": "@nx/jest:jest",

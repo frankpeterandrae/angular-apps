@@ -12,7 +12,6 @@ import { DialogConfigModel } from '../../model/dialog-config.model';
 describe('DialogService', () => {
 	let service: DialogService;
 	let overlay: Overlay;
-	let injector: Injector;
 	let createSpy: jest.SpyInstance;
 	let attachSpy: jest.SpyInstance;
 	let backdropClickSpy: jest.SpyInstance;
