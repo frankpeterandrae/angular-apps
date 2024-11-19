@@ -21,8 +21,9 @@ jobs:
           fetch-depth: 0  # Fetch the entire history and all branches
 
       # Fetch the base branch explicitly to ensure it is available
-      - name: Fetch base branch
+      - name: Checkout main in detached HEAD
         run: |
+          git checkout --detach
           if [ -n "$GITHUB_BASE_REF" ]; then
             git fetch origin $GITHUB_BASE_REF:$GITHUB_BASE_REF
           else
