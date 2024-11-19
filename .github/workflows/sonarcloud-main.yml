@@ -1,41 +1,17 @@
-name: SonarCloud Scan
+name: SonarCloud Scan for main branch
 
 on:
-  pull_request:
-    branches:
-      - main
-    types: [opened, synchronize, reopened]
+  workflow_call: # This makes the workflow reusable
 
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
-
     steps:
       # Checkout the repository with all branches and full history
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Fetch the entire history and all branches
-
-      # Fetch the base branch explicitly to ensure it is available
-      - name: Checkout main in detached HEAD
-        run: |
-          git checkout --detach
-          if [ -n "$GITHUB_BASE_REF" ]; then
-            git fetch origin $GITHUB_BASE_REF:$GITHUB_BASE_REF
-          else
-            git fetch origin main:main
-          fi
-
-      # Set base commit
-      - name: Set base commit
-        run: |
-          if [ -n "$GITHUB_BASE_REF" ]; then
-            BASE_COMMIT=$GITHUB_BASE_REF
-          else
-            BASE_COMMIT=main
-          fi
-          echo "BASE_COMMIT=$BASE_COMMIT" >> $GITHUB_ENV
 
       # Set up Node.js (required for NX)
       - name: Set up Node.js
@@ -49,7 +25,7 @@ jobs:
 
       # Run tests for affected apps and libs
       - name: Run tests and collect coverage
-        run: npx nx affected --target=test --base=$BASE_COMMIT --head=HEAD
+        run: npx nx run-many --target=test --all --parallel
 
       - name: Upload coverage to SonarCloud
         uses: SonarSource/sonarcloud-github-action@v2
