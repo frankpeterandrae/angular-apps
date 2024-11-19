@@ -16,7 +16,7 @@ import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
 	standalone: true,
 })
 export class TranslationPipe implements PipeTransform {
-	private readonly _translocoService = inject(ScopedTranslationServiceInterface);
+	private readonly translocoService = inject(ScopedTranslationServiceInterface);
 
 	/**
 	 * Transforms the input value to a translated string.
@@ -26,6 +26,6 @@ export class TranslationPipe implements PipeTransform {
 	 * @returns {Observable<string>} An observable that emits the translated value.
 	 */
 	public transform(key: string, scope?: string, params: Record<string, string> = {}): Observable<string> {
-		return this._translocoService.translate(key, scope, params);
+		return this.translocoService.selectTranslate(key, scope, params);
 	}
 }

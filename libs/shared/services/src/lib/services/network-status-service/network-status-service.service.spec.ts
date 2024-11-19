@@ -17,7 +17,7 @@ describe('NetworkStatusServiceService', () => {
 
 	/**
 	 * Utility function to mock navigator.onLine.
-	 * @param value - The value to set for navigator.onLine.
+	 * @param {boolean} value - The value to set for navigator.onLine.
 	 */
 	const mockNavigatorOnLine = (value: boolean): void => {
 		Object.defineProperty(navigator, 'onLine', {

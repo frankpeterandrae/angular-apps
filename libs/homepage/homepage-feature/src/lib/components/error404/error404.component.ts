@@ -28,7 +28,7 @@ export class Error404Component implements OnInit {
 
 	/**
 	 * Constructor for Error404Component.
-	 * @param router - The Angular Router service.
+	 * @param {Router} router - The Angular Router service.
 	 */
 	constructor(private readonly router: Router) {}
 
@@ -36,9 +36,11 @@ export class Error404Component implements OnInit {
 	 * Initializes the component and sets the backtoStartpage property with the translated string.
 	 */
 	ngOnInit(): void {
-		this.translationService.translate('Error404Component.lbl.BackToStartpage', 'feature').subscribe((translation) => {
-			this.backtoStartpage = translation;
-		});
+		this.translationService
+			.selectTranslate('Error404Component.lbl.BackToStartpage', 'feature')
+			.subscribe((translation) => {
+				this.backtoStartpage = translation;
+			});
 	}
 
 	/**

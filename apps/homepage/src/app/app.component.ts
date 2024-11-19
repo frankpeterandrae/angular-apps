@@ -12,10 +12,11 @@ import {
 } from '@angular-apps/shared/ui-theme';
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { environment } from '@angular-apps/config';
+import { BUILD_DATE, environment } from '@angular-apps/config';
 import { Logger } from '@angular-apps/services';
 import { combineLatest } from 'rxjs';
 import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
+import { Meta } from '@angular/platform-browser';
 
 /**
  * The root component of the application.
@@ -37,9 +38,19 @@ export class AppComponent implements OnInit {
 	/**
 	 * Creates an instance of AppComponent.
 	 * @param {ScopedTranslationServiceInterface} translocoService - The translation service used for fetching translations.
+	 * @param {Meta} meta - The meta service used to set meta tags.
 	 */
-	constructor(private readonly translocoService: ScopedTranslationServiceInterface) {
-		// Ensure a language is set
+	constructor(
+		private readonly translocoService: ScopedTranslationServiceInterface,
+		private readonly meta: Meta,
+	) {
+		this.meta.addTags([
+			{ name: 'robots', content: 'index, follow' },
+			{ name: 'author', content: 'Frank-Peter Andrä' },
+			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
+			{ name: 'date', content: BUILD_DATE, scheme: 'YYYY-MM-DDTHH:mm:ss.sssZ' },
+			{ charset: 'UTF-8' },
+		]);
 	}
 
 	/**
@@ -51,10 +62,10 @@ export class AppComponent implements OnInit {
 		}
 
 		combineLatest([
-			this.translocoService.translate('AppComponent.menu.lbl.Home'),
-			this.translocoService.translate('AppComponent.menu.lbl.PaintRack'),
-			this.translocoService.translate('AppComponent.menu.lbl.InDevelopment'),
-			this.translocoService.translate('AppComponent.menu.lbl.Test'),
+			this.translocoService.selectTranslate('AppComponent.menu.lbl.Home'),
+			this.translocoService.selectTranslate('AppComponent.menu.lbl.PaintRack'),
+			this.translocoService.selectTranslate('AppComponent.menu.lbl.InDevelopment'),
+			this.translocoService.selectTranslate('AppComponent.menu.lbl.Test'),
 		]).subscribe(([home, paintRack, inDevelopment, test]) => {
 			this.initializeMenuItems(home, paintRack, inDevelopment, test);
 		});
@@ -72,7 +83,7 @@ export class AppComponent implements OnInit {
 			{
 				label: home,
 				icon: IconDefinition.HOUSE,
-				route: '/home',
+				route: '/',
 			},
 			{
 				label: paintRack,

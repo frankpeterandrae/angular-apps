@@ -30,7 +30,7 @@ export class HeroComponent implements OnInit {
 	 * Initializes the component and sets the translated paragraph text.
 	 */
 	ngOnInit(): void {
-		this.translocoService.translate('HeroComponent.lbl.Paragraph1', 'feature').subscribe((translation) => {
+		this.translocoService.selectTranslate('HeroComponent.lbl.Paragraph1', 'feature').subscribe((translation) => {
 			this.paragraph = translation;
 		});
 	}

@@ -6,7 +6,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { HeroComponent } from '../hero/hero.component';
-import { setupTestingModule } from '../../test-setup';
+import { setupTestingModule } from '../../../test-setup';
 
 describe('HomeComponent', () => {
 	let component: HomeComponent;

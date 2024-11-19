@@ -48,8 +48,8 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 
 	/**
 	 * Constructor to inject the ColorService and DialogService.
-	 * @param colorService - The service used to fetch colors.
-	 * @param dialogService - The service used to open dialogs.
+	 * @param {ColorService} colorService - The service used to fetch colors.
+	 * @param {DialogService} dialogService - The service used to open dialogs.
 	 */
 	constructor(
 		private readonly colorService: ColorService,
@@ -76,7 +76,7 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 
 	/**
 	 * Lifecycle hook that is called when any data-bound property of a directive changes.
-	 * @param changes - The changes in the data-bound properties.
+	 * @param {SimpleChanges} changes - The changes in the data-bound properties.
 	 */
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['searchQuery']) {
@@ -115,7 +115,7 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 
 	/**
 	 * Highlights the colors that match the search query.
-	 * @param query - The search query to match against color names.
+	 * @param {string} query - The search query to match against color names.
 	 */
 	public highlightMatchingColors(query: string): void {
 		this.colors().forEach((colorRow) => {
@@ -128,8 +128,8 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 
 	/**
 	 * Calculates the storage location of each color based on its index.
-	 * @param colors - The array of colors to calculate storage locations for.
-	 * @returns The array of colors with updated storage locations.
+	 * @param {Color[]} colors - The array of colors to calculate storage locations for.
+	 * @returns {Color[]} - The array of colors with updated storage locations.
 	 */
 	public calculateStorageLocation(colors: Color[]): Color[] {
 		colors.forEach((color, idx) => {
@@ -141,7 +141,7 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 
 	/**
 	 * Opens the details dialog for a given color.
-	 * @param color - The color for which to open the details' dialog.
+	 * @param {Color} color - The color for which to open the details' dialog.
 	 */
 	public openDetails(color: Color): void {
 		const dialogConfig: DialogConfigModel<Color> = { componentData: color, settings: { title: color.name } };

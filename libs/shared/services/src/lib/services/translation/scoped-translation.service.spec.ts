@@ -38,7 +38,7 @@ describe('ScopedTranslationService', () => {
 
 		translocoService.selectTranslate.mockReturnValue(of(translatedValue));
 
-		service.translate(key, scope, params).subscribe((result) => {
+		service.selectTranslate(key, scope, params).subscribe((result) => {
 			expect(result).toBe(translatedValue);
 			done();
 		});
@@ -52,7 +52,7 @@ describe('ScopedTranslationService', () => {
 
 		translocoService.selectTranslate.mockReturnValue(of(translatedValue));
 
-		service.translate(key, scope, params).subscribe((result) => {
+		service.selectTranslate(key, scope, params).subscribe((result) => {
 			expect(result).toBe(translatedValue);
 			done();
 		});
@@ -66,7 +66,7 @@ describe('ScopedTranslationService', () => {
 
 		translocoService.selectTranslate.mockReturnValue(of(translatedValue));
 
-		service.translate(key, scope, params).subscribe((result) => {
+		service.selectTranslate(key, scope, params).subscribe((result) => {
 			expect(result).toBe(translatedValue);
 			done();
 		});
@@ -80,7 +80,7 @@ describe('ScopedTranslationService', () => {
 
 		translocoService.selectTranslate.mockReturnValue(of(translatedValue));
 
-		service.translate(key, scope, params).subscribe((result) => {
+		service.selectTranslate(key, scope, params).subscribe((result) => {
 			expect(result).toBe(translatedValue);
 			done();
 		});

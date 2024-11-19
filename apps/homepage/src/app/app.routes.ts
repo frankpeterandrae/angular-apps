@@ -32,9 +32,8 @@ const devRoutes: Route[] = [
  * Includes the main routes for the application and conditionally includes development routes.
  */
 export const appRoutes: Route[] = [
-	{ path: '', redirectTo: 'home', pathMatch: 'full' },
 	{
-		path: 'home',
+		path: '',
 		/**
 		 * Lazy loads the HomeComponent for the home route.
 		 * @returns {Promise<any>} A promise that resolves to the HomeComponent.

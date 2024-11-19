@@ -16,5 +16,11 @@
 			"ReworkHint": "This page is currently undergoing a complete rebuild.",
 			"Title": "Welcome to my website"
 		}
+	},
+	"HomeComponent": {
+		"meta": {
+			"Description": "Welcome page to explain what this website is about.",
+			"Title": "Frank-Peter Andrä - Home of frankpeterandrae.de"
+		}
 	}
 }
