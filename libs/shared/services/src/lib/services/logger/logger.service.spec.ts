@@ -6,11 +6,12 @@
 import { TestBed } from '@angular/core/testing';
 
 import { Logger, LOGGER_SOURCE } from './logger.service';
+import { setupTestingModule } from '../../../test-setup';
 
 describe('Logger', () => {
 	let logger: Logger;
 
-	beforeEach(() => {
+	beforeEach(async () => {
 		jest.clearAllMocks();
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		jest.spyOn(console, 'info').mockImplementation(() => {});
@@ -20,7 +21,8 @@ describe('Logger', () => {
 		jest.spyOn(console, 'error').mockImplementation(() => {});
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		jest.spyOn(console, 'debug').mockImplementation(() => {});
-		TestBed.configureTestingModule({
+
+		await setupTestingModule({
 			providers: [{ provide: LOGGER_SOURCE, useValue: 'TestSource' }],
 		});
 		logger = TestBed.inject(Logger);

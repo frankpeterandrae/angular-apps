@@ -7,6 +7,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { NetworkStatusServiceService } from './network-status-service.service';
 import { take } from 'rxjs';
+import { setupTestingModule } from '../../../test-setup';
 
 /**
  * Test suite for NetworkStatusServiceService.
@@ -28,10 +29,10 @@ describe('NetworkStatusServiceService', () => {
 	/**
 	 * Sets up the testing module and injects the service before each test.
 	 */
-	beforeEach(() => {
+	beforeEach(async () => {
 		mockNavigatorOnLine(true);
 
-		TestBed.configureTestingModule({
+		await setupTestingModule({
 			providers: [NetworkStatusServiceService],
 		});
 		service = TestBed.inject(NetworkStatusServiceService);

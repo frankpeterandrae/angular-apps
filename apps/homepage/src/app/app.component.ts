@@ -13,8 +13,9 @@ import {
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { environment } from '@angular-apps/config';
-import { Logger, ScopedTranslationService } from '@angular-apps/services';
+import { Logger } from '@angular-apps/services';
 import { combineLatest } from 'rxjs';
+import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
 
 /**
  * The root component of the application.
@@ -35,9 +36,9 @@ export class AppComponent implements OnInit {
 
 	/**
 	 * Creates an instance of AppComponent.
-	 * @param {ScopedTranslationService} translocoService - The translation service used for fetching translations.
+	 * @param {ScopedTranslationServiceInterface} translocoService - The translation service used for fetching translations.
 	 */
-	constructor(private readonly translocoService: ScopedTranslationService) {
+	constructor(private readonly translocoService: ScopedTranslationServiceInterface) {
 		// Ensure a language is set
 	}
 

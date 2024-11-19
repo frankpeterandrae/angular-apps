@@ -6,9 +6,8 @@
 import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
 import en from './assets/i18n/color-rack/en.json';
 import de from './assets/i18n/color-rack/de.json';
-import { TranslocoConfig, TranslocoTestingModule } from '@jsverse/transloco';
-import { TestBed, TestModuleMetadata } from '@angular/core/testing';
-import { ModuleWithProviders, NO_ERRORS_SCHEMA } from '@angular/core';
+import { TestModuleMetadata } from '@angular/core/testing';
+import { sharedSetupTestingModule } from '@angular-apps/testing';
 
 setupZoneTestEnv();
 
@@ -17,23 +16,6 @@ setupZoneTestEnv();
  * @param {TestModuleMetadata} param0 - The metadata for the test module, including imports, providers, and declarations.
  * @returns {Promise<any>} A promise that resolves when the test module is compiled.
  */
-export function setupTestingModule({ imports = [], providers, declarations }: TestModuleMetadata): Promise<any> {
-	return TestBed.configureTestingModule({
-		imports: [translocoTestingModulFactory({}), ...imports],
-		providers,
-		declarations,
-		schemas: [NO_ERRORS_SCHEMA],
-	}).compileComponents();
-}
-
-/**
- * Creates a Transloco testing module with the provided configuration.
- * @param {Partial<TranslocoConfig>} config - Partial configuration for the Transloco module.
- * @returns {TranslocoTestingModule} The configured Transloco testing module.
- */
-function translocoTestingModulFactory(config: Partial<TranslocoConfig>): ModuleWithProviders<TranslocoTestingModule> {
-	return TranslocoTestingModule.forRoot({
-		langs: { en, de },
-		translocoConfig: { availableLangs: ['en', 'de'], defaultLang: 'en', ...config },
-	});
+export function setupTestingModule({ imports = [], providers = [], declarations }: TestModuleMetadata): Promise<any> {
+	return sharedSetupTestingModule({ imports, providers, declarations }, { en, de });
 }

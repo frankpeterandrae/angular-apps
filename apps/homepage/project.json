@@ -4,7 +4,7 @@
 	"projectType": "application",
 	"prefix": "fpa",
 	"sourceRoot": "apps/homepage/src",
-	"tags": ["domain:homepage", "type:app"],
+	"tags": ["app:homepage", "type:app"],
 	"targets": {
 		"build": {
 			"executor": "@angular-devkit/build-angular:application",

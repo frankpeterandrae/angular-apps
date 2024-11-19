@@ -9,7 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { environment } from '@angular-apps/config';
 import { setupTestingModule } from '../test-setup';
-import { LanguageToggleComponent, MockLanguageToggleComponent } from '@angular-apps/shared/ui-theme';
+import { LanguageToggleComponent } from '@angular-apps/shared/ui-theme';
+import { MockedLanguageToggleComponent } from '@angular-apps/testing';
 
 describe('AppComponent', () => {
 	let fixture: ComponentFixture<AppComponent>;
@@ -29,7 +30,7 @@ describe('AppComponent', () => {
 						},
 					},
 				},
-				{ provide: LanguageToggleComponent, useClass: MockLanguageToggleComponent },
+				{ provide: LanguageToggleComponent, useClass: MockedLanguageToggleComponent },
 			],
 		});
 

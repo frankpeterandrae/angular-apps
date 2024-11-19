@@ -2,7 +2,6 @@
  * Copyright (c) 2024. Frank-Peter Andrä
  * All rights reserved.
  */
-
 import { Component } from '@angular/core';
 
 /**
@@ -13,7 +12,7 @@ import { Component } from '@angular/core';
 	template: '',
 	standalone: true,
 })
-export class MockLanguageToggleComponent {
+export class MockedLanguageToggleComponent {
 	// Mock any properties or methods with Jest
 	public language = 'en'; // Mock as an observable if `currentLang` is an observable
 }

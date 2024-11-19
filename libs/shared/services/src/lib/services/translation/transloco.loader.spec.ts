@@ -3,17 +3,17 @@
  * All rights reserved.
  */
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController } from '@angular/common/http/testing';
 import { TranslocoHttpLoader } from './transloco.loader';
 import { Translation } from '@jsverse/transloco';
+import { setupTestingModule } from '../../../test-setup';
 
 describe('TranslocoHttpLoader', () => {
 	let loader: TranslocoHttpLoader;
 	let httpMock: HttpTestingController;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({
-			imports: [HttpClientTestingModule],
+	beforeEach(async () => {
+		await setupTestingModule({
 			providers: [TranslocoHttpLoader],
 		});
 

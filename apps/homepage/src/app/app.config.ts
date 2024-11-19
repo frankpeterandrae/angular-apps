@@ -9,8 +9,9 @@ import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideFastSVG } from '@push-based/ngx-fast-svg';
 import { provideTransloco } from '@jsverse/transloco';
-import { TranslocoHttpLoader } from '@angular-apps/services';
+import { ScopedTranslationService, TranslocoHttpLoader } from '@angular-apps/services';
 import { translocoConfigFactory } from '@angular-apps/config';
+import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
 
 /**
  * Application configuration object.
@@ -54,5 +55,9 @@ export const appConfig: ApplicationConfig = {
 			config: translocoConfigFactory,
 			loader: TranslocoHttpLoader,
 		}),
+		{
+			provide: ScopedTranslationServiceInterface,
+			useClass: ScopedTranslationService,
+		},
 	],
 };

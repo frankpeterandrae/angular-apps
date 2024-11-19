@@ -25,35 +25,35 @@ module.exports = [
 					depConstraints: [
 						{
 							sourceTag: 'type:app',
-							onlyDependOnLibsWithTags: ['type:api', 'type:feature', 'type:ui', 'type:domain-logic', 'type:util'],
+							onlyDependOnLibsWithTags: ['type:api', 'type:feature', 'type:ui', 'type:testing', 'type:util'],
 						},
 						{
 							sourceTag: 'type:api',
-							onlyDependOnLibsWithTags: ['type:ui', 'type:domain-logic', 'type:util'],
+							onlyDependOnLibsWithTags: ['type:ui', 'type:testing', 'type:util'],
 						},
 						{
 							sourceTag: 'type:feature',
-							onlyDependOnLibsWithTags: ['type:ui', 'type:domain-logic', 'type:util'],
+							onlyDependOnLibsWithTags: ['type:ui', 'type:testing', 'type:util'],
 						},
 						{
 							sourceTag: 'type:ui',
-							onlyDependOnLibsWithTags: ['type:domain-logic', 'type:util'],
+							onlyDependOnLibsWithTags: ['type:testing', 'type:util'],
 						},
 						{
-							sourceTag: 'type:domain-logic',
+							sourceTag: 'type:testing',
 							onlyDependOnLibsWithTags: ['type:util'],
 						},
 						{
-							sourceTag: 'domain:shared',
-							onlyDependOnLibsWithTags: ['domain:shared'],
+							sourceTag: 'lib:shared',
+							onlyDependOnLibsWithTags: ['lib:shared'],
 						},
 						{
-							sourceTag: 'domain:homepage',
-							onlyDependOnLibsWithTags: ['domain:homepage', 'domain:shared'],
+							sourceTag: 'app:homepage',
+							onlyDependOnLibsWithTags: ['app:homepage', 'lib:shared'],
 						},
 						{
-							sourceTag: 'domain:demo',
-							onlyDependOnLibsWithTags: ['domain:demo', 'domain:shared'],
+							sourceTag: 'app:demo',
+							onlyDependOnLibsWithTags: ['app:demo', 'lib:shared'],
 						},
 					],
 				},
