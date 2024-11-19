@@ -12,6 +12,14 @@ describe('Logger', () => {
 
 	beforeEach(() => {
 		jest.clearAllMocks();
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		jest.spyOn(console, 'info').mockImplementation(() => {});
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		jest.spyOn(console, 'warn').mockImplementation(() => {});
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		jest.spyOn(console, 'error').mockImplementation(() => {});
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		jest.spyOn(console, 'debug').mockImplementation(() => {});
 		TestBed.configureTestingModule({
 			providers: [{ provide: LOGGER_SOURCE, useValue: 'TestSource' }],
 		});

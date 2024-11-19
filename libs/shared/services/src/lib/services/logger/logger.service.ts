@@ -46,7 +46,7 @@ export class Logger {
 	 * Creates an instance of Logger.
 	 * @param {string} [source] - The source of the log messages.
 	 */
-	constructor(@Optional() @Inject(LOGGER_SOURCE) private source?: string) {}
+	constructor(@Optional() @Inject(LOGGER_SOURCE) private readonly source?: string) {}
 
 	/**
 	 * Sets the logger to production mode, disabling logging if in production environment.
