@@ -1,8 +1,10 @@
 name: Deploy to FTP Server
 
 on:
-  #pull_request:
-    #types: [ opened, synchronize, reopened ]
+  pull_request:
+    branches:
+      - feature
+    types: [opened, synchronize, reopened]
 
 jobs:
   build-and-deploy:

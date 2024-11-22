@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { NgStyle } from '@angular/common';
+import { AsyncPipe, NgStyle } from '@angular/common';
 import {
 	AfterViewInit,
 	Component,
@@ -21,6 +21,7 @@ import { DialogConfigModel, DialogService } from '@angular-apps/shared/ui-theme'
 import { ColorDetailsComponent } from '../color-details/color-details.component';
 import { CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { NumberInput } from '@angular/cdk/coercion';
+import { TranslationPipe } from '@angular-apps/services';
 
 /**
  * Component representing a grid of colors.
@@ -30,7 +31,7 @@ import { NumberInput } from '@angular/cdk/coercion';
 	templateUrl: './color-grid.component.html',
 	styleUrls: ['./color-grid.component.scss'],
 	standalone: true,
-	imports: [NgStyle, CdkVirtualScrollViewport, CdkVirtualForOf, CdkFixedSizeVirtualScroll],
+	imports: [NgStyle, CdkVirtualScrollViewport, CdkVirtualForOf, CdkFixedSizeVirtualScroll, AsyncPipe, TranslationPipe],
 })
 export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 	@ViewChild(CdkVirtualScrollViewport) public viewPort!: CdkVirtualScrollViewport;

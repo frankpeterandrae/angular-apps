@@ -9,6 +9,11 @@
 			"Wave": "Welle"
 		}
 	},
+	"ColorGridComponent": {
+		"lbl": {
+			"TwoThinCoats": "Two Thin Coats"
+		}
+	},
 	"ColorSearch": {
 		"lbl": {
 			"SearchColor": "Farbe suchen"
@@ -24,12 +29,12 @@
 			"ColorSearchDescription": "Benutzer können eine Farbeingabe verwenden, um nach bestimmten Farben zu suchen. Die Suchergebnisse werden in einem Raster angezeigt.",
 			"Description": "Ich habe auf dieser Seite eine Übersicht über Duncan Rhodes' Two Thin Coats Farben erstellt.",
 			"FunctionsDescription": "Diese Seite bietet folgende Funktionen",
-			"TwoThinCoats": "Two Thin Coats"
+			"Titel": "Farbregal"
 		}
 	},
 	"ColorSearchContainerComponent": {
 		"meta": {
-			"Description": "Farbsuche für Duncan Rhodes' Two Thin Coats Farben",
+			"Description": "Entdecken Sie Duncan Rhodes' Farbwelten: Suchen, wählen und erfahren Sie Details zu Two Thin Coats Farben in einem interaktiven Raster.",
 			"Title": "Frank-Peter Andrä - Farbregal von frankpeterandrae.de"
 		}
 	}

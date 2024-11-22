@@ -22,7 +22,7 @@ import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
 export class Error404Component implements OnInit {
 	private readonly translationService = inject(ScopedTranslationServiceInterface);
 	protected readonly ButtonColorDefinition = ButtonColorDefinition;
-	public backtoStartpage: string | undefined;
+	public backToStartpage: string | undefined;
 
 	private readonly logger = new Logger('Error404Component');
 
@@ -33,13 +33,13 @@ export class Error404Component implements OnInit {
 	constructor(private readonly router: Router) {}
 
 	/**
-	 * Initializes the component and sets the backtoStartpage property with the translated string.
+	 * Initializes the component and sets the backToStartpage property with the translated string.
 	 */
 	ngOnInit(): void {
 		this.translationService
 			.selectTranslate('Error404Component.lbl.BackToStartpage', 'feature')
 			.subscribe((translation) => {
-				this.backtoStartpage = translation;
+				this.backToStartpage = translation;
 			});
 	}
 

@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ColorGridComponent } from '../color-grid/color-grid.component';
 import { ColorSearchComponent } from '../color-search/color-search.component';
 import { TranslationPipe } from '@angular-apps/services';
@@ -20,18 +20,16 @@ import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
 	standalone: true,
 	imports: [ColorSearchComponent, ColorGridComponent, TranslationPipe, AsyncPipe],
 })
-export class ColorSearchContainerComponent {
+export class ColorSearchContainerComponent implements OnInit {
+	private readonly meta = inject(Meta);
+	private readonly title = inject(Title);
+	private readonly translocoService = inject(ScopedTranslationServiceInterface);
+
 	/**
-	 * Constructor for ColorSearchContainerComponent.
-	 * @param {Meta} meta - The meta service used to set meta tags.
-	 * @param {Title} title - The title service used to set the title.
-	 * @param {ScopedTranslationServiceInterface} translocoService - The translation service used for fetching translations.
+	 * Lifecycle hook that is called after data-bound properties of a directive are initialized.
+	 * Initializes the component by setting the title and meta description using translations.
 	 */
-	constructor(
-		private readonly meta: Meta,
-		private readonly title: Title,
-		private readonly translocoService: ScopedTranslationServiceInterface,
-	) {
+	ngOnInit(): void {
 		this.translocoService
 			.selectTranslate('ColorSearchContainerComponent.meta.Title', 'color-rack')
 			.subscribe((translation) => {
