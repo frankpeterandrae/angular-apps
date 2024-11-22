@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HeroComponent } from './hero.component';
 import { setupTestingModule } from '../../../test-setup';
 
@@ -24,4 +24,12 @@ describe('HeroComponent', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
+
+	it('should set the translated paragraph text on initialization', fakeAsync(() => {
+		component.ngOnInit();
+		fixture.detectChanges();
+		tick(100); // Simulate the delay in `translate`
+		fixture.detectChanges();
+		expect(component.paragraph).toBe('HeroComponent.lbl.Paragraph1');
+	}));
 });
