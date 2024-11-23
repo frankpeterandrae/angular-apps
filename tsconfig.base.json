@@ -15,6 +15,7 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
+			"@angular-apps/card-generator": ["libs/card-generator/src/index.ts"],
 			"@angular-apps/colour-rack": ["libs/colour-rack/src/index.ts"],
 			"@angular-apps/config": ["libs/shared/config/src/index.ts"],
 			"@angular-apps/demo-feature": ["libs/demo/demo-feature/src/index.ts"],

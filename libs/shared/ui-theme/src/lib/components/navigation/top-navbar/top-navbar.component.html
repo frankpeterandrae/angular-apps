@@ -26,6 +26,7 @@
 					class="nva-dropdown fpa-p-1 fpa-light-text fpa-link"
 					[ngClass]="{ 'link-active': getCurrentRoute().includes(navigationItem.route) }"
 					(click)="toggleNavigation(navigationItem.route)"
+					[title]="navigationItem.label"
 				>
 					<span>{{ navigationItem.label }}</span>
 				</a>
@@ -46,6 +47,7 @@
 				[routerLink]="navigationItem.route"
 				[ngClass]="{ 'link-active': getCurrentRoute() === navigationItem.route }"
 				(click)="resetDropdowns()"
+				[title]="navigationItem.label"
 			>
 				<span>{{ navigationItem.label }}</span>
 			</a>

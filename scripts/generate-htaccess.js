@@ -31,6 +31,9 @@ extractRoutes(sourceFile);
 
 // Generate .htaccess rules
 let htaccessContent = `
+<filesMatch "\\.(html|css|js|txt|php)$">
+   AddDefaultCharset UTF-8
+</filesMatch>
 # Set expiration headers for static assets
 <IfModule mod_expires.c>
     ExpiresActive On
@@ -53,9 +56,6 @@ let htaccessContent = `
     # Do not cache the main HTML file (index.html)
     <FilesMatch "index\\.html$">
         ExpiresByType text/html "access plus 0 seconds"
-    </FilesMatch>
-    <FilesMatch "\\.(html|htm)$">
-        AddType text/html; charset=UTF-8 .html
     </FilesMatch>
 </IfModule>
 
