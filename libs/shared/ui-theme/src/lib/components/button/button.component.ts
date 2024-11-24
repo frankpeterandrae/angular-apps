@@ -19,7 +19,7 @@ import { FastSvgComponent } from '@push-based/ngx-fast-svg';
 })
 export class ButtonComponent implements OnInit {
 	/** Event emitter for button click events. */
-	public onClick = output();
+	public buttonClick = output();
 
 	/** Text to be displayed on the button. */
 	public buttonText = input<string>();
@@ -69,7 +69,7 @@ export class ButtonComponent implements OnInit {
 	 */
 	public callback(): void {
 		if (!this.disabled()) {
-			this.onClick.emit();
+			this.buttonClick.emit();
 		}
 	}
 }

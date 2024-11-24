@@ -10,12 +10,16 @@
 		class="fpa-flex fpa-flex-row fpa-flex-justify-space-between fpa-border-bottom fpa-border-grey-t6 fpa-mb-05 fpa-p-05"
 	>
 		<h2>{{ data.settings.title }}</h2>
-		<theme-button (onClick)="close()" [color]="undefined" [icon]="'close'"></theme-button>
+		<theme-button (buttonClick)="close()" [color]="undefined" [icon]="'close'"></theme-button>
 	</header>
 	<div class="fpa-p-05">
 		<ng-content></ng-content>
 	</div>
 	<footer class="fpa-flex fpa-flex-row fpa-flex-justify-flex-end fpa-border-top fpa-border-grey-t6 fpa-mt-05 fpa-p-05">
-		<theme-button (onClick)="close()" [color]="ButtonColorDefinition.SUCCESS" [buttonText]="'Schließen'"></theme-button>
+		<theme-button
+			(buttonClick)="close()"
+			[color]="ButtonColorDefinition.SUCCESS"
+			[buttonText]="'Schließen'"
+		></theme-button>
 	</footer>
 </div>
