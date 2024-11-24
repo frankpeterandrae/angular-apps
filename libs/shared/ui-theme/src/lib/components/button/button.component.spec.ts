@@ -45,7 +45,7 @@ describe('ButtonComponent', () => {
 
 	it('should emit onClick event when button is clicked', () => {
 		fixture.componentRef.setInput('color', ButtonColorDefinition.SUCCESS);
-		const onClickSpy = jest.spyOn(component.onClick, 'emit');
+		const onClickSpy = jest.spyOn(component.buttonClick, 'emit');
 		fixture.detectChanges();
 
 		const buttonElement: HTMLButtonElement = fixture.nativeElement.querySelector('button');
