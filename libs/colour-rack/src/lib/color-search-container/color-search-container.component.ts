@@ -15,10 +15,9 @@ import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
  * Component for the color search container.
  */
 @Component({
-	selector: 'cr-color-search-container',
-	templateUrl: './color-search-container.component.html',
-	standalone: true,
-	imports: [ColorSearchComponent, ColorGridComponent, TranslationPipe, AsyncPipe],
+    selector: 'cr-color-search-container',
+    templateUrl: './color-search-container.component.html',
+    imports: [ColorSearchComponent, ColorGridComponent, TranslationPipe, AsyncPipe]
 })
 export class ColorSearchContainerComponent implements OnInit {
 	private readonly meta = inject(Meta);

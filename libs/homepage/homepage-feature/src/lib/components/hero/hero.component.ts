@@ -12,11 +12,10 @@ import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
  * Component decorator for defining the HeroComponent.
  */
 @Component({
-	selector: 'homepage-feature-hero',
-	standalone: true,
-	templateUrl: './hero.component.html',
-	styleUrl: './hero.component.scss',
-	imports: [TranslationPipe, AsyncPipe],
+    selector: 'homepage-feature-hero',
+    templateUrl: './hero.component.html',
+    styleUrl: './hero.component.scss',
+    imports: [TranslationPipe, AsyncPipe]
 })
 export class HeroComponent implements OnInit {
 	private readonly translocoService = inject(ScopedTranslationServiceInterface);

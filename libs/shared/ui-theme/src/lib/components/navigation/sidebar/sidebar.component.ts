@@ -14,11 +14,10 @@ import { MenuItem } from '../../../model/menu-item.model';
  * It uses CommonModule, RouterLink, and FastSvgComponent.
  */
 @Component({
-	selector: 'theme-sidebar',
-	standalone: true,
-	imports: [CommonModule, RouterLink, FastSvgComponent],
-	templateUrl: './sidebar.component.html',
-	styleUrl: './sidebar.component.scss',
+    selector: 'theme-sidebar',
+    imports: [CommonModule, RouterLink, FastSvgComponent],
+    templateUrl: './sidebar.component.html',
+    styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
 	/**

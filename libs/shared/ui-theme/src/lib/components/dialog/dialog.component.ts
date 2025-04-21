@@ -16,11 +16,10 @@ import { ButtonColorDefinition } from '../../enums';
  * It is used to display a dialog in the application.
  */
 @Component({
-	selector: 'theme-dialog',
-	standalone: true,
-	imports: [CommonModule, ButtonComponent],
-	templateUrl: './dialog.component.html',
-	styleUrls: ['./dialog.component.scss'],
+    selector: 'theme-dialog',
+    imports: [CommonModule, ButtonComponent],
+    templateUrl: './dialog.component.html',
+    styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent {
 	/**
