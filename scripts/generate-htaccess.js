@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024. Frank-Peter Andrä
+ * Copyright (c) 2024-2025. Frank-Peter Andrä
  * All rights reserved.
  */
 
@@ -79,10 +79,9 @@ RewriteEngine On
 # Set the base URL for all subsequent rules
 RewriteBase /
 
-# Redirect all requests for /php-api to the PHP server
-# RewriteEngine On
-# RewriteCond %{REQUEST_URI} ^/php-api/ [NC]
-# RewriteRule ^ - [L]
+# Let Passenger handle Sinatra app in /api
+RewriteCond %{REQUEST_URI} ^/api(/.*)?$ [NC]
+RewriteRule ^api(/.*)?$ - [L]
 
 # Allow direct access to existing files and directories
 RewriteCond %{REQUEST_FILENAME} -f [OR]

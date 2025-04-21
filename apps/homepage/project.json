@@ -123,6 +123,9 @@
 						"command": "echo shx rm -f dist/production/php-api/encryption.php"
 					},
 					{
+						"command": "shx cp -r apps/api dist/production/api/"
+					},
+					{
 						"command": "node ./scripts/generate-htaccess.js"
 					},
 					{
