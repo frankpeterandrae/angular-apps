@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2024. Frank-Peter Andrä
+ * Copyright (c) 2024-2025. Frank-Peter Andrä
  * All rights reserved.
  */
 
 const { FlatCompat } = require('@eslint/eslintrc');
 const nxEslintPlugin = require('@nx/eslint-plugin');
 const js = require('@eslint/js');
-
+require('@typescript-eslint/eslint-plugin');
 const compat = new FlatCompat({
 	baseDirectory: __dirname,
 	recommendedConfig: js.configs.recommended,
