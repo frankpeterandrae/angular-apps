@@ -27,11 +27,10 @@ import { TranslationPipe } from '@angular-apps/services';
  * Component representing a grid of colors.
  */
 @Component({
-	selector: 'cr-color-grid',
-	templateUrl: './color-grid.component.html',
-	styleUrls: ['./color-grid.component.scss'],
-	standalone: true,
-	imports: [NgStyle, CdkVirtualScrollViewport, CdkVirtualForOf, CdkFixedSizeVirtualScroll, AsyncPipe, TranslationPipe],
+    selector: 'cr-color-grid',
+    templateUrl: './color-grid.component.html',
+    styleUrls: ['./color-grid.component.scss'],
+    imports: [NgStyle, CdkVirtualScrollViewport, CdkVirtualForOf, CdkFixedSizeVirtualScroll, AsyncPipe, TranslationPipe]
 })
 export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 	@ViewChild(CdkVirtualScrollViewport) public viewPort!: CdkVirtualScrollViewport;

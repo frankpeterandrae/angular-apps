@@ -22,11 +22,10 @@ import { Meta } from '@angular/platform-browser';
  * The root component of the application.
  */
 @Component({
-	standalone: true,
-	imports: [RouterOutlet, HeaderComponent, FooterComponent, LanguageToggleComponent],
-	selector: 'fpa-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss'],
+    imports: [RouterOutlet, HeaderComponent, FooterComponent, LanguageToggleComponent],
+    selector: 'fpa-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
 	/**

@@ -14,17 +14,16 @@ import { IconDefinition } from '../../enums';
  * to provide a reusable input field with various configurable properties.
  */
 @Component({
-	selector: 'theme-input',
-	standalone: true,
-	imports: [CommonModule, FastSvgComponent, FormsModule, ReactiveFormsModule],
-	templateUrl: './input.component.html',
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => InputComponent),
-			multi: true,
-		},
-	],
+    selector: 'theme-input',
+    imports: [CommonModule, FastSvgComponent, FormsModule, ReactiveFormsModule],
+    templateUrl: './input.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => InputComponent),
+            multi: true,
+        },
+    ]
 })
 export class InputComponent implements ControlValueAccessor {
 	@ViewChild('searchInput') public searchInput!: ElementRef;
