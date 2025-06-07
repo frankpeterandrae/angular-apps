@@ -99,7 +99,8 @@
 					"buildTarget": "homepage:build:development"
 				}
 			},
-			"defaultConfiguration": "development"
+			"defaultConfiguration": "development",
+			"continuous": true
 		},
 		"build-production": {
 			"executor": "nx:run-commands",
