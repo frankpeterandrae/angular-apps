@@ -4,7 +4,7 @@
  */
 
 import { AfterViewInit, Component, computed, ElementRef, Inject, input, OnDestroy } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 /**
@@ -12,7 +12,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
  */
 @Component({
 	selector: 'theme-image-loader',
-	imports: [CommonModule],
+	imports: [],
 	templateUrl: './image-loader.component.html',
 	styleUrl: './image-loader.component.scss',
 })

@@ -3,7 +3,6 @@
  * All rights reserved.
  */
 
-import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FastSvgComponent } from '@push-based/ngx-fast-svg';
@@ -15,7 +14,7 @@ import { MenuItem } from '../../../model/menu-item.model';
  */
 @Component({
 	selector: 'theme-sidebar',
-	imports: [CommonModule, RouterLink, FastSvgComponent],
+	imports: [RouterLink, FastSvgComponent],
 	templateUrl: './sidebar.component.html',
 	styleUrl: './sidebar.component.scss',
 })

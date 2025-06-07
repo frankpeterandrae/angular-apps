@@ -4,14 +4,13 @@
  */
 
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 /**
  *
  */
 @Component({
 	selector: 'demo-typography',
-	imports: [CommonModule],
+	imports: [],
 	templateUrl: './typography-demo.component.html',
 })
 export class TypographyDemoComponent {}

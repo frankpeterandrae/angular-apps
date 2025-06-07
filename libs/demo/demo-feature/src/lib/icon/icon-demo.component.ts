@@ -4,7 +4,6 @@
  */
 
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FastSvgComponent } from '@push-based/ngx-fast-svg';
 import { TooltipDirective } from '@angular-apps/shared/ui-theme';
 
@@ -13,7 +12,7 @@ import { TooltipDirective } from '@angular-apps/shared/ui-theme';
  */
 @Component({
 	selector: 'demo-icon',
-	imports: [CommonModule, FastSvgComponent, TooltipDirective],
+	imports: [FastSvgComponent, TooltipDirective],
 	templateUrl: './icon-demo.component.html',
 })
 export class IconDemoComponent {

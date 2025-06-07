@@ -4,7 +4,7 @@
  */
 
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ButtonColorDefinition, ButtonComponent } from '@angular-apps/shared/ui-theme';
 
 /**
@@ -12,7 +12,7 @@ import { ButtonColorDefinition, ButtonComponent } from '@angular-apps/shared/ui-
  */
 @Component({
 	selector: 'demo-button',
-	imports: [CommonModule, ButtonComponent],
+	imports: [ButtonComponent],
 	templateUrl: './button-demo.component.html',
 })
 export class ButtonDemoComponent {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024. Frank-Peter Andrä
+ * Copyright (c) 2024-2025. Frank-Peter Andrä
  * All rights reserved.
  */
 
@@ -22,6 +22,15 @@ const devRoutes: Route[] = [
 		 * @returns {Promise<any>} A promise that resolves to the Error404Component.
 		 */
 		loadComponent: () => import('@angular-apps/homepage-feature').then((m) => m.Error404Component),
+		canActivate: [EnvGuard],
+	},
+	{
+		path: 'dev/Lokkarten',
+		/**
+		 * Lazy loads the LokkartenComponent for the Lokkarten route.
+		 * @returns {Promise<any>} A promise that resolves to the LokkartenComponent.
+		 */
+		loadComponent: () => import('@angular-apps/fktt-cards').then((m) => m.FkttCardsComponent),
 		canActivate: [EnvGuard],
 	},
 	// Add more dev-specific routes here

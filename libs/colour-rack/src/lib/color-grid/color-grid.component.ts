@@ -13,7 +13,7 @@ import {
 	OnInit,
 	signal,
 	SimpleChanges,
-	ViewChild,
+	viewChild,
 } from '@angular/core';
 import { Color } from '../models/color.model';
 import { ColorService } from '../services/color.service';
@@ -40,7 +40,7 @@ import { TranslationPipe } from '@angular-apps/services';
 	],
 })
 export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
-	@ViewChild(CdkVirtualScrollViewport) public viewPort!: CdkVirtualScrollViewport;
+	public readonly viewPort = viewChild.required(CdkVirtualScrollViewport);
 	/**
 	 * The search query used to filter and highlight colors.
 	 */
@@ -96,7 +96,7 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 	 * This is used to perform any additional initialization tasks that require the view to be fully rendered.
 	 */
 	public ngAfterViewInit(): void {
-		if (this.viewPort) {
+		if (this.viewPort()) {
 			setTimeout(() => {
 				this.updateItemSize();
 			});
@@ -162,7 +162,7 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 	 * Updates the item size based on the first color tile's dimensions.
 	 */
 	private updateItemSize(): void {
-		const firstCard: HTMLElement | null = this.viewPort.elementRef.nativeElement.querySelector('.color-tile');
+		const firstCard: HTMLElement | null = this.viewPort().elementRef.nativeElement.querySelector('.color-tile');
 		if (firstCard) {
 			const marginTop = parseInt(window.getComputedStyle(firstCard).marginTop, 10);
 			const marginBottom = parseInt(window.getComputedStyle(firstCard).marginBottom, 10);

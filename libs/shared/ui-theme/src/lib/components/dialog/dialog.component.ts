@@ -4,7 +4,7 @@
  */
 
 import { Component, Inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { OverlayRef } from '@angular/cdk/overlay';
 import { DIALOG_DATA } from './dialog-tokens';
 import { DialogConfigModel } from '../../model/dialog-config.model';
@@ -17,7 +17,7 @@ import { ButtonColorDefinition } from '../../enums';
  */
 @Component({
 	selector: 'theme-dialog',
-	imports: [CommonModule, ButtonComponent],
+	imports: [ButtonComponent],
 	templateUrl: './dialog.component.html',
 	styleUrls: ['./dialog.component.scss'],
 })

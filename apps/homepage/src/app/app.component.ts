@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024. Frank-Peter Andrä
+ * Copyright (c) 2024-2025. Frank-Peter Andrä
  * All rights reserved.
  */
 
@@ -17,6 +17,15 @@ import { Logger } from '@angular-apps/services';
 import { combineLatest } from 'rxjs';
 import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
 import { Meta } from '@angular/platform-browser';
+
+interface InitializeMenuItemsParams {
+	home: string;
+	paintRack: string;
+	inDevelopment: string;
+	test: string;
+	fkttCards: string;
+	modelRailroad: string;
+}
 
 /**
  * The root component of the application.
@@ -65,37 +74,42 @@ export class AppComponent implements OnInit {
 			this.translocoService.selectTranslate('AppComponent.menu.lbl.PaintRack'),
 			this.translocoService.selectTranslate('AppComponent.menu.lbl.InDevelopment'),
 			this.translocoService.selectTranslate('AppComponent.menu.lbl.Test'),
-		]).subscribe(([home, paintRack, inDevelopment, test]) => {
-			this.initializeMenuItems(home, paintRack, inDevelopment, test);
+			this.translocoService.selectTranslate('AppComponent.menu.lbl.FkttCards'),
+			this.translocoService.selectTranslate('AppComponent.menu.lbl.ModelRailroad'),
+		]).subscribe(([home, paintRack, inDevelopment, test, fkttCards, modelRailroad]) => {
+			this.initializeMenuItems({ home, paintRack, inDevelopment, test, fkttCards, modelRailroad });
 		});
 	}
 
 	/**
 	 * Initializes the menu items with the provided translations.
-	 * @param {string} home - The translation for the home menu item.
-	 * @param {string} paintRack - The translation for the paint rack menu item.
-	 * @param {string} inDevelopment - The translation for the in development menu item.
-	 * @param {string} test - The translation for the test menu item.
+	 * @param { InitializeMenuItemsParams } menuLabels - An object containing the translated labels for the menu items.
 	 */
-	private initializeMenuItems(home: string, paintRack: string, inDevelopment: string, test: string): void {
+	private initializeMenuItems(menuLabels: InitializeMenuItemsParams): void {
 		this.menuItems = [
 			{
-				label: home,
+				label: menuLabels.home,
 				icon: IconDefinition.HOUSE,
 				route: '/',
 			},
 			{
-				label: paintRack,
+				label: menuLabels.paintRack,
 				icon: IconDefinition.PALETTE,
 				route: '/paint-rack',
 			},
 			...(!environment.production
 				? [
 						{
-							label: inDevelopment,
+							label: menuLabels.inDevelopment,
 							icon: IconDefinition.PALETTE,
 							route: '/dev',
-							children: [{ label: test, route: '/dev/test' }],
+							children: [{ label: menuLabels.test, route: '/dev/test' }],
+						},
+						{
+							label: menuLabels.modelRailroad,
+							icon: IconDefinition.PALETTE,
+							route: '/dev/Lokkarten',
+							children: [{ label: menuLabels.fkttCards, route: '/dev/Lokkarten' }],
 						},
 					]
 				: []),

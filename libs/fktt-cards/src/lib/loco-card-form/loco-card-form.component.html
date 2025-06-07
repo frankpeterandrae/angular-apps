@@ -1,0 +1,97 @@
+<form [formGroup]="locoCardForm" (ngSubmit)="onSubmit()">
+	<div class="fpa-flex">
+		<theme-select
+			formControlName="type"
+			[id]="'type'"
+			[label]="'Type'"
+			[options]="locoCardTypes"
+			[darkText]="true"
+		/>
+	</div>
+
+	<theme-input
+		formControlName="owner"
+		[id]="'owner'"
+		[label]="'Owner'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input
+		formControlName="image"
+		[id]="'image'"
+		[label]="'Image URL'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input
+		formControlName="cardNumber"
+		[id]="'cardNumber'"
+		[label]="'Card Number'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input
+		formControlName="colorCode"
+		[id]="'colorCode'"
+		[label]="'Color Code'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input
+		formControlName="manufacturer"
+		[id]="'manufacturer'"
+		[label]="'Manufacturer'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input
+		formControlName="operatingNumber"
+		[id]="'operatingNumber'"
+		[label]="'Operating Number'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input
+		formControlName="epoch"
+		[id]="'epoch'"
+		[label]="'Epoch'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input
+		formControlName="railroadAdministration"
+		[id]="'railroadAdministration'"
+		[label]="'Railroad Administration'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-textarea
+		formControlName="description"
+		[id]="'description'"
+		[label]="'Description'"
+		[darkText]="true"
+	></theme-textarea>
+	<theme-input
+		formControlName="clutch"
+		[id]="'clutch'"
+		[label]="'Clutch'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input
+		formControlName="lengthOverBuffer"
+		[id]="'lengthOverBuffer'"
+		[label]="'Length Over Buffer'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input formControlName="mass" [id]="'mass'" [label]="'Mass'" [type]="'text'" [darkText]="true"></theme-input>
+	<theme-input
+		formControlName="dccAddress"
+		[id]="'dccAddress'"
+		label="DCC Address"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<button type="submit">Submit</button>
+</form>

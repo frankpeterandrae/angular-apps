@@ -34,3 +34,8 @@ jobs:
           local-dir: dist/production/
           server-dir: /html/
           protocol: ftps
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            images/**

@@ -2,15 +2,7 @@
  * Copyright (c) 2024. Frank-Peter Andrä
  * All rights reserved.
  */
-@use '../base/prefix';
-@use '../base/variables';
-@use '../electrons/colors';
-
-.#{prefix.$prefix}button-no-style {
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-}
+@use '../../theme/base/prefix';
 
 .#{prefix.$prefix}button {
 	border: none;
@@ -37,43 +29,37 @@
 }
 
 .#{prefix.$prefix}default {
-	background-color: #{variables.$default};
-
-	@extend %#{prefix.$prefix}dark-text;
+	background-color: var(--default);
+	color: var(--dark-text);
 }
 
 .#{prefix.$prefix}primary {
-	background-color: #{variables.$primary};
-
-	@extend %#{prefix.$prefix}light-text;
+	background-color: var(--primary);
+	color: var(--light-text);
 }
 
 .#{prefix.$prefix}info {
-	background-color: #{variables.$info};
-
-	@extend %#{prefix.$prefix}light-text;
+	background-color: var(--info);
+	color: var(--light-text);
 }
 
 .#{prefix.$prefix}success {
-	background-color: #{variables.$success};
-
-	@extend %#{prefix.$prefix}light-text;
+	background-color: var(--success);
+	color: var(--light-text);
 }
 
 .#{prefix.$prefix}warning {
-	background-color: #{variables.$warning};
-
-	@extend %#{prefix.$prefix}light-text;
+	background-color: var(--warning);
+	color: var(--light-text);
 }
 
 .#{prefix.$prefix}danger {
-	background-color: #{variables.$danger};
-
-	@extend %#{prefix.$prefix}light-text;
+	background-color: var(--danger);
+	color: var(--light-text);
 }
 
 .#{prefix.$prefix}disabled {
-	background-color: #{variables.$default};
+	background-color: var(--default);
 	cursor: not-allowed;
 }
 
