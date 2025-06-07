@@ -45,16 +45,16 @@ module.exports = [
 							onlyDependOnLibsWithTags: ['type:util'],
 						},
 						{
-							sourceTag: 'lib:shared',
-							onlyDependOnLibsWithTags: ['lib:shared'],
+							sourceTag: 'scope:shared',
+							onlyDependOnLibsWithTags: ['scope:shared'],
 						},
 						{
-							sourceTag: 'app:homepage',
-							onlyDependOnLibsWithTags: ['app:homepage', 'lib:shared'],
+							sourceTag: 'scope:web',
+							onlyDependOnLibsWithTags: ['scope:web', 'scope:shared'],
 						},
 						{
-							sourceTag: 'app:demo',
-							onlyDependOnLibsWithTags: ['app:demo', 'lib:shared'],
+							sourceTag: 'scope:demo',
+							onlyDependOnLibsWithTags: ['scope:demo', 'scope:shared'],
 						},
 					],
 				},
