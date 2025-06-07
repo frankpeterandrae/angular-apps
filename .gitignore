@@ -46,3 +46,5 @@ Thumbs.db
 /libs/shared/config/src/lib/sitemap/sitemap.xml
 /apps/homepage/public/images/
 *.xlsm
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
