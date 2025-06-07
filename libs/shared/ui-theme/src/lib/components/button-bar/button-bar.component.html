@@ -1,0 +1,12 @@
+@for (button of buttons(); track $index) {
+	<theme-button
+		(buttonClick)="button.callback()"
+		[buttonText]="button.buttonText"
+		[icon]="button.icon"
+		[color]="button.color"
+		[type]="button.type"
+		[iconEnd]="button.iconEnd"
+		[disabled]="button.disabled"
+	>
+	</theme-button>
+}
