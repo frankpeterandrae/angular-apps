@@ -11,9 +11,9 @@ import { ButtonColorDefinition, ButtonComponent } from '@angular-apps/shared/ui-
  *
  */
 @Component({
-    selector: 'demo-button',
-    imports: [CommonModule, ButtonComponent],
-    templateUrl: './button-demo.component.html'
+	selector: 'demo-button',
+	imports: [CommonModule, ButtonComponent],
+	templateUrl: './button-demo.component.html',
 })
 export class ButtonDemoComponent {
 	protected readonly ButtonColorDefinition = ButtonColorDefinition;

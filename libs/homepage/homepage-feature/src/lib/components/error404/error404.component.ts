@@ -14,9 +14,9 @@ import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
  * Component for displaying a 404 error page.
  */
 @Component({
-    selector: 'homepage-feature-error404',
-    imports: [ButtonComponent, CardComponent, TranslationPipe, AsyncPipe],
-    templateUrl: './error404.component.html'
+	selector: 'homepage-feature-error404',
+	imports: [ButtonComponent, CardComponent, TranslationPipe, AsyncPipe],
+	templateUrl: './error404.component.html',
 })
 export class Error404Component implements OnInit {
 	private readonly translationService = inject(ScopedTranslationServiceInterface);

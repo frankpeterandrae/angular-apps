@@ -11,10 +11,10 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
  *
  */
 @Component({
-    selector: 'theme-image-loader',
-    imports: [CommonModule],
-    templateUrl: './image-loader.component.html',
-    styleUrl: './image-loader.component.scss'
+	selector: 'theme-image-loader',
+	imports: [CommonModule],
+	templateUrl: './image-loader.component.html',
+	styleUrl: './image-loader.component.scss',
 })
 export class ImageLoaderComponent implements AfterViewInit, OnDestroy {
 	/**

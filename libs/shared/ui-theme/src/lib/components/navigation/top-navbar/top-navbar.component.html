@@ -36,7 +36,10 @@
 					<ng-container
 						*ngFor="let navigationItemChild of navigationItem.children"
 						[ngTemplateOutlet]="navList"
-						[ngTemplateOutletContext]="{ navigationItem: navigationItemChild, color: ColorDefinition.CRIMSON }"
+						[ngTemplateOutletContext]="{
+							navigationItem: navigationItemChild,
+							color: ColorDefinition.CRIMSON,
+						}"
 					></ng-container>
 				</div>
 			</div>

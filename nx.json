@@ -83,12 +83,11 @@
 	"defaultBase": "main",
 	"generators": {
 		"@nx/angular:component": {
-			"style": "css"
+			"style": "scss"
 		},
 		"@nx/angular:library": {
 			"linter": "eslint",
 			"unitTestRunner": "jest"
 		}
-	},
-	"useLegacyCache": true
+	}
 }

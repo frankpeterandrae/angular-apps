@@ -18,6 +18,7 @@
 			"@angular-apps/colour-rack": ["libs/colour-rack/src/index.ts"],
 			"@angular-apps/config": ["libs/shared/config/src/index.ts"],
 			"@angular-apps/demo-feature": ["libs/demo/demo-feature/src/index.ts"],
+			"@angular-apps/fktt-cards": ["libs/fktt-cards/src/index.ts"],
 			"@angular-apps/homepage-feature": ["libs/homepage/homepage-feature/src/index.ts"],
 			"@angular-apps/interfaces": ["libs/shared/interfaces/src/index.ts"],
 			"@angular-apps/services": ["libs/shared/services/src/index.ts"],

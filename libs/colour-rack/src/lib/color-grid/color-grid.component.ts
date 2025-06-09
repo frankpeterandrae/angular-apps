@@ -27,10 +27,17 @@ import { TranslationPipe } from '@angular-apps/services';
  * Component representing a grid of colors.
  */
 @Component({
-    selector: 'cr-color-grid',
-    templateUrl: './color-grid.component.html',
-    styleUrls: ['./color-grid.component.scss'],
-    imports: [NgStyle, CdkVirtualScrollViewport, CdkVirtualForOf, CdkFixedSizeVirtualScroll, AsyncPipe, TranslationPipe]
+	selector: 'cr-color-grid',
+	templateUrl: './color-grid.component.html',
+	styleUrls: ['./color-grid.component.scss'],
+	imports: [
+		NgStyle,
+		CdkVirtualScrollViewport,
+		CdkVirtualForOf,
+		CdkFixedSizeVirtualScroll,
+		AsyncPipe,
+		TranslationPipe,
+	],
 })
 export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 	@ViewChild(CdkVirtualScrollViewport) public viewPort!: CdkVirtualScrollViewport;
@@ -121,7 +128,9 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 		this.colors().forEach((colorRow) => {
 			colorRow.forEach((color) => {
 				const allNames = [color.name, ...color.alternativeNames];
-				color.highlighted = query ? allNames.some((name) => name.toLowerCase().includes(query.toLowerCase())) : false;
+				color.highlighted = query
+					? allNames.some((name) => name.toLowerCase().includes(query.toLowerCase()))
+					: false;
 			});
 		});
 	}

@@ -51,9 +51,11 @@ describe('DataConnectionService', () => {
 	it('should add a new user to the server', () => {
 		const mockResponse = { success: true };
 		jest.spyOn(httpClient, 'post').mockReturnValue(of(mockResponse));
-		service.addUser({ user: 'testUser', password: 'testPassword', email: 'test@example.com' }).subscribe((response) => {
-			expect(response).toEqual(mockResponse);
-		});
+		service
+			.addUser({ user: 'testUser', password: 'testPassword', email: 'test@example.com' })
+			.subscribe((response) => {
+				expect(response).toEqual(mockResponse);
+			});
 	});
 
 	it('should log in a user', () => {

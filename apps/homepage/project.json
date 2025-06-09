@@ -4,7 +4,7 @@
 	"projectType": "application",
 	"prefix": "fpa",
 	"sourceRoot": "apps/homepage/src",
-	"tags": ["app:homepage", "type:app"],
+	"tags": ["scope:web", "type:app"],
 	"targets": {
 		"build": {
 			"executor": "@angular-devkit/build-angular:application",
@@ -24,6 +24,11 @@
 					{
 						"glob": "**/*",
 						"input": "libs/colour-rack/src/assets",
+						"output": "assets"
+					},
+					{
+						"glob": "**/*",
+						"input": "libs/fktt-cards/src/assets",
 						"output": "assets"
 					},
 					{
@@ -144,12 +149,6 @@
 						"command": "npm run foss"
 					}
 				]
-			}
-		},
-		"extract-i18n": {
-			"executor": "@angular-devkit/build-angular:extract-i18n",
-			"options": {
-				"buildTarget": "homepage:build"
 			}
 		},
 		"lint": {
