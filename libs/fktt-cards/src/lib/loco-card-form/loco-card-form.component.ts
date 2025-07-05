@@ -2,7 +2,15 @@ import { Component, OnInit, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { LocoCardModel } from '../model/loco-card.model';
-import { InputComponent, SelectComponent, SelectOption, TextareaComponent } from '@angular-apps/shared/ui-theme';
+import {
+	CheckboxComponent,
+	CheckboxGroupeComponent,
+	FloatingLabelDirective,
+	InputComponent,
+	SelectComponent,
+	SelectOption,
+	TextareaComponent,
+} from '@angular-apps/shared/ui-theme';
 import { LocoTypeEnum } from '../model/loco-type.enum';
 
 /**
@@ -11,7 +19,16 @@ import { LocoTypeEnum } from '../model/loco-type.enum';
 @Component({
 	selector: 'fktt-loco-card-form',
 	standalone: true,
-	imports: [CommonModule, ReactiveFormsModule, InputComponent, SelectComponent, TextareaComponent],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		InputComponent,
+		SelectComponent,
+		TextareaComponent,
+		FloatingLabelDirective,
+		CheckboxComponent,
+		CheckboxGroupeComponent,
+	],
 	templateUrl: './loco-card-form.component.html',
 	styleUrl: './loco-card-form.component.scss',
 })
@@ -55,6 +72,8 @@ export class LocoCardFormComponent implements OnInit {
 			dccAddress: [''],
 			type: [''],
 			use: [[]],
+			useFrom: [''],
+			useTo: [''],
 		});
 	}
 

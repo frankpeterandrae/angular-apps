@@ -11,4 +11,5 @@ export interface LocoCardModel extends CardModel {
 	dccAddress: string;
 	type: LocoTypeEnum;
 	use: LocoUseEnum[];
+	operationTime: { from: string; to: string } | null;
 }

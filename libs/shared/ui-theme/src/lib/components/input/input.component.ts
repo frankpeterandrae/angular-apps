@@ -39,6 +39,7 @@ export class InputComponent implements ControlValueAccessor {
 	public isDynamic = input<boolean>(true);
 	/** When true, applies dark text color for light backgrounds. */
 	public darkText = input<boolean>(false);
+	public disabled = input<boolean>(false);
 
 	// Define output using the `output` function
 	public valueChange = output<string>();

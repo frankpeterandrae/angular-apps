@@ -1,0 +1,9 @@
+<input
+	type="checkbox"
+	class="fpa-checkbox"
+	[id]="id()"
+	[value]="value"
+	[disabled]="disabled()"
+	(input)="onInput($event)"
+/>
+<label for="id()"> {{ label() }}</label>
