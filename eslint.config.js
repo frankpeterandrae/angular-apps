@@ -26,7 +26,13 @@ module.exports = [
 					depConstraints: [
 						{
 							sourceTag: 'type:app',
-							onlyDependOnLibsWithTags: ['type:api', 'type:feature', 'type:ui', 'type:testing', 'type:util'],
+							onlyDependOnLibsWithTags: [
+								'type:api',
+								'type:feature',
+								'type:ui',
+								'type:testing',
+								'type:util',
+							],
 						},
 						{
 							sourceTag: 'type:api',

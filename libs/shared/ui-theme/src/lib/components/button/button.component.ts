@@ -12,9 +12,10 @@ import { FastSvgComponent } from '@push-based/ngx-fast-svg';
  * ButtonComponent is a reusable button component with customizable properties.
  */
 @Component({
-    selector: 'theme-button',
-    imports: [CommonModule, FastSvgComponent],
-    templateUrl: './button.component.html'
+	selector: 'theme-button',
+	imports: [CommonModule, FastSvgComponent],
+	templateUrl: './button.component.html',
+	styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent implements OnInit {
 	/** Event emitter for button click events. */

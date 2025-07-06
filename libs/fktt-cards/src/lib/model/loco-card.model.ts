@@ -4,7 +4,12 @@
  */
 
 import { CardModel } from './card-model';
+import { LocoTypeEnum } from './loco-type.enum';
+import { LocoUseEnum } from './loco-use.enum';
 
 export interface LocoCardModel extends CardModel {
 	dccAddress: string;
+	type: LocoTypeEnum;
+	use: LocoUseEnum[];
+	operationTime: { from: string; to: string } | null;
 }

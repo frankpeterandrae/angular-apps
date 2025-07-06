@@ -1,5 +1,10 @@
 <p>Karten Generator</p>
 
-<theme-card>
-	<theme-button-bar [buttons]="buttons"></theme-button-bar>
-</theme-card>
+<theme-tab-group class="fktt-card">
+	<theme-tab label="Lokkarte">
+		<fktt-loco-card-form (locoCardSubmit)="onLocoCardSubmit($event)"></fktt-loco-card-form>
+	</theme-tab>
+	<theme-tab label="Wagenkarte">
+		<fktt-fright-car-card-form></fktt-fright-car-card-form>
+	</theme-tab>
+</theme-tab-group>

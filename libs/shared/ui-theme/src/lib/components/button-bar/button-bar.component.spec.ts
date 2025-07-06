@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2025. Frank-Peter Andrä
- * All rights reserved.
- */
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ButtonBarComponent } from './button-bar.component';

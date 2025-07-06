@@ -11,9 +11,9 @@ import { RouterOutlet } from '@angular/router';
  * The root component of the demo application.
  */
 @Component({
-    imports: [SidebarComponent, RouterOutlet],
-    selector: 'demo-root',
-    templateUrl: './app.component.html'
+	imports: [SidebarComponent, RouterOutlet],
+	selector: 'demo-root',
+	templateUrl: './app.component.html',
 })
 export class AppComponent {
 	/** The title of the application. */

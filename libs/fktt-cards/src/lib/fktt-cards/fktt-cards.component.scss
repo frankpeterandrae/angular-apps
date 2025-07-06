@@ -1,0 +1,7 @@
+.fktt-card > theme-card {
+	& > div.card-border {
+		max-height: calc(var(--content-height) - 2rem /* intro text */);
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+}

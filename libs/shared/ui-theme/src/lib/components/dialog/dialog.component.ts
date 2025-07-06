@@ -4,10 +4,10 @@
  */
 
 import { Component, Inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { OverlayRef } from '@angular/cdk/overlay';
 import { DIALOG_DATA } from './dialog-tokens';
-import { DialogConfigModel } from '../../model/dialog-config.model';
+import { DialogConfigModel } from '../../model';
 import { ButtonComponent } from '../button/button.component';
 import { ButtonColorDefinition } from '../../enums';
 
@@ -16,10 +16,10 @@ import { ButtonColorDefinition } from '../../enums';
  * It is used to display a dialog in the application.
  */
 @Component({
-    selector: 'theme-dialog',
-    imports: [CommonModule, ButtonComponent],
-    templateUrl: './dialog.component.html',
-    styleUrls: ['./dialog.component.scss']
+	selector: 'theme-dialog',
+	imports: [ButtonComponent],
+	templateUrl: './dialog.component.html',
+	styleUrls: ['./dialog.component.scss'],
 })
 export class DialogComponent {
 	/**

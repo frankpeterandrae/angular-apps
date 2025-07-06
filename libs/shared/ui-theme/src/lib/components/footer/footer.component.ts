@@ -11,8 +11,8 @@ import { AsyncPipe } from '@angular/common';
  * FooterComponent is a standalone Angular component that represents the footer section of the theme.
  */
 @Component({
-    selector: 'theme-footer',
-    imports: [TranslationPipe, AsyncPipe],
-    templateUrl: './footer.component.html'
+	selector: 'theme-footer',
+	imports: [TranslationPipe, AsyncPipe],
+	templateUrl: './footer.component.html',
 })
 export class FooterComponent {}

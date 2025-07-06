@@ -4,7 +4,7 @@
  */
 
 import { IconDefinition, InputComponent } from '@angular-apps/shared/ui-theme';
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { TranslationPipe } from '@angular-apps/services';
 import { AsyncPipe } from '@angular/common';
 
@@ -12,17 +12,16 @@ import { AsyncPipe } from '@angular/common';
  * Component for searching colors.
  */
 @Component({
-    selector: 'cr-color-search',
-    templateUrl: './color-search.component.html',
-    styleUrls: ['./color-search.component.scss'],
-    imports: [InputComponent, TranslationPipe, AsyncPipe],
-    changeDetection: ChangeDetectionStrategy.OnPush
+	selector: 'cr-color-search',
+	templateUrl: './color-search.component.html',
+	imports: [InputComponent, TranslationPipe, AsyncPipe],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorSearchComponent {
 	/**
 	 * Event emitted when a search is performed.
 	 */
-	@Output() public searchEvent = new EventEmitter<string>();
+	public readonly searchEvent = output<string>();
 
 	/**
 	 * Emits the search event with the current search text.

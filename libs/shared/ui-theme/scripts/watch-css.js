@@ -16,17 +16,20 @@ function compileSass() {
 			const cssOutputPath = path.join(__dirname, '../src/lib/theme'); // Output to lib root
 			const outputFileName = 'styles.css'; // Desired CSS file name
 
+			console.log(__dirname);
+			console.log(cssOutputPath); //\angular-apps\libs\shared\ui-theme\src\lib\theme\
+			console.log(path.join(cssOutputPath, outputFileName)); //\angular-apps\libs\shared\ui-theme\src\lib\styles.css
 			// Compile SCSS to CSS using compileAsync
 			const result = await sass.compileAsync(scssPath, {
-				style: 'compressed', // 'compressed' or 'expanded'
+				style: 'expanded', // 'compressed' or 'expanded'
 				// Include additional options if necessary
 			});
 
 			result.css = result.css.replace(/\/\*!.*?Frank-Peter Andrä.*?\*\//gs, '');
 			// Write the compiled CSS to the desired output file
-			await fs.writeFile(path.join(path.dirname(cssOutputPath), outputFileName), result.css);
+			await fs.writeFile(path.join(cssOutputPath, outputFileName), result.css);
 
-			console.log(`CSS successfully compiled to ${outputFileName}`);
+			console.log(`CSS successfully compiled to ${path.join(cssOutputPath, outputFileName)}`);
 		} catch (error) {
 			console.error('SASS compilation error:', error);
 			process.exit(1);

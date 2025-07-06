@@ -1,0 +1,135 @@
+<!--
+  ~ Copyright (c) 2025. Frank-Peter Andrä
+  ~ All rights reserved.
+  -->
+
+<form [formGroup]="locoCardForm" (ngSubmit)="onSubmit()">
+	<div class="fpa-grid-3">
+		<div class="fpa-grid-12 fpa-grid-col-start-0 fpa-grid-col-end-2">
+			<theme-select
+				class="fpa-grid-col-start-0 fpa-grid-col-end-2"
+				formControlName="type"
+				[id]="'type'"
+				[label]="'Type'"
+				[options]="locoCardTypes"
+				[darkText]="true"
+			/>
+			<theme-input
+				class="fpa-grid-col-start-5 fpa-grid-col-end-3"
+				formControlName="cardNumber"
+				[id]="'cardNumber'"
+				[label]="'Card Number'"
+				[type]="'text'"
+				[darkText]="true"
+			></theme-input>
+			<theme-input
+				class="fpa-grid-col-start-9 fpa-grid-col-end-4"
+				formControlName="railroadAdministration"
+				[id]="'railroadAdministration'"
+				[label]="'Railroad Administration'"
+				[type]="'text'"
+				[darkText]="true"
+			></theme-input>
+		</div>
+		<div class="fpa-grid-12 fpa-grid-col-start-0 fpa-grid-col-end-2">
+			<theme-checkbox-groupe
+				class="fpa-grid-col-start-0 fpa-grid-col-end-5"
+				formControlName="use"
+				[id]="'use'"
+				[label]="'Use1'"
+				[checkboxes]="checkboxes"
+			>
+			</theme-checkbox-groupe>
+			<theme-input
+				class="fpa-grid-col-start-8 fpa-grid-col-end-2"
+				formControlName="useFrom"
+				[id]="'useFrom'"
+				[label]="'form'"
+				[type]="'text'"
+				[darkText]="true"
+			></theme-input>
+			<theme-input
+				class="fpa-grid-col-start-11 fpa-grid-col-end-2"
+				formControlName="railroadAdministration"
+				[id]="'railroadAdministration'"
+				[label]="'to'"
+				[type]="'text'"
+				[darkText]="true"
+			></theme-input>
+		</div>
+	</div>
+
+	<theme-input
+		formControlName="owner"
+		[id]="'owner'"
+		[label]="'Owner'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input
+		formControlName="image"
+		[id]="'image'"
+		[label]="'Image URL'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+
+	<theme-input
+		formControlName="colorCode"
+		[id]="'colorCode'"
+		[label]="'Color Code'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input
+		formControlName="manufacturer"
+		[id]="'manufacturer'"
+		[label]="'Manufacturer'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input
+		formControlName="operatingNumber"
+		[id]="'operatingNumber'"
+		[label]="'Operating Number'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input
+		formControlName="epoch"
+		[id]="'epoch'"
+		[label]="'Epoch'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+
+	<theme-textarea
+		formControlName="description"
+		[id]="'description'"
+		[label]="'Description'"
+		[darkText]="true"
+	></theme-textarea>
+	<theme-input
+		formControlName="clutch"
+		[id]="'clutch'"
+		[label]="'Clutch'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input
+		formControlName="lengthOverBuffer"
+		[id]="'lengthOverBuffer'"
+		[label]="'Length Over Buffer'"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<theme-input formControlName="mass" [id]="'mass'" [label]="'Mass'" [type]="'text'" [darkText]="true"></theme-input>
+	<theme-input
+		formControlName="dccAddress"
+		[id]="'dccAddress'"
+		label="DCC Address"
+		[type]="'text'"
+		[darkText]="true"
+	></theme-input>
+	<button type="submit">Submit</button>
+</form>

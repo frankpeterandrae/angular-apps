@@ -12,9 +12,9 @@ import { ButtonColorDefinition } from '../../enums';
  * Component for the login form.
  */
 @Component({
-    selector: 'theme-login',
-    imports: [ReactiveFormsModule, ButtonComponent],
-    templateUrl: './login.component.html'
+	selector: 'theme-login',
+	imports: [ReactiveFormsModule, ButtonComponent],
+	templateUrl: './login.component.html',
 })
 export class LoginComponent {
 	/**

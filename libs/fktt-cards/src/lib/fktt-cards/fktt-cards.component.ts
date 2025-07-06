@@ -1,11 +1,8 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {
-	ButtonBarComponent,
-	ButtonColorDefinition,
-	ButtonConfigModel,
-	CardComponent,
-} from '@angular-apps/shared/ui-theme';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { TabComponent, TabGroupComponent } from '@angular-apps/shared/ui-theme';
+import { LocoCardFormComponent } from '../loco-card-form/loco-card-form.component';
+import { FrightCarFormComponent } from '../fright-car-card-form/fright-car-form.component';
+import { LocoCardModel } from '../model/loco-card.model';
 
 /**
  * FkttCardsComponent.
@@ -15,36 +12,20 @@ import {
  */
 @Component({
 	selector: 'fktt-cards',
-	imports: [CommonModule, CardComponent, ButtonBarComponent],
+	imports: [TabGroupComponent, TabComponent, LocoCardFormComponent, FrightCarFormComponent],
 	templateUrl: './fktt-cards.component.html',
+	styleUrls: ['./fktt-cards.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class FkttCardsComponent {
-	/**
-	 * Configuration array for the button bar.
-	 * Each ButtonConfigModel defines the label, icon, style, and click handler.
-	 */
-	public buttons: ButtonConfigModel[] = [
-		{
-			buttonText: 'Add Card',
-			icon: 'plus',
-			color: ButtonColorDefinition.PRIMARY,
-			type: 'button',
-			/**
-			 * Opens the form to create a new LOK card.
-			 * Called when the 'Add Card' button is clicked.
-			 * @returns {void}
-			 */
-			callback: (): void => this.showLokCard(),
-			iconEnd: false,
-			disabled: false,
-		},
-	];
+	/** Collected loco cards submissions. */
+	public locoCards: LocoCardModel[] = [];
 
 	/**
-	 * Opens the form to create a new LOK card.
-	 * Called when the 'Add Card' button is clicked.
+	 * Handles a submitted loco card.
+	 * @param { LocoCardModel } card - The loco card that was submitted.
 	 */
-	private showLokCard(): void {
-		// do nothing for now
+	public onLocoCardSubmit(card: LocoCardModel): void {
+		this.locoCards.push(card);
 	}
 }

@@ -46,6 +46,9 @@ describe('HomeComponent', () => {
 		tick(100); // Simulate the delay in `translate`
 		fixture.detectChanges();
 		expect(mockTitle.setTitle).toHaveBeenCalledWith('HomeComponent.meta.Title');
-		expect(mockMeta.addTag).toHaveBeenCalledWith({ name: 'description', content: 'HomeComponent.meta.Description' });
+		expect(mockMeta.addTag).toHaveBeenCalledWith({
+			name: 'description',
+			content: 'HomeComponent.meta.Description',
+		});
 	}));
 });

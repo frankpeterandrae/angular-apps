@@ -55,7 +55,8 @@ export const appRoutes: Route[] = [
 		 * Lazy loads the ColorSearchContainerComponent for the paint rack route.
 		 * @returns {Promise<any>} A promise that resolves to the ColorSearchContainerComponent.
 		 */
-		loadComponent: (): Promise<any> => import('@angular-apps/colour-rack').then((m) => m.ColorSearchContainerComponent),
+		loadComponent: (): Promise<any> =>
+			import('@angular-apps/colour-rack').then((m) => m.ColorSearchContainerComponent),
 	},
 	...(environment.production ? [] : devRoutes),
 	{

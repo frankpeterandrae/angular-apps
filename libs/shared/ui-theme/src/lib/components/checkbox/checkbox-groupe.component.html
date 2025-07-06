@@ -1,0 +1,22 @@
+<!--
+  ~ Copyright (c) 2025. Frank-Peter Andrä
+  ~ All rights reserved.
+  -->
+
+<div class="fpa-input-group fpa-mt-1">
+	@if (label()) {
+		<label class="fpa-input-label">{{ label() }}</label>
+	}
+	<div class="fpa-flex fpa-flex-row">
+		@for (checkbox of checkboxes(); track checkbox.id) {
+			<theme-checkbox
+				[label]="checkbox.label"
+				[id]="checkbox.id"
+				[(value)]="checkbox.value"
+				[disabled]="checkbox.disabled"
+				(input)="checkbox.onInput($event)"
+			>
+			</theme-checkbox>
+		}
+	</div>
+</div>

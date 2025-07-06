@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2025. Frank-Peter Andrä
- * All rights reserved.
- */
-
 import { Component, input } from '@angular/core';
 import { ButtonConfigModel } from '../../model';
 import { ButtonComponent } from '../button/button.component';

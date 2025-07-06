@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2025. Frank-Peter Andrä
- * All rights reserved.
- */
-
 import { ButtonConfigModel } from './button-config.model';
 
 export interface ButtonBarConfig {

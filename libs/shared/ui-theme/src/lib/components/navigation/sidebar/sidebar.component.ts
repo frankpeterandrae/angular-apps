@@ -3,7 +3,6 @@
  * All rights reserved.
  */
 
-import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FastSvgComponent } from '@push-based/ngx-fast-svg';
@@ -14,10 +13,10 @@ import { MenuItem } from '../../../model/menu-item.model';
  * It uses CommonModule, RouterLink, and FastSvgComponent.
  */
 @Component({
-    selector: 'theme-sidebar',
-    imports: [CommonModule, RouterLink, FastSvgComponent],
-    templateUrl: './sidebar.component.html',
-    styleUrl: './sidebar.component.scss'
+	selector: 'theme-sidebar',
+	imports: [RouterLink, FastSvgComponent],
+	templateUrl: './sidebar.component.html',
+	styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
 	/**
