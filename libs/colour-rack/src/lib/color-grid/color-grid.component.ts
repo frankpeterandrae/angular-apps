@@ -4,7 +4,7 @@
  */
 
 import { AsyncPipe, NgStyle } from '@angular/common';
-import { AfterViewInit, Component, HostListener, input, OnChanges, OnInit, signal, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, input, OnChanges, OnInit, signal, SimpleChanges, inject, viewChild } from '@angular/core';
 import { Color } from '../models/color.model';
 import { ColorService } from '../services/color.service';
 import { DialogConfigModel, DialogService } from '@angular-apps/shared/ui-theme';
@@ -23,7 +23,10 @@ import { TranslationPipe } from '@angular-apps/services';
 	imports: [NgStyle, CdkVirtualScrollViewport, CdkVirtualForOf, CdkFixedSizeVirtualScroll, AsyncPipe, TranslationPipe]
 })
 export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
-	@ViewChild(CdkVirtualScrollViewport) public viewPort!: CdkVirtualScrollViewport;
+	private readonly colorService = inject(ColorService);
+	private readonly dialogService = inject(DialogService);
+
+	public readonly viewPort = viewChild.required(CdkVirtualScrollViewport);
 	/**
 	 * The search query used to filter and highlight colors.
 	 */
@@ -35,16 +38,6 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 	public colors = signal<Color[][]>([]);
 	public itemSize: NumberInput = 68;
 	private chunkSize = 12;
-
-	/**
-	 * Constructor to inject the ColorService and DialogService.
-	 * @param {ColorService} colorService - The service used to fetch colors.
-	 * @param {DialogService} dialogService - The service used to open dialogs.
-	 */
-	constructor(
-		private readonly colorService: ColorService,
-		private readonly dialogService: DialogService
-	) {}
 
 	/**
 	 * Adjusts the item size, chunk size, and fetches colors when the window is resized.
@@ -79,7 +72,7 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 	 * This is used to perform any additional initialization tasks that require the view to be fully rendered.
 	 */
 	public ngAfterViewInit(): void {
-		if (this.viewPort) {
+		if (this.viewPort()) {
 			setTimeout(() => {
 				this.updateItemSize();
 			});
@@ -143,7 +136,7 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 	 * Updates the item size based on the first color tile's dimensions.
 	 */
 	private updateItemSize(): void {
-		const firstCard: HTMLElement | null = this.viewPort.elementRef.nativeElement.querySelector('.color-tile');
+		const firstCard: HTMLElement | null = this.viewPort().elementRef.nativeElement.querySelector('.color-tile');
 		if (firstCard) {
 			const marginTop = parseInt(window.getComputedStyle(firstCard).marginTop, 10);
 			const marginBottom = parseInt(window.getComputedStyle(firstCard).marginBottom, 10);

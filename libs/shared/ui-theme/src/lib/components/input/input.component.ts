@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Component, ElementRef, forwardRef, input, output, ViewChild } from '@angular/core';
+import { Component, ElementRef, forwardRef, input, output, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FastSvgComponent } from '@push-based/ngx-fast-svg';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
@@ -26,7 +26,7 @@ import { IconDefinition } from '../../enums';
 	]
 })
 export class InputComponent implements ControlValueAccessor {
-	@ViewChild('searchInput') public searchInput!: ElementRef;
+	public readonly searchInput = viewChild.required<ElementRef>('searchInput');
 	public label = input<string>('');
 	public type = input<string>('text');
 	public placeholder = input<string>('');

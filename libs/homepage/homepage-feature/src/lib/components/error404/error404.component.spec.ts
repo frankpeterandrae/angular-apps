@@ -7,6 +7,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 
 import { Error404Component } from './error404.component';
 import { setupTestingModule } from '../../../test-setup';
+import { LOGGER_SOURCE } from '@angular-apps/services';
 
 describe('Error404Component', () => {
 	let component: Error404Component;
@@ -14,7 +15,8 @@ describe('Error404Component', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			imports: [Error404Component]
+			imports: [Error404Component],
+			providers: [{ provide: LOGGER_SOURCE, useValue: 'Error404Component' }]
 		});
 
 		fixture = TestBed.createComponent(Error404Component);

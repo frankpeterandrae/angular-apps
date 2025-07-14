@@ -4,7 +4,7 @@
  */
 
 import { FooterComponent, HeaderComponent, IconDefinition, LanguageToggleComponent, MenuItem } from '@angular-apps/shared/ui-theme';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { BUILD_DATE, environment } from '@angular-apps/config';
 import { Logger } from '@angular-apps/services';
@@ -22,6 +22,9 @@ import { Meta } from '@angular/platform-browser';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+	private readonly translocoService = inject(ScopedTranslationServiceInterface);
+	private readonly meta = inject(Meta);
+
 	/**
 	 * The menu items to be displayed in the sidebar.
 	 * @type {MenuItem[]}
@@ -30,13 +33,8 @@ export class AppComponent implements OnInit {
 
 	/**
 	 * Creates an instance of AppComponent.
-	 * @param {ScopedTranslationServiceInterface} translocoService - The translation service used for fetching translations.
-	 * @param {Meta} meta - The meta service used to set meta tags.
 	 */
-	constructor(
-		private readonly translocoService: ScopedTranslationServiceInterface,
-		private readonly meta: Meta
-	) {
+	constructor() {
 		this.meta.addTags([
 			{ name: 'robots', content: 'index, follow' },
 			{ name: 'author', content: 'Frank-Peter Andrä' },

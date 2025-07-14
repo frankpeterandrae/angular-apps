@@ -4,7 +4,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '@angular-apps/config';
 
@@ -15,15 +15,11 @@ import { environment } from '@angular-apps/config';
 	providedIn: 'root'
 })
 export class DataConnectionService {
+	private readonly http = inject(HttpClient);
+
 	private readonly apiUrl = '/php-api/api.php'; // Use the environment-specific API URL
 	private readonly addUserUrl = '/php-api/encryption.php'; // Use the environment-specific API URL
-	private readonly loginUrl = '/php-api/login.php'; // Use the environment-specific API URL
-
-	/**
-	 * Constructor for DataConnectionService.
-	 * @param {HttpClient} http - The HTTP client for making requests.
-	 */
-	constructor(private readonly http: HttpClient) {}
+	private readonly loginUrl = '/php-api/login.php';
 
 	/**
 	 * Fetches data from the server.

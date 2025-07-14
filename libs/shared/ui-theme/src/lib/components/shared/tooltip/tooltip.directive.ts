@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Directive, ElementRef, HostListener, input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostListener, input, Renderer2, inject } from '@angular/core';
 
 /**
  * TooltipDirective is an Angular directive that adds a tooltip to an element.
@@ -14,21 +14,14 @@ import { Directive, ElementRef, HostListener, input, Renderer2 } from '@angular/
 	standalone: true
 })
 export class TooltipDirective {
+	private readonly elementeRef = inject(ElementRef);
+	private readonly renderer = inject(Renderer2);
+
 	/**
 	 * The text to be displayed inside the tooltip.
 	 */
 	public themeTooltip = input<string>('');
 	private tooltipElement: HTMLElement | null = null;
-
-	/**
-	 * Constructor for the TooltipDirective.
-	 * @param {ElementRef} elementeRef - Reference to the element the directive is applied to.
-	 * @param {Renderer2} renderer - Renderer2 instance for manipulating the DOM.
-	 */
-	constructor(
-		private readonly elementeRef: ElementRef,
-		private readonly renderer: Renderer2
-	) {}
 
 	/**
 	 * Event handler for the mouseenter event.

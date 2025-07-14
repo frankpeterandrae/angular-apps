@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, inject } from '@angular/core';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { DIALOG_DATA } from './dialog-tokens';
@@ -16,15 +16,8 @@ import { DialogConfigModel } from '../../model/dialog-config.model';
 	providedIn: 'root'
 })
 export class DialogService {
-	/**
-	 * Constructor to inject the Overlay and Injector services.
-	 * @param {Overlay} overlay - The Overlay service to create and manage overlays.
-	 * @param {Injector} injector - The Injector service to create custom injectors.
-	 */
-	constructor(
-		private readonly overlay: Overlay,
-		private readonly injector: Injector
-	) {}
+	private readonly overlay = inject(Overlay);
+	private readonly injector = inject(Injector);
 
 	/**
 	 * Opens a dialog with the specified component and data.

@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DIALOG_DATA, DialogComponent, DialogConfigModel } from '@angular-apps/shared/ui-theme';
 import { ColorType } from '../models/color-type.enum';
@@ -19,11 +19,7 @@ import { TranslationPipe } from '@angular-apps/services';
 	templateUrl: './color-details.component.html'
 })
 export class ColorDetailsComponent {
-	/**
-	 * Constructor to inject the dialog configuration data.
-	 * @param {DialogConfigModel<Color>} data - The dialog configuration data containing color information.
-	 */
-	constructor(@Inject(DIALOG_DATA) public data: DialogConfigModel<Color>) {}
+	public readonly data = inject<DialogConfigModel<Color>>(DIALOG_DATA);
 
 	/**
 	 * Returns the color type as a string.
