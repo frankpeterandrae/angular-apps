@@ -4,5 +4,5 @@
  */
 export const environment = {
 	production: true,
-	baseUrl: 'https://frankpeterandrae.de', // Production API URL
+	baseUrl: 'https://frankpeterandrae.de' // Production API URL
 };

@@ -16,7 +16,7 @@ describe('ColorService', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [ColorService, provideHttpClient(), provideHttpClientTesting()],
+			providers: [ColorService, provideHttpClient(), provideHttpClientTesting()]
 		});
 		service = TestBed.inject(ColorService);
 		httpMock = TestBed.inject(HttpTestingController);
@@ -36,7 +36,7 @@ describe('ColorService', () => {
 				mainColor: '',
 				wave: '',
 				row: 1,
-				column: 2,
+				column: 2
 			},
 			{
 				name: 'Blue',
@@ -46,8 +46,8 @@ describe('ColorService', () => {
 				mainColor: '',
 				wave: '',
 				row: 3,
-				column: 4,
-			},
+				column: 4
+			}
 		];
 
 		service.getColors().subscribe((colors) => {
@@ -76,7 +76,7 @@ describe('ColorService', () => {
 
 		service.getColors().subscribe(
 			() => fail('expected an error, not colors'),
-			(error) => expect(error.status).toBe(404),
+			(error) => expect(error.status).toBe(404)
 		);
 
 		const req = httpMock.expectOne('assets/colors.json');

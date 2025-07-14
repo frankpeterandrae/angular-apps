@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 @Component({
 	selector: 'theme-language-toggle',
 	template: '',
-	standalone: true,
+	standalone: true
 })
 export class MockedLanguageToggleComponent {
 	// Mock any properties or methods with Jest

@@ -12,9 +12,9 @@ import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
  * Component representing the homepage feature.
  */
 @Component({
-    selector: 'homepage-feature',
-    imports: [HeroComponent],
-    templateUrl: './home.component.html'
+	selector: 'homepage-feature',
+	imports: [HeroComponent],
+	templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
 	private readonly meta = inject(Meta);

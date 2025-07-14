@@ -3,12 +3,7 @@
   ~ All rights reserved.
   -->
 <h2>{{ 'ColorGridComponent.lbl.TwoThinCoats' | fpaTranslate: 'color-rack' | async }}</h2>
-<cdk-virtual-scroll-viewport
-	[itemSize]="itemSize"
-	[minBufferPx]="itemSize"
-	[maxBufferPx]="itemSize"
-	class="mobile-height"
->
+<cdk-virtual-scroll-viewport [itemSize]="itemSize" [minBufferPx]="itemSize" [maxBufferPx]="itemSize" class="mobile-height">
 	<div *cdkVirtualFor="let colorItems of colors()" class="fpa-grid-12 fpa-grid-gap fpa-mb-05 fpa-mr-05">
 		@for (color of colorItems; track color.name) {
 			<a
@@ -16,7 +11,7 @@
 				[ngStyle]="{
 					background: color.secondaryColor
 						? 'radial-gradient(circle,' + color.mainColor + ', ' + color.secondaryColor + ')'
-						: color.mainColor,
+						: color.mainColor
 				}"
 				(click)="openDetails(color)"
 				(keydown.enter)="openDetails(color)"

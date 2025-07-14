@@ -3,13 +3,7 @@
  * All rights reserved.
  */
 
-import {
-	FooterComponent,
-	HeaderComponent,
-	IconDefinition,
-	LanguageToggleComponent,
-	MenuItem,
-} from '@angular-apps/shared/ui-theme';
+import { FooterComponent, HeaderComponent, IconDefinition, LanguageToggleComponent, MenuItem } from '@angular-apps/shared/ui-theme';
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { BUILD_DATE, environment } from '@angular-apps/config';
@@ -22,10 +16,10 @@ import { Meta } from '@angular/platform-browser';
  * The root component of the application.
  */
 @Component({
-    imports: [RouterOutlet, HeaderComponent, FooterComponent, LanguageToggleComponent],
-    selector: 'fpa-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+	imports: [RouterOutlet, HeaderComponent, FooterComponent, LanguageToggleComponent],
+	selector: 'fpa-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
 	/**
@@ -41,14 +35,14 @@ export class AppComponent implements OnInit {
 	 */
 	constructor(
 		private readonly translocoService: ScopedTranslationServiceInterface,
-		private readonly meta: Meta,
+		private readonly meta: Meta
 	) {
 		this.meta.addTags([
 			{ name: 'robots', content: 'index, follow' },
 			{ name: 'author', content: 'Frank-Peter Andrä' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
 			{ name: 'date', content: BUILD_DATE, scheme: 'YYYY-MM-DDTHH:mm:ss.sssZ' },
-			{ charset: 'UTF-8' },
+			{ charset: 'UTF-8' }
 		]);
 	}
 
@@ -64,7 +58,7 @@ export class AppComponent implements OnInit {
 			this.translocoService.selectTranslate('AppComponent.menu.lbl.Home'),
 			this.translocoService.selectTranslate('AppComponent.menu.lbl.PaintRack'),
 			this.translocoService.selectTranslate('AppComponent.menu.lbl.InDevelopment'),
-			this.translocoService.selectTranslate('AppComponent.menu.lbl.Test'),
+			this.translocoService.selectTranslate('AppComponent.menu.lbl.Test')
 		]).subscribe(([home, paintRack, inDevelopment, test]) => {
 			this.initializeMenuItems(home, paintRack, inDevelopment, test);
 		});
@@ -82,12 +76,12 @@ export class AppComponent implements OnInit {
 			{
 				label: home,
 				icon: IconDefinition.HOUSE,
-				route: '/',
+				route: '/'
 			},
 			{
 				label: paintRack,
 				icon: IconDefinition.PALETTE,
-				route: '/paint-rack',
+				route: '/paint-rack'
 			},
 			...(!environment.production
 				? [
@@ -95,10 +89,10 @@ export class AppComponent implements OnInit {
 							label: inDevelopment,
 							icon: IconDefinition.PALETTE,
 							route: '/dev',
-							children: [{ label: test, route: '/dev/test' }],
-						},
+							children: [{ label: test, route: '/dev/test' }]
+						}
 					]
-				: []),
+				: [])
 		];
 	}
 }

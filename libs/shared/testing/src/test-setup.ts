@@ -22,9 +22,9 @@ export function sharedSetupTestingModule(
 	{ imports = [], providers = [], declarations }: TestModuleMetadata,
 	langs: HashMap<Translation> = {
 		en: { hello: 'Hello' },
-		de: { hello: 'Hallo' },
+		de: { hello: 'Hallo' }
 	},
-	config: Partial<TranslocoConfig> = {},
+	config: Partial<TranslocoConfig> = {}
 ): Promise<any> {
 	return TestBed.configureTestingModule({
 		imports: [translocoTestingModulFactory(config, langs), ...imports],
@@ -32,10 +32,10 @@ export function sharedSetupTestingModule(
 			{ provide: ScopedTranslationServiceInterface, useClass: MockScopedTranslationService },
 			provideHttpClient(),
 			provideHttpClientTesting(),
-			...providers,
+			...providers
 		],
 		declarations,
-		schemas: [NO_ERRORS_SCHEMA],
+		schemas: [NO_ERRORS_SCHEMA]
 	}).compileComponents();
 }
 
@@ -49,11 +49,11 @@ function translocoTestingModulFactory(
 	config: Partial<TranslocoConfig>,
 	langs: HashMap<Translation> = {
 		en: { hello: 'Hello' },
-		de: { hello: 'Hallo' },
-	},
+		de: { hello: 'Hallo' }
+	}
 ): ModuleWithProviders<TranslocoTestingModule> {
 	return TranslocoTestingModule.forRoot({
 		langs: langs,
-		translocoConfig: { availableLangs: ['en', 'de'], defaultLang: 'en', ...config },
+		translocoConfig: { availableLangs: ['en', 'de'], defaultLang: 'en', ...config }
 	});
 }

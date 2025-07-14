@@ -22,7 +22,7 @@ describe('NetworkStatusServiceService', () => {
 	const mockNavigatorOnLine = (value: boolean): void => {
 		Object.defineProperty(navigator, 'onLine', {
 			value,
-			configurable: true,
+			configurable: true
 		});
 	};
 
@@ -33,7 +33,7 @@ describe('NetworkStatusServiceService', () => {
 		mockNavigatorOnLine(true);
 
 		await setupTestingModule({
-			providers: [NetworkStatusServiceService],
+			providers: [NetworkStatusServiceService]
 		});
 		service = TestBed.inject(NetworkStatusServiceService);
 	});
@@ -61,7 +61,7 @@ describe('NetworkStatusServiceService', () => {
 
 		TestBed.resetTestingModule();
 		TestBed.configureTestingModule({
-			providers: [NetworkStatusServiceService],
+			providers: [NetworkStatusServiceService]
 		});
 		service = TestBed.inject(NetworkStatusServiceService);
 
@@ -80,7 +80,7 @@ describe('NetworkStatusServiceService', () => {
 
 		TestBed.resetTestingModule();
 		TestBed.configureTestingModule({
-			providers: [NetworkStatusServiceService],
+			providers: [NetworkStatusServiceService]
 		});
 		service = TestBed.inject(NetworkStatusServiceService);
 
@@ -99,7 +99,7 @@ describe('NetworkStatusServiceService', () => {
 
 		TestBed.resetTestingModule();
 		TestBed.configureTestingModule({
-			providers: [NetworkStatusServiceService],
+			providers: [NetworkStatusServiceService]
 		});
 		service = TestBed.inject(NetworkStatusServiceService);
 
@@ -126,7 +126,7 @@ describe('NetworkStatusServiceService', () => {
 
 		TestBed.resetTestingModule();
 		TestBed.configureTestingModule({
-			providers: [NetworkStatusServiceService],
+			providers: [NetworkStatusServiceService]
 		});
 		service = TestBed.inject(NetworkStatusServiceService);
 
@@ -153,7 +153,7 @@ describe('NetworkStatusServiceService', () => {
 
 		TestBed.resetTestingModule();
 		TestBed.configureTestingModule({
-			providers: [NetworkStatusServiceService],
+			providers: [NetworkStatusServiceService]
 		});
 		service = TestBed.inject(NetworkStatusServiceService);
 

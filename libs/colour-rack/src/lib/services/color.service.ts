@@ -13,7 +13,7 @@ import { Color } from '../models/color.model';
  * Provided in the root module.
  */
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class ColorService {
 	private readonly colorsUrl = 'assets/colors.json'; // Path to your JSON file

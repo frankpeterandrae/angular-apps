@@ -18,7 +18,7 @@ function compileSass() {
 
 			// Compile SCSS to CSS using compileAsync
 			const result = await sass.compileAsync(scssPath, {
-				style: 'compressed', // 'compressed' or 'expanded'
+				style: 'compressed' // 'compressed' or 'expanded'
 				// Include additional options if necessary
 			});
 
@@ -43,7 +43,7 @@ const chokidar = require('chokidar');
 // Initialize watcher.
 const watcher = chokidar.watch(path.join(__dirname, '../src/lib/theme/**/*.scss'), {
 	persistent: true,
-	ignoreInitial: true,
+	ignoreInitial: true
 });
 
 // Add event listeners.

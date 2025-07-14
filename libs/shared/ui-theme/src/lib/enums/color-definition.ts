@@ -13,5 +13,5 @@ export enum ColorDefinition {
 	SLATE_GRAY = 'slate-gray',
 	SLATE_GRAY_HIGHLIGHT = 'slate-gray-highlight',
 	EBONY = 'ebony',
-	EBONY_HIGHLIGHT = 'ebony-highlight',
+	EBONY_HIGHLIGHT = 'ebony-highlight'
 }

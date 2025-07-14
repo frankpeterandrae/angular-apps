@@ -14,7 +14,7 @@ describe('Error404Component', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			imports: [Error404Component],
+			imports: [Error404Component]
 		});
 
 		fixture = TestBed.createComponent(Error404Component);
@@ -42,15 +42,9 @@ describe('Error404Component', () => {
 	it('should log error if navigation to home fails', async () => {
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-		const navigateSpy = jest
-			.spyOn(component['router'], 'navigate')
-			.mockImplementation(() => Promise.reject('Navigation Error'));
+		const navigateSpy = jest.spyOn(component['router'], 'navigate').mockImplementation(() => Promise.reject('Navigation Error'));
 		await component.routeToHome();
 		expect(navigateSpy).toHaveBeenCalledWith(['/']);
-		expect(consoleErrorSpy).toHaveBeenCalledWith(
-			'[Error404Component]',
-			'Error while navigating to home page',
-			'Navigation Error',
-		);
+		expect(consoleErrorSpy).toHaveBeenCalledWith('[Error404Component]', 'Error while navigating to home page', 'Navigation Error');
 	});
 });

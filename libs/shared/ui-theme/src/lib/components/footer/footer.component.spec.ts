@@ -14,7 +14,7 @@ describe('FooterComponent', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			imports: [FooterComponent],
+			imports: [FooterComponent]
 		});
 
 		fixture = TestBed.createComponent(FooterComponent);

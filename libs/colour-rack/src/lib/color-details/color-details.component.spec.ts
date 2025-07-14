@@ -17,20 +17,20 @@ describe('ColorDetailsComponent', () => {
 
 	beforeEach(async () => {
 		overlayRefMock = {
-			dispose: jest.fn(),
+			dispose: jest.fn()
 		} as unknown as jest.Mocked<OverlayRef>;
 
 		const mockDialogData: DialogConfigModel<any> = {
 			componentData: undefined,
-			settings: { title: 'Test Dialog' },
+			settings: { title: 'Test Dialog' }
 		};
 
 		await setupTestingModule({
 			imports: [ColorDetailsComponent],
 			providers: [
 				{ provide: OverlayRef, useValue: overlayRefMock },
-				{ provide: DIALOG_DATA, useValue: mockDialogData },
-			],
+				{ provide: DIALOG_DATA, useValue: mockDialogData }
+			]
 		});
 
 		fixture = TestBed.createComponent(ColorDetailsComponent);

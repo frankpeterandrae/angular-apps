@@ -11,10 +11,10 @@ import { CommonModule } from '@angular/common';
  * It uses the CommonModule and has an external HTML template and SCSS stylesheet.
  */
 @Component({
-    selector: 'theme-card',
-    imports: [CommonModule],
-    templateUrl: './card.component.html',
-    styleUrl: './card.component.scss'
+	selector: 'theme-card',
+	imports: [CommonModule],
+	templateUrl: './card.component.html',
+	styleUrl: './card.component.scss'
 })
 export class CardComponent {
 	/**

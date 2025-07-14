@@ -4,7 +4,8 @@
 		"outDir": "../../dist/out-tsc",
 		"types": [],
 		"resolveJsonModule": true,
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"moduleResolution": "bundler"
 	},
 	"files": ["src/main.ts"],
 	"include": ["src/**/*.d.ts"],

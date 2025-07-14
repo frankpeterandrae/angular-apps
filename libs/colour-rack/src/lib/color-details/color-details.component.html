@@ -15,9 +15,7 @@
 
 		@if (data.componentData?.alternativeNames) {
 			<div class="fpa-grid-col-end-2">
-				<span class="fpa-font-weight-bold"
-					>{{ 'ColorDetails.lbl.AlternativeNames' | fpaTranslate: 'color-rack' | async }}:
-				</span>
+				<span class="fpa-font-weight-bold">{{ 'ColorDetails.lbl.AlternativeNames' | fpaTranslate: 'color-rack' | async }}: </span>
 			</div>
 			<div class="fpa-grid-col-end-10">
 				@for (alternativeNames of data.componentData?.alternativeNames; track alternativeNames; let idx = $index) {
@@ -56,9 +54,7 @@
 		</div>
 
 		<div class="fpa-grid-col-end-2">
-			<span class="fpa-font-weight-bold"
-				>{{ 'ColorDetails.lbl.Position' | fpaTranslate: 'color-rack' | async }} :
-			</span>
+			<span class="fpa-font-weight-bold">{{ 'ColorDetails.lbl.Position' | fpaTranslate: 'color-rack' | async }} : </span>
 		</div>
 		<div class="fpa-grid-col-end-10">
 			<div class="fpa-flex fpa-flex-row fpa-justify-between fpa-mb-05">

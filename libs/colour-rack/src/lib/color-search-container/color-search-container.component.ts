@@ -15,9 +15,9 @@ import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
  * Component for the color search container.
  */
 @Component({
-    selector: 'cr-color-search-container',
-    templateUrl: './color-search-container.component.html',
-    imports: [ColorSearchComponent, ColorGridComponent, TranslationPipe, AsyncPipe]
+	selector: 'cr-color-search-container',
+	templateUrl: './color-search-container.component.html',
+	imports: [ColorSearchComponent, ColorGridComponent, TranslationPipe, AsyncPipe]
 })
 export class ColorSearchContainerComponent implements OnInit {
 	private readonly meta = inject(Meta);
@@ -29,17 +29,13 @@ export class ColorSearchContainerComponent implements OnInit {
 	 * Initializes the component by setting the title and meta description using translations.
 	 */
 	ngOnInit(): void {
-		this.translocoService
-			.selectTranslate('ColorSearchContainerComponent.meta.Title', 'color-rack')
-			.subscribe((translation) => {
-				this.title.setTitle(translation);
-			});
+		this.translocoService.selectTranslate('ColorSearchContainerComponent.meta.Title', 'color-rack').subscribe((translation) => {
+			this.title.setTitle(translation);
+		});
 
-		this.translocoService
-			.selectTranslate('ColorSearchContainerComponent.meta.Description', 'color-rack')
-			.subscribe((translation) => {
-				this.meta.addTag({ name: 'description', content: translation });
-			});
+		this.translocoService.selectTranslate('ColorSearchContainerComponent.meta.Description', 'color-rack').subscribe((translation) => {
+			this.meta.addTag({ name: 'description', content: translation });
+		});
 	}
 
 	/**

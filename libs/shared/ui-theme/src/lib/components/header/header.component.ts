@@ -12,9 +12,9 @@ import { TopNavbarComponent } from '../navigation/top-navbar/top-navbar.componen
  * It includes the TopNavbarComponent and uses an external HTML template and CSS stylesheet.
  */
 @Component({
-    selector: 'theme-header',
-    imports: [TopNavbarComponent],
-    templateUrl: './header.component.html'
+	selector: 'theme-header',
+	imports: [TopNavbarComponent],
+	templateUrl: './header.component.html'
 })
 export class HeaderComponent {
 	/**

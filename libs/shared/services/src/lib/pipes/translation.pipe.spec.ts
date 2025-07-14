@@ -12,7 +12,7 @@ describe('TranslationPipe', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			providers: [TranslationPipe],
+			providers: [TranslationPipe]
 		});
 
 		pipe = TestBed.inject(TranslationPipe);

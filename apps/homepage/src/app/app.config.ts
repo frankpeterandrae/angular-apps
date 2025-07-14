@@ -46,18 +46,18 @@ export const appConfig: ApplicationConfig = {
 			 */
 			url: (name: string) => {
 				return `/assets/svg-assets/${name}.svg`;
-			},
+			}
 		}),
 		/**
 		 * Provides the Transloco configuration.
 		 */
 		provideTransloco({
 			config: translocoConfigFactory,
-			loader: TranslocoHttpLoader,
+			loader: TranslocoHttpLoader
 		}),
 		{
 			provide: ScopedTranslationServiceInterface,
-			useClass: ScopedTranslationService,
-		},
-	],
+			useClass: ScopedTranslationService
+		}
+	]
 };

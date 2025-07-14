@@ -12,7 +12,7 @@ import { environment } from '@angular-apps/config';
  * If not in production, allows activation. Otherwise, redirects to a 404 page.
  */
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class EnvGuard implements CanActivate {
 	/**

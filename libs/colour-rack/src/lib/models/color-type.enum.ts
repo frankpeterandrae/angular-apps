@@ -11,5 +11,5 @@ export enum ColorType {
 	W = 'Wash',
 	G = 'Glaze',
 	E = 'Effect',
-	B = 'Bright',
+	B = 'Bright'
 }

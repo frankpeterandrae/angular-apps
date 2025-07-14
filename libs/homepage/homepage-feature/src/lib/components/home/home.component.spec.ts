@@ -18,18 +18,18 @@ describe('HomeComponent', () => {
 
 	beforeEach(async () => {
 		mockMeta = {
-			addTag: jest.fn(),
+			addTag: jest.fn()
 		} as unknown as jest.Mocked<Meta>;
 		mockTitle = {
-			setTitle: jest.fn(),
+			setTitle: jest.fn()
 		} as unknown as jest.Mocked<Title>;
 
 		await setupTestingModule({
 			imports: [HomeComponent, HeroComponent],
 			providers: [
 				{ provide: Meta, useValue: mockMeta },
-				{ provide: Title, useValue: mockTitle },
-			],
+				{ provide: Title, useValue: mockTitle }
+			]
 		});
 
 		fixture = TestBed.createComponent(HomeComponent);

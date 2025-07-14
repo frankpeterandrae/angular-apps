@@ -13,7 +13,7 @@ export enum LogLevel {
 	Error = 1,
 	Warn = 2,
 	Info = 3,
-	Debug = 4,
+	Debug = 4
 }
 
 /**
@@ -33,7 +33,7 @@ export const LOGGER_SOURCE = new InjectionToken<string>('LOGGER_SOURCE');
  * Logger service for logging messages with different log levels.
  */
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class Logger {
 	private static disabled = false;

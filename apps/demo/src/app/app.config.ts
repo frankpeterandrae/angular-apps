@@ -42,11 +42,11 @@ export const appConfig: ApplicationConfig = {
 			 */
 			url: (name: string) => {
 				return `/assets/svg-assets/${name}.svg`;
-			},
+			}
 		}),
 		{
 			provide: ScopedTranslationServiceInterface,
-			useClass: ScopedTranslationService,
-		},
-	],
+			useClass: ScopedTranslationService
+		}
+	]
 };

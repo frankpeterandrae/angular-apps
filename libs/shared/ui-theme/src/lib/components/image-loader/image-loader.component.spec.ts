@@ -34,7 +34,7 @@ describe('ImageLoaderComponent', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			imports: [ImageLoaderComponent],
+			imports: [ImageLoaderComponent]
 		});
 
 		fixture = TestBed.createComponent(ImageLoaderComponent);

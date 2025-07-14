@@ -13,7 +13,7 @@ export const appRoutes: Route[] = [
 		 * Lazy loads the DemoButtonComponent from the demo-feature module.
 		 * @returns {Promise<any>} A promise that resolves to the DemoButtonComponent.
 		 */
-		loadComponent: (): Promise<any> => import('@angular-apps/demo-feature').then((m) => m.ButtonDemoComponent),
+		loadComponent: (): Promise<any> => import('@angular-apps/demo-feature').then((m) => m.ButtonDemoComponent)
 	},
 	{
 		path: 'colors',
@@ -21,7 +21,7 @@ export const appRoutes: Route[] = [
 		 * Lazy loads the ColorsComponent from the demo-feature module.
 		 * @returns {Promise<any>} A promise that resolves to the ColorsComponent.
 		 */
-		loadComponent: (): Promise<any> => import('@angular-apps/demo-feature').then((m) => m.ColorsComponent),
+		loadComponent: (): Promise<any> => import('@angular-apps/demo-feature').then((m) => m.ColorsComponent)
 	},
 	{
 		path: 'icons',
@@ -29,7 +29,7 @@ export const appRoutes: Route[] = [
 		 * Lazy loads the IconsDemoComponent from the demo-feature module.
 		 * @returns {Promise<any>} A promise that resolves to the IconsDemoComponent.
 		 */
-		loadComponent: (): Promise<any> => import('@angular-apps/demo-feature').then((m) => m.IconDemoComponent),
+		loadComponent: (): Promise<any> => import('@angular-apps/demo-feature').then((m) => m.IconDemoComponent)
 	},
 	{
 		path: 'typography',
@@ -37,6 +37,6 @@ export const appRoutes: Route[] = [
 		 * Lazy loads the TypographyComponent from the demo-feature module.
 		 * @returns {Promise<any>} A promise that resolves to the TypographyComponent.
 		 */
-		loadComponent: (): Promise<any> => import('@angular-apps/demo-feature').then((m) => m.TypographyDemoComponent),
-	},
+		loadComponent: (): Promise<any> => import('@angular-apps/demo-feature').then((m) => m.TypographyDemoComponent)
+	}
 ];

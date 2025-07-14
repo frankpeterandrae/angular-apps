@@ -16,14 +16,12 @@ describe('LanguageToggleComponent', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			imports: [LanguageToggleComponent],
+			imports: [LanguageToggleComponent]
 		});
 
 		fixture = TestBed.createComponent(LanguageToggleComponent);
 		component = fixture.componentInstance;
-		mockTranslationService = TestBed.inject(
-			ScopedTranslationServiceInterface,
-		) as unknown as MockScopedTranslationService;
+		mockTranslationService = TestBed.inject(ScopedTranslationServiceInterface) as unknown as MockScopedTranslationService;
 
 		fixture.detectChanges();
 	});

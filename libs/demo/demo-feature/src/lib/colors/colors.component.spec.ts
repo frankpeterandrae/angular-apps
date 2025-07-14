@@ -12,7 +12,7 @@ describe('TypographyComponent', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			imports: [ColorsComponent],
+			imports: [ColorsComponent]
 		});
 
 		fixture = TestBed.createComponent(ColorsComponent);

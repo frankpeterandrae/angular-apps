@@ -19,12 +19,12 @@ describe('ColorGridComponent', () => {
 
 	beforeEach(async () => {
 		const colorServiceMock = {
-			getColors: jest.fn().mockReturnValue(of([])), // Ensure it returns an observable
+			getColors: jest.fn().mockReturnValue(of([])) // Ensure it returns an observable
 		};
 
 		await setupTestingModule({
 			imports: [ColorGridComponent],
-			providers: [{ provide: ColorService, useValue: colorServiceMock }],
+			providers: [{ provide: ColorService, useValue: colorServiceMock }]
 		});
 
 		fixture = TestBed.createComponent(ColorGridComponent);
@@ -43,8 +43,8 @@ describe('ColorGridComponent', () => {
 				mainColor: '',
 				wave: '',
 				row: 1,
-				column: 2,
-			},
+				column: 2
+			}
 		];
 		colorService.getColors.mockReturnValue(of(colors));
 
@@ -65,8 +65,8 @@ describe('ColorGridComponent', () => {
 					mainColor: '',
 					wave: '',
 					column: 1,
-					row: 1,
-				},
+					row: 1
+				}
 			],
 			[
 				{
@@ -77,9 +77,9 @@ describe('ColorGridComponent', () => {
 					mainColor: '',
 					wave: '',
 					column: 1,
-					row: 2,
-				},
-			],
+					row: 2
+				}
+			]
 		];
 		component.colors.set(colors);
 
@@ -100,8 +100,8 @@ describe('ColorGridComponent', () => {
 					mainColor: '',
 					wave: '',
 					column: 1,
-					row: 1,
-				},
+					row: 1
+				}
 			],
 			[
 				{
@@ -112,9 +112,9 @@ describe('ColorGridComponent', () => {
 					mainColor: '',
 					wave: '',
 					column: 1,
-					row: 2,
-				},
-			],
+					row: 2
+				}
+			]
 		];
 
 		component.colors.set(colors);
@@ -135,8 +135,8 @@ describe('ColorGridComponent', () => {
 				mainColor: '',
 				wave: '',
 				row: 0,
-				column: 0,
-			},
+				column: 0
+			}
 		];
 		const result = component.calculateStorageLocation(colors);
 		expect(result[0].row).toBe(1);
@@ -153,7 +153,7 @@ describe('ColorGridComponent', () => {
 				mainColor: '',
 				wave: '',
 				row: 0,
-				column: 0,
+				column: 0
 			},
 			{
 				name: 'Blue',
@@ -163,7 +163,7 @@ describe('ColorGridComponent', () => {
 				mainColor: '',
 				wave: '',
 				row: 0,
-				column: 0,
+				column: 0
 			},
 			{
 				name: 'Green',
@@ -173,7 +173,7 @@ describe('ColorGridComponent', () => {
 				mainColor: '',
 				wave: '',
 				row: 0,
-				column: 0,
+				column: 0
 			},
 			{
 				name: 'Yellow',
@@ -183,8 +183,8 @@ describe('ColorGridComponent', () => {
 				mainColor: '',
 				wave: '',
 				row: 0,
-				column: 0,
-			},
+				column: 0
+			}
 		];
 		const result = component.calculateStorageLocation(colors);
 		expect(result[0].row).toBe(1);
@@ -206,7 +206,7 @@ describe('ColorGridComponent', () => {
 			mainColor: '',
 			wave: '',
 			row: 0,
-			column: 0,
+			column: 0
 		}));
 		const result = component.calculateStorageLocation(colors);
 		expect(result[0].row).toBe(1);
@@ -229,12 +229,12 @@ describe('ColorGridComponent', () => {
 			mainColor: '',
 			wave: '',
 			row: 1,
-			column: 1,
+			column: 1
 		};
 		component.openDetails(color);
 		expect(dialogServiceSpy).toHaveBeenCalledWith(ColorDetailsComponent, {
 			componentData: color,
-			settings: { title: color.name },
+			settings: { title: color.name }
 		});
 	});
 

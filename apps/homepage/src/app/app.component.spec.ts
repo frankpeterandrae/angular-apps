@@ -25,13 +25,13 @@ describe('AppComponent', () => {
 						params: of({}),
 						snapshot: {
 							paramMap: {
-								get: (): any => null,
-							},
-						},
-					},
+								get: (): any => null
+							}
+						}
+					}
 				},
-				{ provide: LanguageToggleComponent, useClass: MockedLanguageToggleComponent },
-			],
+				{ provide: LanguageToggleComponent, useClass: MockedLanguageToggleComponent }
+			]
 		});
 
 		fixture = TestBed.createComponent(AppComponent);

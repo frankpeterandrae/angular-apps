@@ -19,11 +19,11 @@ describe('ScopedTranslationService', () => {
 			setActiveLang: jest.fn(),
 			selectTranslate: jest.fn(),
 			getAvailableLangs: jest.fn(),
-			getActiveLang: jest.fn(),
+			getActiveLang: jest.fn()
 		};
 
 		await setupTestingModule({
-			providers: [ScopedTranslationService, { provide: TranslocoService, useValue: translocoServiceMock }],
+			providers: [ScopedTranslationService, { provide: TranslocoService, useValue: translocoServiceMock }]
 		});
 
 		service = TestBed.inject(ScopedTranslationService);

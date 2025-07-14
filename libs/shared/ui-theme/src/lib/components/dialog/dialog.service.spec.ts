@@ -18,7 +18,7 @@ describe('DialogService', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [DialogService, Overlay, Injector],
+			providers: [DialogService, Overlay, Injector]
 		});
 
 		service = TestBed.inject(DialogService);
@@ -28,9 +28,9 @@ describe('DialogService', () => {
 		const mockOverlayRef: Partial<OverlayRef> = {
 			attach: jest.fn(),
 			backdropClick: jest.fn().mockReturnValue({
-				subscribe: jest.fn(),
+				subscribe: jest.fn()
 			}),
-			dispose: jest.fn(),
+			dispose: jest.fn()
 		};
 		createSpy = jest.spyOn(overlay, 'create').mockReturnValue(mockOverlayRef as OverlayRef);
 		attachSpy = jest.spyOn(mockOverlayRef, 'attach');

@@ -14,9 +14,9 @@ import { TranslationPipe } from '@angular-apps/services';
  * Component representing the details of a color.
  */
 @Component({
-    selector: 'cr-color-details',
-    imports: [CommonModule, DialogComponent, TranslationPipe],
-    templateUrl: './color-details.component.html'
+	selector: 'cr-color-details',
+	imports: [CommonModule, DialogComponent, TranslationPipe],
+	templateUrl: './color-details.component.html'
 })
 export class ColorDetailsComponent {
 	/**

@@ -19,28 +19,28 @@ module.exports = [
 				{
 					type: 'attribute',
 					prefix: 'lib',
-					style: 'camelCase',
-				},
+					style: 'camelCase'
+				}
 			],
 			'@angular-eslint/component-selector': [
 				'error',
 				{
 					type: 'element',
 					prefix: 'lib',
-					style: 'kebab-case',
-				},
-			],
-		},
+					style: 'kebab-case'
+				}
+			]
+		}
 	},
 	{
 		files: ['**/*.html'],
 		// Override or add rules here
-		rules: {},
+		rules: {}
 	},
 	{
 		files: ['**/*.ts'],
 		rules: {
-			'@angular-eslint/prefer-standalone': 'off',
-		},
-	},
+			'@angular-eslint/prefer-standalone': 'off'
+		}
+	}
 ];

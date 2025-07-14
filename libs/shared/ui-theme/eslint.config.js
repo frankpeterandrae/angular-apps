@@ -10,7 +10,7 @@ require('@typescript-eslint/eslint-plugin');
 
 const compat = new FlatCompat({
 	baseDirectory: __dirname,
-	recommendedConfig: js.configs.recommended,
+	recommendedConfig: js.configs.recommended
 });
 
 module.exports = [
@@ -20,8 +20,8 @@ module.exports = [
 			extends: [
 				'plugin:@nx/angular',
 				'plugin:@angular-eslint/recommended',
-				'plugin:@angular-eslint/template/process-inline-templates',
-			],
+				'plugin:@angular-eslint/template/process-inline-templates'
+			]
 		})
 		.map((config) => ({
 			...config,
@@ -33,30 +33,30 @@ module.exports = [
 					{
 						type: 'attribute',
 						prefix: 'theme',
-						style: 'camelCase',
-					},
+						style: 'camelCase'
+					}
 				],
 				'@angular-eslint/component-selector': [
 					'error',
 					{
 						type: 'element',
 						prefix: 'theme',
-						style: 'kebab-case',
-					},
-				],
-			},
+						style: 'kebab-case'
+					}
+				]
+			}
 		})),
 	...compat.config({ extends: ['plugin:@nx/angular-template'] }).map((config) => ({
 		...config,
 		files: ['**/*.html'],
 		rules: {
-			...config.rules,
-		},
+			...config.rules
+		}
 	})),
 	{
 		files: ['**/*.ts'],
 		rules: {
-			'@angular-eslint/prefer-standalone': 'off',
-		},
-	},
+			'@angular-eslint/prefer-standalone': 'off'
+		}
+	}
 ];
