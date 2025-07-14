@@ -12,5 +12,5 @@ export enum IconDefinition {
 	GERMAN = 'german',
 	GERMAN_MONOCHROME = 'german_monochrome',
 	ENGLISH = 'english',
-	ENGLISH_MONOCHROME = 'english_monochrome',
+	ENGLISH_MONOCHROME = 'english_monochrome'
 }

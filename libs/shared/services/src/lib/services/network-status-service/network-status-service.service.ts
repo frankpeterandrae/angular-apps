@@ -11,7 +11,7 @@ import { fromEvent, map, merge, of } from 'rxjs';
  * Provides an observable `status$` that emits `true` when online and `false` when offline.
  */
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class NetworkStatusServiceService {
 	/**
@@ -21,6 +21,6 @@ export class NetworkStatusServiceService {
 	public readonly status$ = merge(
 		fromEvent(window, 'offline').pipe(map(() => false)),
 		fromEvent(window, 'online').pipe(map(() => true)),
-		of(navigator.onLine),
+		of(navigator.onLine)
 	);
 }

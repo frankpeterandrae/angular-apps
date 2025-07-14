@@ -17,7 +17,7 @@ describe('EnvGuard', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [EnvGuard, { provide: Router, useValue: { navigate: jest.fn() } }],
+			providers: [EnvGuard, { provide: Router, useValue: { navigate: jest.fn() } }]
 		});
 		guard = TestBed.inject(EnvGuard);
 		router = TestBed.inject(Router);

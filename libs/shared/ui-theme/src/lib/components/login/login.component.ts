@@ -12,9 +12,9 @@ import { ButtonColorDefinition } from '../../enums';
  * Component for the login form.
  */
 @Component({
-    selector: 'theme-login',
-    imports: [ReactiveFormsModule, ButtonComponent],
-    templateUrl: './login.component.html'
+	selector: 'theme-login',
+	imports: [ReactiveFormsModule, ButtonComponent],
+	templateUrl: './login.component.html'
 })
 export class LoginComponent {
 	/**
@@ -34,11 +34,11 @@ export class LoginComponent {
 	 */
 	constructor(
 		public dataConnection: DataConnectionService,
-		private readonly formBuilder: FormBuilder,
+		private readonly formBuilder: FormBuilder
 	) {
 		this.loginForm = this.formBuilder.group({
 			email: ['', [Validators.required, Validators.email]],
-			password: ['', Validators.required],
+			password: ['', Validators.required]
 		});
 	}
 

@@ -21,7 +21,7 @@ describe('TooltipDirective', () => {
 			appendChild: jest.fn(),
 			addClass: jest.fn(),
 			setStyle: jest.fn(),
-			removeChild: jest.fn(),
+			removeChild: jest.fn()
 		} as unknown as Renderer2;
 
 		// Mock InputSignal<string>

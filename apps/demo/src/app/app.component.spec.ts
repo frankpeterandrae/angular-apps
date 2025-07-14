@@ -24,12 +24,12 @@ describe('AppComponent', () => {
 								 * Mocked get.
 								 * @returns Null.
 								 */
-								get: (): any => null,
-							},
-						},
-					},
-				},
-			],
+								get: (): any => null
+							}
+						}
+					}
+				}
+			]
 		});
 	});
 

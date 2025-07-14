@@ -12,7 +12,7 @@ import { environment } from '@angular-apps/config';
  * Injectable service for data connection operations.
  */
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class DataConnectionService {
 	private readonly apiUrl = '/php-api/api.php'; // Use the environment-specific API URL

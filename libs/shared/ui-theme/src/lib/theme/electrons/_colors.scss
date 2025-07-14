@@ -23,14 +23,14 @@ $colors: (
 	slate-gray-highlight: variables.$slate-gray-highlight,
 	slate-gray: variables.$slate-gray,
 	success: variables.$success,
-	warning: variables.$warning,
+	warning: variables.$warning
 );
 $colors-with-variants: (
 	linen: variables.$linen,
 	sandy-brown: variables.$sandy-brown,
 	crimson: variables.$crimson,
 	slate-gray: variables.$slate-gray,
-	ebony: variables.$ebony,
+	ebony: variables.$ebony
 );
 
 @each $name, $color in $colors {

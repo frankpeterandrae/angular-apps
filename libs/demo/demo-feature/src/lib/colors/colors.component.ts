@@ -11,10 +11,10 @@ import { TooltipDirective } from '@angular-apps/shared/ui-theme';
  * Component representing a color palette with various shades.
  */
 @Component({
-    selector: 'demo-colors',
-    imports: [NgClass, TooltipDirective],
-    templateUrl: './colors.component.html',
-    styleUrl: './colors.component.scss'
+	selector: 'demo-colors',
+	imports: [NgClass, TooltipDirective],
+	templateUrl: './colors.component.html',
+	styleUrl: './colors.component.scss'
 })
 export class ColorsComponent {
 	/**
@@ -38,7 +38,7 @@ export class ColorsComponent {
 		'slate-gray-highlight',
 		'slate-gray',
 		'success',
-		'warning',
+		'warning'
 	];
 	/**
 	 * List of shade levels.

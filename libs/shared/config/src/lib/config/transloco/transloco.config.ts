@@ -10,5 +10,5 @@ export const translocoConfigFactory: TranslocoConfig = translocoConfig({
 	availableLangs: ['en', 'de'],
 	defaultLang: 'de',
 	reRenderOnLangChange: true,
-	prodMode: environment.production,
+	prodMode: environment.production
 });

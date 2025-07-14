@@ -19,17 +19,17 @@ describe('ColorSearchContainerComponent', () => {
 
 	beforeEach(async () => {
 		mockMeta = {
-			addTag: jest.fn(),
+			addTag: jest.fn()
 		} as unknown as jest.Mocked<Meta>;
 		mockTitle = {
-			setTitle: jest.fn(),
+			setTitle: jest.fn()
 		} as unknown as jest.Mocked<Title>;
 		await setupTestingModule({
 			imports: [ColorSearchContainerComponent, ColorSearchComponent, ColorGridComponent],
 			providers: [
 				{ provide: Meta, useValue: mockMeta },
-				{ provide: Title, useValue: mockTitle },
-			],
+				{ provide: Title, useValue: mockTitle }
+			]
 		});
 
 		fixture = TestBed.createComponent(ColorSearchContainerComponent);
@@ -63,7 +63,7 @@ describe('ColorSearchContainerComponent', () => {
 		expect(mockTitle.setTitle).toHaveBeenCalledWith('ColorSearchContainerComponent.meta.Title');
 		expect(mockMeta.addTag).toHaveBeenCalledWith({
 			name: 'description',
-			content: 'ColorSearchContainerComponent.meta.Description',
+			content: 'ColorSearchContainerComponent.meta.Description'
 		});
 	}));
 });

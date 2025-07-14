@@ -12,11 +12,11 @@ import { AsyncPipe } from '@angular/common';
  * Component for searching colors.
  */
 @Component({
-    selector: 'cr-color-search',
-    templateUrl: './color-search.component.html',
-    styleUrls: ['./color-search.component.scss'],
-    imports: [InputComponent, TranslationPipe, AsyncPipe],
-    changeDetection: ChangeDetectionStrategy.OnPush
+	selector: 'cr-color-search',
+	templateUrl: './color-search.component.html',
+	styleUrls: ['./color-search.component.scss'],
+	imports: [InputComponent, TranslationPipe, AsyncPipe],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColorSearchComponent {
 	/**

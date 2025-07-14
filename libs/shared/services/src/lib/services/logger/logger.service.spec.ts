@@ -23,7 +23,7 @@ describe('Logger', () => {
 		jest.spyOn(console, 'debug').mockImplementation(() => {});
 
 		await setupTestingModule({
-			providers: [{ provide: LOGGER_SOURCE, useValue: 'TestSource' }],
+			providers: [{ provide: LOGGER_SOURCE, useValue: 'TestSource' }]
 		});
 		logger = TestBed.inject(Logger);
 

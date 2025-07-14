@@ -19,34 +19,34 @@ module.exports = [
 				{
 					type: 'attribute',
 					prefix: 'sharedServices',
-					style: 'camelCase',
-				},
+					style: 'camelCase'
+				}
 			],
 			'@angular-eslint/component-selector': [
 				'error',
 				{
 					type: 'element',
 					prefix: 'shared-services',
-					style: 'kebab-case',
-				},
+					style: 'kebab-case'
+				}
 			],
 			'@angular-eslint/pipe-prefix': [
 				'error',
 				{
-					prefixes: ['fpa'],
-				},
-			],
-		},
+					prefixes: ['fpa']
+				}
+			]
+		}
 	},
 	{
 		files: ['**/*.html'],
 		// Override or add rules here
-		rules: {},
+		rules: {}
 	},
 	{
 		files: ['**/*.ts'],
 		rules: {
-			'@angular-eslint/prefer-standalone': 'off',
-		},
-	},
+			'@angular-eslint/prefer-standalone': 'off'
+		}
+	}
 ];

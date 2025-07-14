@@ -27,12 +27,12 @@ describe('SidebarComponent', () => {
 								 * Mocked get.
 								 * @returns Null.
 								 */
-								get: (): any => null,
-							},
-						},
-					},
-				},
-			],
+								get: (): any => null
+							}
+						}
+					}
+				}
+			]
 		});
 
 		fixture = TestBed.createComponent(SidebarComponent);
@@ -54,7 +54,7 @@ describe('SidebarComponent', () => {
 	it('should display menu items when provided', () => {
 		fixture.componentRef.setInput('menuItems', [
 			{ label: 'Dashboard', link: '/' },
-			{ label: 'Settings', link: '/settings' },
+			{ label: 'Settings', link: '/settings' }
 		]);
 		fixture.detectChanges();
 		const menuItems = fixture.nativeElement.querySelectorAll('.menu-item');

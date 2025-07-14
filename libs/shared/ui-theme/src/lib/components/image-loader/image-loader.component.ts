@@ -3,18 +3,18 @@
  * All rights reserved.
  */
 
-import { AfterViewInit, Component, computed, ElementRef, Inject, input, OnDestroy } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { AfterViewInit, Component, computed, ElementRef, Inject, input, OnDestroy, DOCUMENT } from '@angular/core';
+
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 /**
  *
  */
 @Component({
-    selector: 'theme-image-loader',
-    imports: [CommonModule],
-    templateUrl: './image-loader.component.html',
-    styleUrl: './image-loader.component.scss'
+	selector: 'theme-image-loader',
+	imports: [],
+	templateUrl: './image-loader.component.html',
+	styleUrl: './image-loader.component.scss'
 })
 export class ImageLoaderComponent implements AfterViewInit, OnDestroy {
 	/**
@@ -94,7 +94,7 @@ export class ImageLoaderComponent implements AfterViewInit, OnDestroy {
 	constructor(
 		private readonly elementRef: ElementRef,
 		private readonly sanitizer: DomSanitizer,
-		@Inject(DOCUMENT) private readonly document: Document,
+		@Inject(DOCUMENT) private readonly document: Document
 	) {
 		// Initialize with placeholder
 		this.setPlaceholder();
@@ -116,8 +116,8 @@ export class ImageLoaderComponent implements AfterViewInit, OnDestroy {
 			},
 			{
 				rootMargin: '50px',
-				threshold: 0.01,
-			},
+				threshold: 0.01
+			}
 		);
 		this.observer.observe(this.elementRef.nativeElement);
 	}

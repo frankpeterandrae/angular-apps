@@ -27,12 +27,12 @@ describe('TopnavbarComponent', () => {
 								 * Mocked get.
 								 * @returns Null.
 								 */
-								get: (): any => null,
-							},
-						},
-					},
-				},
-			],
+								get: (): any => null
+							}
+						}
+					}
+				}
+			]
 		});
 
 		fixture = TestBed.createComponent(TopNavbarComponent);

@@ -13,7 +13,7 @@ import { ScopedTranslationServiceInterface } from '@angular-apps/interfaces';
  */
 @Pipe({
 	name: 'fpaTranslate',
-	standalone: true,
+	standalone: true
 })
 export class TranslationPipe implements PipeTransform {
 	private readonly translocoService = inject(ScopedTranslationServiceInterface);

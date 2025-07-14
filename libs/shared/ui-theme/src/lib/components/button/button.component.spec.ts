@@ -14,7 +14,7 @@ describe('ButtonComponent', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			imports: [ButtonComponent],
+			imports: [ButtonComponent]
 		});
 
 		fixture = TestBed.createComponent(ButtonComponent);

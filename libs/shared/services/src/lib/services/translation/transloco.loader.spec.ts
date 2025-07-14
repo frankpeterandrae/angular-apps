@@ -14,7 +14,7 @@ describe('TranslocoHttpLoader', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			providers: [TranslocoHttpLoader],
+			providers: [TranslocoHttpLoader]
 		});
 
 		loader = TestBed.inject(TranslocoHttpLoader);
@@ -47,7 +47,7 @@ describe('TranslocoHttpLoader', () => {
 			error: (error): void => {
 				expect(error.status).toBe(404);
 				done();
-			},
+			}
 		});
 
 		const req = httpMock.expectOne(`/assets/i18n/${lang}.json`);

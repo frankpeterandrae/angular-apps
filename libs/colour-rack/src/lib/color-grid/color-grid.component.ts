@@ -4,17 +4,7 @@
  */
 
 import { AsyncPipe, NgStyle } from '@angular/common';
-import {
-	AfterViewInit,
-	Component,
-	HostListener,
-	input,
-	OnChanges,
-	OnInit,
-	signal,
-	SimpleChanges,
-	ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, HostListener, input, OnChanges, OnInit, signal, SimpleChanges, ViewChild } from '@angular/core';
 import { Color } from '../models/color.model';
 import { ColorService } from '../services/color.service';
 import { DialogConfigModel, DialogService } from '@angular-apps/shared/ui-theme';
@@ -27,10 +17,10 @@ import { TranslationPipe } from '@angular-apps/services';
  * Component representing a grid of colors.
  */
 @Component({
-    selector: 'cr-color-grid',
-    templateUrl: './color-grid.component.html',
-    styleUrls: ['./color-grid.component.scss'],
-    imports: [NgStyle, CdkVirtualScrollViewport, CdkVirtualForOf, CdkFixedSizeVirtualScroll, AsyncPipe, TranslationPipe]
+	selector: 'cr-color-grid',
+	templateUrl: './color-grid.component.html',
+	styleUrls: ['./color-grid.component.scss'],
+	imports: [NgStyle, CdkVirtualScrollViewport, CdkVirtualForOf, CdkFixedSizeVirtualScroll, AsyncPipe, TranslationPipe]
 })
 export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 	@ViewChild(CdkVirtualScrollViewport) public viewPort!: CdkVirtualScrollViewport;
@@ -53,7 +43,7 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 	 */
 	constructor(
 		private readonly colorService: ColorService,
-		private readonly dialogService: DialogService,
+		private readonly dialogService: DialogService
 	) {}
 
 	/**

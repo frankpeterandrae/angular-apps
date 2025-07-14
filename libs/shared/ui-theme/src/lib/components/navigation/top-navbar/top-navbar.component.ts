@@ -13,10 +13,10 @@ import { ColorDefinition } from '../../../enums';
  * Component representing the top navigation bar.
  */
 @Component({
-    selector: 'theme-topnavbar',
-    imports: [CommonModule, RouterLink],
-    templateUrl: './top-navbar.component.html',
-    styleUrl: './top-navbar.component.scss'
+	selector: 'theme-topnavbar',
+	imports: [CommonModule, RouterLink],
+	templateUrl: './top-navbar.component.html',
+	styleUrl: './top-navbar.component.scss'
 })
 export class TopNavbarComponent {
 	/**

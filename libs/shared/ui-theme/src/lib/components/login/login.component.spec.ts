@@ -15,7 +15,7 @@ describe('LoginComponent', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			imports: [LoginComponent],
+			imports: [LoginComponent]
 		});
 
 		fixture = TestBed.createComponent(LoginComponent);

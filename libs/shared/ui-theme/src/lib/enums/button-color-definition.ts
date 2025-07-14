@@ -9,5 +9,5 @@ export enum ButtonColorDefinition {
 	INFO = 'info',
 	PRIMARY = 'primary',
 	SUCCESS = 'success',
-	WARNING = 'warning',
+	WARNING = 'warning'
 }

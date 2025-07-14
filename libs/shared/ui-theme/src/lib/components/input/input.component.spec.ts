@@ -13,7 +13,7 @@ describe('InputComponent', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			imports: [InputComponent],
+			imports: [InputComponent]
 		});
 
 		fixture = TestBed.createComponent(InputComponent);

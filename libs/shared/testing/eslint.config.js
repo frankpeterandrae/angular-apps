@@ -13,17 +13,17 @@ module.exports = [
 	...nx.configs['flat/angular-template'],
 	{
 		files: ['**/*.ts'],
-		rules: {},
+		rules: {}
 	},
 	{
 		files: ['**/*.html'],
 		// Override or add rules here
-		rules: {},
+		rules: {}
 	},
 	{
 		files: ['**/*.ts'],
 		rules: {
-			'@angular-eslint/prefer-standalone': 'off',
-		},
-	},
+			'@angular-eslint/prefer-standalone': 'off'
+		}
+	}
 ];

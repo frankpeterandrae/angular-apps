@@ -11,7 +11,7 @@ import { Directive, ElementRef, HostListener, input, Renderer2 } from '@angular/
  */
 @Directive({
 	selector: '[themeTooltip]',
-	standalone: true,
+	standalone: true
 })
 export class TooltipDirective {
 	/**
@@ -27,7 +27,7 @@ export class TooltipDirective {
 	 */
 	constructor(
 		private readonly elementeRef: ElementRef,
-		private readonly renderer: Renderer2,
+		private readonly renderer: Renderer2
 	) {}
 
 	/**

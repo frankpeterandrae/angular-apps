@@ -13,7 +13,7 @@ describe('HeroComponent', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			imports: [HeroComponent],
+			imports: [HeroComponent]
 		});
 
 		fixture = TestBed.createComponent(HeroComponent);

@@ -13,7 +13,7 @@ import { DialogConfigModel } from '../../model/dialog-config.model';
  * Service to manage dialog operations.
  */
 @Injectable({
-	providedIn: 'root',
+	providedIn: 'root'
 })
 export class DialogService {
 	/**
@@ -23,7 +23,7 @@ export class DialogService {
 	 */
 	constructor(
 		private readonly overlay: Overlay,
-		private readonly injector: Injector,
+		private readonly injector: Injector
 	) {}
 
 	/**
@@ -38,16 +38,16 @@ export class DialogService {
 			backdropClass: 'dark-backdrop',
 			panelClass: 'dialog-panel',
 			positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
-			maxWidth: '90vw',
+			maxWidth: '90vw'
 		};
 		const overlayRef = this.overlay.create(config);
 
 		const customInjector = Injector.create({
 			providers: [
 				{ provide: DIALOG_DATA, useValue: data },
-				{ provide: OverlayRef, useValue: overlayRef },
+				{ provide: OverlayRef, useValue: overlayRef }
 			],
-			parent: this.injector,
+			parent: this.injector
 		});
 
 		const componentPortal = new ComponentPortal(component, null, customInjector);

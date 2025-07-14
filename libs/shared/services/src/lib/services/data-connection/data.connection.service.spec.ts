@@ -18,7 +18,7 @@ describe('DataConnectionService', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			providers: [DataConnectionService, { provide: HttpClient, useValue: { get: jest.fn(), post: jest.fn() } }],
+			providers: [DataConnectionService, { provide: HttpClient, useValue: { get: jest.fn(), post: jest.fn() } }]
 		});
 		httpClient = TestBed.inject(HttpClient);
 		service = TestBed.inject(DataConnectionService);

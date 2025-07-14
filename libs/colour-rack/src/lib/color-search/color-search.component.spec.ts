@@ -13,7 +13,7 @@ describe('ColorSearchComponent', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			imports: [ColorSearchComponent],
+			imports: [ColorSearchComponent]
 		});
 
 		fixture = TestBed.createComponent(ColorSearchComponent);

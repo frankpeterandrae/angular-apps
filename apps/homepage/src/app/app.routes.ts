@@ -22,8 +22,8 @@ const devRoutes: Route[] = [
 		 * @returns {Promise<any>} A promise that resolves to the Error404Component.
 		 */
 		loadComponent: () => import('@angular-apps/homepage-feature').then((m) => m.Error404Component),
-		canActivate: [EnvGuard],
-	},
+		canActivate: [EnvGuard]
+	}
 	// Add more dev-specific routes here
 ];
 
@@ -38,7 +38,7 @@ export const appRoutes: Route[] = [
 		 * Lazy loads the HomeComponent for the home route.
 		 * @returns {Promise<any>} A promise that resolves to the HomeComponent.
 		 */
-		loadComponent: (): Promise<any> => import('@angular-apps/homepage-feature').then((m) => m.HomeComponent),
+		loadComponent: (): Promise<any> => import('@angular-apps/homepage-feature').then((m) => m.HomeComponent)
 	},
 	{
 		path: 'paint-rack',
@@ -46,7 +46,7 @@ export const appRoutes: Route[] = [
 		 * Lazy loads the ColorSearchContainerComponent for the paint rack route.
 		 * @returns {Promise<any>} A promise that resolves to the ColorSearchContainerComponent.
 		 */
-		loadComponent: (): Promise<any> => import('@angular-apps/colour-rack').then((m) => m.ColorSearchContainerComponent),
+		loadComponent: (): Promise<any> => import('@angular-apps/colour-rack').then((m) => m.ColorSearchContainerComponent)
 	},
 	...(environment.production ? [] : devRoutes),
 	{
@@ -55,6 +55,6 @@ export const appRoutes: Route[] = [
 		 * Lazy loads the Error404Component for handling unknown routes.
 		 * @returns {Promise<any>} A promise that resolves to the Error404Component.
 		 */
-		loadComponent: (): Promise<any> => import('@angular-apps/homepage-feature').then((m) => m.Error404Component),
-	},
+		loadComponent: (): Promise<any> => import('@angular-apps/homepage-feature').then((m) => m.Error404Component)
+	}
 ];

@@ -13,7 +13,7 @@ describe('CardComponent', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			imports: [CardComponent],
+			imports: [CardComponent]
 		});
 
 		fixture = TestBed.createComponent(CardComponent);

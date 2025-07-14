@@ -13,7 +13,7 @@ describe('IconComponent', () => {
 
 	beforeEach(async () => {
 		await setupTestingModule({
-			imports: [IconDemoComponent],
+			imports: [IconDemoComponent]
 		});
 
 		fixture = TestBed.createComponent(IconDemoComponent);
