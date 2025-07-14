@@ -2,8 +2,10 @@
 	"AppComponent": {
 		"menu": {
 			"lbl": {
+				"FkttCards": "FKTT Card Generator",
 				"Home": "Home",
 				"InDevelopment": "In Development",
+				"ModelRailroad": "Model railroad",
 				"PaintRack": "Paint rack",
 				"Test": "Test"
 			}

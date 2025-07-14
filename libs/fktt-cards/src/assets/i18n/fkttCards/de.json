@@ -1,0 +1,21 @@
+{
+	"FkttCards": {
+		"lbl": {
+			"FkttCards": "FKTT Karten Generator",
+			"FrightCarCard": "Wagenkarte",
+			"LocoCard": "Lokkarte"
+		}
+	},
+	"LocoCard": {
+		"lbl": {
+			"CardNumber": "Karten Nummer",
+			"Freight": "Güterzug",
+			"Owner": "",
+			"Passenger": "Personenzug",
+			"RailroadAdministration": "Bahnverwaltung",
+			"Shunting": "Rangierlok",
+			"Type": "Type",
+			"UsedFor": "Einsatz"
+		}
+	}
+}

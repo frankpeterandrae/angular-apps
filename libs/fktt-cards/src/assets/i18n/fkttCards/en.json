@@ -1,0 +1,21 @@
+{
+	"FkttCards": {
+		"lbl": {
+			"FkttCards": "FKTT Card Generator",
+			"FrightCarCard": "",
+			"LocoCard": "Loco card"
+		}
+	},
+	"LocoCard": {
+		"lbl": {
+			"CardNumber": "Card Number",
+			"Freight": "Fright Train",
+			"Owner": "",
+			"Passenger": "Pasanger Train",
+			"RailroadAdministration": "Railroad Administration",
+			"Shunting": "Shunting Locomotive",
+			"Type": "Type",
+			"UsedFor": "Use"
+		}
+	}
+}

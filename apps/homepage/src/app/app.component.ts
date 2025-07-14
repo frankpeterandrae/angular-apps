@@ -24,10 +24,12 @@ import { translateSignal } from '@jsverse/transloco';
 export class AppComponent implements OnInit {
 	private readonly meta = inject(Meta);
 
-	protected homeLabel = translateSignal(i18nTextModules.AppComponent.menu.lbl.Home);
+	private homeLabel = translateSignal(i18nTextModules.AppComponent.menu.lbl.Home);
 	private paintRack = translateSignal(i18nTextModules.AppComponent.menu.lbl.PaintRack);
 	private inDevelopment = translateSignal(i18nTextModules.AppComponent.menu.lbl.InDevelopment);
 	private test = translateSignal(i18nTextModules.AppComponent.menu.lbl.Test);
+	private fkttCards = translateSignal(i18nTextModules.AppComponent.menu.lbl.FkttCards);
+	private modelRailroad = translateSignal(i18nTextModules.AppComponent.menu.lbl.ModelRailroad);
 	/**
 	 * The menu items to be displayed in the sidebar.
 	 * @type {MenuItem[]}
@@ -82,6 +84,13 @@ export class AppComponent implements OnInit {
 							icon: IconDefinition.PALETTE,
 							route: '/dev',
 							children: [{ id: 'test', label: this.test, route: '/dev/test' }]
+						},
+						{
+							id: 'modelRailroad',
+							label: this.modelRailroad,
+							icon: IconDefinition.PALETTE,
+							route: '/dev/Lokkarten',
+							children: [{ id: 'fkttCards', label: this.fkttCards, route: '/dev/Lokkarten' }]
 						}
 					]
 				: [])
