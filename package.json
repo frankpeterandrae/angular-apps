@@ -109,6 +109,7 @@
 		}
 	},
 	"lint-staged": {
+		"*": "nx affected:lint",
 		"*.{css,scss}": [
 			"stylelint --fix",
 			"prettier --config .prettierrc --write"

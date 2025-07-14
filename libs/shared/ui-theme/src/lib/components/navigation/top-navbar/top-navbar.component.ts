@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Component, input } from '@angular/core';
+import { Component, input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuItem } from '../../../model/menu-item.model';
 import { Router, RouterLink } from '@angular/router';
@@ -19,6 +19,8 @@ import { ColorDefinition } from '../../../enums';
 	styleUrl: './top-navbar.component.scss'
 })
 export class TopNavbarComponent {
+	public readonly router = inject(Router);
+
 	/**
 	 * Array of menu items to be displayed in the navigation bar.
 	 */
@@ -33,12 +35,6 @@ export class TopNavbarComponent {
 	 * Object to track the state of dropdown menus.
 	 */
 	public showDropdown: { [key: string]: boolean } = {};
-
-	/**
-	 * Constructor to inject the Router service.
-	 * @param {Router} router - The Angular Router service.
-	 */
-	constructor(public readonly router: Router) {}
 
 	/**
 	 * Gets the current route URL.

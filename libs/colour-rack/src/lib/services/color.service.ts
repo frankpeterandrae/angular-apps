@@ -4,7 +4,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Color } from '../models/color.model';
 
@@ -16,13 +16,9 @@ import { Color } from '../models/color.model';
 	providedIn: 'root'
 })
 export class ColorService {
-	private readonly colorsUrl = 'assets/colors.json'; // Path to your JSON file
+	private readonly http = inject(HttpClient);
 
-	/**
-	 * Constructor for ColorService.
-	 * @param {HttpClient} http - The HTTP client used to make requests.
-	 */
-	constructor(private readonly http: HttpClient) {}
+	private readonly colorsUrl = 'assets/colors.json';
 
 	/**
 	 * Fetches the list of colors from the JSON file.

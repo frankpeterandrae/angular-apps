@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { AfterViewInit, Component, computed, ElementRef, Inject, input, OnDestroy, DOCUMENT } from '@angular/core';
+import { AfterViewInit, Component, computed, ElementRef, input, OnDestroy, DOCUMENT, inject } from '@angular/core';
 
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
@@ -17,6 +17,10 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 	styleUrl: './image-loader.component.scss'
 })
 export class ImageLoaderComponent implements AfterViewInit, OnDestroy {
+	private readonly elementRef = inject(ElementRef);
+	private readonly sanitizer = inject(DomSanitizer);
+	private readonly document = inject<Document>(DOCUMENT);
+
 	/**
 	 * The source URL of the image.
 	 */
@@ -87,15 +91,8 @@ export class ImageLoaderComponent implements AfterViewInit, OnDestroy {
 	/**
 	 * Constructor for ImageLoaderComponent.
 	 * Initializes the component with the provided services and sets a placeholder image.
-	 * @param {ElementRef} elementRef - Reference to the element.
-	 * @param {DomSanitizer} sanitizer - Service to sanitize URLs.
-	 * @param {Document} document - Reference to the document.
 	 */
-	constructor(
-		private readonly elementRef: ElementRef,
-		private readonly sanitizer: DomSanitizer,
-		@Inject(DOCUMENT) private readonly document: Document
-	) {
+	constructor() {
 		// Initialize with placeholder
 		this.setPlaceholder();
 	}

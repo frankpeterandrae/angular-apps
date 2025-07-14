@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { environment } from '@angular-apps/config';
 
@@ -15,11 +15,7 @@ import { environment } from '@angular-apps/config';
 	providedIn: 'root'
 })
 export class EnvGuard implements CanActivate {
-	/**
-	 * Constructor for EnvGuard.
-	 * @param {Router} router - The Angular Router service used for navigation.
-	 */
-	constructor(private readonly router: Router) {}
+	private readonly router = inject(Router);
 
 	/**
 	 * Determines if the route can be activated.

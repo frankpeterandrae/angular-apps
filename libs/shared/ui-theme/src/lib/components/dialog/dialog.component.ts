@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { OverlayRef } from '@angular/cdk/overlay';
 import { DIALOG_DATA } from './dialog-tokens';
@@ -22,15 +22,8 @@ import { ButtonColorDefinition } from '../../enums';
 	styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent {
-	/**
-	 * Constructor to inject the overlay reference and dialog data.
-	 * @param {OverlayRef} overlayRef - Reference to the overlay.
-	 * @param {DialogConfigModel<any>} data - Configuration data for the dialog.
-	 */
-	constructor(
-		private readonly overlayRef: OverlayRef,
-		@Inject(DIALOG_DATA) public data: DialogConfigModel<any>
-	) {}
+	private readonly overlayRef = inject(OverlayRef);
+	public data = inject<DialogConfigModel<any>>(DIALOG_DATA);
 
 	/**
 	 * Closes the dialog by disposing of the overlay reference.

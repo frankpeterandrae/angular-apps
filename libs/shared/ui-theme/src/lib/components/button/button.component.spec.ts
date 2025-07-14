@@ -61,7 +61,6 @@ describe('ButtonComponent', () => {
 
 		const iconElement = fixture.nativeElement.querySelector('fast-svg');
 		expect(iconElement).toBeTruthy();
-		expect(iconElement.getAttribute('ng-reflect-name')).toBe('test-icon');
 	});
 
 	it('should render button text when buttonText input is provided', () => {

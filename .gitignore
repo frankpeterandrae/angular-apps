@@ -48,3 +48,4 @@ Thumbs.db
 *.xlsm
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
+/out/

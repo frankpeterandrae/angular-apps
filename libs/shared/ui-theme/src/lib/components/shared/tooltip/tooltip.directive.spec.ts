@@ -6,14 +6,14 @@
 import { TooltipDirective } from './tooltip.directive';
 import { ElementRef, input, Renderer2 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { setupTestingModule } from '../../../../test-setup';
 
 describe('TooltipDirective', () => {
 	let directive: TooltipDirective;
 	let elementRefMock: ElementRef;
 	let rendererMock: Renderer2;
 
-	beforeEach(() => {
-		// Mock ElementRef and Renderer2
+	beforeEach(async () => {
 		elementRefMock = { nativeElement: document.createElement('div') } as ElementRef;
 		rendererMock = {
 			createElement: jest.fn().mockReturnValue(document.createElement('span')),
@@ -24,11 +24,16 @@ describe('TooltipDirective', () => {
 			removeChild: jest.fn()
 		} as unknown as Renderer2;
 
-		// Mock InputSignal<string>
+		await setupTestingModule({
+			providers: [
+				{ provide: ElementRef, useValue: elementRefMock },
+				{ provide: Renderer2, useValue: rendererMock }
+			]
+		});
 
 		TestBed.runInInjectionContext(() => {
 			const themeTooltip = input<string>('Test Tooltip');
-			directive = new TooltipDirective(elementRefMock, rendererMock);
+			directive = new TooltipDirective();
 			directive.themeTooltip = themeTooltip;
 		});
 	});

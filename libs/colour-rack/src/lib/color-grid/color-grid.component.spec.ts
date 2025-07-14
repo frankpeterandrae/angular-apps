@@ -243,13 +243,13 @@ describe('ColorGridComponent', () => {
 		Object.defineProperty(firstCard, 'offsetHeight', { value: 100, configurable: true });
 		firstCard.style.marginTop = '10px';
 		firstCard.style.marginBottom = '10px';
-		jest.spyOn(component['viewPort'].elementRef.nativeElement, 'querySelector').mockReturnValue(firstCard);
+		jest.spyOn(component['viewPort']().elementRef.nativeElement, 'querySelector').mockReturnValue(firstCard);
 		component['updateItemSize']();
 		expect(component.itemSize).toBe(120); // 100px height + 10px marginTop + 10px marginBottom
 	});
 
 	it('should set item size to default when no color tile is found', () => {
-		jest.spyOn(component['viewPort'].elementRef.nativeElement, 'querySelector').mockReturnValue(null);
+		jest.spyOn(component['viewPort']().elementRef.nativeElement, 'querySelector').mockReturnValue(null);
 		component['updateItemSize']();
 		expect(component.itemSize).toBe(68);
 	});

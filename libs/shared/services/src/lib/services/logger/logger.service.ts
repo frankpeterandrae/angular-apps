@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
+import { Injectable, InjectionToken, inject } from '@angular/core';
 
 /**
  * Enum representing the log levels.
@@ -36,17 +36,13 @@ export const LOGGER_SOURCE = new InjectionToken<string>('LOGGER_SOURCE');
 	providedIn: 'root'
 })
 export class Logger {
+	private readonly source = inject(LOGGER_SOURCE, { optional: true });
+
 	private static disabled = false;
 
 	private static readonly level: LogLevel = LogLevel.Debug;
 
 	private static readonly outputs: LogOutput[] = [];
-
-	/**
-	 * Creates an instance of Logger.
-	 * @param {string} [source] - The source of the log messages.
-	 */
-	constructor(@Optional() @Inject(LOGGER_SOURCE) private readonly source?: string) {}
 
 	/**
 	 * Sets the logger to production mode, disabling logging if in production environment.
@@ -103,7 +99,7 @@ export class Logger {
 		if (!Logger.disabled && level <= Logger.level) {
 			const log = this.source ? ['[' + this.source + ']'].concat(objects) : objects;
 			func.apply(console, log);
-			Logger.outputs.forEach((output) => output.apply(output, [this.source, level, ...objects]));
+			Logger.outputs.forEach((output) => output.apply(output, [this.source ?? undefined, level, ...objects]));
 		}
 	}
 }

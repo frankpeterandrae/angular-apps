@@ -2,7 +2,7 @@
  * Copyright (c) 2024. Frank-Peter Andrä
  * All rights reserved.
  */
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DataConnectionService } from '@angular-apps/services';
 import { ButtonComponent } from '../button/button.component';
@@ -17,6 +17,9 @@ import { ButtonColorDefinition } from '../../enums';
 	templateUrl: './login.component.html'
 })
 export class LoginComponent {
+	public dataConnection = inject(DataConnectionService);
+	private readonly formBuilder = inject(FormBuilder);
+
 	/**
 	 * Enum for color definitions.
 	 */
@@ -29,13 +32,8 @@ export class LoginComponent {
 
 	/**
 	 * Constructor for LoginComponent.
-	 * @param {DataConnectionService} dataConnection - Service for data connection.
-	 * @param {FormBuilder} formBuilder - Service to create form groups.
 	 */
-	constructor(
-		public dataConnection: DataConnectionService,
-		private readonly formBuilder: FormBuilder
-	) {
+	constructor() {
 		this.loginForm = this.formBuilder.group({
 			email: ['', [Validators.required, Validators.email]],
 			password: ['', Validators.required]
