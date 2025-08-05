@@ -36,7 +36,8 @@
 		"@angular/platform-browser": "20.0.7",
 		"@angular/platform-browser-dynamic": "20.0.7",
 		"@angular/router": "20.0.7",
-		"@jsverse/transloco": "^7.5.0",
+		"@jsverse/transloco": "^7.6.1",
+		"@ngrx/signals": "^20.0.0-rc.0",
 		"@nx/angular": "21.2.3",
 		"@push-based/ngx-fast-svg": "^18.1.0",
 		"rxjs": "~7.8.1",
@@ -120,6 +121,7 @@
 			"prettier --config .prettierrc --write"
 		],
 		"*.{md,json,html,php}": [
+			"node scripts/build-translation-files.js",
 			"prettier --config .prettierrc --write"
 		]
 	}
