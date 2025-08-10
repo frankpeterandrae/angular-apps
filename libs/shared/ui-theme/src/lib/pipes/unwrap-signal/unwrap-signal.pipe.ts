@@ -10,7 +10,7 @@ export class UnwrapSignalPipe implements PipeTransform {
 	 * @param {string | Signal<string>} value - The given value.
 	 * @returns {string} The string.
 	 */
-	public transform(value: string | Signal<string>): string {
-		return typeof value === 'function' ? (value as any)() : value;
+	public transform(value: Signal<string>): string {
+		return value();
 	}
 }

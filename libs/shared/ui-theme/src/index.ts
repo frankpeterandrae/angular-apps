@@ -29,4 +29,3 @@ export * from './lib/components/textarea/textarea.component';
 export * from './lib/directives/floating-lable';
 export * from './lib/enums';
 export * from './lib/model';
-export * from './lib/pipes/unwrap-signal/unwrap-signal.pipe';

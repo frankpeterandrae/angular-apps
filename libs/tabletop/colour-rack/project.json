@@ -1,7 +1,7 @@
 {
 	"name": "colour-rack",
-	"$schema": "../../node_modules/nx/schemas/project-schema.json",
-	"sourceRoot": "libs/colour-rack/src",
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/tabletop/colour-rack/src",
 	"prefix": "lib",
 	"projectType": "library",
 	"tags": ["scope:web", "type:feature"],
@@ -10,7 +10,7 @@
 			"executor": "@nx/jest:jest",
 			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
 			"options": {
-				"jestConfig": "libs/colour-rack/jest.config.ts"
+				"jestConfig": "libs/tabletop/colour-rack/jest.config.ts"
 			}
 		},
 		"lint": {
@@ -20,7 +20,7 @@
 			"executor": "nx-stylelint:lint",
 			"outputs": ["{options.outputFile}"],
 			"options": {
-				"lintFilePatterns": ["libs/colour-rack/**/*.css", "libs/colour-rack/**/*.scss"]
+				"lintFilePatterns": ["libs/tabletop/colour-rack/**/*.css", "libs/tabletop/colour-rack/**/*.scss"]
 			}
 		}
 	}

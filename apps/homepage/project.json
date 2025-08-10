@@ -23,7 +23,7 @@
 					},
 					{
 						"glob": "**/*",
-						"input": "libs/colour-rack/src/assets",
+						"input": "libs/tabletop/colour-rack/src/assets",
 						"output": "assets"
 					},
 					{

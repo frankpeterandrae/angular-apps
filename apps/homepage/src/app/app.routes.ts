@@ -24,6 +24,25 @@ const devRoutes: Route[] = [
 		 */
 		loadComponent: () => import('@angular-apps/homepage-feature').then((m) => m.Error404Component),
 		canActivate: [EnvGuard]
+	},
+	{
+		path: 'tabletop/model-collection',
+		/**
+		 * Lazy loads the Error404Component for the test route.
+		 * @returns {Promise<any>} A promise that resolves to the Error404Component.
+		 */
+		loadComponent: () => import('@angular-apps/model-collection').then((m) => m.ModelCollectionComponent),
+		canActivate: [EnvGuard]
+	},
+	{
+		path: 'tabletop/paint-rack',
+		/**
+		 * Lazy loads the ColorSearchContainerComponent for the paint rack route.
+		 * @returns {Promise<any>} A promise that resolves to the ColorSearchContainerComponent.
+		 */
+		loadComponent: (): Promise<any> => import('@angular-apps/colour-rack').then((m) => m.ColorSearchContainerComponent),
+		providers: [provideTranslocoScope(Scopes.COLOR_RACK)],
+		canActivate: [EnvGuard]
 	}
 	// Add more dev-specific routes here
 ];

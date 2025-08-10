@@ -7,7 +7,7 @@ import { Signal } from '@angular/core';
 
 export interface MenuItem {
 	id: string;
-	label: string | Signal<string>;
+	label: Signal<string>;
 	icon?: string;
 	route?: string;
 	children?: MenuItem[];

@@ -28,6 +28,8 @@ export class AppComponent implements OnInit {
 	private paintRack = translateSignal(i18nTextModules.AppComponent.menu.lbl.PaintRack);
 	private inDevelopment = translateSignal(i18nTextModules.AppComponent.menu.lbl.InDevelopment);
 	private test = translateSignal(i18nTextModules.AppComponent.menu.lbl.Test);
+	private tabletop = translateSignal(i18nTextModules.AppComponent.menu.lbl.Tabletop);
+
 	/**
 	 * The menu items to be displayed in the sidebar.
 	 * @type {MenuItem[]}
@@ -68,12 +70,6 @@ export class AppComponent implements OnInit {
 				icon: IconDefinition.HOUSE,
 				route: '/'
 			},
-			{
-				id: 'paint-rack',
-				label: this.paintRack,
-				icon: IconDefinition.PALETTE,
-				route: '/paint-rack'
-			},
 			...(!environment.production
 				? [
 						{
@@ -82,6 +78,16 @@ export class AppComponent implements OnInit {
 							icon: IconDefinition.PALETTE,
 							route: '/dev',
 							children: [{ id: 'test', label: this.test, route: '/dev/test' }]
+						},
+						{
+							id: 'tabletop',
+							label: this.tabletop,
+							icon: IconDefinition.PALETTE,
+							route: '/tabletop',
+							children: [
+								{ id: 'paint-rack', label: this.paintRack, route: '/tabletop/paint-rack' },
+								{ id: 'models', label: this.paintRack, route: '/tabletop/model-collection' }
+							]
 						}
 					]
 				: [])

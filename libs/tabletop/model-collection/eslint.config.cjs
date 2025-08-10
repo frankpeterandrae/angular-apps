@@ -1,11 +1,5 @@
-/*
- * Copyright (c) 2025. Frank-Peter Andrä
- * All rights reserved.
- */
-
 const nx = require('@nx/eslint-plugin');
-const baseConfig = require('../../eslint.config.js');
-require('@typescript-eslint/eslint-plugin');
+const baseConfig = require('../../../eslint.config.js');
 
 module.exports = [
 	...baseConfig,
@@ -18,7 +12,7 @@ module.exports = [
 				'error',
 				{
 					type: 'attribute',
-					prefix: 'cr',
+					prefix: 'lib',
 					style: 'camelCase'
 				}
 			],
@@ -26,7 +20,7 @@ module.exports = [
 				'error',
 				{
 					type: 'element',
-					prefix: 'cr',
+					prefix: 'lib',
 					style: 'kebab-case'
 				}
 			]
@@ -36,11 +30,5 @@ module.exports = [
 		files: ['**/*.html'],
 		// Override or add rules here
 		rules: {}
-	},
-	{
-		files: ['**/*.ts'],
-		rules: {
-			'@angular-eslint/prefer-standalone': 'off'
-		}
 	}
 ];

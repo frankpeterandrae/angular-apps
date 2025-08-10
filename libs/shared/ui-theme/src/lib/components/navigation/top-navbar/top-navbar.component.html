@@ -24,10 +24,12 @@
 			<div class="nva-dropdown">
 				<a
 					class="nva-dropdown fpa-p-1 fpa-light-text fpa-link"
+					[routerLink]="navigationItem.route"
 					[ngClass]="{ 'link-active': getCurrentRoute().includes(navigationItem.route) }"
-					(click)="toggleNavigation(navigationItem.route)"
+					(mouseover)="toggleNavigation(navigationItem.route)"
+					(mouseleave)="toggleNavigation(navigationItem.route)"
 				>
-					<span>{{ navigationItem.label | themeUnwrapSignal }}</span>
+					<span>{{ navigationItem.label() }}</span>
 				</a>
 				<div
 					class="dropdown-content fpa-bg-linen fpa-dark-text"
@@ -51,7 +53,7 @@
 				[ngClass]="{ 'link-active': getCurrentRoute() === navigationItem.route }"
 				(click)="resetDropdowns()"
 			>
-				<span>{{ navigationItem.label | themeUnwrapSignal }}</span>
+				<span>{{ navigationItem.label() }}</span>
 			</a>
 		}
 	</li>
