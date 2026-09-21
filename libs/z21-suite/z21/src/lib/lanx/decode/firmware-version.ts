@@ -3,35 +3,42 @@
  * All rights reserved.
  */
 
-import type { Z21Event } from '@application-platform/z21-shared';
+import { Z21EventName, type Z21FirmwareVersionEvent } from '@application-platform/z21-shared';
 
 /**
- * Decodes the LAN X Firmware Version payload.
- * @param payload - The raw payload bytes.
- *    - DB1: Major version
- *    - DB2: Minor version
- *      e.g., [0x01, 0x23] represents version 1.23
- * @returns Array of Z21Event entries with firmware version information.
+ * Decodes LAN-X firmware version responses.
  */
-export function decodeLanXFirmwareVersionPayload(payload: Uint8Array): Extract<Z21Event, { event: 'system.event.firmware.version' }>[] {
-	const bcdToNumber = (value: number | undefined): number => {
-		if (value === undefined) return 0;
-		const high = (value >> 4) & 0x0f;
-		const low = value & 0x0f;
-		return high * 10 + low;
-	};
-
-	const major = bcdToNumber(payload[1]);
-	const minor = bcdToNumber(payload[2]);
-	const raw = Array.from(payload);
-	return [
-		{
-			event: 'system.event.firmware.version',
-			payload: {
-				raw,
-				major,
-				minor
-			}
+export class LanXFirmwareVersionDecoder {
+	/**
+	 * Decodes a firmware version payload.
+	 *
+	 * @param payload - LAN-X firmware version payload.
+	 * @returns Decoded firmware version event.
+	 */
+	public decode(payload: Uint8Array): Z21FirmwareVersionEvent[] {
+		if (payload.length < 3) {
+			return [];
 		}
-	];
+		const major = this.bcdToNumber(payload[1]);
+		const minor = this.bcdToNumber(payload[2]);
+
+		return [
+			{
+				event: Z21EventName.FIRMWARE_VERSION,
+				payload: {
+					major,
+					minor,
+					raw: Array.from(payload)
+				}
+			}
+		];
+	}
+
+	private bcdToNumber(value: number | undefined): number {
+		if (value === undefined) {
+			return 0;
+		}
+
+		return ((value >> 4) & 0x0f) * 10 + (value & 0x0f);
+	}
 }

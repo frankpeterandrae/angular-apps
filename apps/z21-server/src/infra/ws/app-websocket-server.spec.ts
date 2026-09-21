@@ -3,53 +3,60 @@
  * All rights reserved.
  */
 
-import { isClientToServerMessage, PROTOCOL_VERSION } from '@application-platform/protocol';
-import { WsServer } from '@application-platform/server-utils';
-import { DeepMock, DeepMocked, resetMocksBeforeEach } from '@application-platform/shared-node-test';
-import { Logger } from '@application-platform/z21-shared';
-import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
+import { PROTOCOL_VERSION, type ClientToServer } from '@application-platform/protocol';
+import type { WsServer } from '@application-platform/server-utils';
+import { DeepMock, type DeepMocked } from '@application-platform/shared-node-test';
+import type { Logger } from '@application-platform/z21-shared';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import type { WebSocket as WsWebSocket } from 'ws';
 
 import { AppWsServer } from './app-websocket-server';
-
-// DeepMock the protocol validation function at module level
-vi.mock('@application-platform/protocol', async () => {
-	const actual = await vi.importActual<typeof import('@application-platform/protocol')>('@application-platform/protocol');
-	return {
-		...actual,
-		isClientToServerMessage: vi.fn()
-	};
-});
 
 describe('AppWsServer', () => {
 	let wsServer: DeepMocked<WsServer>;
 	let logger: DeepMocked<Logger>;
 	let server: AppWsServer;
 
+	const ws = {} as WsWebSocket;
+
+	function connectionHandlers(): {
+		onMessage: (data: string, ws: WsWebSocket) => void;
+		onDisconnect: ((ws: WsWebSocket) => void) | undefined;
+		onConnect: ((ws: WsWebSocket) => void) | undefined;
+	} {
+		const [onMessage, onDisconnect, onConnect] = wsServer.onConnection.mock.calls[0];
+
+		return {
+			onMessage,
+			onDisconnect,
+			onConnect
+		};
+	}
+
 	beforeEach(() => {
 		wsServer = DeepMock<WsServer>();
+
 		logger = DeepMock<Logger>();
 
-		resetMocksBeforeEach({ wsServer, logger, console });
-
-		// DeepMock console.log to keep tests clean
-		vi.spyOn(global.console, 'log').mockImplementation(() => {
-			// do nothing
-		});
-
-		server = new AppWsServer(wsServer as any, logger as any);
+		server = new AppWsServer(wsServer, logger);
 	});
 
-	it('sends server.replay.session.ready on new connection', () => {
-		const onMessage = vi.fn();
-		const onDisconnect = vi.fn();
-		const onConnect = vi.fn();
+	it('sends session-ready before invoking the connect handler', () => {
+		const callOrder: string[] = [];
 
-		server.onConnection(onMessage, onDisconnect, onConnect);
+		wsServer.send.mockImplementation(() => {
+			callOrder.push('ready');
+		});
 
-		const onConnectHandler = wsServer.onConnection.mock.calls[0][2];
-		const ws: any = { id: 'ws-1' };
+		const onConnect = vi.fn(() => {
+			callOrder.push('connect');
+		});
 
-		onConnectHandler!(ws);
+		server.onConnection(vi.fn(), undefined, onConnect);
+
+		const handlers = connectionHandlers();
+
+		handlers.onConnect?.(ws);
 
 		expect(wsServer.send).toHaveBeenCalledWith(ws, {
 			type: 'server.replay.session.ready',
@@ -59,74 +66,139 @@ describe('AppWsServer', () => {
 				requestId: ''
 			}
 		});
+
+		expect(callOrder).toEqual(['ready', 'connect']);
 	});
 
-	it('ignores invalid JSON payloads', () => {
+	it('forwards valid protocol messages', () => {
 		const onMessage = vi.fn();
-		server.onConnection(onMessage);
-		const handler = wsServer.onConnection.mock.calls[0][0];
-		const ws: any = {};
 
-		handler('not-json', ws);
+		const message: ClientToServer = {
+			type: 'system.command.trackpower.set',
+			payload: {
+				powerOn: true,
+				requestId: 'req-1'
+			}
+		};
+
+		server.onConnection(onMessage);
+
+		connectionHandlers().onMessage(JSON.stringify(message), ws);
+
+		expect(onMessage).toHaveBeenCalledWith(message, ws);
+
+		expect(logger.info).toHaveBeenCalledWith('ws.message.accepted', {
+			type: message.type
+		});
+	});
+
+	it('rejects malformed JSON', () => {
+		const onMessage = vi.fn();
+
+		server.onConnection(onMessage);
+
+		connectionHandlers().onMessage('not-json', ws);
 
 		expect(onMessage).not.toHaveBeenCalled();
+
+		expect(logger.debug).toHaveBeenCalledWith(
+			'ws.message.rejected',
+			expect.objectContaining({
+				reason: 'invalid json'
+			})
+		);
 	});
 
-	it('rejects messages that fail validation', () => {
-		(isClientToServerMessage as unknown as Mock).mockReturnValue(false);
+	it('rejects JSON that is not a valid client protocol message', () => {
 		const onMessage = vi.fn();
-		server.onConnection(onMessage);
-		const handler = wsServer.onConnection.mock.calls[0][0];
-		const ws: any = {};
 
-		handler(JSON.stringify({ bogus: true }), ws);
+		server.onConnection(onMessage);
+
+		connectionHandlers().onMessage(
+			JSON.stringify({
+				type: 'invalid.message'
+			}),
+			ws
+		);
 
 		expect(onMessage).not.toHaveBeenCalled();
+
+		expect(logger.info).toHaveBeenCalledWith('ws.message.rejected', {
+			message: {
+				type: 'invalid.message'
+			},
+			reason: 'invalid message'
+		});
 	});
 
-	it('forwards accepted messages to the provided handler', () => {
-		(isClientToServerMessage as unknown as Mock).mockImplementation((m: any) => !!m && typeof m === 'object' && m.type === 'ping');
-		const onMessage = vi.fn();
-		server.onConnection(onMessage);
-		const handler = wsServer.onConnection.mock.calls[0][0];
-		const ws: any = {};
-		const msg = { type: 'ping' };
-
-		handler(JSON.stringify(msg), ws);
-
-		expect(onMessage).toHaveBeenCalledWith(msg, ws);
-	});
-
-	it('invokes disconnect handler when connection ends', () => {
-		const onMessage = vi.fn();
+	it('invokes the disconnect handler', () => {
 		const onDisconnect = vi.fn();
-		server.onConnection(onMessage, onDisconnect);
 
-		const disconnect = wsServer.onConnection.mock.calls[0][1];
-		const ws: any = { id: 'ws-1' };
-		disconnect!(ws);
+		server.onConnection(vi.fn(), onDisconnect);
 
-		expect(onDisconnect).toHaveBeenCalled();
+		connectionHandlers().onDisconnect?.(ws);
+
+		expect(onDisconnect).toHaveBeenCalledWith(ws);
 	});
 
-	it('delegates sendToClient to underlying wsServer', () => {
-		const ws: any = { id: 'ws-2' };
-		server.sendToClient(ws, {
+	it('logs rejected asynchronous message handlers', async () => {
+		const error = new Error('handler failed');
+
+		const onMessage = vi.fn().mockRejectedValue(error);
+
+		const message: ClientToServer = {
+			type: 'system.command.trackpower.set',
+			payload: {
+				powerOn: true,
+				requestId: 'req-1'
+			}
+		};
+
+		server.onConnection(onMessage);
+
+		connectionHandlers().onMessage(JSON.stringify(message), ws);
+
+		await vi.waitFor(() => {
+			expect(logger.error).toHaveBeenCalledWith('ws.message.failed', {
+				type: message.type,
+				error
+			});
+		});
+	});
+
+	it('delegates sendToClient to the underlying server', () => {
+		const message = {
 			type: 'server.replay.session.ready',
 			payload: {
 				protocolVersion: PROTOCOL_VERSION,
-				serverTime: new Date().toISOString(),
+				serverTime: '2026-01-01T00:00:00.000Z',
 				requestId: 'req-1'
 			}
-		});
-		expect(wsServer.send).toHaveBeenCalledWith(ws, expect.objectContaining({ type: 'server.replay.session.ready' }));
+		} as const;
+
+		server.sendToClient(ws, message);
+
+		expect(wsServer.send).toHaveBeenCalledWith(ws, message);
 	});
 
-	it('delegates broadcast to underlying wsServer', () => {
-		server.broadcast({
+	it('delegates broadcast to the underlying server', () => {
+		const message = {
 			type: 'server.replay.session.ready',
-			payload: { protocolVersion: PROTOCOL_VERSION, serverTime: new Date().toISOString(), requestId: 'req-1' }
-		});
-		expect(wsServer.broadcast).toHaveBeenCalledWith(expect.objectContaining({ type: 'server.replay.session.ready' }));
+			payload: {
+				protocolVersion: PROTOCOL_VERSION,
+				serverTime: '2026-01-01T00:00:00.000Z',
+				requestId: 'req-1'
+			}
+		} as const;
+
+		server.broadcast(message);
+
+		expect(wsServer.broadcast).toHaveBeenCalledWith(message);
+	});
+
+	it('delegates close to the underlying server', () => {
+		server.close();
+
+		expect(wsServer.close).toHaveBeenCalledOnce();
 	});
 });

@@ -4,7 +4,7 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { CvNack, CvRead, CvResult, PROTOCOL_VERSION, type ClientToServer } from '@application-platform/protocol';
+import { PROTOCOL_VERSION, type ClientToServer, type CvNack, type CvRead, type CvResult } from '@application-platform/protocol';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { setupTestingModule } from '../test-setup';
@@ -130,7 +130,7 @@ describe('WsClientService', () => {
 		const send = JSON.parse(lastCreatedWs.send.mock.calls[0][0]);
 		const requestId = send.payload.requestId;
 
-		const response = { type: 'programming.replay.cv.result', payload: { requestId, cvAdress: 42 } } as CvResult;
+		const response = { type: 'programming.replay.cv.result', payload: { requestId, cvAddress: 42 } } as CvResult;
 		lastCreatedWs.onmessage?.({ data: JSON.stringify(response) });
 
 		await expect(promise).resolves.toEqual(response);

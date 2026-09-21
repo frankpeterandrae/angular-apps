@@ -4,14 +4,13 @@
  */
 
 /**
- * Represents a decoded Z21 dataset from a UDP buffer.
+ * Represents a decoded dataset extracted from a Z21 UDP frame.
  *
- * Variants:
- * - xBus: X-BUS tunneled frame. `xHeader` is the first X-BUS byte, `data` is the payload without the trailing XOR.
- * - systemState: Fixed-length 16-byte Z21 system state packet.
- * - unknown: Any unrecognized header or unexpected payload length, returned as-is for observability.
+ * Unknown or malformed frames are preserved as diagnostic datasets so callers
+ * can inspect unexpected protocol input.
  */
 export type Z21Dataset =
+	| { kind: 'ds.serial'; serial: number }
 	| { kind: 'ds.x.bus'; xHeader: number; data: Uint8Array }
 	| { kind: 'ds.system.state'; state: Uint8Array }
 	| { kind: 'ds.unknown'; header: number; payload: Uint8Array; reason: string }

@@ -5,16 +5,22 @@
 
 import { TrackStatusManager, type CommandStationInfo, type LocoManager } from '@application-platform/domain';
 import type { ServerToClient } from '@application-platform/protocol';
-import type { Z21Dataset, Z21UdpDatagram, Z21UdpFrom } from '@application-platform/z21';
-import { datasetsToEvents, decodeSystemState, deriveTrackFlagsFromSystemState, parseZ21Datagram } from '@application-platform/z21';
+import type {
+	SystemStateDecoder,
+	Z21Codec,
+	Z21Dataset,
+	Z21DatasetEventMapper,
+	Z21UdpDatagram,
+	Z21UdpFrom
+} from '@application-platform/z21';
 import {
-	LocoInfoEventPayload,
-	PowerPayload,
-	Z21Event,
-	Z21LanHeader,
+	Z21EventName,
 	type HardwareType,
+	type LocoInfoEventPayload,
 	type Logger,
+	type PowerPayload,
 	type Z21CodeEvent,
+	type Z21Event,
 	type Z21FirmwareVersionEvent,
 	type Z21HwinfoEvent,
 	type Z21StoppedEvent,
@@ -27,105 +33,75 @@ import type { CvProgrammingService } from '../services/cv-programming-service';
 export type BroadcastFn = (msg: ServerToClient) => void;
 
 /**
- * Handles inbound Z21 payloads, updates track status, and emits server-to-client events.
+ * Processes decoded Z21 protocol data, updates application state,
+ * and forwards resulting messages to connected clients.
  */
 export class Z21EventHandler {
 	private readonly trackStatusManager: TrackStatusManager;
-	/**
-	 * Creates a new Z21EventHandler.
-	 * @param broadcast - Function to broadcast messages to all WebSocket clients
-	 * @param locoManager - Locomotive state manager
-	 * @param logger - Logger instance
-	 * @param commandStationInfo - Command station information storage
-	 * @param csInfoOrchestrator - Command station info orchestrator
-	 * @param cvProgrammingService - CV programming service
-	 */
+
 	constructor(
 		private readonly broadcast: BroadcastFn,
 		private readonly locoManager: LocoManager,
 		private readonly logger: Logger,
 		private readonly commandStationInfo: CommandStationInfo,
 		private readonly csInfoOrchestrator: CommandStationInfoOrchestrator,
-		private readonly cvProgrammingService: CvProgrammingService
+		private readonly cvProgrammingService: CvProgrammingService,
+		private readonly codec: Z21Codec,
+		private readonly datasetEventMapper: Z21DatasetEventMapper,
+		private readonly systemStateDecoder: SystemStateDecoder
 	) {
 		this.trackStatusManager = new TrackStatusManager();
 	}
 
 	/**
-	 * Dispatches incoming Z21 messages:
-	 * - serial: forwards raw serial events
-	 * - system.state: forwards state snapshot
-	 * - datasets: processes contained events and rebroadcasts datasets/events
+	 * Processes a datagram received from the Z21 transport.
+	 *
+	 * @param datagram - Received UDP datagram.
 	 */
-	public handleDatagram(dg: Z21UdpDatagram): void {
-		const { raw, rawHex, from } = dg;
+	public handleDatagram(datagram: Z21UdpDatagram): void {
+		const datasets = this.codec.parseZ21Datagram(datagram.raw);
 
-		const len = raw.readUInt16LE(0);
-		const header = raw.readUInt16LE(2);
-
-		// Envelope (for Serial etc.) - keep this small and delegate the rest
-		if (raw.length >= 4 && len === 0x0008 && header === Z21LanHeader.LAN_GET_SERIAL_NUMBER && raw.length >= 8) {
-			const serial = raw.readUInt32LE(4);
-
-			this.broadcast({
-				type: 'system.message.z21.rx',
-				payload: {
-					rawHex,
-					datasets: [{ kind: 'ds.serial', serial, from }],
-					events: [{ event: 'event.serial', serial }]
-				}
-			});
-			return;
-		}
-
-		// Parse and delegate full processing to a helper to reduce cognitive complexity
-		const datasets = parseZ21Datagram(raw);
-		this.processParsedDatagram(datasets, dg, header, len, from, rawHex);
+		this.processParsedDatagram(datasets, datagram);
 	}
 
 	/**
 	 * Handles the bulk of the datagram processing. Split out to lower cognitive complexity of handleDatagram.
 	 */
-	private processParsedDatagram(
-		datasets: Z21Dataset[],
-		dg: Z21UdpDatagram,
-		header: number,
-		len: number,
-		from: Z21UdpFrom,
-		rawHex: string
-	): void {
-		// Log dataset-level issues (unknown / bad_xor)
-		for (const ds of datasets) {
-			this.logger.debug('z21.dataset', { ds });
-			this.logDatasetIssues(ds, from, rawHex);
+	private processParsedDatagram(datasets: Z21Dataset[], datagram: Z21UdpDatagram): void {
+		const { raw, rawHex, from } = datagram;
+
+		const len = raw.readUInt16LE(0);
+		const header = raw.readUInt16LE(2);
+
+		for (const dataset of datasets) {
+			this.logger.debug('z21.dataset', { ds: dataset });
+
+			this.logDatasetIssues(dataset, from, rawHex);
 		}
 
-		// Handle a system state snapshot dataset once (if present)
-		const sys = datasets.find((d) => d.kind === 'ds.system.state');
-		if (sys?.kind === 'ds.system.state') {
-			this.handleSystemStateDataset(sys, rawHex, from);
-		}
+		const events = datasets
+			.filter((dataset) => dataset.kind !== 'ds.unknown' && dataset.kind !== 'ds.bad_xor')
+			.flatMap((dataset) => this.datasetEventMapper.map(dataset));
 
-		// Default: datasets -> events
-		const usableDatasets = datasets.filter((d) => d.kind !== 'ds.unknown' && d.kind !== 'ds.bad_xor');
-		const events = usableDatasets.flatMap(datasetsToEvents);
-
-		// Let CV programming service observe CV events before further processing
 		this.forwardCvEvents(events);
 
 		for (const event of events) {
-			this.handleEvent(event, datasets, dg);
+			this.handleEvent(event, datagram);
 		}
 
 		this.logger.info('system.message.z21.rx', {
-			from: dg.from,
-			len: dg.raw.length,
+			from: datagram.from,
+			len: datagram.raw.length,
 			header,
 			frameLen: len,
-			datasetKinds: datasets.map((d) => d.kind),
-			eventTypes: events.map((e) => e.event)
+			datasetKinds: datasets.map((dataset) => dataset.kind),
+			eventTypes: events.map((event) => event.event)
 		});
-		this.logger.debug('z21.rx.raw', { from: dg.from, hex: dg.rawHex });
+
+		this.logger.debug('z21.rx.raw', {
+			from: datagram.from,
+			hex: datagram.rawHex
+		});
 	}
 
 	/**
@@ -148,41 +124,11 @@ export class Z21EventHandler {
 	}
 
 	/**
-	 * Handle the special "system.state" dataset: decode, broadcast and update track status.
-	 */
-	private handleSystemStateDataset(sys: Z21Dataset, rawHex: string, from: Z21UdpFrom): void {
-		if (sys.kind !== 'ds.system.state') return;
-
-		const state = decodeSystemState(sys.state);
-
-		this.broadcast({
-			type: 'system.message.z21.rx',
-			payload: {
-				rawHex,
-				datasets: [{ kind: 'ds.system.state', from, payload: state }],
-				events: [{ event: 'system.event.state', state }]
-			}
-		});
-
-		const flags = deriveTrackFlagsFromSystemState({
-			centralState: state.centralState,
-			centralStateEx: state.centralStateEx
-		});
-		const payload: PowerPayload = {
-			powerOn: !!flags.powerOn,
-			emergencyStop: !!flags.emergencyStop,
-			shortCircuit: !!flags.shortCircuit,
-			programmingMode: !!flags.programmingMode
-		};
-		this.updateTrackPower(payload, sys.kind);
-	}
-
-	/**
 	 * Forward CV-related events to the CV programming service so it can resolve any waiting promises.
 	 */
 	private forwardCvEvents(events: readonly Z21Event[]): void {
 		for (const event of events) {
-			if (event.event === 'programming.event.cv.result' || event.event === 'programming.event.cv.nack') {
+			if (event.event === Z21EventName.CV_RESULT || event.event === Z21EventName.CV_NACK) {
 				this.cvProgrammingService.onEvent(event);
 			}
 		}
@@ -191,90 +137,90 @@ export class Z21EventHandler {
 	/**
 	 * Central switch to handle individual events. Kept small by delegating to helpers.
 	 */
-	private handleEvent(event: Z21Event, datasets: Z21Dataset[], dg: Z21UdpDatagram): void {
+	private handleEvent(event: Z21Event, datagram: Z21UdpDatagram): void {
 		switch (event.event) {
-			case 'system.event.state': {
-				const flags = deriveTrackFlagsFromSystemState({
-					centralState: event.payload.centralState,
-					centralStateEx: event.payload.centralStateEx
-				});
-				const payload: PowerPayload = {
-					powerOn: !!flags.powerOn,
-					emergencyStop: !!flags.emergencyStop,
-					shortCircuit: !!flags.shortCircuit,
-					programmingMode: !!flags.programmingMode
-				};
-				this.updateTrackPower(payload, 'ds.lan.x');
-				break;
-			}
-			case 'loco.event.info': {
+			case Z21EventName.SYSTEM_STATE:
+				this.handleSystemState(event);
+				return;
+
+			case Z21EventName.LOCO_INFO:
 				this.updateLocoInfoFromZ21(event.payload);
-				break;
-			}
-			case 'switching.event.turnout.info': {
+				return;
+
+			case Z21EventName.TURNOUT_INFO:
 				this.broadcast({
 					type: 'switching.message.turnout.state',
-					payload: { addr: event.payload.addr, state: event.payload.state }
+					payload: {
+						addr: event.payload.addr,
+						state: event.payload.state
+					}
 				});
-				break;
-			}
-			case 'system.event.track.power': {
+				return;
+
+			case Z21EventName.TRACK_POWER:
+			case Z21EventName.STATUS:
 				this.updateTrackPower(event.payload, 'ds.lan.x');
-				break;
-			}
-			case 'event.unknown.lan_x': {
-				this.logUnknown('lan_x', event.event, {
-					from: dg.from,
-					hex: dg.rawHex,
-					datasets,
-					events: datasets.flatMap(datasetsToEvents)
-				});
-				break;
-			}
-			case 'system.event.status': {
-				this.updateTrackPower(event.payload, 'ds.lan.x');
-				break;
-			}
-			case 'event.unknown.x.bus': {
-				this.logUnknown('x_bus', event.event, {
-					from: dg.from,
-					hex: dg.rawHex,
-					xHeader: event.xHeader,
-					bytes: event.bytes
-				});
-				break;
-			}
-			case 'system.event.x.bus.version': {
+				return;
+
+			case Z21EventName.X_BUS_VERSION:
 				this.handleXBusVersion(event);
-				break;
-			}
-			case 'system.event.firmware.version': {
+				return;
+
+			case Z21EventName.FIRMWARE_VERSION:
 				this.handleFirmwareVersion(event);
-				break;
-			}
-			case 'system.event.stopped': {
+				return;
+
+			case Z21EventName.STOPPED:
 				this.handleStopped(event);
-				break;
-			}
-			case 'system.event.hwinfo': {
+				return;
+
+			case Z21EventName.Z21_HWINFO:
 				this.handleHwInfo(event);
-				break;
-			}
-			case 'system.event.z21.code': {
+				return;
+
+			case Z21EventName.Z21_CODE:
 				this.handleCode(event);
-				break;
-			}
-			case 'programming.event.cv.result':
-			case 'programming.event.cv.nack':
-				// Already forwarded to CvProgrammingService before switch-case
-				// Nothing more to do here
-				break;
-			default: {
-				this.logUnknown('x_bus', 'unknown', {
-					from: dg.from,
-					hex: dg.rawHex
+				return;
+
+			case Z21EventName.CV_RESULT:
+			case Z21EventName.CV_NACK:
+				return;
+
+			case Z21EventName.BROADCAST_FLAGS:
+				return;
+
+			case Z21EventName.UNKNOWN_LAN_X:
+				this.logUnknown('lan_x', event.event, {
+					from: datagram.from,
+					hex: datagram.rawHex
 				});
-			}
+				return;
+
+			case Z21EventName.UNKNOWN_X_BUS:
+				this.logUnknown('x_bus', event.event, {
+					from: datagram.from,
+					hex: datagram.rawHex,
+					xHeader: event.payload.xHeader,
+					bytes: event.payload.bytes
+				});
+				return;
+
+			case Z21EventName.SERIAL:
+				this.broadcast({
+					type: 'system.message.z21.rx',
+					payload: {
+						rawHex: datagram.rawHex,
+						datasets: [
+							{
+								kind: 'ds.serial',
+								serial: event.payload.serial,
+								from: datagram.from
+							}
+						],
+						events: [event]
+					}
+				});
+				return;
 		}
 	}
 
@@ -291,16 +237,16 @@ export class Z21EventHandler {
 			type: 'system.message.x.bus.version',
 			payload: { version: event.payload.xBusVersionString, cmdsId: event.payload.cmdsId }
 		});
-		this.csInfoOrchestrator.poke();
 		this.csInfoOrchestrator.ack('xBusVersion');
+		this.csInfoOrchestrator.poke();
 	}
 
 	private handleFirmwareVersion(event: Z21FirmwareVersionEvent): void {
 		this.logger.info('z21.firmware.version', event);
 		this.commandStationInfo.setFirmwareVersion(event.payload);
 		this.broadcast({ type: 'system.message.firmware.version', payload: { major: event.payload.major, minor: event.payload.minor } });
-		this.csInfoOrchestrator.poke();
 		this.csInfoOrchestrator.ack('firmware');
+		this.csInfoOrchestrator.poke();
 	}
 
 	private handleStopped(event: Z21StoppedEvent): void {
@@ -318,8 +264,8 @@ export class Z21EventHandler {
 			payload: { major: event.payload.majorVersion, minor: event.payload.minorVersion }
 		});
 		this.broadcast({ type: 'system.message.hardware.info', payload: { hardwareType: event.payload.hardwareType } });
-		this.csInfoOrchestrator.poke();
 		this.csInfoOrchestrator.ack('hwinfo');
+		this.csInfoOrchestrator.poke();
 	}
 
 	private handleCode(event: Z21CodeEvent): void {
@@ -329,12 +275,6 @@ export class Z21EventHandler {
 		this.csInfoOrchestrator.ack('code');
 	}
 
-	/**
-	 * Logs unknown Z21 frames, LAN_X, or X-Bus messages.
-	 * @param scope - The scope of the unknown message
-	 * @param unknownKind - The type of unknown message
-	 * @param meta - Additional metadata including source address and hex data
-	 */
 	private logUnknown(
 		scope: 'frame' | 'lan_x' | 'x_bus',
 		unknownKind: string,
@@ -343,9 +283,6 @@ export class Z21EventHandler {
 		this.logger.warn('z21.unknown', { scope, unknownKind, ...meta });
 	}
 
-	/**
-	 * Updates track power status based on X-Bus power signal and notifies clients.
-	 */
 	private updateTrackPower(payload: PowerPayload, source: 'ds.x.bus' | 'ds.system.state' | 'ds.lan.x'): void {
 		const status = this.trackStatusManager.updateStatus(payload, source);
 		this.broadcast({
@@ -354,10 +291,6 @@ export class Z21EventHandler {
 		});
 	}
 
-	/**
-	 * Updates locomotive info from Z21 and broadcasts to clients.
-	 * @param locoInfo - Locomotive info event from Z21
-	 */
 	private updateLocoInfoFromZ21(locoInfo: LocoInfoEventPayload): void {
 		const locoState = this.locoManager.updateLocoInfoFromZ21(locoInfo);
 		this.broadcast({
@@ -370,5 +303,29 @@ export class Z21EventHandler {
 				estop: locoState.state.estop
 			}
 		});
+	}
+
+	private handleSystemState(
+		event: Extract<
+			Z21Event,
+			{
+				event: typeof Z21EventName.SYSTEM_STATE;
+			}
+		>
+	): void {
+		const flags = this.systemStateDecoder.deriveTrackFlags({
+			centralState: event.payload.centralState,
+			centralStateEx: event.payload.centralStateEx
+		});
+
+		this.updateTrackPower(
+			{
+				powerOn: Boolean(flags.powerOn),
+				emergencyStop: Boolean(flags.emergencyStop),
+				shortCircuit: Boolean(flags.shortCircuit),
+				programmingMode: Boolean(flags.programmingMode)
+			},
+			'ds.system.state'
+		);
 	}
 }

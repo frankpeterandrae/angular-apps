@@ -49,6 +49,17 @@ export class Z21UiStore {
 				// no-op for now
 				break;
 
+			case 'programming.replay.cv.nack':
+			case 'programming.replay.cv.result':
+			case 'server.replay.session.ready':
+			case 'feedback.message.changed':
+			case 'loco.message.eStop':
+			case 'system.message.z21.code':
+			case 'system.message.firmware.version':
+			case 'system.message.hardware.info':
+			case 'system.message.stop':
+			case 'system.message.x.bus.version':
+			case 'system.message.z21.rx':
 			default:
 				break;
 		}

@@ -18,24 +18,20 @@ import {
 import { decodeCvAddress, decodeDccAddress, decodeFunctions, decodeSpeed } from './_shared';
 
 describe('payload decode helpers', () => {
-	// Helper function to create test function bytes (similar to helper functions in bootstrap.spec.ts)
 	function makeFunctionBytes(f0_f4 = 0, f5_f12 = 0, f13_f20 = 0, f21_f28 = 0, f29_f31 = 0): Uint8Array {
 		return new Uint8Array([f0_f4, f5_f12, f13_f20, f21_f28, f29_f31]);
 	}
 
-	// Helper function to verify function state
 	function expectFunctionState(functionMap: Record<number, boolean>, functionNumber: number, expectedState: boolean): void {
 		expect(functionMap[functionNumber]).toBe(expectedState);
 	}
 
-	// Helper function to verify multiple function states
 	function expectFunctionStates(functionMap: Record<number, boolean>, states: Array<{ fn: number; state: boolean }>): void {
 		for (const { fn, state } of states) {
 			expectFunctionState(functionMap, fn, state);
 		}
 	}
 
-	// Helper function to verify speed result structure
 	function expectValidSpeedResult(result: ReturnType<typeof decodeSpeed>, expectedValues: Partial<ReturnType<typeof decodeSpeed>>): void {
 		if (expectedValues.speedSteps !== undefined) expect(result.speedSteps).toBe(expectedValues.speedSteps);
 		if (expectedValues.speed !== undefined) expect(result.speed).toBe(expectedValues.speed);
@@ -397,7 +393,6 @@ describe('payload decode helpers', () => {
 		});
 
 		it('applies FULL_BYTE_MASK to MSB (masks out higher bits)', () => {
-			// Provide an MSB with extra high bits set; masking should make it equivalent to 0xff
 			const addressWithOverflowMsb = decodeCvAddress(0x1ff, 0x42);
 			const expected = decodeCvAddress(0xff, 0x42);
 

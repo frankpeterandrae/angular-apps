@@ -2,31 +2,19 @@
  * Copyright (c) 2026. Frank-Peter Andrä
  * All rights reserved.
  */
-import { Direction, Logger, Z21LanHeader } from '@application-platform/z21-shared';
+import type { Direction, Logger } from '@application-platform/z21-shared';
 
-import { type LocoFunctionSwitchType } from '../constants';
-import { encodeXBusLanFrame } from '../helper/x-bus-encoder';
-import {
-	encodeLanXGetFirmwareVersion,
-	encodeLanXGetLocoInfo,
-	encodeLanXGetTurnoutInfo,
-	encodeLanXGetVersion,
-	encodeLanXSetLocoEStop,
-	encodeLanXSetLocoFunction,
-	encodeLanXSetStop,
-	encodeLanXSetTrackPowerOff,
-	encodeLanXSetTrackPowerOn,
-	encodeLanXSetTurnout,
-	encodeLanXSystemStatus,
-	encodeLocoDrive128
-} from '../lanx/encoder';
-import { encodeLanXCvRead } from '../lanx/encoder/programming/cv-read';
-import { encodeLanXCvWrite } from '../lanx/encoder/programming/cv-write';
+import type { LocoFunctionSwitchType, Z21BroadcastFlag } from '../constants';
+import type { LocoEncoder, ProgrammingEncoder, SystemEncoder, TurnoutEncoder } from '../lanx/encoder';
 import { type Z21Udp } from '../udp/udp';
 
+export type TurnoutOptions = {
+	queue?: boolean;
+	pulseMs?: number;
+};
+
 /**
- * Service for controlling Z21 model railroad command station via UDP.
- * Provides methods to send track power commands and demo payloads.
+ * Coordinates Z21 command encoding, logging and UDP transmission.
  */
 export class Z21CommandService {
 	private readonly turnoutOffTimers = new Map<number, NodeJS.Timeout>();
@@ -34,10 +22,18 @@ export class Z21CommandService {
 	 * Creates an instance of Z21CommandService.
 	 * @param udp - The UDP transport service for communicating with Z21.
 	 * @param logger - Logger instance for logging messages.
+	 * @param locoEncoder - Encoder for locomotive commands (speed, functions, etc.)
+	 * @param programmingEncoder - Encoder for programming commands (CV read/write, etc.)
+	 * @param systemEncoder - Encoder for system commands (status, version, etc.)
+	 * @param turnoutEncoder - Encoder for turnout commands (set position, info, etc.)
 	 */
 	constructor(
 		private readonly udp: Z21Udp,
-		private readonly logger: Logger
+		private readonly logger: Logger,
+		private readonly locoEncoder: LocoEncoder,
+		private readonly programmingEncoder: ProgrammingEncoder,
+		private readonly systemEncoder: SystemEncoder,
+		private readonly turnoutEncoder: TurnoutEncoder
 	) {}
 
 	/**
@@ -45,22 +41,29 @@ export class Z21CommandService {
 	 * @param on - Whether to enable (true) or disable (false) track power.
 	 */
 	public sendTrackPower(on: boolean): void {
-		const buf = on ? encodeLanXSetTrackPowerOn() : encodeLanXSetTrackPowerOff();
+		const buf = on ? this.systemEncoder.trackPowerOn() : this.systemEncoder.trackPowerOff();
 		this.logger.debug('[z21] tx TRACK_POWER', { powerOn: on ? 'ON' : 'OFF', hex: buf.toString('hex') });
 		this.udp.sendRaw(buf);
 	}
 
 	/**
-	 * Sends a locomotive drive command (speed and direction) to the Z21 device.
-	 * Converts fractional speed (0-1) to 128-step DCC speed commands.
-	 * @param address - Locomotive address (1-9999)
-	 * @param speed - Fractional speed (0.0 = stop, 1.0 = full speed)
-	 * @param forward - Direction ('FWD' for forward, 'REV' for reverse)
+	 * Sends a locomotive drive command.
+	 *
+	 * @param address - Locomotive address.
+	 * @param speedStep - Regular 128-mode speed step from 0 to 126.
+	 * @param direction - Direction of travel.
 	 */
-	public setLocoDrive(address: number, speed: number, forward: Direction): void {
-		const buf = encodeLocoDrive128(address, speed, forward);
-		this.logger.debug('[z21] tx LOCO_DRIVE', { address, speed, forward, hex: buf.toString('hex') });
-		this.udp.sendRaw(buf);
+	public setLocoDrive(address: number, speedStep: number, direction: Direction): void {
+		const buffer = this.locoEncoder.drive(address, speedStep, direction);
+
+		this.logger.debug('[z21] tx LOCO_DRIVE', {
+			address,
+			speedStep,
+			direction,
+			hex: buffer.toString('hex')
+		});
+
+		this.udp.sendRaw(buffer);
 	}
 
 	/**
@@ -74,20 +77,18 @@ export class Z21CommandService {
 	 * @param on - One of the LocoFunctionSwitchType values (Off, On, Toggle).
 	 */
 	public setLocoFunction(address: number, fn: number, on: LocoFunctionSwitchType): void {
-		const buf = encodeLanXSetLocoFunction(address, fn, on);
+		const buf = this.locoEncoder.setFunction(address, fn, on);
 		this.logger.debug('[z21] tx LOCO_FUNCTION', { address, fn, on, hex: buf.toString('hex') });
 		this.udp.sendRaw(buf);
 	}
 
 	/**
-	 * Request locomotive information (CVs / capabilities) from the Z21.
+	 * Requests the current locomotive state from the Z21.
 	 *
-	 * Encodes the LAN/X LOCO_INFO command and sends it to the central.
-	 *
-	 * @param address - Address of the locomotive to query.
+	 * @param address - Locomotive address to query.
 	 */
 	public getLocoInfo(address: number): void {
-		const buf = encodeLanXGetLocoInfo(address);
+		const buf = this.locoEncoder.getInfo(address);
 		this.logger.debug('[z21] tx LOCO_INFO', { address, hex: buf.toString('hex') });
 		this.udp.sendRaw(buf);
 	}
@@ -99,7 +100,7 @@ export class Z21CommandService {
 	 * @param address - Address of the turnout to query.
 	 */
 	public getTurnoutInfo(address: number): void {
-		const buf = encodeLanXGetTurnoutInfo(address);
+		const buf = this.turnoutEncoder.getInfo(address);
 		this.logger.debug('[z21] tx TURNOUT_INFO', { address, hex: buf.toString('hex') });
 		this.udp.sendRaw(buf);
 	}
@@ -109,13 +110,13 @@ export class Z21CommandService {
 	 * Sends an activation command followed by a deactivation command after the pulse duration.
 	 * @param address - Turnout address
 	 * @param port - Port (0 or 1) to set the turnout position
-	 * @param opts - Optional settings:
+	 * @param options - Optional settings:
 	 *  - queue: Whether to queue the command (default: true)
 	 *   - pulseMs: Duration in milliseconds before deactivating the turnout (default: 100ms)
 	 */
-	public setTurnout(address: number, port: 0 | 1, opts?: { queue?: boolean; pulseMs?: number }): void {
-		const queueFlag = opts?.queue ?? true;
-		const pulseMs = opts?.pulseMs ?? 100;
+	public setTurnout(address: number, port: 0 | 1, options?: TurnoutOptions): void {
+		const queueFlag = options?.queue ?? true;
+		const pulseMs = options?.pulseMs ?? 100;
 
 		const existingTimer = this.turnoutOffTimers.get(address);
 		if (existingTimer) {
@@ -123,12 +124,10 @@ export class Z21CommandService {
 			this.turnoutOffTimers.delete(address);
 		}
 
-		// Activate (A=1)
-		const buf = encodeLanXSetTurnout(address, port, true, queueFlag);
+		const buf = this.turnoutEncoder.set(address, port, true, queueFlag);
 		this.logger.debug('[z21] tx TURNOUT_SET', { address, port, A: 1, queue: queueFlag, hex: buf.toString('hex') });
 		this.udp.sendRaw(buf);
 
-		// Deactivate (A=0) after pulseMs
 		const timer = setTimeout(() => {
 			if (!this.turnoutOffTimers.has(address) || this.turnoutOffTimers.get(address) !== timer) {
 				return;
@@ -136,8 +135,14 @@ export class Z21CommandService {
 
 			this.turnoutOffTimers.delete(address);
 
-			const bufOff = encodeLanXSetTurnout(address, port, false, queueFlag);
-			this.logger.debug('[z21] tx LOCO_ESTOP', { address, hex: buf.toString('hex') });
+			const bufOff = this.turnoutEncoder.set(address, port, false, queueFlag);
+			this.logger.debug('[z21] tx TURNOUT_SET', {
+				address,
+				port,
+				A: 0,
+				queue: queueFlag,
+				hex: bufOff.toString('hex')
+			});
 			this.udp.sendRaw(bufOff);
 		}, pulseMs);
 
@@ -150,17 +155,21 @@ export class Z21CommandService {
 	 * @param address - Locomotive address to emergency stop.
 	 */
 	public setLocoEStop(address: number): void {
-		const buf = encodeLanXSetLocoEStop(address);
-		// eslint-disable-next-line no-console
-		console.log('[z21] tx LOCO_ESTOP', `addr=${address}`, buf.toString('hex'));
-		this.udp.sendRaw(buf);
+		const buffer = this.locoEncoder.emergencyStop(address);
+
+		this.logger.debug('[z21] tx LOCO_ESTOP', {
+			address,
+			hex: buffer.toString('hex')
+		});
+
+		this.udp.sendRaw(buffer);
 	}
 
 	/**
 	 * Requests the Z21 firmware version information.
 	 */
 	public getXBusVersion(): void {
-		const buf = encodeLanXGetVersion();
+		const buf = this.systemEncoder.getVersion();
 		this.logger.debug('[z21] tx GET_VERSION', { hex: buf.toString('hex') });
 		this.udp.sendRaw(buf);
 	}
@@ -169,7 +178,7 @@ export class Z21CommandService {
 	 * Requests the Z21 status information.
 	 */
 	public getStatus(): void {
-		const buf = encodeLanXSystemStatus();
+		const buf = this.systemEncoder.getStatus();
 		this.logger.debug('[z21] tx GET_STATUS', { hex: buf.toString('hex') });
 		this.udp.sendRaw(buf);
 	}
@@ -178,7 +187,7 @@ export class Z21CommandService {
 	 * Sends a global emergency stop command to the Z21 device.
 	 */
 	public setStop(): void {
-		const buf = encodeLanXSetStop();
+		const buf = this.systemEncoder.stop();
 		this.logger.debug('[z21] tx SET_STOP', { hex: buf.toString('hex') });
 		this.udp.sendRaw(buf);
 	}
@@ -187,7 +196,7 @@ export class Z21CommandService {
 	 * Requests the Z21 firmware version information.
 	 */
 	public getFirmwareVersion(): void {
-		const buf = encodeLanXGetFirmwareVersion();
+		const buf = this.systemEncoder.getFirmwareVersion();
 		this.logger.debug('[z21] tx GET_FIRMWARE_VERSION', { hex: buf.toString('hex') });
 		this.udp.sendRaw(buf);
 	}
@@ -196,18 +205,22 @@ export class Z21CommandService {
 	 * Requests the Z21 hardware information.
 	 */
 	public getHardwareInfo(): void {
-		const buf = encodeXBusLanFrame(Z21LanHeader.LAN_GET_HWINFO);
-		this.logger.debug('[z21] tx GET_HARDWARE_INFO', { hex: buf.toString('hex') });
-		this.udp.sendRaw(buf);
+		const buffer = this.systemEncoder.getHardwareInfo();
+
+		this.logger.debug('[z21] tx GET_HARDWARE_INFO', { hex: buffer.toString('hex') });
+
+		this.udp.sendRaw(buffer);
 	}
 
 	/**
 	 * Requests the Z21 command station code information.
 	 */
 	public getCode(): void {
-		const buf = encodeXBusLanFrame(Z21LanHeader.LAN_GET_CODE);
-		this.logger.debug('[z21] tx LAN_GET_CODE', { hex: buf.toString('hex') });
-		this.udp.sendRaw(buf);
+		const buffer = this.systemEncoder.getCode();
+
+		this.logger.debug('[z21] tx LAN_GET_CODE', { hex: buffer.toString('hex') });
+
+		this.udp.sendRaw(buffer);
 	}
 
 	/**
@@ -215,7 +228,7 @@ export class Z21CommandService {
 	 * @param cvAddress - CV address to read (1-1024)
 	 */
 	public sendCvRead(cvAddress: number): void {
-		const buf = encodeLanXCvRead(cvAddress);
+		const buf = this.programmingEncoder.readCv(cvAddress);
 		this.logger.debug('[z21] tx CV_READ', { cvAddress, hex: buf.toString('hex') });
 		this.udp.sendRaw(buf);
 	}
@@ -226,7 +239,7 @@ export class Z21CommandService {
 	 * @param cvValue - CV value to write (0-255)
 	 */
 	public sendCvWrite(cvAddress: number, cvValue: number): void {
-		const buf = encodeLanXCvWrite(cvAddress, cvValue);
+		const buf = this.programmingEncoder.writeCv(cvAddress, cvValue);
 		this.logger.debug('[z21] tx CV_WRITE', { cvAddress, cvValue, hex: buf.toString('hex') });
 		this.udp.sendRaw(buf);
 	}
@@ -235,8 +248,39 @@ export class Z21CommandService {
 	 *  Requests the Z21 broadcast flags information.
 	 */
 	public getBroadcastFlags(): void {
-		const buf = encodeXBusLanFrame(Z21LanHeader.LAN_GET_BROADCASTFLAGS);
-		this.logger.debug('[z21] tx LAN_GET_BROADCASTFLAGS', { hex: buf.toString('hex') });
-		this.udp.sendRaw(buf);
+		const buffer = this.systemEncoder.getBroadcastFlags();
+
+		this.logger.debug('[z21] tx LAN_GET_BROADCASTFLAGS', { hex: buffer.toString('hex') });
+
+		this.udp.sendRaw(buffer);
+	}
+
+	/**
+	 * Sets the Z21 broadcast flags.
+	 *
+	 * @param flags - Broadcast flags to set (bitmask of Z21BroadcastFlag values)
+	 */
+	public setBroadcastFlags(flags: Z21BroadcastFlag): void {
+		const buffer = this.systemEncoder.setBroadcastFlags(flags);
+
+		this.udp.sendRaw(buffer);
+	}
+
+	/**
+	 * Requests the Z21 system state information.
+	 */
+	public getSystemState(): void {
+		const buffer = this.systemEncoder.getSystemState();
+
+		this.udp.sendRaw(buffer);
+	}
+
+	/**
+	 * Sends a log-off command to the Z21 device.
+	 */
+	public logOff(): void {
+		const buffer = this.systemEncoder.logOff();
+
+		this.udp.sendRaw(buffer);
 	}
 }
