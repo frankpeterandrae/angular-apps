@@ -15,7 +15,7 @@ export type LocoDrive = CommandMessage<
 	'drive',
 	{
 		addr: number;
-		speed: number;
+		speedStep: number;
 		dir: Direction;
 		steps?: 14 | 28 | 128;
 	}

@@ -12,6 +12,6 @@ export * from './lib/lanx/decode/decoder';
 export * from './lib/lanx/dispatch';
 export * from './lib/lanx/encoder';
 export * from './lib/services/z21-command-service';
-export * from './lib/system/decode-system-state';
-export * from './lib/system/derive-track-flags';
+export * from './lib/system/system-info-decoder';
+export * from './lib/system/system-state-decoder';
 export * from './lib/udp/udp';

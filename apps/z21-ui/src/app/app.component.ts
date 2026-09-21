@@ -91,12 +91,12 @@ export class AppComponent {
 	 * @param v - UI speed in the range 0..1
 	 */
 	public setSpeed(v: number): void {
-		const step = this.uiSpeedToStep128(v);
+		const speedStep = this.uiSpeedToStep128(v);
 		const requestId = crypto.randomUUID();
 		this.store.speedUi.set(v);
 		this.ws.send({
 			type: 'loco.command.drive',
-			payload: { addr: this.store.selectedAddr(), speed: step, dir: this.store.dir(), steps: 128, requestId }
+			payload: { addr: this.store.selectedAddr(), speedStep, dir: this.store.dir(), steps: 128, requestId }
 		});
 	}
 
@@ -196,7 +196,7 @@ export class AppComponent {
 				(requestId) => ({
 					type: 'programming.command.cv.read',
 
-					payload: { requestId, cvAdress: this.cvAddress() }
+					payload: { requestId, cvAddress: this.cvAddress() }
 				}),
 				{ timeoutMs: 8000 }
 			);
@@ -227,7 +227,7 @@ export class AppComponent {
 			await this.ws.request<Extract<ServerToClient, { type: 'programming.replay.cv.result' }>>(
 				(requestId) => ({
 					type: 'programming.command.cv.write',
-					payload: { requestId, cvAdress: this.cvAddress(), cvValue: value }
+					payload: { requestId, cvAddress: this.cvAddress(), cvValue: value }
 				}),
 				{ timeoutMs: 8000 }
 			);

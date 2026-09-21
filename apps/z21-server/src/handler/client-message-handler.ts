@@ -3,41 +3,37 @@
  * All rights reserved.
  */
 
-import type { LocoManager } from '@application-platform/domain';
-import { type ClientToServer, type ServerToClient } from '@application-platform/protocol';
+import type { LocoManager, LocoState } from '@application-platform/domain';
+import type { ClientToServer, ServerToClient } from '@application-platform/protocol';
 import { LocoFunctionSwitchType, type Z21CommandService } from '@application-platform/z21';
-import { Direction, TurnoutState } from '@application-platform/z21-shared';
+import { TurnoutState, type Direction } from '@application-platform/z21-shared';
 import type { WebSocket as WsWebSocket } from 'ws';
 
 import type { CvProgrammingService } from '../services/cv-programming-service';
 
-/**
- * Function signature used to emit server-to-client protocol messages.
- * @param msg - The message to broadcast to connected clients
- */
+/** Sends a message to all connected clients. */
 export type BroadcastFn = (msg: ServerToClient) => void;
 
+/** Sends a message to a specific WebSocket client. */
 export type ReplyFn = (ws: WsWebSocket, msg: ServerToClient) => void;
 
 /**
- * Handles validated client-to-server messages and coordinates actions
- * across the locomotive manager and Z21 UDP gateway, emitting resulting
- * server-to-client updates.
+ * Handles validated client commands and coordinates domain state,
+ * Z21 commands, and client responses.
  */
 export class ClientMessageHandler {
 	private readonly driveThrottleMs = 50;
 
-	private readonly pendingDrives = new Map<number, { speed: number; dir: Direction }>();
+	private readonly pendingDrives = new Map<
+		number,
+		{
+			speedStep: number;
+			dir: Direction;
+		}
+	>();
+
 	private readonly driveTimers = new Map<number, NodeJS.Timeout>();
 
-	/**
-	 * Creates a new ClientMessageHandler.
-	 * @param locoManager - Manages locomotive state (speed, direction, functions)
-	 * @param z21Service - Z21 UDP transport used for signaling/demo pings
-	 * @param cvProgrammingService - Service for CV programming operations
-	 * @param reply - Function to reply to specific WebSocket clients
-	 * @param broadcast - Function to emit server-to-client messages
-	 */
 	constructor(
 		private readonly locoManager: LocoManager,
 		private readonly z21Service: Z21CommandService,
@@ -47,187 +43,216 @@ export class ClientMessageHandler {
 	) {}
 
 	/**
-	 * Routes an incoming validated client message to the appropriate handler
-	 * and emits corresponding state updates to clients.
+	 * Routes a validated client message to its command handler.
 	 *
-	 * Supported messages:
-	 * - server.command.session.hello: currently ignored
-	 * - system.command.trackpower.set: toggles track power and notifies clients
-	 * - loco.command.drive: sets locomotive speed and direction, then broadcasts state
-	 * - loco.command.function.set: toggles a locomotive function, then broadcasts state
-	 * - switching.command.turnout.set: sets turnout state and notifies clients
-	 *
-	 * @param msg - The client-to-server protocol message
-	 * @param ws - The WebSocket connection from which the message originated
+	 * @param message - Client message to process.
+	 * @param ws - WebSocket connection that sent the message.
 	 */
-	public async handle(msg: ClientToServer, ws: WsWebSocket): Promise<void> {
-		switch (msg.type) {
-			case 'server.command.session.hello': {
-				// ignore for now
-				break;
-			}
+	public async handle(message: ClientToServer, ws: WsWebSocket): Promise<void> {
+		switch (message.type) {
+			case 'server.command.session.hello':
+				return;
 
-			case 'system.command.trackpower.set': {
-				// Ping the Z21 gateway (demo behavior), then broadcast new power state
-				this.z21Service.sendTrackPower(msg.payload.powerOn);
-				this.broadcast({
-					type: 'system.message.trackpower',
-					payload: { powerOn: msg.payload.powerOn, shortCircuit: false, emergencyStop: false, programmingMode: false }
-				});
-				break;
-			}
-			case 'loco.command.drive': {
-				// Update locomotive speed/direction and inform clients of the new state
-				const st = this.locoManager.setSpeed(msg.payload.addr, msg.payload.speed, msg.payload.dir);
-				this.pendingDrives.set(msg.payload.addr, { speed: msg.payload.speed, dir: msg.payload.dir });
-				this.scheduleDrive(msg.payload.addr);
-				this.broadcast({
-					type: 'loco.message.state',
-					payload: {
-						addr: msg.payload.addr,
-						speed: st.speed,
-						dir: st.dir,
-						fns: st.fns,
-						estop: st.estop
-					}
-				});
-				break;
-			}
+			case 'system.command.trackpower.set':
+				this.handleTrackPower(message);
+				return;
 
-			case 'loco.command.function.set': {
-				// Toggle a locomotive function and broadcast the updated locomotive state
-				const st = this.locoManager.setFunction(msg.payload.addr, msg.payload.fn, msg.payload.on);
-				this.z21Service.setLocoFunction(
-					msg.payload.addr,
-					msg.payload.fn,
-					msg.payload.on ? LocoFunctionSwitchType.ON : LocoFunctionSwitchType.OFF
-				);
-				this.broadcast({
-					type: 'loco.message.state',
-					payload: {
-						addr: msg.payload.addr,
-						speed: st.speed,
-						dir: st.dir,
-						fns: st.fns,
-						estop: st.estop
-					}
-				});
-				break;
-			}
+			case 'loco.command.drive':
+				this.handleLocoDrive(message);
+				return;
 
-			case 'loco.command.function.toggle': {
-				// Toggle a locomotive function and broadcast the updated locomotive state
-				const st = this.locoManager.setFunction(
-					msg.payload.addr,
-					msg.payload.fn,
-					!(this.locoManager.getState(msg.payload.addr)?.fns[msg.payload.fn] ?? false)
-				);
-				this.z21Service.setLocoFunction(msg.payload.addr, msg.payload.fn, LocoFunctionSwitchType.TOGGLE);
-				this.broadcast({
-					type: 'loco.message.state',
-					payload: {
-						addr: msg.payload.addr,
-						speed: st.speed,
-						dir: st.dir,
-						fns: st.fns,
-						estop: st.estop
-					}
-				});
-				break;
-			}
+			case 'loco.command.function.set':
+				this.handleLocoFunctionSet(message);
+				return;
 
-			case 'loco.command.eStop': {
-				// Emergency stop a locomotive and broadcast the updated state
-				const t = this.driveTimers.get(msg.payload.addr);
-				if (t) {
-					clearTimeout(t);
-				}
+			case 'loco.command.function.toggle':
+				this.handleLocoFunctionToggle(message);
+				return;
 
-				this.driveTimers.delete(msg.payload.addr);
-				this.pendingDrives.delete(msg.payload.addr);
+			case 'loco.command.eStop':
+				this.handleLocoEmergencyStop(message);
+				return;
 
-				this.z21Service.setLocoEStop(msg.payload.addr);
-				this.z21Service.getLocoInfo(msg.payload.addr);
-				break;
-			}
+			case 'switching.command.turnout.set':
+				this.handleTurnout(message);
+				return;
 
-			case 'switching.command.turnout.set': {
-				// Update turnout state and notify clients
-				const port: 0 | 1 = msg.payload.state === TurnoutState.DIVERGING ? 1 : 0;
-				this.z21Service.setTurnout(msg.payload.addr, port, { queue: true, pulseMs: msg.payload.pulseMs ?? 100 });
-				this.z21Service.getTurnoutInfo(msg.payload.addr);
-				break;
-			}
-
-			case 'loco.command.stop.all': {
+			case 'loco.command.stop.all':
 				this.z21Service.setStop();
-				break;
-			}
+				return;
 
-			case 'programming.command.cv.read': {
-				const requestId = msg.payload.requestId;
-				try {
-					const res = await this.cvProgrammingService.readCv(msg.payload.cvAdress);
-					this.reply(ws, {
-						type: 'programming.replay.cv.result',
-						payload: {
-							requestId,
-							cvAdress: res.cvAdress,
-							cvValue: res.cvValue
-						}
-					});
-				} catch (err) {
-					this.reply(ws, {
-						type: 'programming.replay.cv.nack',
-						payload: {
-							requestId,
-							error: (err as Error).message
-						}
-					});
-				}
-				break;
-			}
+			case 'programming.command.cv.read':
+				await this.handleCvRead(message, ws);
+				return;
 
-			case 'programming.command.cv.write': {
-				const requestId = msg.payload.requestId;
-				try {
-					await this.cvProgrammingService.writeCv(msg.payload.cvAdress, msg.payload.cvValue);
-					this.reply(ws, {
-						type: 'programming.replay.cv.result',
-						payload: {
-							requestId,
-							cvAdress: msg.payload.cvAdress,
-							cvValue: msg.payload.cvValue
-						}
-					});
-				} catch (err) {
-					this.reply(ws, {
-						type: 'programming.replay.cv.nack',
-						payload: {
-							requestId,
-							error: (err as Error).message
-						}
-					});
-				}
-				break;
-			}
+			case 'programming.command.cv.write':
+				await this.handleCvWrite(message, ws);
+				return;
 
-			case 'programming.command.pom.cv.read': {
-				// Not implemented
-				break;
-			}
-
-			case 'programming.command.pom.cv.write': {
-				// Not implemented
-				break;
-			}
+			case 'programming.command.pom.cv.read':
+			case 'programming.command.pom.cv.write':
+				return;
 		}
 	}
 
-	/**
-	 * Schedule a throttled drive command for a locomotive.
-	 * @param addr - Locomotive address
-	 */
+	private handleTrackPower(message: Extract<ClientToServer, { type: 'system.command.trackpower.set' }>): void {
+		const { powerOn } = message.payload;
+
+		this.z21Service.sendTrackPower(powerOn);
+
+		this.broadcast({
+			type: 'system.message.trackpower',
+			payload: {
+				powerOn,
+				shortCircuit: false,
+				emergencyStop: false,
+				programmingMode: false
+			}
+		});
+	}
+
+	private handleLocoDrive(message: Extract<ClientToServer, { type: 'loco.command.drive' }>): void {
+		const { addr, speedStep, dir } = message.payload;
+
+		const speed = speedStep / 126;
+
+		const state = this.locoManager.setSpeed(addr, speed, dir);
+
+		this.pendingDrives.set(addr, {
+			speedStep,
+			dir
+		});
+
+		this.scheduleDrive(addr);
+		this.broadcastLocoState(addr, state);
+	}
+
+	private handleLocoFunctionSet(message: Extract<ClientToServer, { type: 'loco.command.function.set' }>): void {
+		const { addr, fn, on } = message.payload;
+
+		const state = this.locoManager.setFunction(addr, fn, on);
+
+		this.z21Service.setLocoFunction(addr, fn, on ? LocoFunctionSwitchType.ON : LocoFunctionSwitchType.OFF);
+
+		this.broadcastLocoState(addr, state);
+	}
+
+	private handleLocoFunctionToggle(message: Extract<ClientToServer, { type: 'loco.command.function.toggle' }>): void {
+		const { addr, fn } = message.payload;
+
+		const currentState = this.locoManager.getState(addr);
+
+		const state = this.locoManager.setFunction(addr, fn, !(currentState?.fns[fn] ?? false));
+
+		this.z21Service.setLocoFunction(addr, fn, LocoFunctionSwitchType.TOGGLE);
+
+		this.broadcastLocoState(addr, state);
+	}
+
+	private handleLocoEmergencyStop(message: Extract<ClientToServer, { type: 'loco.command.eStop' }>): void {
+		const { addr } = message.payload;
+
+		const timer = this.driveTimers.get(addr);
+
+		if (timer) {
+			clearTimeout(timer);
+		}
+
+		this.driveTimers.delete(addr);
+		this.pendingDrives.delete(addr);
+
+		this.z21Service.setLocoEStop(addr);
+		this.z21Service.getLocoInfo(addr);
+	}
+
+	private handleTurnout(
+		message: Extract<
+			ClientToServer,
+			{
+				type: 'switching.command.turnout.set';
+			}
+		>
+	): void {
+		const { addr, state, pulseMs } = message.payload;
+
+		const port: 0 | 1 = state === TurnoutState.DIVERGING ? 1 : 0;
+
+		this.z21Service.setTurnout(addr, port, {
+			queue: true,
+			pulseMs: pulseMs ?? 100
+		});
+
+		this.z21Service.getTurnoutInfo(addr);
+	}
+
+	private async handleCvRead(message: Extract<ClientToServer, { type: 'programming.command.cv.read' }>, ws: WsWebSocket): Promise<void> {
+		const { requestId, cvAddress } = message.payload;
+
+		try {
+			const result = await this.cvProgrammingService.readCv(cvAddress);
+
+			this.reply(ws, {
+				type: 'programming.replay.cv.result',
+				payload: {
+					requestId,
+					cvAddress: result.cvAddress,
+					cvValue: result.cvValue
+				}
+			});
+		} catch (error) {
+			this.replyCvError(ws, requestId, error);
+		}
+	}
+
+	private async handleCvWrite(
+		message: Extract<ClientToServer, { type: 'programming.command.cv.write' }>,
+		ws: WsWebSocket
+	): Promise<void> {
+		const { requestId, cvAddress, cvValue } = message.payload;
+
+		try {
+			await this.cvProgrammingService.writeCv(cvAddress, cvValue);
+
+			this.reply(ws, {
+				type: 'programming.replay.cv.result',
+				payload: {
+					requestId,
+					cvAddress,
+					cvValue
+				}
+			});
+		} catch (error) {
+			this.replyCvError(ws, requestId, error);
+		}
+	}
+
+	private replyCvError(ws: WsWebSocket, requestId: string, error: unknown): void {
+		this.reply(ws, {
+			type: 'programming.replay.cv.nack',
+			payload: {
+				requestId,
+				error: this.getErrorMessage(error)
+			}
+		});
+	}
+
+	private getErrorMessage(error: unknown): string {
+		return error instanceof Error ? error.message : String(error);
+	}
+
+	private broadcastLocoState(addr: number, state: LocoState): void {
+		this.broadcast({
+			type: 'loco.message.state',
+			payload: {
+				addr,
+				speed: state.speed,
+				dir: state.dir,
+				fns: state.fns,
+				estop: state.estop
+			}
+		});
+	}
+
 	private scheduleDrive(addr: number): void {
 		if (this.driveTimers.has(addr)) {
 			return;
@@ -244,7 +269,7 @@ export class ClientMessageHandler {
 
 			this.pendingDrives.delete(addr);
 
-			this.z21Service.setLocoDrive(addr, next.speed, next.dir);
+			this.z21Service.setLocoDrive(addr, next.speedStep, next.dir);
 		}, this.driveThrottleMs);
 
 		this.driveTimers.set(addr, timer);

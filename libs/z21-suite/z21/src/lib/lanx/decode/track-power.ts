@@ -3,52 +3,65 @@
  * All rights reserved.
  */
 
-import type { LanXCommandKey, Z21Event } from '@application-platform/z21-shared';
+import { Z21EventName, type TrackPowerCommand, type TrackPowerEvent } from '@application-platform/z21-shared';
 
 /**
- * Decodes track power on/off commands into Z21Event entries.
- *
- * @param command - The LAN X command key.
- *
- * @returns Array of Z21Event entries produced from the dataset.
+ * Decodes LAN-X track power commands.
  */
-export function decodeLanXTrackPowerPayload(command: LanXCommandKey): Extract<Z21Event, { event: 'system.event.track.power' }>[] {
-	const raw = Array.from(Buffer.from(command, 'ascii'));
-	if (command === 'LAN_X_BC_TRACK_POWER_OFF') {
+export class LanXTrackPowerDecoder {
+	/**
+	 * Converts a track power command into its corresponding state event.
+	 *
+	 * @param command - LAN-X command.
+	 * @returns Track power event, or no event for unsupported commands.
+	 */
+	public decode(command: TrackPowerCommand): TrackPowerEvent[] {
+		const state = this.getState(command);
+
 		return [
 			{
-				event: 'system.event.track.power',
-				payload: { emergencyStop: false, powerOn: false, programmingMode: false, shortCircuit: false, raw }
+				event: Z21EventName.TRACK_POWER,
+				payload: {
+					...state,
+					raw: Array.from(Buffer.from(command, 'ascii'))
+				}
 			}
 		];
 	}
 
-	if (command === 'LAN_X_BC_TRACK_POWER_ON') {
-		return [
-			{
-				event: 'system.event.track.power',
-				payload: { emergencyStop: false, powerOn: true, programmingMode: false, shortCircuit: false, raw }
-			}
-		];
-	}
+	private getState(command: TrackPowerCommand): Omit<TrackPowerEvent['payload'], 'raw'> {
+		switch (command) {
+			case 'LAN_X_BC_TRACK_POWER_OFF':
+				return {
+					emergencyStop: false,
+					powerOn: false,
+					programmingMode: false,
+					shortCircuit: false
+				};
 
-	if (command === 'LAN_X_BC_PROGRAMMING_MODE') {
-		return [
-			{
-				event: 'system.event.track.power',
-				payload: { emergencyStop: false, powerOn: true, programmingMode: true, shortCircuit: false, raw }
-			}
-		];
-	}
+			case 'LAN_X_BC_TRACK_POWER_ON':
+				return {
+					emergencyStop: false,
+					powerOn: true,
+					programmingMode: false,
+					shortCircuit: false
+				};
 
-	if (command === 'LAN_X_BC_TRACK_SHORT_CIRCUIT') {
-		return [
-			{
-				event: 'system.event.track.power',
-				payload: { emergencyStop: false, powerOn: false, programmingMode: false, shortCircuit: true, raw }
-			}
-		];
-	}
+			case 'LAN_X_BC_PROGRAMMING_MODE':
+				return {
+					emergencyStop: false,
+					powerOn: true,
+					programmingMode: true,
+					shortCircuit: false
+				};
 
-	return [];
+			case 'LAN_X_BC_TRACK_SHORT_CIRCUIT':
+				return {
+					emergencyStop: false,
+					powerOn: false,
+					programmingMode: false,
+					shortCircuit: true
+				};
+		}
+	}
 }

@@ -3,14 +3,13 @@
  * All rights reserved.
  */
 
-import type { ChildProcessWithoutNullStreams } from 'node:child_process';
-import { spawn } from 'node:child_process';
+import { type ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 import * as dgram from 'node:dgram';
 import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
-import { ServerConfig } from '@application-platform/z21-shared';
+import type { ServerConfig } from '@application-platform/z21-shared';
 import WebSocket from 'ws';
 
 export type WsMessage = { type: string; payload: { [key: string]: unknown } };

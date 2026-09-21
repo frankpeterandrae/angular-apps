@@ -3,42 +3,39 @@
  * All rights reserved.
  */
 
-import type { Z21Event } from '@application-platform/z21-shared';
+import { Z21EventName, type LocoInfoEvent } from '@application-platform/z21-shared';
 
 import { decodeDccAddress, decodeFunctions, decodeSpeed } from './_shared';
 
 /**
- * Decodes a loco info X-BUS dataset into a Z21Event array.
- *
- * @param payload - The X-BUS dataset bytes.
- *
- * @returns Array of Z21Event entries produced from the dataset.
+ * Decodes LAN-X locomotive information payloads.
  */
-export function decodeLanXLocoInfoPayload(payload: Uint8Array): Extract<Z21Event, { event: 'loco.event.info' }>[] {
-	if (payload.length < 5) {
-		return [];
-	}
-	const raw = Array.from(payload);
-	const addr = decodeDccAddress(payload[0], payload[1]);
-	const { speedSteps, speed, emergencyStop, direction, isOccupied, isMmLoco } = decodeSpeed(payload[2], payload[3]);
-	const { functionMap, isDoubleTraction, isSmartsearch } = decodeFunctions(payload, 4);
-
-	return [
-		{
-			event: 'loco.event.info',
-			payload: {
-				addr,
-				isMmLoco,
-				isOccupied,
-				isDoubleTraction,
-				isSmartsearch,
-				speedSteps,
-				speed,
-				emergencyStop,
-				direction,
-				functionMap,
-				raw
-			}
+export class LanXLocoInfoDecoder {
+	/**
+	 * Decodes locomotive state and function information.
+	 *
+	 * @param payload - LAN-X locomotive information payload.
+	 * @returns Decoded locomotive information event, or no event for incomplete data.
+	 */
+	public decode(payload: Uint8Array): LocoInfoEvent[] {
+		if (payload.length < 5) {
+			return [];
 		}
-	];
+
+		const addr = decodeDccAddress(payload[0], payload[1]);
+		const speed = decodeSpeed(payload[2], payload[3]);
+		const functions = decodeFunctions(payload, 4);
+
+		return [
+			{
+				event: Z21EventName.LOCO_INFO,
+				payload: {
+					addr,
+					...speed,
+					...functions,
+					raw: Array.from(payload)
+				}
+			}
+		];
+	}
 }

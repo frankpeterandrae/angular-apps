@@ -3,1233 +3,614 @@
  * All rights reserved.
  */
 
-import { CommandStationInfo, LocoManager } from '@application-platform/domain';
-import { DeepMock, DeepMocked, resetMocksBeforeEach } from '@application-platform/shared-node-test';
-import type { Z21UdpDatagram } from '@application-platform/z21';
+import type { CommandStationInfo, LocoManager } from '@application-platform/domain';
+import { DeepMock, type DeepMocked } from '@application-platform/shared-node-test';
+import type { SystemStateDecoder, Z21Codec, Z21Dataset, Z21DatasetEventMapper, Z21UdpDatagram } from '@application-platform/z21';
 import {
-	CvNackEvent,
-	CvResultEvent,
-	LocoInfoEvent,
-	Logger,
-	SystemStateEvent,
-	TurnoutInfoEvent,
-	UnknownLanXEvent,
-	UnknownXBusEvent,
-	Z21CodeEvent,
-	Z21FirmwareVersionEvent,
-	Z21HwinfoEvent,
-	Z21StoppedEvent,
-	Z21VersionEvent
+	TurnoutState,
+	Z21EventName,
+	type LocoInfoEvent,
+	type Logger,
+	type SystemStateEvent,
+	type Z21Event
 } from '@application-platform/z21-shared';
-import { beforeEach, describe, expect, it, Mock, MockedFunction, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi, type MockedFunction } from 'vitest';
 
-import { CommandStationInfoOrchestrator } from '../services/command-station-info-orchestrator';
-import { CvProgrammingService } from '../services/cv-programming-service';
+import type { CommandStationInfoOrchestrator } from '../services/command-station-info-orchestrator';
+import type { CvProgrammingService } from '../services/cv-programming-service';
 
-import { BroadcastFn, Z21EventHandler } from './z21-event-handler';
+import { Z21EventHandler, type BroadcastFn } from './z21-event-handler';
 
-// Use a symbol to store mocks globally so vi.mock can access them
-declare global {
-	var __z21TestMocks: { parseZ21Datagram: any; datasetsToEvents: any } | undefined;
-}
-
-vi.mock('@application-platform/z21', async () => {
-	const actual = await vi.importActual<typeof import('@application-platform/z21')>('@application-platform/z21');
-
-	// Initialize mocks if not already done
-	if (!globalThis.__z21TestMocks) {
-		globalThis.__z21TestMocks = {
-			parseZ21Datagram: vi.fn(),
-			datasetsToEvents: vi.fn()
-		};
-	}
-
-	return {
-		...actual,
-		parseZ21Datagram: globalThis.__z21TestMocks.parseZ21Datagram,
-		datasetsToEvents: globalThis.__z21TestMocks.datasetsToEvents
-	};
-});
-
-describe('Z21EventHandler.handleDatagram', () => {
-	// Create a local reference to the mocked functions
-	const z21Mocks = () => globalThis.__z21TestMocks!;
+describe('Z21EventHandler', () => {
+	let handler: Z21EventHandler;
 
 	let broadcast: MockedFunction<BroadcastFn>;
 	let locoManager: DeepMocked<LocoManager>;
+	let logger: DeepMocked<Logger>;
 	let commandStationInfo: DeepMocked<CommandStationInfo>;
 	let csInfoOrchestrator: DeepMocked<CommandStationInfoOrchestrator>;
-	let logger: DeepMocked<Logger>;
-	let handler: Z21EventHandler;
 	let cvProgrammingService: DeepMocked<CvProgrammingService>;
+	let codec: DeepMocked<Z21Codec>;
+	let datasetEventMapper: DeepMocked<Z21DatasetEventMapper>;
+	let systemStateDecoder: DeepMocked<SystemStateDecoder>;
+
+	function createDatagram(rawHex = '04000000'): Z21UdpDatagram {
+		return {
+			raw: Buffer.from([0x04, 0x00, 0x00, 0x00]),
+			rawHex,
+			from: {
+				address: '127.0.0.1',
+				port: 21105
+			}
+		};
+	}
+
+	function process(dataset: Z21Dataset, event?: Z21Event, datagram = createDatagram()): void {
+		codec.parseZ21Datagram.mockReturnValue([dataset]);
+
+		datasetEventMapper.map.mockReturnValue(event ? [event] : []);
+
+		handler.handleDatagram(datagram);
+	}
 
 	beforeEach(() => {
 		broadcast = vi.fn();
+
 		locoManager = DeepMock<LocoManager>();
+		logger = DeepMock<Logger>();
 		commandStationInfo = DeepMock<CommandStationInfo>();
 		csInfoOrchestrator = DeepMock<CommandStationInfoOrchestrator>();
-		logger = DeepMock<Logger>();
 		cvProgrammingService = DeepMock<CvProgrammingService>();
-
-		// Reset all mocks before each test
-		if (globalThis.__z21TestMocks) {
-			globalThis.__z21TestMocks.parseZ21Datagram.mockReset();
-			globalThis.__z21TestMocks.datasetsToEvents.mockReset();
-		}
-
-		// Clear mocked functions
-		resetMocksBeforeEach({
-			broadcast,
-			locoManager,
-			commandStationInfo,
-			csInfoOrchestrator,
-			logger,
-			cvProgrammingService,
-			parseZ21Datagram: globalThis.__z21TestMocks?.parseZ21Datagram,
-			datasetsToEvents: globalThis.__z21TestMocks?.datasetsToEvents
-		});
+		codec = DeepMock<Z21Codec>();
+		datasetEventMapper = DeepMock<Z21DatasetEventMapper>();
+		systemStateDecoder = DeepMock<SystemStateDecoder>();
 
 		handler = new Z21EventHandler(
 			broadcast,
-			locoManager as any,
-			logger as any,
-			commandStationInfo as any,
-			csInfoOrchestrator as any,
-			cvProgrammingService as any
+			locoManager,
+			logger,
+			commandStationInfo,
+			csInfoOrchestrator,
+			cvProgrammingService,
+			codec,
+			datasetEventMapper,
+			systemStateDecoder
 		);
 	});
 
-	describe('serial datagrams', () => {
-		it('forwards serial number with correct from address', () => {
-			const payload = {
-				raw: Buffer.from([0x08, 0x00, 0x10, 0x00, 0x7b, 0x00, 0x00, 0x00]),
-				rawHex: '0x01',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
+	it('parses incoming datagrams and maps usable datasets to events', () => {
+		const datagram = createDatagram();
+		const dataset: Z21Dataset = {
+			kind: 'ds.code',
+			code: 2
+		};
 
-			handler.handleDatagram(payload);
+		codec.parseZ21Datagram.mockReturnValue([dataset]);
 
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'system.message.z21.rx',
-				payload: {
-					rawHex: '0x01',
-					datasets: [{ kind: 'ds.serial', serial: 123, from: { address: '127.0.0.1', port: 21105 } }],
-					events: [{ event: 'event.serial', serial: 123 }]
-				}
-			});
-		});
+		datasetEventMapper.map.mockReturnValue([]);
 
-		it('handles serial number zero', () => {
-			const payload = {
-				raw: Buffer.from([0x08, 0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0x11',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
+		handler.handleDatagram(datagram);
 
-			handler.handleDatagram(payload);
+		expect(codec.parseZ21Datagram).toHaveBeenCalledWith(datagram.raw);
 
-			expect(broadcast).toHaveBeenCalledWith(
-				expect.objectContaining({
-					payload: expect.objectContaining({
-						events: [{ event: 'event.serial', serial: 0 }]
-					})
-				})
-			);
-		});
-
-		it('handles maximum serial number', () => {
-			const payload = {
-				raw: Buffer.from([0x08, 0x00, 0x10, 0x00, 0xff, 0xff, 0xff, 0xff]),
-				rawHex: '0x12',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith(
-				expect.objectContaining({
-					payload: expect.objectContaining({
-						events: [{ event: 'event.serial', serial: 0xffffffff }]
-					})
-				})
-			);
-		});
-
-		it('preserves remote client address and port', () => {
-			const payload = {
-				raw: Buffer.from([0x08, 0x00, 0x10, 0x00, 0xc8, 0x01, 0x00, 0x00]),
-				rawHex: '0x10',
-				from: { address: '192.168.1.1', port: 54321 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith(
-				expect.objectContaining({
-					payload: expect.objectContaining({
-						datasets: [expect.objectContaining({ from: { address: '192.168.1.1', port: 54321 } })]
-					})
-				})
-			);
-		});
+		expect(datasetEventMapper.map).toHaveBeenCalledWith(dataset);
 	});
 
-	describe('system state events', () => {
-		it('broadcasts trackPower message when system state is received', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([
-				{
-					kind: 'ds.system.state',
-					state: new Uint8Array([0x64, 0x00, 0x32, 0x00, 0x4b, 0x00, 0x19, 0x00, 0x98, 0x3a, 0x88, 0x13, 0x03, 0x04, 0x00, 0x00])
-				}
-			] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{
-					event: 'system.event.state',
-					payload: { centralState: 0x03, centralStateEx: 0x04 }
-				}
-			] as any);
-			const payload = {
-				raw: Buffer.from([
-					0x14, 0x00, 0x84, 0x00, 0x64, 0x00, 0x32, 0x00, 0x4b, 0x00, 0x19, 0x00, 0x98, 0x3a, 0x88, 0x13, 0x03, 0x04, 0x00, 0x00
-				]),
-				rawHex: '0x04',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith(
-				expect.objectContaining({
-					type: 'system.message.trackpower'
-				})
-			);
-		});
-
-		it('includes track power state in broadcast', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([
-				{
-					kind: 'ds.system.state',
-					state: new Uint8Array([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])
-				}
-			] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{
-					event: 'system.event.state',
-					payload: { centralState: 0x00, centralStateEx: 0x00 }
-				}
-			] as any);
-
-			const payload = {
-				raw: Buffer.from([
-					0x14, 0x00, 0x84, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-				]),
-				rawHex: '0x07',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith(
-				expect.objectContaining({
-					type: 'system.message.trackpower',
-					payload: expect.objectContaining({
-						powerOn: expect.any(Boolean),
-						shortCircuit: expect.any(Boolean)
-					})
-				})
-			);
-		});
-	});
-
-	describe('datagram metadata preservation', () => {
-		it('preserves rawHex in serial broadcasts', () => {
-			const customRawHex = '0xabcdef12';
-			const payload = {
-				raw: Buffer.from([0x08, 0x00, 0x10, 0x00, 0x99, 0x03, 0x00, 0x00]),
-				rawHex: customRawHex,
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith(
-				expect.objectContaining({
-					payload: expect.objectContaining({
-						rawHex: customRawHex
-					})
-				})
-			);
-		});
-
-		it('preserves network source for remote clients', () => {
-			const payload = {
-				raw: Buffer.from([0x08, 0x00, 0x10, 0x00, 0x09, 0x03, 0x00, 0x00]),
-				rawHex: '0x30',
-				from: { address: '192.168.100.50', port: 65535 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith(
-				expect.objectContaining({
-					payload: expect.objectContaining({
-						datasets: [
-							expect.objectContaining({
-								from: { address: '192.168.100.50', port: 65535 }
-							})
-						]
-					})
-				})
-			);
-		});
-	});
-
-	describe('z21.x.bus.version events', () => {
-		it('broadcasts system.message.x.bus.version with xBusVersion string and cmdsId', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.x.bus.version', payload: { xBusVersionString: 'V3.0', cmdsId: 0x01, xBusVersion: 0x30, raw: [] } }
-			] as Z21VersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xd1',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'system.message.x.bus.version',
-				payload: {
-					version: 'V3.0',
-					cmdsId: 0x01
-				}
-			});
-		});
-
-		it('stores xBusVersion in command station info', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			const versionEvent = {
-				event: 'system.event.x.bus.version',
-				payload: { xBusVersionString: 'V3.0', cmdsId: 0x02, xBusVersion: 0x30, raw: [] }
+	describe('diagnostic datasets', () => {
+		it('logs unknown frames without mapping them', () => {
+			const dataset: Z21Dataset = {
+				kind: 'ds.unknown',
+				header: 0x9999,
+				payload: Uint8Array.from([0x01, 0x02]),
+				reason: 'unsupported'
 			};
-			z21Mocks().datasetsToEvents.mockReturnValue([versionEvent] as Z21VersionEvent[]);
 
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xd2',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
+			codec.parseZ21Datagram.mockReturnValue([dataset]);
 
-			handler.handleDatagram(payload);
-
-			expect(commandStationInfo.setXBusVersion).toHaveBeenCalledWith(versionEvent.payload);
-		});
-
-		it('broadcasts with minimum cmdsId value', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.x.bus.version', payload: { xBusVersionString: 'V1.0', cmdsId: 0x00, xBusVersion: 0x10, raw: [] } }
-			] as Z21VersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xd4',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'system.message.x.bus.version',
-				payload: {
-					version: 'V1.0',
-					cmdsId: 0x00
-				}
-			});
-		});
-
-		it('broadcasts with maximum cmdsId value', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.x.bus.version', payload: { xBusVersionString: 'V4.0', cmdsId: 0xff, xBusVersion: 0x40, raw: [] } }
-			] as Z21VersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xd5',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'system.message.x.bus.version',
-				payload: {
-					version: 'V4.0',
-					cmdsId: 0xff
-				}
-			});
-		});
-
-		it('handles Unknown xBusVersion string', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.x.bus.version', payload: { xBusVersionString: 'Unknown', cmdsId: 0xff, xBusVersion: 0x00, raw: [] } }
-			] as Z21VersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xd3',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'system.message.x.bus.version',
-				payload: {
-					version: 'Unknown',
-					cmdsId: 0xff
-				}
-			});
-		});
-
-		it('sets hardware type to Z21_OLD when cmdsId is 0x12', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.x.bus.version', payload: { xBusVersionString: 'V3.0', cmdsId: 0x12, xBusVersion: 0x30, raw: [] } }
-			] as Z21VersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xd6',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(commandStationInfo.setHardwareType).toHaveBeenCalledWith('Z21_OLD');
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'system.message.hardware.info',
-				payload: {
-					hardwareType: 'Z21_OLD'
-				}
-			});
-		});
-
-		it('sets hardware type to z21_START when cmdsId is 0x13', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.x.bus.version', payload: { xBusVersionString: 'V3.6', cmdsId: 0x13, xBusVersion: 0x36, raw: [] } }
-			] as Z21VersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xd7',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(commandStationInfo.setHardwareType).toHaveBeenCalledWith('z21_START');
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'system.message.hardware.info',
-				payload: {
-					hardwareType: 'z21_START'
-				}
-			});
-		});
-
-		it('does not set hardware type when cmdsId is neither 0x12 nor 0x13', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.x.bus.version', payload: { xBusVersionString: 'V3.0', cmdsId: 0x14, xBusVersion: 0x30, raw: [] } }
-			] as Z21VersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xd8',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			// Initialize mock before checking
-			(commandStationInfo.setHardwareType as Mock).mockClear();
-
-			handler.handleDatagram(payload);
-
-			expect(commandStationInfo.setHardwareType).not.toHaveBeenCalled();
-			expect(broadcast).not.toHaveBeenCalledWith(expect.objectContaining({ event: 'event.system.message.hardware.info' }));
-		});
-
-		it('calls csInfoOrchestrator poke and ack after processing xBusVersion', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.x.bus.version', payload: { xBusVersionString: 'V3.0', cmdsId: 0x01, xBusVersion: 0x30, raw: [] } }
-			] as Z21VersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xd9',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(csInfoOrchestrator.poke).toHaveBeenCalled();
-			expect(csInfoOrchestrator.ack).toHaveBeenCalledWith('xBusVersion');
-		});
-
-		it('calls orchestrator in correct order for cmdsId 0x12', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.x.bus.version', payload: { xBusVersionString: 'V3.0', cmdsId: 0x12, xBusVersion: 0x30, raw: [] } }
-			] as Z21VersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xda',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			const pokeCall = csInfoOrchestrator.poke.mock.invocationCallOrder[0];
-			const ackCall = csInfoOrchestrator.ack.mock.invocationCallOrder[0];
-			expect(ackCall).toBeGreaterThan(pokeCall);
-		});
-	});
-
-	describe('z21.firmware.version events', () => {
-		it('broadcasts system.message.firmware.version with major and minor versions', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.firmware.version', payload: { major: 0x12, minor: 0x34, raw: [] } }
-			] as Z21FirmwareVersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xe3',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'system.message.firmware.version',
-				payload: {
-					major: 0x12,
-					minor: 0x34
-				}
-			});
-		});
-
-		it('stores firmware version in command station info', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			const versionEvent = { event: 'system.event.firmware.version', payload: { major: 0x25, minor: 0x99, raw: [] } };
-			z21Mocks().datasetsToEvents.mockReturnValue([versionEvent] as Z21FirmwareVersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xe4',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(commandStationInfo.setFirmwareVersion).toHaveBeenCalledWith(versionEvent.payload);
-		});
-
-		it('broadcasts firmware version with minimum values', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.firmware.version', payload: { major: 0x00, minor: 0x00, raw: [] } }
-			] as Z21FirmwareVersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xe5',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'system.message.firmware.version',
-				payload: {
-					major: 0x00,
-					minor: 0x00
-				}
-			});
-		});
-
-		it('broadcasts firmware version with maximum values', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.firmware.version', payload: { major: 0xff, minor: 0xff, raw: [] } }
-			] as Z21FirmwareVersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xe6',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'system.message.firmware.version',
-				payload: {
-					major: 0xff,
-					minor: 0xff
-				}
-			});
-		});
-
-		it('broadcasts firmware version with different major and minor values', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.firmware.version', payload: { major: 0x30, minor: 0x06, raw: [] } }
-			] as Z21FirmwareVersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xe7',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'system.message.firmware.version',
-				payload: {
-					major: 0x30,
-					minor: 0x06
-				}
-			});
-		});
-
-		it('calls csInfoOrchestrator poke and ack after processing firmware version', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.firmware.version', payload: { major: 0x12, minor: 0x34, raw: [] } }
-			] as Z21FirmwareVersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xe8',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(csInfoOrchestrator.poke).toHaveBeenCalled();
-			expect(csInfoOrchestrator.ack).toHaveBeenCalledWith('firmware');
-		});
-
-		it('calls orchestrator in correct order for firmware version', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.firmware.version', payload: { major: 0x01, minor: 0x20, raw: [] } }
-			] as Z21FirmwareVersionEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xe9',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			const pokeCall = csInfoOrchestrator.poke.mock.invocationCallOrder[0];
-			const ackCall = csInfoOrchestrator.ack.mock.invocationCallOrder[0];
-			expect(ackCall).toBeGreaterThan(pokeCall);
-		});
-	});
-
-	describe('z21.stopped events', () => {
-		it('broadcasts system.message.stop when emergency stop is triggered', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([{ event: 'system.event.stopped' }] as Z21StoppedEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xe1',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({ type: 'system.message.stop', payload: {} });
-		});
-	});
-
-	// Note: z21.hwinfo and z21.code datasets are not passed to datasetsToEvents in the current implementation
-	// (only x.bus and system.state are processed). Once support is added, targeted tests should be added here.
-
-	describe('turnout.info events', () => {
-		it('broadcasts turnout state with STRAIGHT position', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'switching.event.turnout.info', payload: { addr: 42, state: 'STRAIGHT' } }
-			] as TurnoutInfoEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xf1',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'switching.message.turnout.state',
-				payload: {
-					addr: 42,
-					state: 'STRAIGHT'
-				}
-			});
-		});
-
-		it('broadcasts turnout state with DIVERGING position', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'switching.event.turnout.info', payload: { addr: 123, state: 'DIVERGING' } }
-			] as TurnoutInfoEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xf2',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'switching.message.turnout.state',
-				payload: {
-					addr: 123,
-					state: 'DIVERGING'
-				}
-			});
-		});
-
-		it('handles maximum turnout address', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'switching.event.turnout.info', payload: { addr: 16383, state: 'STRAIGHT' } }
-			] as TurnoutInfoEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xf3',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'switching.message.turnout.state',
-				payload: {
-					addr: 16383,
-					state: 'STRAIGHT'
-				}
-			});
-		});
-	});
-
-	describe('loco.info events', () => {
-		beforeEach(() => {
-			locoManager.updateLocoInfoFromZ21 = vi.fn().mockReturnValue({
-				addr: 100,
-				state: { speed: 0.5, dir: 'FWD', fns: { 0: true }, estop: false }
-			});
-		});
-
-		it('broadcasts loco state with speed, direction and functions', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{
-					event: 'loco.event.info',
-					payload: {
-						addr: 100,
-						speed: 0.5,
-						direction: 'FWD',
-						functionMap: { 0: true },
-						speedSteps: 128,
-						emergencyStop: false,
-						isDoubleTraction: false,
-						isMmLoco: false,
-						isOccupied: true,
-						isSmartsearch: true,
-						raw: []
-					}
-				}
-			] as LocoInfoEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xg1',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith(
-				expect.objectContaining({
-					payload: expect.objectContaining({
-						estop: false
-					})
-				})
-			);
-		});
-
-		it('updates loco manager with loco info event', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			const locoInfoEvent = {
-				event: 'loco.event.info',
-				payload: {
-					addr: 200,
-					speed: 0.8,
-					direction: 'REV',
-					functionMap: { 1: true, 5: false },
-					speedSteps: 128,
-					emergencyStop: false,
-					isDoubleTraction: false,
-					isMmLoco: false,
-					isOccupied: true,
-					isSmartsearch: true,
-					raw: []
-				}
-			};
-			z21Mocks().datasetsToEvents.mockReturnValue([locoInfoEvent] as LocoInfoEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xg2',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(locoManager.updateLocoInfoFromZ21).toHaveBeenCalledWith(locoInfoEvent.payload);
-		});
-
-		it('broadcasts estop flag when locomotive is in emergency stop', () => {
-			locoManager.updateLocoInfoFromZ21.mockReturnValue({
-				addr: 50,
-				state: { speed: 0, dir: 'FWD', fns: {}, estop: true }
-			});
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'loco.event.info', payload: { addr: 50, speed: 0, direction: 'FWD', functionMap: {} } }
-			] as LocoInfoEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xg3',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({
-				type: 'loco.message.state',
-				payload: { addr: 50, dir: 'FWD', estop: true, fns: {}, speed: 0 }
-			});
-		});
-
-		it('handles multiple functions in loco state', () => {
-			locoManager.updateLocoInfoFromZ21.mockReturnValue({
-				addr: 300,
-				state: { speed: 0.3, dir: 'REV', fns: { 0: true, 1: false, 2: true, 10: true }, estop: false }
-			});
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus' }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{
-					event: 'loco.event.info',
-					payload: {
-						addr: 300,
-						speed: 0.3,
-						direction: 'REV',
-						functionMap: { 0: true, 1: false, 2: true, 10: true },
-						speedSteps: 128,
-						emergencyStop: false,
-						isDoubleTraction: false,
-						isMmLoco: false,
-						isOccupied: true,
-						isSmartsearch: true,
-						raw: []
-					}
-				}
-			] as LocoInfoEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x00, 0x00, 0x00, 0x00]),
-				rawHex: '0xg4',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith(
-				expect.objectContaining({
-					payload: expect.objectContaining({ fns: { '0': true, '1': false, '10': true, '2': true } })
-				})
-			);
-		});
-	});
-
-	describe('z21.hwinfo events', () => {
-		it('broadcasts firmware and hardware info and acks orchestrator', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.hwinfo', hwtype: 0x00000204, fwVersionBcd: 0x00000125 }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.hwinfo', payload: { hardwareType: 'z21_START', majorVersion: 1, minorVersion: 25, raw: [] } }
-			] as Z21HwinfoEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x0c, 0x00, 0x1a, 0x00, 0x04, 0x02, 0x00, 0x00, 0x25, 0x01, 0x00, 0x00]),
-				rawHex: '0xh5',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(commandStationInfo.setFirmwareVersion).toHaveBeenCalledWith({ major: 1, minor: 25 });
-			expect(commandStationInfo.setHardwareType).toHaveBeenCalledWith('z21_START');
-			expect(broadcast).toHaveBeenCalledWith({ type: 'system.message.firmware.version', payload: { major: 1, minor: 25 } });
-			expect(broadcast).toHaveBeenCalledWith({ type: 'system.message.hardware.info', payload: { hardwareType: 'z21_START' } });
-			expect(csInfoOrchestrator.ack).toHaveBeenCalledWith('hwinfo');
-			const pokeCall = csInfoOrchestrator.poke.mock.invocationCallOrder[0];
-			const ackCall = csInfoOrchestrator.ack.mock.invocationCallOrder[0];
-			expect(ackCall).toBeGreaterThan(pokeCall);
-		});
-	});
-
-	describe('z21.code events', () => {
-		it('broadcasts code and stores it then acks orchestrator', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.code', code: 2 }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.z21.code', payload: { code: 2, raw: [] } }
-			] as Z21CodeEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x05, 0x00, 0x18, 0x00, 0x02]),
-				rawHex: '0xc2',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(commandStationInfo.setCode).toHaveBeenCalledWith(2);
-			expect(broadcast).toHaveBeenCalledWith({ type: 'system.message.z21.code', payload: { code: 2 } });
-			expect(csInfoOrchestrator.ack).toHaveBeenCalledWith('code');
-		});
-	});
-
-	describe('unknown and bad frames', () => {
-		it('logs unknown frames', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([
-				{
-					kind: 'ds.unknown',
-					header: 0x99,
-					reason: 'unrecognized header or invalid payload length',
-					payload: Buffer.from([0x01, 0x02])
-				}
-			] as any);
-
-			const payload = {
-				raw: Buffer.from([0x05, 0x00, 0x99, 0x00, 0x01]),
-				rawHex: '0x05009900',
-				from: { address: '192.168.1.10', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
+			handler.handleDatagram(createDatagram('deadbeef'));
 
 			expect(logger.warn).toHaveBeenCalledWith('z21.unknown', {
 				scope: 'frame',
 				unknownKind: 'unknown',
-				from: { address: '192.168.1.10', port: 21105 },
-				header: 0x99,
-				reason: 'unrecognized header or invalid payload length',
+				from: {
+					address: '127.0.0.1',
+					port: 21105
+				},
+				header: 0x9999,
+				reason: 'unsupported',
 				payload: [1, 2],
-				hex: '0x05009900'
+				hex: 'deadbeef'
 			});
+
+			expect(datasetEventMapper.map).not.toHaveBeenCalled();
 		});
 
-		it('logs bad XOR checksums', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.bad_xor', calc: '0x42', recv: '0x43' }] as any);
+		it('logs invalid X-Bus checksums without mapping them', () => {
+			const dataset: Z21Dataset = {
+				kind: 'ds.bad_xor',
+				calc: '42',
+				recv: '43'
+			};
 
-			const payload = {
-				raw: Buffer.from([0x07, 0x00, 0x40, 0x00, 0x61, 0x01, 0x43]),
-				rawHex: '0x07004000610143',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
+			codec.parseZ21Datagram.mockReturnValue([dataset]);
 
-			handler.handleDatagram(payload);
+			handler.handleDatagram(createDatagram('cafebabe'));
 
 			expect(logger.warn).toHaveBeenCalledWith('z21.unknown', {
 				scope: 'frame',
 				unknownKind: 'bad_xor',
-				from: { address: '127.0.0.1', port: 21105 },
-				calc: '0x42',
-				recv: '0x43',
-				hex: '0x07004000610143'
+				from: {
+					address: '127.0.0.1',
+					port: 21105
+				},
+				calc: '42',
+				recv: '43',
+				hex: 'cafebabe'
 			});
-		});
 
-		it('logs unknown LAN_X events', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus', xHeader: 0x99, data: Buffer.from([0x01]) }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([{ event: 'event.unknown.lan_x' } as unknown as UnknownLanXEvent[]]);
-
-			const payload = {
-				raw: Buffer.from([0x06, 0x00, 0x40, 0x00, 0x99, 0x01]),
-				rawHex: '0x0600400099',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(logger.warn).toHaveBeenCalledWith(
-				'z21.unknown',
-				expect.objectContaining({
-					scope: 'lan_x',
-					unknownKind: 'event.unknown.lan_x'
-				})
-			);
-		});
-
-		it('logs unknown X-Bus events', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus', xHeader: 0x88, data: Buffer.from([0x01]) }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'event.unknown.x.bus', xHeader: 0x88, bytes: [0x01] } as UnknownXBusEvent
-			]);
-
-			const payload = {
-				raw: Buffer.from([0x06, 0x00, 0x40, 0x00, 0x88, 0x01]),
-				rawHex: '0x0600400088',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(logger.warn).toHaveBeenCalledWith(
-				'z21.unknown',
-				expect.objectContaining({
-					scope: 'x_bus',
-					unknownKind: 'event.unknown.x.bus',
-					xHeader: 0x88,
-					bytes: [0x01]
-				})
-			);
-		});
-
-		it('logs completely unknown event types in default case', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus', xHeader: 0x77, data: Buffer.from([]) }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([{ event: 'event.something.completely.unknown' } as any]);
-
-			const payload = {
-				raw: Buffer.from([0x05, 0x00, 0x40, 0x00, 0x77]),
-				rawHex: '0x0500400077',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(logger.warn).toHaveBeenCalledWith(
-				'z21.unknown',
-				expect.objectContaining({
-					scope: 'x_bus'
-				})
-			);
+			expect(datasetEventMapper.map).not.toHaveBeenCalled();
 		});
 	});
 
-	describe('z21.stopped events', () => {
-		it('sets emergency stop and broadcasts system.message.stop', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus', xHeader: 0x81, data: Buffer.from([0x00]) }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([{ event: 'system.event.stopped' }] as Z21StoppedEvent[]);
+	it('broadcasts serial information received from the mapper', () => {
+		const event: Z21Event = {
+			event: Z21EventName.SERIAL,
+			payload: {
+				serial: 123,
+				raw: [123, 0, 0, 0]
+			}
+		};
 
-			const payload = {
-				raw: Buffer.from([0x07, 0x00, 0x40, 0x00, 0x81, 0x00, 0x81]),
-				rawHex: '0x07004000810081',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
+		process(
+			{
+				kind: 'ds.serial',
+				serial: 123
+			},
+			event,
+			createDatagram('080010007b000000')
+		);
 
-			handler.handleDatagram(payload);
-
-			expect(broadcast).toHaveBeenCalledWith({ type: 'system.message.stop', payload: {} });
-			expect(logger.info).toHaveBeenCalledWith('z21.stopped', expect.objectContaining({ event: 'system.event.stopped' }));
-		});
-	});
-
-	describe('cv events', () => {
-		it('forwards cv.result to CvProgrammingService', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([
-				{ kind: 'ds.x.bus', xHeader: 0x64, data: Buffer.from([0x14, 0x00, 0x1c, 0x2a]) }
-			] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'programming.event.cv.result', payload: { cv: 29, value: 42, raw: [] } }
-			] as CvResultEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x0a, 0x00, 0x40, 0x00, 0x64, 0x14, 0x00, 0x1c, 0x2a, 0x5a]),
-				rawHex: '0x0a00400064...',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(cvProgrammingService.onEvent).toHaveBeenCalledWith(
-				expect.objectContaining({
-					event: 'programming.event.cv.result',
-					payload: {
-						cv: 29,
-						value: 42,
-						raw: []
+		expect(broadcast).toHaveBeenCalledWith({
+			type: 'system.message.z21.rx',
+			payload: {
+				rawHex: '080010007b000000',
+				datasets: [
+					{
+						kind: 'ds.serial',
+						serial: 123,
+						from: {
+							address: '127.0.0.1',
+							port: 21105
+						}
 					}
-				})
-			);
-		});
-
-		it('forwards cv.nack to CvProgrammingService', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.x.bus', xHeader: 0x61, data: Buffer.from([0x13]) }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'programming.event.cv.nack', payload: { shortCircuit: false } }
-			] as CvNackEvent[]);
-
-			const payload = {
-				raw: Buffer.from([0x07, 0x00, 0x40, 0x00, 0x61, 0x13, 0x72]),
-				rawHex: '0x07004000...',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(cvProgrammingService.onEvent).toHaveBeenCalledWith(
-				expect.objectContaining({
-					event: 'programming.event.cv.nack'
-				})
-			);
+				],
+				events: [event]
+			}
 		});
 	});
 
-	describe('z21.x.bus.version with hardware detection', () => {
-		it('detects Z21_OLD hardware when cmdsId is 0x12', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([
-				{ kind: 'ds.x.bus', xHeader: 0x63, data: Buffer.from([0x21, 0x12, 0x13]) }
-			] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.x.bus.version', payload: { xBusVersionString: '1.9', cmdsId: 0x12 } } as Z21VersionEvent
-			]);
-
-			const payload = {
-				raw: Buffer.from([0x09, 0x00, 0x40, 0x00, 0x63, 0x21, 0x12, 0x13, 0x73]),
-				rawHex: '0x09004000...',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			expect(commandStationInfo.setHardwareType).toHaveBeenCalledWith('Z21_OLD');
-			expect(broadcast).toHaveBeenCalledWith({ type: 'system.message.hardware.info', payload: { hardwareType: 'Z21_OLD' } });
+	it('processes a system state event exactly once', () => {
+		systemStateDecoder.deriveTrackFlags.mockReturnValue({
+			powerOn: true,
+			emergencyStop: false,
+			shortCircuit: false,
+			programmingMode: true
 		});
 
-		it('detects z21_START hardware when cmdsId is 0x13', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([
-				{ kind: 'ds.x.bus', xHeader: 0x63, data: Buffer.from([0x21, 0x13, 0x13]) }
-			] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.x.bus.version', payload: { xBusVersionString: '1.9', cmdsId: 0x13 } } as Z21VersionEvent
-			]);
+		const event: Z21Event = {
+			event: Z21EventName.SYSTEM_STATE,
+			payload: {
+				mainCurrentMa: 0,
+				progCurrentMa: 0,
+				filteredMainCurrentMa: 0,
+				temperatureC: 0,
+				supplyVoltageMv: 0,
+				vccVoltageMv: 0,
+				centralState: 0x20,
+				centralStateEx: 0,
+				capabilities: 0
+			} as SystemStateEvent['payload']
+		};
 
-			const payload = {
-				raw: Buffer.from([0x09, 0x00, 0x40, 0x00, 0x63, 0x21, 0x13, 0x13, 0x72]),
-				rawHex: '0x09004000...',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
+		process(
+			{
+				kind: 'ds.system.state',
+				state: new Uint8Array(16)
+			},
+			event
+		);
 
-			handler.handleDatagram(payload);
+		expect(systemStateDecoder.deriveTrackFlags).toHaveBeenCalledOnce();
 
-			expect(commandStationInfo.setHardwareType).toHaveBeenCalledWith('z21_START');
-			expect(broadcast).toHaveBeenCalledWith({ type: 'system.message.hardware.info', payload: { hardwareType: 'z21_START' } });
-		});
+		expect(broadcast).toHaveBeenCalledOnce();
 
-		it('does not set hardware type for other cmdsId values', () => {
-			z21Mocks().parseZ21Datagram.mockReturnValue([
-				{ kind: 'ds.x.bus', xHeader: 0x63, data: Buffer.from([0x21, 0x14, 0x13]) }
-			] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{ event: 'system.event.x.bus.version', payload: { xBusVersionString: '1.9', cmdsId: 0x14 } } as Z21VersionEvent
-			]);
-
-			const payload = {
-				raw: Buffer.from([0x09, 0x00, 0x40, 0x00, 0x63, 0x21, 0x14, 0x13, 0x71]),
-				rawHex: '0x09004000...',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
-
-			handler.handleDatagram(payload);
-
-			// Should still set xbus version and broadcast it
-			expect(commandStationInfo.setXBusVersion).toHaveBeenCalled();
-			expect(broadcast).toHaveBeenCalledWith(
-				expect.objectContaining({
-					type: 'system.message.x.bus.version',
-					payload: expect.objectContaining({
-						version: '1.9',
-						cmdsId: 0x14
-					})
-				})
-			);
-
-			// But hardware type should not be set for cmdsId !== 0x12 && !== 0x13
-			// TODO: This assertion fails due to internal mock state - need to refactor
-			// expect(commandStationInfo.setHardwareType).not.toHaveBeenCalled();
+		expect(broadcast).toHaveBeenCalledWith({
+			type: 'system.message.trackpower',
+			payload: {
+				powerOn: true,
+				emergencyStop: false,
+				shortCircuit: false,
+				programmingMode: true,
+				source: 'ds.system.state'
+			}
 		});
 	});
 
-	describe('system.state special handling', () => {
-		it('handles system.state dataset and derives track status', () => {
-			const systemStateBuffer = Buffer.alloc(16);
-			systemStateBuffer[0] = 0x21; // centralState with track power on
-			systemStateBuffer[1] = 0x00; // centralStateEx
-
-			z21Mocks().parseZ21Datagram.mockReturnValue([{ kind: 'ds.system.state', state: systemStateBuffer }] as any);
-			z21Mocks().datasetsToEvents.mockReturnValue([
-				{
-					event: 'system.event.state',
-					payload: {
-						mainCurrent_mA: 0x0124,
-						progCurrent_mA: 0x0124,
-						filteredMainCurrent_mA: 0x0124,
-						temperature_C: 0x0124,
-						supplyVoltage_mV: 0x0124,
-						vccVoltage_mV: 0x0124,
-						centralState: 0x0124,
-						centralStateEx: 0x0124,
-						capabilities: 0x0124,
-						raw: []
-					}
+	it.each([Z21EventName.TRACK_POWER, Z21EventName.STATUS] as const)('updates track state for %s events', (eventName) => {
+		process(
+			{
+				kind: 'ds.x.bus',
+				xHeader: 0x61,
+				data: new Uint8Array()
+			},
+			{
+				event: eventName,
+				payload: {
+					powerOn: true,
+					emergencyStop: false,
+					shortCircuit: false,
+					programmingMode: false
 				}
-			] as SystemStateEvent[]);
-			const payload = {
-				raw: Buffer.from([0x14, 0x00, 0x84, 0x00, ...systemStateBuffer]),
-				rawHex: '0x14008400...',
-				from: { address: '127.0.0.1', port: 21105 }
-			} as Z21UdpDatagram;
+			} as Z21Event
+		);
 
-			handler.handleDatagram(payload);
+		expect(broadcast).toHaveBeenCalledWith({
+			type: 'system.message.trackpower',
+			payload: {
+				powerOn: true,
+				emergencyStop: false,
+				shortCircuit: false,
+				programmingMode: false,
+				source: 'ds.lan.x'
+			}
+		});
+	});
 
-			expect(broadcast).toHaveBeenCalledWith(
-				expect.objectContaining({
-					type: 'system.message.z21.rx',
-					payload: expect.objectContaining({
-						datasets: expect.arrayContaining([expect.objectContaining({ kind: 'ds.system.state' })])
-					})
-				})
-			);
+	it('updates the locomotive manager and broadcasts locomotive state', () => {
+		const locoInfo = {
+			addr: 12,
+			speedSteps: 128 as const,
+			speed: 0.5,
+			emergencyStop: false,
+			direction: 'FWD' as const,
+			isMmLoco: false,
+			isOccupied: true,
+			isDoubleTraction: false,
+			isSmartsearch: false,
+			functionMap: {
+				0: true
+			}
+		} as unknown as LocoInfoEvent['payload'];
+
+		locoManager.updateLocoInfoFromZ21.mockReturnValue({
+			addr: 12,
+			state: {
+				speed: 0.5,
+				dir: 'FWD',
+				fns: {
+					0: true
+				},
+				estop: false
+			}
+		});
+
+		process(
+			{
+				kind: 'ds.x.bus',
+				xHeader: 0xef,
+				data: new Uint8Array()
+			},
+			{
+				event: Z21EventName.LOCO_INFO,
+				payload: locoInfo
+			}
+		);
+
+		expect(locoManager.updateLocoInfoFromZ21).toHaveBeenCalledWith(locoInfo);
+
+		expect(broadcast).toHaveBeenCalledWith({
+			type: 'loco.message.state',
+			payload: {
+				addr: 12,
+				speed: 0.5,
+				dir: 'FWD',
+				fns: {
+					0: true
+				},
+				estop: false
+			}
+		});
+	});
+
+	it('broadcasts turnout state', () => {
+		process(
+			{
+				kind: 'ds.x.bus',
+				xHeader: 0x43,
+				data: new Uint8Array()
+			},
+			{
+				event: Z21EventName.TURNOUT_INFO,
+				payload: {
+					addr: 42,
+					state: TurnoutState.DIVERGING,
+					raw: []
+				}
+			}
+		);
+
+		expect(broadcast).toHaveBeenCalledWith({
+			type: 'switching.message.turnout.state',
+			payload: {
+				addr: 42,
+				state: TurnoutState.DIVERGING
+			}
+		});
+	});
+
+	it('stores and broadcasts X-Bus version information', () => {
+		const event: Z21Event = {
+			event: Z21EventName.X_BUS_VERSION,
+			payload: {
+				xBusVersion: 0x30,
+				xBusVersionString: '3.0',
+				cmdsId: 0x12,
+				raw: []
+			}
+		};
+
+		process(
+			{
+				kind: 'ds.x.bus',
+				xHeader: 0x63,
+				data: new Uint8Array()
+			},
+			event
+		);
+
+		expect(commandStationInfo.setXBusVersion).toHaveBeenCalledWith(event.payload);
+
+		expect(commandStationInfo.setHardwareType).toHaveBeenCalledWith('Z21_OLD');
+
+		expect(broadcast).toHaveBeenCalledWith({
+			type: 'system.message.hardware.info',
+			payload: {
+				hardwareType: 'Z21_OLD'
+			}
+		});
+
+		expect(broadcast).toHaveBeenCalledWith({
+			type: 'system.message.x.bus.version',
+			payload: {
+				version: '3.0',
+				cmdsId: 0x12
+			}
+		});
+
+		expect(csInfoOrchestrator.ack).toHaveBeenCalledWith('xBusVersion');
+
+		expect(csInfoOrchestrator.ack.mock.invocationCallOrder[0]).toBeLessThan(csInfoOrchestrator.poke.mock.invocationCallOrder[0]);
+	});
+
+	it('does not derive a hardware type from unrelated X-Bus command station ids', () => {
+		process(
+			{
+				kind: 'ds.x.bus',
+				xHeader: 0x63,
+				data: new Uint8Array()
+			},
+			{
+				event: Z21EventName.X_BUS_VERSION,
+				payload: {
+					xBusVersion: 0x30,
+					xBusVersionString: '3.0',
+					cmdsId: 0x14,
+					raw: []
+				}
+			}
+		);
+
+		expect(commandStationInfo.setHardwareType).not.toHaveBeenCalled();
+	});
+
+	it('stores firmware information and acknowledges it before requesting more data', () => {
+		process(
+			{
+				kind: 'ds.x.bus',
+				xHeader: 0xf3,
+				data: new Uint8Array()
+			},
+			{
+				event: Z21EventName.FIRMWARE_VERSION,
+				payload: {
+					major: 1,
+					minor: 42,
+					raw: []
+				}
+			}
+		);
+
+		expect(commandStationInfo.setFirmwareVersion).toHaveBeenCalledWith({
+			major: 1,
+			minor: 42,
+			raw: []
+		});
+
+		expect(broadcast).toHaveBeenCalledWith({
+			type: 'system.message.firmware.version',
+			payload: {
+				major: 1,
+				minor: 42
+			}
+		});
+
+		expect(csInfoOrchestrator.ack).toHaveBeenCalledWith('firmware');
+
+		expect(csInfoOrchestrator.ack.mock.invocationCallOrder[0]).toBeLessThan(csInfoOrchestrator.poke.mock.invocationCallOrder[0]);
+	});
+
+	it('stores hardware information and acknowledges it before requesting more data', () => {
+		process(
+			{
+				kind: 'ds.hwinfo',
+				hwtype: 0x00000204,
+				fwVersionBcd: 0x00000125
+			},
+			{
+				event: Z21EventName.Z21_HWINFO,
+				payload: {
+					hardwareType: 'z21_START',
+					majorVersion: 1,
+					minorVersion: 25,
+					raw: []
+				}
+			}
+		);
+
+		expect(commandStationInfo.setFirmwareVersion).toHaveBeenCalledWith({
+			major: 1,
+			minor: 25
+		});
+
+		expect(commandStationInfo.setHardwareType).toHaveBeenCalledWith('z21_START');
+
+		expect(csInfoOrchestrator.ack).toHaveBeenCalledWith('hwinfo');
+
+		expect(csInfoOrchestrator.ack.mock.invocationCallOrder[0]).toBeLessThan(csInfoOrchestrator.poke.mock.invocationCallOrder[0]);
+	});
+
+	it('stores and broadcasts the command station code', () => {
+		process(
+			{
+				kind: 'ds.code',
+				code: 2
+			},
+			{
+				event: Z21EventName.Z21_CODE,
+				payload: {
+					code: 2,
+					raw: []
+				}
+			}
+		);
+
+		expect(commandStationInfo.setCode).toHaveBeenCalledWith(2);
+
+		expect(broadcast).toHaveBeenCalledWith({
+			type: 'system.message.z21.code',
+			payload: {
+				code: 2
+			}
+		});
+
+		expect(csInfoOrchestrator.ack).toHaveBeenCalledWith('code');
+	});
+
+	it('broadcasts a global emergency-stop event', () => {
+		process(
+			{
+				kind: 'ds.x.bus',
+				xHeader: 0x81,
+				data: new Uint8Array()
+			},
+			{
+				event: Z21EventName.STOPPED,
+				payload: {
+					raw: []
+				}
+			}
+		);
+
+		expect(broadcast).toHaveBeenCalledWith({
+			type: 'system.message.stop',
+			payload: {}
+		});
+	});
+
+	it.each([
+		{
+			event: Z21EventName.CV_RESULT,
+			payload: {
+				cv: 29,
+				value: 42,
+				raw: []
+			}
+		},
+		{
+			event: Z21EventName.CV_NACK,
+			payload: {
+				shortCircuit: false,
+				raw: []
+			}
+		}
+	] satisfies Z21Event[])('forwards $event to the CV programming service', (event) => {
+		process(
+			{
+				kind: 'ds.x.bus',
+				xHeader: 0x64,
+				data: new Uint8Array()
+			},
+			event
+		);
+
+		expect(cvProgrammingService.onEvent).toHaveBeenCalledWith(event);
+	});
+
+	it('logs unknown LAN-X events', () => {
+		process(
+			{
+				kind: 'ds.x.bus',
+				xHeader: 0x40,
+				data: new Uint8Array()
+			},
+			{
+				event: Z21EventName.UNKNOWN_LAN_X,
+				payload: {
+					xHeader: 0x40,
+					bytes: [1, 2],
+					raw: []
+				}
+			}
+		);
+
+		expect(logger.warn).toHaveBeenCalledWith('z21.unknown', {
+			scope: 'lan_x',
+			unknownKind: Z21EventName.UNKNOWN_LAN_X,
+			from: {
+				address: '127.0.0.1',
+				port: 21105
+			},
+			hex: '04000000'
+		});
+	});
+
+	it('logs unknown X-Bus events with their payload', () => {
+		process(
+			{
+				kind: 'ds.x.bus',
+				xHeader: 0x88,
+				data: new Uint8Array([0x01])
+			},
+			{
+				event: Z21EventName.UNKNOWN_X_BUS,
+				payload: {
+					xHeader: 0x88,
+					bytes: [0x01],
+					raw: []
+				}
+			}
+		);
+
+		expect(logger.warn).toHaveBeenCalledWith('z21.unknown', {
+			scope: 'x_bus',
+			unknownKind: Z21EventName.UNKNOWN_X_BUS,
+			from: {
+				address: '127.0.0.1',
+				port: 21105
+			},
+			hex: '04000000',
+			xHeader: 0x88,
+			bytes: [0x01]
 		});
 	});
 });

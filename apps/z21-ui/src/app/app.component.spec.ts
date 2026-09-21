@@ -3,10 +3,9 @@
  * All rights reserved.
  */
 
-import type { ComponentFixture } from '@angular/core/testing';
-import { TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { LocoState } from '@application-platform/protocol';
+import type { LocoState } from '@application-platform/protocol';
 import { LanguageToggleComponent } from '@application-platform/shared/ui-theme';
 import { MockedLanguageToggleComponent } from '@application-platform/testing';
 import { TurnoutState } from '@application-platform/z21-shared';
@@ -103,7 +102,7 @@ describe('AppComponent', () => {
 		expect(send.type).toBe('loco.command.drive');
 		expect(send.payload.addr).toBe(comp.store.selectedAddr());
 		// speed should be 0..126 rounded
-		expect(send.payload.speed).toBe(Math.round(0.55 * 126));
+		expect(send.payload.speedStep).toBe(Math.round(0.55 * 126));
 		expect(send.payload.dir).toBe(comp.store.dir());
 	});
 

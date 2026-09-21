@@ -3,38 +3,36 @@
  * All rights reserved.
  */
 
-import type { Z21Event } from '@application-platform/z21-shared';
-import { CentralStatus } from '@application-platform/z21-shared';
+import { CentralStatus, Z21EventName, type Z21StatusEvent } from '@application-platform/z21-shared';
 
 /**
- * Decodes LAN X system commands into Z21Event arrays.
- *
- * @param payload - The X-BUS dataset bytes.
- *
- * @returns Array of Z21Event entries produced from the dataset.
+ * Decodes LAN-X central station status payloads.
  */
-export function decodeLanXStatusChangedPayload(payload: Uint8Array): Extract<Z21Event, { event: 'system.event.status' }>[] {
-	if (payload.length < 2) {
-		return [];
-	}
-
-	const raw = Array.from(payload);
-	const emergencyStop = (payload[1] & CentralStatus.EmergencyStop) !== 0;
-	const shortCircuit = (payload[1] & CentralStatus.ShortCircuit) !== 0;
-	const trackVoltageOff = (payload[1] & CentralStatus.TrackVoltageOff) !== 0;
-	const on = !trackVoltageOff;
-	const programmingMode = (payload[1] & CentralStatus.ProgrammingModeActive) !== 0;
-
-	return [
-		{
-			event: 'system.event.status',
-			payload: {
-				emergencyStop,
-				shortCircuit,
-				powerOn: on,
-				programmingMode,
-				raw
-			}
+export class LanXStatusDecoder {
+	/**
+	 * Decodes the central station status flags.
+	 *
+	 * @param payload - LAN-X status payload.
+	 * @returns Decoded status event, or no event for incomplete data.
+	 */
+	public decode(payload: Uint8Array): Z21StatusEvent[] {
+		if (payload.length < 2) {
+			return [];
 		}
-	];
+
+		const status = payload[1];
+
+		return [
+			{
+				event: Z21EventName.STATUS,
+				payload: {
+					emergencyStop: (status & CentralStatus.EmergencyStop) !== 0,
+					shortCircuit: (status & CentralStatus.ShortCircuit) !== 0,
+					powerOn: (status & CentralStatus.TrackVoltageOff) === 0,
+					programmingMode: (status & CentralStatus.ProgrammingModeActive) !== 0,
+					raw: Array.from(payload)
+				}
+			}
+		];
+	}
 }
