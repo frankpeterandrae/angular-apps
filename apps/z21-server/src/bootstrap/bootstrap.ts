@@ -5,78 +5,57 @@
 
 import { type ServerToClient } from '@application-platform/protocol';
 import { Z21BroadcastFlag } from '@application-platform/z21';
-import { Broadcastflags, ServerConfig } from '@application-platform/z21-shared';
+import type { Broadcastflags } from '@application-platform/z21-shared';
 import { type WebSocket as WsWebSocket } from 'ws';
 
 import { ClientMessageHandler } from '../handler/client-message-handler';
 
-import { createProviders, Providers } from './providers';
+import { type Providers } from './providers';
+
+const BROADCAST_FLAGS: ReadonlyArray<{
+	key: keyof Broadcastflags;
+	value: Z21BroadcastFlag;
+}> = [
+	{ key: 'basic', value: Z21BroadcastFlag.BASIC },
+	{ key: 'rMbus', value: Z21BroadcastFlag.R_MBUS },
+	{ key: 'railcom', value: Z21BroadcastFlag.RAILCOM },
+	{ key: 'systemState', value: Z21BroadcastFlag.SYSTEM_STATE },
+	{ key: 'changedLocoInfo', value: Z21BroadcastFlag.CHANGED_LOCO_INFO },
+	{
+		key: 'locoNetWithoutLocoAndSwitches',
+		value: Z21BroadcastFlag.LOCO_NET_WITHOUT_LOCO_AND_SWITCHES
+	},
+	{
+		key: 'locoNetWithLocoAndSwitches',
+		value: Z21BroadcastFlag.LOCO_NET_WITH_LOCO_AND_SWITCHES
+	},
+	{
+		key: 'locoNetDetector',
+		value: Z21BroadcastFlag.LOCO_NET_DETECTOR
+	},
+	{
+		key: 'railcomDatachanged',
+		value: Z21BroadcastFlag.RAILCOM_DATACHANGED
+	}
+];
 
 /**
- * Bootstrap class to initialize and start the Z21 server application.
- * Features:
- * - Loads configuration
- * - Sets up HTTP server for static file serving
- * - Initializes WebSocket server for client communication
- * - Configures Z21 UDP gateway and command service
- * - Manages locomotive and track status state
- * - Wires event handlers for Z21 events and client messages
- * - Starts the HTTP and UDP servers
- * @remarks Call `start()` to launch the server.
+ * Coordinates application startup, shutdown, WebSocket wiring,
+ * and the lifecycle of the active Z21 session.
  */
 export class Bootstrap {
-	/**
-	 * Validated client message handler:
-	 * - Applies loco and turnout changes
-	 * - Emits resulting server-to-client updates
-	 * - Performs demo ping via Z21 UDP where relevant
-	 */
 	private readonly clientMessageHandler: ClientMessageHandler;
-
-	/**
-	 * Count of connected WebSocket clients.
-	 */
 	private wsClientCount = 0;
-
-	/**
-	 * Sequence number for assigning unique client IDs.
-	 */
 	private wsClientSeq = 0;
-
-	/**
-	 * Mapping of WebSocket client objects to their unique IDs.
-	 */
 	private readonly wsClientIds = new WeakMap<object, number>();
-
-	/**
-	 * Indicates whether a Z21 session is currently active.
-	 */
 	private z21SessionActive = false;
+	private z21HeartbeatTimer: NodeJS.Timeout | null = null;
 
-	/**
-	 * Backing field for the Z21 heartbeat timer.
-	 * Do not use directly; use `z21HeartbeatTimer` instead.
-	 */
-	private _z21HeartbeatTimer: NodeJS.Timeout | null = null;
-
-	/**
-	 * Timer for sending periodic Z21 heartbeat messages.
-	 * @deprecated Use `z21HeartbeatTimer` instead.
-	 */
-	private get z21HaertbeatTimer(): NodeJS.Timeout | null {
-		return this._z21HeartbeatTimer;
-	}
-
-	private set z21HaertbeatTimer(value: NodeJS.Timeout | null) {
-		this._z21HeartbeatTimer = value;
-	}
-
-	private readonly providers: Providers;
-
-	constructor(providersOrConfig: Providers | ServerConfig) {
-		this.providers = 'cfg' in providersOrConfig ? providersOrConfig : createProviders(providersOrConfig);
+	constructor(private readonly providers: Providers) {
 		const broadcast = (msg: ServerToClient): void => this.providers.wsServer.broadcast(msg);
+
 		const replay = (ws: WsWebSocket, msg: ServerToClient): void => this.providers.wsServer.sendToClient(ws, msg);
+
 		this.clientMessageHandler = new ClientMessageHandler(
 			this.providers.locoManager,
 			this.providers.z21CommandService,
@@ -87,11 +66,9 @@ export class Bootstrap {
 	}
 
 	/**
-	 * Start the Z21 UDP and priming requests:
-	 * - Start listening on the configured UDP port
-	 * - Request serial (triggers one UDP response)
-	 * - Enable broadcast flags (basic + systemState)
-	 * - Pull current system state immediately
+	 * Starts the application services and wires transport handlers.
+	 *
+	 * @returns This bootstrap instance.
 	 */
 	public start(): this {
 		this.wireUdp();
@@ -102,7 +79,7 @@ export class Bootstrap {
 	}
 
 	/**
-	 * Stops the UDP and WebSocket servers.
+	 * Stops the active Z21 session and all application servers.
 	 */
 	public stop(): void {
 		try {
@@ -131,20 +108,11 @@ export class Bootstrap {
 	}
 
 	private wireUdp(): void {
-		this.providers.udp.on('datagram', (dg) => {
-			/**
-			 * Dispatch inbound Z21 payloads to the handler,
-			 * which may update track status and broadcast events.
-			 */
-			this.providers.z21EventHandler.handleDatagram(dg);
-		});
+		this.providers.udp.on('datagram', (datagram) => this.providers.z21EventHandler.handleDatagram(datagram));
 	}
 
 	private wireWs(): void {
 		this.providers.wsServer.onConnection(
-			/**
-			 * For each accepted client message, route to the client message handler.
-			 */
 			(msg, ws) => this.clientMessageHandler.handle(msg, ws),
 			(ws) => this.handleClientDisconnect(ws),
 			(ws) => this.handleClientConnected(ws)
@@ -231,32 +199,19 @@ export class Bootstrap {
 		this.providers.csInfoOrchestrator.poke();
 
 		this.setBroadcast();
-		this.providers.udp.sendSystemStateGetData();
+		this.providers.z21CommandService.getSystemState();
 		this.startZ21Heartbeat();
 	}
 
 	private setBroadcast(): void {
-		let castFlags = Z21BroadcastFlag.NONE;
-		const flagConfig = this.providers.cfg.z21.broadcastflags;
-		const flags: { key: keyof Broadcastflags; value: Z21BroadcastFlag }[] = [
-			{ key: 'basic', value: Z21BroadcastFlag.BASIC },
-			{ key: 'rMbus', value: Z21BroadcastFlag.R_MBUS },
-			{ key: 'railcom', value: Z21BroadcastFlag.RAILCOM },
-			{ key: 'systemState', value: Z21BroadcastFlag.SYSTEM_STATE },
-			{ key: 'changedLocoInfo', value: Z21BroadcastFlag.CHANGED_LOCO_INFO },
-			{ key: 'locoNetWithoutLocoAndSwitches', value: Z21BroadcastFlag.LOCO_NET_WITHOUT_LOCO_AND_SWITCHES },
-			{ key: 'locoNetWithLocoAndSwitches', value: Z21BroadcastFlag.LOCO_NET_WITH_LOCO_AND_SWITCHES },
-			{ key: 'locoNetDetector', value: Z21BroadcastFlag.LOCO_NET_DETECTOR },
-			{ key: 'railcomDatachanged', value: Z21BroadcastFlag.RAILCOM_DATACHANGED }
-		];
+		const config = this.providers.cfg.z21.broadcastflags;
 
-		for (const { key, value } of flags) {
-			if (flagConfig?.[key]) {
-				castFlags |= value;
-			}
-		}
+		const flags = BROADCAST_FLAGS.reduce(
+			(result, entry) => (config?.[entry.key] ? result | entry.value : result),
+			Z21BroadcastFlag.NONE
+		);
 
-		this.providers.udp.sendSetBroadcastFlags(castFlags);
+		this.providers.z21CommandService.setBroadcastFlags(flags);
 	}
 
 	private deactivateZ21Session(): void {
@@ -270,34 +225,39 @@ export class Bootstrap {
 
 		this.providers.csInfoOrchestrator.reset();
 		this.stopZ21Heartbeat();
-		this.providers.udp.sendLogOff();
+		this.providers.z21CommandService.logOff();
 	}
 
 	private startZ21Heartbeat(): void {
 		const intervalMs = 60_000;
 
 		this.stopZ21Heartbeat();
-		this.z21HaertbeatTimer = setInterval(() => {
-			this.providers.udp.sendSystemStateGetData();
-		}, intervalMs);
+
+		this.z21HeartbeatTimer = setInterval(() => this.providers.z21CommandService.getSystemState(), intervalMs);
 
 		// Don't keep the Node process alive just because of the heartbeat.
-		this.z21HaertbeatTimer.unref?.();
+		this.z21HeartbeatTimer.unref();
 	}
 
 	private stopZ21Heartbeat(): void {
-		if (this.z21HaertbeatTimer) {
-			clearInterval(this.z21HaertbeatTimer);
-			this.z21HaertbeatTimer = null;
+		if (!this.z21HeartbeatTimer) {
+			return;
 		}
+
+		clearInterval(this.z21HeartbeatTimer);
+		this.z21HeartbeatTimer = null;
 	}
+
 	private getWsClientId(ws: object): number {
 		const existing = this.wsClientIds.get(ws);
-		if (existing) {
+
+		if (existing !== undefined) {
 			return existing;
 		}
+
 		const id = ++this.wsClientSeq;
 		this.wsClientIds.set(ws, id);
+
 		return id;
 	}
 }

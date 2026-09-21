@@ -6,7 +6,7 @@
 import { Direction } from '@application-platform/z21-shared';
 
 import {
-	AddessByteMask,
+	AddressByteMask,
 	F13ToF20FunctionsByteMask,
 	F21ToF28FunctionsByteMask,
 	F29ToF31FunctionsByteMask,
@@ -17,12 +17,18 @@ import {
 	SpeedByteMask
 } from '../../constants';
 
+/**
+ * Decoded locomotive function states and related flags.
+ */
 export type LocoFunctionDecodeResult = {
 	functionMap: Record<number, boolean>;
 	isDoubleTraction: boolean;
 	isSmartsearch: boolean;
 };
 
+/**
+ * Decoded locomotive speed, direction and status information.
+ */
 export type LocoSpeedDecodeResult = {
 	speedSteps: 14 | 28 | 128;
 	speed: number;
@@ -41,7 +47,7 @@ export type LocoSpeedDecodeResult = {
  * @returns The decoded DCC address as a number.
  */
 export function decodeDccAddress(msbByte: number, lsbByte: number): number {
-	const adrMsb = msbByte & AddessByteMask.MSB;
+	const adrMsb = msbByte & AddressByteMask.MSB;
 	const adrLsb = lsbByte;
 	const addr = (adrMsb << 8) + adrLsb;
 
@@ -49,12 +55,11 @@ export function decodeDccAddress(msbByte: number, lsbByte: number): number {
 }
 
 /**
- * Decodes a DCC address from the given MSB and LSB bytes.
+ * Decodes a zero-based protocol CV address into its one-based CV number.
  *
- * @param msbByte - The MSB byte containing the high bits of the address.
- * @param lsbByte - The LSB byte containing the low bits of the address.
- *
- * @returns The decoded DCC address as a number.
+ * @param msbByte - Most significant address byte.
+ * @param lsbByte - Least significant address byte.
+ * @returns One-based CV address.
  */
 export function decodeCvAddress(msbByte: number, lsbByte: number): number {
 	const adrMsb = msbByte & FULL_BYTE_MASK;
@@ -83,8 +88,7 @@ export function decodeSpeed(db2: number, db3: number): LocoSpeedDecodeResult {
 	}
 
 	const direction = (db3 & SpeedByteMask.DIRECTION_FORWARD) === 0 ? Direction.REV : Direction.FWD;
-	const SPEED_VALUE_MASK = SpeedByteMask.VALUE;
-	const speedRaw = db3 & SPEED_VALUE_MASK;
+	const speedRaw = db3 & SpeedByteMask.VALUE;
 	// In the X-BUS protocol, a speed value of 1 encodes "emergency stop".
 	// Regular speed steps are encoded as (step + 1), so:
 	//   - 0 means "stop"
@@ -106,26 +110,29 @@ export function decodeSpeed(db2: number, db3: number): LocoSpeedDecodeResult {
  */
 export function decodeFunctions(payload: Uint8Array, startIndex: number): LocoFunctionDecodeResult {
 	const functionMap: Record<number, boolean> = {};
-	const db4 = payload[startIndex];
 
-	// Keine Funktionsbytes vorhanden
-	if (db4 === undefined) {
-		return { functionMap, isDoubleTraction: false, isSmartsearch: false };
+	if (payload.length <= startIndex) {
+		return {
+			functionMap,
+			isDoubleTraction: false,
+			isSmartsearch: false
+		};
 	}
 
-	// DB4: D,S + F0..F4
+	const db4 = payload[startIndex];
+
 	const isDoubleTraction = (db4 & LowFunctionsByteMask.D) !== 0;
 	const isSmartsearch = (db4 & LowFunctionsByteMask.S) !== 0;
 
-	functionMap[0] = (db4 & LowFunctionsByteMask.L) !== 0; // F0 / Licht
+	functionMap[0] = (db4 & LowFunctionsByteMask.L) !== 0;
 	functionMap[1] = (db4 & LowFunctionsByteMask.F1) !== 0;
 	functionMap[2] = (db4 & LowFunctionsByteMask.F2) !== 0;
 	functionMap[3] = (db4 & LowFunctionsByteMask.F3) !== 0;
 	functionMap[4] = (db4 & LowFunctionsByteMask.F4) !== 0;
 
-	// DB5: F5..F12
-	const db5 = payload[startIndex + 1];
-	if (db5 !== undefined) {
+	if (payload.length > startIndex + 1) {
+		const db5 = payload[startIndex + 1];
+
 		functionMap[5] = (db5 & F5ToF12FunctionsByteMask.F5) !== 0;
 		functionMap[6] = (db5 & F5ToF12FunctionsByteMask.F6) !== 0;
 		functionMap[7] = (db5 & F5ToF12FunctionsByteMask.F7) !== 0;
@@ -136,9 +143,9 @@ export function decodeFunctions(payload: Uint8Array, startIndex: number): LocoFu
 		functionMap[12] = (db5 & F5ToF12FunctionsByteMask.F12) !== 0;
 	}
 
-	// DB6: F13..F20
-	const db6 = payload[startIndex + 2];
-	if (db6 !== undefined) {
+	if (payload.length > startIndex + 2) {
+		const db6 = payload[startIndex + 2];
+
 		functionMap[13] = (db6 & F13ToF20FunctionsByteMask.F13) !== 0;
 		functionMap[14] = (db6 & F13ToF20FunctionsByteMask.F14) !== 0;
 		functionMap[15] = (db6 & F13ToF20FunctionsByteMask.F15) !== 0;
@@ -149,9 +156,9 @@ export function decodeFunctions(payload: Uint8Array, startIndex: number): LocoFu
 		functionMap[20] = (db6 & F13ToF20FunctionsByteMask.F20) !== 0;
 	}
 
-	// DB7: F21..F28
-	const db7 = payload[startIndex + 3];
-	if (db7 !== undefined) {
+	if (payload.length > startIndex + 3) {
+		const db7 = payload[startIndex + 3];
+
 		functionMap[21] = (db7 & F21ToF28FunctionsByteMask.F21) !== 0;
 		functionMap[22] = (db7 & F21ToF28FunctionsByteMask.F22) !== 0;
 		functionMap[23] = (db7 & F21ToF28FunctionsByteMask.F23) !== 0;
@@ -162,13 +169,17 @@ export function decodeFunctions(payload: Uint8Array, startIndex: number): LocoFu
 		functionMap[28] = (db7 & F21ToF28FunctionsByteMask.F28) !== 0;
 	}
 
-	// DB8: F29..F31
-	const db8 = payload[startIndex + 4];
-	if (db8 !== undefined) {
+	if (payload.length > startIndex + 4) {
+		const db8 = payload[startIndex + 4];
+
 		functionMap[29] = (db8 & F29ToF31FunctionsByteMask.F29) !== 0;
 		functionMap[30] = (db8 & F29ToF31FunctionsByteMask.F30) !== 0;
 		functionMap[31] = (db8 & F29ToF31FunctionsByteMask.F31) !== 0;
 	}
 
-	return { functionMap, isDoubleTraction, isSmartsearch };
+	return {
+		functionMap,
+		isDoubleTraction,
+		isSmartsearch
+	};
 }

@@ -3,323 +3,397 @@
  * All rights reserved.
  */
 
-import type { ComponentFixture } from '@angular/core/testing';
-import { TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
-import { LocoState } from '@application-platform/protocol';
-import { LanguageToggleComponent } from '@application-platform/shared/ui-theme';
-import { MockedLanguageToggleComponent } from '@application-platform/testing';
-import { TurnoutState } from '@application-platform/z21-shared';
-import { of } from 'rxjs';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ClientToServer, ServerToClient } from '@application-platform/protocol';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { setupTestingModule } from '../test-setup';
 
 import { AppComponent } from './app.component';
 import { WsClientService } from './ws-client.service';
+import { Z21UiStore } from './z21-ui-store.service';
+
+type MessageHandler = (message: ServerToClient) => void;
 
 describe('AppComponent', () => {
 	let fixture: ComponentFixture<AppComponent>;
-	let mockWs: any;
+	let store: Z21UiStore;
+
+	let messageHandler: MessageHandler | undefined;
+
+	const send = vi.fn<(message: ClientToServer) => void>();
+	const request = vi.fn();
+	const unsubscribe = vi.fn();
 
 	beforeEach(async () => {
-		// create a controllable mock for the WsClientService so tests don't attempt real network
-		const sendWrapper = vi.fn();
-		mockWs = {
-			// simple onMessage registration that captures handler
-			onMessage: (h: any) => {
-				mockWs._handler = h;
-				return () => {
-					mockWs._handler = undefined;
-				};
-			},
-			// send only forwards to wrapper when marked open
-			_isOpen: false,
-			open: () => (mockWs._isOpen = true),
-			close: () => (mockWs._isOpen = false),
-			send: (msg: any) => {
-				if (mockWs._isOpen) sendWrapper(JSON.stringify(msg));
-			},
-			_requestCalls: [] as any[],
-			request: (builder: any, opts?: any) => {
-				// minimal request shim: build a fake requestId and return a promise that can be resolved
-				const reqId = 'test-req';
-				const msg = builder(reqId);
-				mockWs._requestCalls.push({ msg, opts });
-				return Promise.reject(new Error('not implemented in mock'));
-			}
+		send.mockReset();
+		request.mockReset();
+		unsubscribe.mockReset();
+
+		messageHandler = undefined;
+
+		const wsMock = {
+			status: vi.fn(() => 'connected'),
+			lastMessage: vi.fn(() => ''),
+			onMessage: vi.fn((handler: MessageHandler) => {
+				messageHandler = handler;
+
+				return unsubscribe;
+			}),
+			send,
+			request
 		};
 
-		// Provide mocked services to the testing module
 		await setupTestingModule({
 			imports: [AppComponent],
 			providers: [
 				{
-					provide: ActivatedRoute,
-					useValue: {
-						params: of({}),
-						snapshot: {
-							paramMap: {
-								get: (): any => null
-							}
-						}
-					}
-				},
-				{ provide: LanguageToggleComponent, useClass: MockedLanguageToggleComponent },
-				{ provide: WsClientService, useValue: mockWs }
+					provide: WsClientService,
+					useValue: wsMock
+				}
 			]
 		});
 
 		fixture = TestBed.createComponent(AppComponent);
+		store = TestBed.inject(Z21UiStore);
+
+		fixture.detectChanges();
 	});
 
-	it('should create the app', () => {
-		const app = fixture.componentInstance;
-		expect(app).toBeTruthy();
+	it('renders the application', () => {
+		const heading = fixture.nativeElement.querySelector('h1') as HTMLHeadingElement;
+
+		expect(heading.textContent).toContain('Z21 UI');
 	});
 
-	it('should set speed signal and send loco.command.drive when websocket is open', () => {
-		const comp = fixture.componentInstance;
+	it('updates the selected locomotive address from the input', () => {
+		const input = fixture.nativeElement.querySelector('#loco') as HTMLInputElement;
 
-		// mark mock ws as open so its send forwards to the wrapper
-		mockWs.open();
+		input.value = '42';
+		input.dispatchEvent(new Event('input'));
 
-		// replace internal send wrapper spy reference for assertion
-		const sendSpy = vi.fn();
-		// override internal wrapper (we cannot reach closure created in beforeEach), so recreate mockWs.send
-		mockWs.send = (msg: any) => {
-			if (mockWs._isOpen) sendSpy(JSON.stringify(msg));
-		};
-
-		// set a sensible selected address in the store
-		comp.store.selectedAddr.set(42);
-
-		// setSpeed now expects a 0..1 UI value
-		comp.setSpeed(0.55);
-
-		expect(comp.store.speedUi()).toBeCloseTo(0.55);
-		expect(sendSpy).toHaveBeenCalledTimes(1);
-		const send = JSON.parse(sendSpy.mock.calls[0][0]);
-		expect(send.type).toBe('loco.command.drive');
-		expect(send.payload.addr).toBe(comp.store.selectedAddr());
-		// speed should be 0..126 rounded
-		expect(send.payload.speed).toBe(Math.round(0.55 * 126));
-		expect(send.payload.dir).toBe(comp.store.dir());
+		expect(store.selectedAddr()).toBe(42);
 	});
 
-	it('should not send messages when websocket is not open', () => {
-		const comp = fixture.componentInstance;
+	it('sends a drive command when the speed input changes', () => {
+		store.selectedAddr.set(42);
+		store.dir.set('REV');
 
-		// ensure mock ws is closed
-		mockWs.close();
+		fixture.detectChanges();
 
-		const sendSpy = vi.fn();
-		mockWs.send = (msg: any) => {
-			if (mockWs._isOpen) sendSpy(JSON.stringify(msg));
-		};
+		const input = fixture.nativeElement.querySelector('#speed') as HTMLInputElement;
 
-		comp.setSpeed(0.1);
-		expect(comp.store.speedUi()).toBeCloseTo(0.1);
-		expect(sendSpy).not.toHaveBeenCalled();
+		input.value = '0.55';
+		input.dispatchEvent(new Event('input'));
+
+		expect(store.speedUi()).toBeCloseTo(0.55);
+
+		expect(send).toHaveBeenCalledWith(
+			expect.objectContaining({
+				type: 'loco.command.drive',
+				payload: expect.objectContaining({
+					addr: 42,
+					speedStep: 69,
+					dir: 'REV',
+					steps: 128
+				})
+			})
+		);
 	});
 
-	it('should send function set command with correct payload', () => {
-		const comp = fixture.componentInstance;
-		mockWs.open();
-		const sendSpy = vi.fn();
-		mockWs.send = (msg: any) => {
-			if (mockWs._isOpen) sendSpy(JSON.stringify(msg));
-		};
+	it('clamps speed values before sending them', () => {
+		const input = fixture.nativeElement.querySelector('#speed') as HTMLInputElement;
 
-		comp.store.selectedAddr.set(7);
-		comp.sendFn(2, true);
+		input.value = '2';
+		input.dispatchEvent(new Event('input'));
 
-		expect(sendSpy).toHaveBeenCalledTimes(1);
-		const send = JSON.parse(sendSpy.mock.calls[0][0]);
-		expect(send.type).toBe('loco.command.function.set');
-		expect(send.payload.fn).toBe(2);
-		expect(send.payload.on).toBe(true);
-		expect(send.payload.addr).toBe(comp.store.selectedAddr());
+		expect(store.speedUi()).toBe(1);
+
+		expect(send).toHaveBeenCalledWith(
+			expect.objectContaining({
+				type: 'loco.command.drive',
+				payload: expect.objectContaining({
+					speedStep: 126
+				})
+			})
+		);
 	});
 
-	it('should send turnout command including pulseMs', () => {
-		const comp = fixture.componentInstance;
-		mockWs.open();
-		const sendSpy = vi.fn();
-		mockWs.send = (msg: any) => {
-			if (mockWs._isOpen) sendSpy(JSON.stringify(msg));
-		};
+	it('tracks speed dragging through pointer events', () => {
+		const input = fixture.nativeElement.querySelector('#speed') as HTMLInputElement;
 
-		comp.store.turnoutAddr.set(123);
-		comp.sendTurnout(TurnoutState.DIVERGING);
+		input.dispatchEvent(new Event('pointerdown'));
 
-		expect(sendSpy).toHaveBeenCalledTimes(1);
-		const send = JSON.parse(sendSpy.mock.calls[0][0]);
-		expect(send.type).toBe('switching.command.turnout.set');
-		expect(send.payload.state).toBe(TurnoutState.DIVERGING);
-		expect(send.payload.pulseMs).toBe(200);
-		expect(send.payload.addr).toBe(comp.store.turnoutAddr());
+		expect(store.draggingSpeed()).toBe(true);
+
+		input.dispatchEvent(new Event('pointerup'));
+
+		expect(store.draggingSpeed()).toBe(false);
 	});
 
-	it('should register ws onMessage handler and update store when a server message is received', () => {
-		// Setup a fresh component that received the mockWs via DI in beforeEach
-		const comp = fixture.componentInstance;
+	it('sends an emergency stop for the selected locomotive', () => {
+		store.selectedAddr.set(99);
 
-		// ensure mockWs captured a handler during component construction
-		expect(typeof mockWs._handler).toBe('function');
+		fixture.detectChanges();
 
-		// set selected address so updateFromServer will match
-		comp.store.selectedAddr.set(5);
-		comp.store.draggingSpeed.set(false);
+		const button = fixture.nativeElement.querySelector('#loco-estop') as HTMLButtonElement;
 
-		// simulate server message via the registered handler
-		const serverMsg = {
-			type: 'loco.message.state',
-			payload: { addr: 5, speed: 63, dir: 'REV', fns: { 1: true }, estop: false }
-		} as LocoState;
-		mockWs._handler(serverMsg);
+		button.click();
 
-		// store should have been updated by the registered handler
-		expect(comp.store.speedUi()).toBeCloseTo(63 / 126);
-		expect(comp.store.dir()).toBe('REV');
-		expect(comp.store.functions()[1]).toBe(true);
+		expect(send).toHaveBeenCalledWith(
+			expect.objectContaining({
+				type: 'loco.command.eStop',
+				payload: expect.objectContaining({
+					addr: 99
+				})
+			})
+		);
 	});
 
-	it('should toggle power and send commands when websocket is open', () => {
-		const comp = fixture.componentInstance;
-		mockWs.open();
-		const sendSpy = vi.fn();
-		mockWs.send = (msg: any) => {
-			if (mockWs._isOpen) sendSpy(JSON.stringify(msg));
-		};
+	it('changes the locomotive direction through the UI', () => {
+		store.dir.set('FWD');
 
-		comp.store.powerOn.set(true);
-		comp.togglePower();
-		expect(comp.store.powerOn()).toBe(false);
-		let send = JSON.parse(sendSpy.mock.calls[0][0]);
-		expect(send.type).toBe('system.command.trackpower.set');
-		expect(send.payload.powerOn).toBe(false);
+		fixture.detectChanges();
 
-		comp.togglePower();
-		expect(comp.store.powerOn()).toBe(true);
-		send = JSON.parse(sendSpy.mock.calls[1][0]);
-		expect(send.payload.powerOn).toBe(true);
+		const button = fixture.nativeElement.querySelector('#loco-direction') as HTMLButtonElement;
+
+		button.click();
+
+		expect(store.dir()).toBe('REV');
+
+		fixture.detectChanges();
+
+		expect(button.textContent).toContain('REV');
 	});
 
-	it('updateFromServer handles loco.message.state updating when addr matches and draggingSpeed false', () => {
-		const comp = fixture.componentInstance;
-		// prepare state
-		comp.store.selectedAddr.set(5);
-		comp.store.draggingSpeed.set(false);
-
-		// message matching address
-		comp.store.updateFromServer({
-			type: 'loco.message.state',
-			payload: { addr: 5, speed: 63, dir: 'REV', fns: { 1: true }, estop: false }
-		} as LocoState);
-		expect(comp.store.speedUi()).toBeCloseTo(63 / 126);
-		expect(comp.store.dir()).toBe('REV');
-		expect(comp.store.functions()[1]).toBe(true);
-	});
-
-	it('updateFromServer does not update speed when draggingSpeed is true', () => {
-		const comp = fixture.componentInstance;
-		comp.store.selectedAddr.set(9);
-		comp.store.draggingSpeed.set(true);
-		comp.store.speedUi.set(0.2);
-
-		comp.store.updateFromServer({
-			type: 'loco.message.state',
-			payload: { addr: 9, speed: 10, dir: 'FWD', fns: {}, estop: false }
-		} as LocoState);
-		expect(comp.store.speedUi()).toBeCloseTo(0.2);
-	});
-
-	it('readCv sets cvValue on success and clears cvError', async () => {
-		const comp = fixture.componentInstance;
-		mockWs.request = vi.fn().mockResolvedValue({
-			type: 'programming.replay.cv.result',
-			payload: { cvValue: 7 }
+	it('renders locomotive functions in numeric order', () => {
+		store.functions.set({
+			10: false,
+			2: true,
+			1: false
 		});
 
-		await comp.readCv();
+		fixture.detectChanges();
 
-		expect(comp.cvError()).toBeNull();
-		expect(comp.cvValue()).toBe(7);
-		expect(mockWs.request).toHaveBeenCalledTimes(1);
+		const buttons = Array.from(fixture.nativeElement.querySelectorAll('[id^="loco-function-"]')) as HTMLButtonElement[];
+
+		expect(buttons.map((button) => button.id)).toEqual(['loco-function-1', 'loco-function-2', 'loco-function-10']);
 	});
 
-	it('readCv sets cvError on failure and clears cvValue', async () => {
-		const comp = fixture.componentInstance;
-		mockWs.request = vi.fn().mockRejectedValue(new Error('boom'));
+	it('sends a locomotive function command from the UI', () => {
+		store.selectedAddr.set(7);
 
-		await comp.readCv();
-
-		expect(comp.cvValue()).toBeNull();
-		expect(comp.cvError()).toBe('boom');
-	});
-
-	it('writeCv guards against null cvValue', async () => {
-		const comp = fixture.componentInstance;
-		mockWs.request = vi.fn();
-		comp.cvValue.set(null);
-
-		await comp.writeCv();
-
-		expect(comp.cvError()).toBe('cvValue is null');
-		expect(mockWs.request).not.toHaveBeenCalled();
-	});
-
-	it('writeCv clears cvError on success and reports errors on failure', async () => {
-		const comp = fixture.componentInstance;
-
-		comp.cvValue.set(12);
-		mockWs.request = vi.fn().mockResolvedValue({
-			type: 'programming.replay.cv.result',
-			payload: { cvValue: 12 }
+		store.functions.set({
+			2: false
 		});
-		await comp.writeCv();
-		expect(comp.cvError()).toBeNull();
 
-		mockWs.request = vi.fn().mockRejectedValue(new Error('nope'));
-		await comp.writeCv();
-		expect(comp.cvError()).toBe('nope');
+		fixture.detectChanges();
+
+		const button = fixture.nativeElement.querySelector('#loco-function-2') as HTMLButtonElement;
+
+		button.click();
+
+		expect(send).toHaveBeenCalledWith(
+			expect.objectContaining({
+				type: 'loco.command.function.set',
+				payload: expect.objectContaining({
+					addr: 7,
+					fn: 2,
+					on: true
+				})
+			})
+		);
 	});
 
-	it('sendEStop emits a loco.command.eStop message', () => {
-		const comp = fixture.componentInstance;
-		mockWs.open();
-		const sendSpy = vi.fn();
-		mockWs.send = (msg: any) => {
-			if (mockWs._isOpen) sendSpy(JSON.stringify(msg));
+	it('updates the turnout address from the input', () => {
+		const input = fixture.nativeElement.querySelector('#turnout') as HTMLInputElement;
+
+		input.value = '123';
+		input.dispatchEvent(new Event('input'));
+
+		expect(store.turnoutAddr()).toBe(123);
+	});
+
+	it('sends the diverging turnout command', () => {
+		store.turnoutAddr.set(123);
+
+		fixture.detectChanges();
+
+		const button = fixture.nativeElement.querySelector('#turnout-diverging') as HTMLButtonElement;
+
+		button.click();
+
+		expect(send).toHaveBeenCalledWith(
+			expect.objectContaining({
+				type: 'switching.command.turnout.set',
+				payload: expect.objectContaining({
+					addr: 123,
+					state: 'DIVERGING',
+					pulseMs: 200
+				})
+			})
+		);
+	});
+
+	it('toggles track power through the UI', () => {
+		store.powerOn.set(false);
+
+		fixture.detectChanges();
+
+		const button = fixture.nativeElement.querySelector('#track-power') as HTMLButtonElement;
+
+		button.click();
+
+		expect(store.powerOn()).toBe(true);
+
+		expect(send).toHaveBeenCalledWith(
+			expect.objectContaining({
+				type: 'system.command.trackpower.set',
+				payload: expect.objectContaining({
+					powerOn: true
+				})
+			})
+		);
+	});
+
+	it('forwards incoming WebSocket messages to the store', () => {
+		const updateSpy = vi.spyOn(store, 'updateFromServer');
+
+		const message: ServerToClient = {
+			type: 'system.message.trackpower',
+			payload: {
+				powerOn: true,
+				shortCircuit: false,
+				emergencyStop: false,
+				programmingMode: false
+			}
 		};
 
-		comp.store.selectedAddr.set(99);
-		comp.sendEStop();
+		messageHandler?.(message);
 
-		expect(sendSpy).toHaveBeenCalledTimes(1);
-		const send = JSON.parse(sendSpy.mock.calls[0][0]);
-		expect(send.type).toBe('loco.command.eStop');
-		expect(send.payload.addr).toBe(99);
+		expect(updateSpy).toHaveBeenCalledWith(message);
 	});
 
-	it('setLocoNumber and draggingSpeed update store signals', () => {
-		const comp = fixture.componentInstance;
+	it('reads a CV through the UI', async () => {
+		request.mockResolvedValue({
+			type: 'programming.replay.cv.result',
+			payload: {
+				requestId: 'req-1',
+				cvAddress: 29,
+				cvValue: 7
+			}
+		});
 
-		comp.setLocoNumber(123);
-		expect(comp.store.selectedAddr()).toBe(123);
+		const addressInput = fixture.nativeElement.querySelector('#cv') as HTMLInputElement;
 
-		comp.draggingSpeed(true);
-		expect(comp.store.draggingSpeed()).toBe(true);
+		addressInput.value = '29';
+		addressInput.dispatchEvent(new Event('input'));
+
+		const button = fixture.nativeElement.querySelector('#cv-read') as HTMLButtonElement;
+
+		button.click();
+
+		await fixture.whenStable();
+		fixture.detectChanges();
+
+		const valueInput = fixture.nativeElement.querySelector('#cvValue') as HTMLInputElement;
+
+		expect(valueInput.value).toBe('7');
+
+		expect(request).toHaveBeenCalledOnce();
 	});
 
-	it('numericKeySort orders numeric keys and prefers non-numeric before numeric', () => {
-		const comp = fixture.componentInstance as any;
-		const sort = comp.numericKeySort as (a: { key: string }, b: { key: string }) => number;
+	it('writes a CV through the UI', async () => {
+		request.mockResolvedValue({
+			type: 'programming.replay.cv.result',
+			payload: {
+				requestId: 'req-1',
+				cvAddress: 29,
+				cvValue: 12
+			}
+		});
 
-		expect(sort({ key: 'a' }, { key: 'b' })).toBe(0);
-		expect(sort({ key: 'a' }, { key: '2' })).toBeLessThan(0);
-		expect(sort({ key: '2' }, { key: 'a' })).toBeGreaterThan(0);
-		expect(sort({ key: '2' }, { key: '10' })).toBeLessThan(0);
+		const valueInput = fixture.nativeElement.querySelector('#cvValue') as HTMLInputElement;
+
+		valueInput.value = '12';
+		valueInput.dispatchEvent(new Event('input'));
+
+		const button = fixture.nativeElement.querySelector('#cv-write') as HTMLButtonElement;
+
+		button.click();
+
+		await fixture.whenStable();
+
+		expect(request).toHaveBeenCalledOnce();
+	});
+
+	it('unsubscribes from WebSocket messages on destroy', () => {
+		fixture.destroy();
+
+		expect(unsubscribe).toHaveBeenCalledOnce();
+	});
+
+	it('shows an error when reading a CV fails', async () => {
+		request.mockRejectedValue(new Error('CV read failed'));
+
+		const button = fixture.nativeElement.querySelector('#cv-read') as HTMLButtonElement;
+
+		button.click();
+
+		await fixture.whenStable();
+		fixture.detectChanges();
+
+		const error = fixture.nativeElement.querySelector('#cv-error') as HTMLElement;
+
+		expect(error.textContent).toContain('CV read failed');
+	});
+
+	it('shows an error when writing a CV fails', async () => {
+		request.mockRejectedValue(new Error('CV write failed'));
+
+		const valueInput = fixture.nativeElement.querySelector('#cvValue') as HTMLInputElement;
+
+		valueInput.value = '12';
+		valueInput.dispatchEvent(new Event('input'));
+
+		const button = fixture.nativeElement.querySelector('#cv-write') as HTMLButtonElement;
+
+		button.click();
+
+		await fixture.whenStable();
+		fixture.detectChanges();
+
+		const error = fixture.nativeElement.querySelector('#cv-error') as HTMLElement;
+
+		expect(error.textContent).toContain('CV write failed');
+	});
+
+	it('shows an error when writing without a CV value', async () => {
+		const button = fixture.nativeElement.querySelector('#cv-write') as HTMLButtonElement;
+
+		button.click();
+
+		await fixture.whenStable();
+		fixture.detectChanges();
+
+		const error = fixture.nativeElement.querySelector('#cv-error') as HTMLElement;
+
+		expect(error.textContent).toContain('cvValue is null');
+		expect(request).not.toHaveBeenCalled();
+	});
+
+	it('shows non-Error CV failures as text', async () => {
+		request.mockRejectedValue('Connection lost');
+
+		const button = fixture.nativeElement.querySelector('#cv-read') as HTMLButtonElement;
+
+		button.click();
+
+		await fixture.whenStable();
+		fixture.detectChanges();
+
+		const error = fixture.nativeElement.querySelector('#cv-error') as HTMLElement;
+
+		expect(error.textContent).toContain('Connection lost');
 	});
 });

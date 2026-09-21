@@ -5,11 +5,11 @@
 
 import type http from 'node:http';
 
-import type { CommandStationInfo, LocoManager, LocoState } from '@application-platform/domain';
-import { clearAllMocks, DeepMock, type DeepMocked } from '@application-platform/shared-node-test';
+import type { CommandStationInfo, LocoManager } from '@application-platform/domain';
+import { DeepMock, type DeepMocked } from '@application-platform/shared-node-test';
 import { Z21BroadcastFlag, type Z21CommandService, type Z21Udp } from '@application-platform/z21';
-import type { Logger } from '@application-platform/z21-shared';
-import { afterEach, beforeEach, describe, expect, it, Mock, vi } from 'vitest';
+import type { Logger, ServerConfig } from '@application-platform/z21-shared';
+import { afterEach, beforeEach, describe, expect, it, type Mock, vi } from 'vitest';
 
 import type { Z21EventHandler } from '../handler/z21-event-handler';
 import type { AppWsServer } from '../infra/ws/app-websocket-server';
@@ -19,227 +19,240 @@ import type { CvProgrammingService } from '../services/cv-programming-service';
 import { Bootstrap } from './bootstrap';
 import type { Providers } from './providers';
 
-describe('Bootstrap session lifecycle', () => {
-	let providers: DeepMocked<Providers> & { wsOnConnection: Mock; broadcast: Mock };
+type TestProviders = DeepMocked<Providers> & {
+	onConnection: Mock;
+};
 
-	function makeProviders(): DeepMocked<Providers> & { wsOnConnection: Mock; broadcast: Mock } {
-		const wsOnConnection = vi.fn();
-		const broadcast = vi.fn();
-		const wsServerClose = vi.fn((cb?: () => void) => {
-			cb?.();
-			return {} as any;
-		});
-		const mockUdp = DeepMock<Z21Udp>();
-		const mockWsServer = DeepMock<AppWsServer>();
-		const mockZ21CommandService = DeepMock<Z21CommandService>();
-		const mockZ21EventHandler = DeepMock<Z21EventHandler>();
-		const mockLocoManager = DeepMock<LocoManager>();
-		const mockCsInfoOrchestrator = DeepMock<CommandStationInfoOrchestrator>();
-		const mockLogger = DeepMock<Logger>();
-		const mockHttpServer = DeepMock<http.Server>();
+describe('Bootstrap Z21 session', () => {
+	let providers: TestProviders;
 
-		mockLocoManager.subscribeLocoInfoOnce.mockReturnValue(false);
-		mockLocoManager.stopAll.mockReturnValue([
-			{
-				addr: 1,
-				state: { speed: 0, dir: 'FWD', fns: [], estop: false }
-			} as { addr: number; state: LocoState }
-		]);
-		mockLogger.child.mockReturnThis();
-		mockHttpServer.listen.mockImplementation((_p: number, cb?: () => void) => {
-			cb?.();
-			return mockHttpServer as unknown as http.Server;
-		});
-		mockHttpServer.close.mockImplementation((cb?: () => void) => {
-			cb?.();
-			return mockHttpServer as unknown as http.Server;
-		});
+	function createProviders(): TestProviders {
+		const udp = DeepMock<Z21Udp>();
+		const wsServer = DeepMock<AppWsServer>();
+		const z21CommandService = DeepMock<Z21CommandService>();
+		const z21EventHandler = DeepMock<Z21EventHandler>();
+		const locoManager = DeepMock<LocoManager>();
+		const csInfoOrchestrator = DeepMock<CommandStationInfoOrchestrator>();
+		const cvProgrammingService = DeepMock<CvProgrammingService>();
+		const commandStationInfo = DeepMock<CommandStationInfo>();
+		const logger = DeepMock<Logger>();
+		const httpServer = DeepMock<http.Server>();
 
-		const providers: DeepMocked<Providers> & { wsOnConnection: Mock; broadcast: Mock } = {
-			cfg: { httpPort: 5050, z21: { host: '1.2.3.4', udpPort: 21105 }, safety: { stopAllOnClientDisconnect: true } } as any,
-			udp: mockUdp as any,
-			wsServer: {
-				...mockWsServer,
-				onConnection: wsOnConnection,
-				broadcast,
-				close: wsServerClose
-			} as any,
-			z21CommandService: mockZ21CommandService as any,
-			z21EventHandler: mockZ21EventHandler as any,
-			locoManager: mockLocoManager as any,
-			csInfoOrchestrator: mockCsInfoOrchestrator as any,
-			logger: mockLogger as any,
-			httpServer: mockHttpServer as any,
-			commandStationInfo: DeepMock<CommandStationInfo>() as any,
-			wsOnConnection,
-			broadcast,
-			cvProgrammingService: DeepMock<CvProgrammingService>() as any
+		const onConnection = vi.fn();
+
+		wsServer.onConnection = onConnection;
+
+		httpServer.listen.mockReturnValue(httpServer);
+
+		httpServer.close.mockReturnValue(httpServer);
+
+		locoManager.subscribeLocoInfoOnce.mockReturnValue(false);
+
+		const cfg: ServerConfig = {
+			httpPort: 5050,
+			z21: {
+				host: '1.2.3.4',
+				udpPort: 21105
+			},
+			safety: {
+				stopAllOnClientDisconnect: false
+			}
 		};
 
-		return providers;
+		return {
+			cfg,
+			logger,
+			httpServer,
+			wsServer,
+			udp,
+			commandStationInfo,
+			z21CommandService,
+			csInfoOrchestrator,
+			locoManager,
+			z21EventHandler,
+			cvProgrammingService,
+			onConnection
+		};
+	}
+
+	function getConnectionHandlers(): {
+		onDisconnect: (ws: unknown) => void;
+		onConnect: (ws: unknown) => void;
+	} {
+		const [, onDisconnect, onConnect] = providers.onConnection.mock.calls[0];
+
+		return {
+			onDisconnect,
+			onConnect
+		};
 	}
 
 	beforeEach(() => {
-		providers = makeProviders();
+		vi.useFakeTimers();
+		providers = createProviders();
 	});
 
 	afterEach(() => {
 		vi.useRealTimers();
 	});
 
-	it('resets and pokes csInfoOrchestrator when first client connects', () => {
-		const bootstrap = new Bootstrap(providers);
+	it('activates the Z21 session when the first client connects', () => {
+		new Bootstrap(providers).start();
 
-		bootstrap.start();
-
-		const [, , onConnect] = providers.wsOnConnection!.mock.calls[0];
-
-		// Clear the mocks from the start() call
-		clearAllMocks(providers);
+		const { onConnect } = getConnectionHandlers();
 
 		onConnect({});
 
-		expect(providers.csInfoOrchestrator.reset).toHaveBeenCalledTimes(1);
-		expect(providers.csInfoOrchestrator.poke).toHaveBeenCalledTimes(1);
-		expect(providers.udp.sendSetBroadcastFlags).toHaveBeenCalledWith(Z21BroadcastFlag.NONE);
-		expect(providers.udp.sendSystemStateGetData).toHaveBeenCalledTimes(1);
+		expect(providers.csInfoOrchestrator.reset).toHaveBeenCalledOnce();
+
+		expect(providers.csInfoOrchestrator.poke).toHaveBeenCalledOnce();
+
+		expect(providers.z21CommandService.setBroadcastFlags).toHaveBeenCalledWith(Z21BroadcastFlag.NONE);
+
+		expect(providers.z21CommandService.getSystemState).toHaveBeenCalledOnce();
 	});
 
-	it('resets orchestrator and stops heartbeat when last client disconnects', () => {
-		vi.useFakeTimers();
+	it('does not activate the session again for additional clients', () => {
+		new Bootstrap(providers).start();
 
-		const bootstrap = new Bootstrap(providers);
+		const { onConnect } = getConnectionHandlers();
 
-		bootstrap.start();
-
-		const [, onDisconnect, onConnect] = providers.wsOnConnection!.mock.calls[0];
 		onConnect({});
 
-		// Clear specific mock to test heartbeat
-		(providers.udp.sendSystemStateGetData as Mock).mockClear();
-		vi.advanceTimersByTime(60_000);
-		expect(providers.udp.sendSystemStateGetData).toHaveBeenCalledTimes(1);
-
-		onDisconnect({});
-
-		// Clear to verify no more heartbeat calls
-		(providers.udp.sendSystemStateGetData as Mock).mockClear();
-
-		expect(providers.csInfoOrchestrator.reset).toHaveBeenCalledTimes(2); // Once on connect, once on disconnect
-		expect(providers.udp.sendLogOff).toHaveBeenCalledTimes(1);
-		vi.advanceTimersByTime(120_000);
-		expect(providers.udp.sendSystemStateGetData).not.toHaveBeenCalled();
-	});
-
-	it('does not reinitialize session on subsequent client connects', () => {
-		vi.useFakeTimers();
-
-		const bootstrap = new Bootstrap(providers);
-
-		bootstrap.start();
-
-		const [, , onConnect] = providers.wsOnConnection!.mock.calls[0];
-		onConnect({});
-
-		// Clear the mocks to verify subsequent connect doesn't reinitialize
-		(providers.csInfoOrchestrator.reset as Mock).mockClear();
-		(providers.csInfoOrchestrator.poke as Mock).mockClear();
-		(providers.udp.sendSetBroadcastFlags as Mock).mockClear();
-		(providers.udp.sendSystemStateGetData as Mock).mockClear();
+		providers.csInfoOrchestrator.reset.mockClear();
+		providers.csInfoOrchestrator.poke.mockClear();
+		providers.z21CommandService.setBroadcastFlags.mockClear();
+		providers.z21CommandService.getSystemState.mockClear();
 
 		onConnect({});
 
 		expect(providers.csInfoOrchestrator.reset).not.toHaveBeenCalled();
+
 		expect(providers.csInfoOrchestrator.poke).not.toHaveBeenCalled();
-		expect(providers.udp.sendSetBroadcastFlags).not.toHaveBeenCalled();
-		expect(providers.udp.sendSystemStateGetData).not.toHaveBeenCalled();
+
+		expect(providers.z21CommandService.setBroadcastFlags).not.toHaveBeenCalled();
+
+		expect(providers.z21CommandService.getSystemState).not.toHaveBeenCalled();
 	});
 
-	it('ignores disconnect when no clients were connected', () => {
-		vi.useFakeTimers();
+	it('requests system state every minute while the session is active', () => {
+		new Bootstrap(providers).start();
 
+		const { onConnect } = getConnectionHandlers();
+
+		onConnect({});
+
+		providers.z21CommandService.getSystemState.mockClear();
+
+		vi.advanceTimersByTime(60_000);
+
+		expect(providers.z21CommandService.getSystemState).toHaveBeenCalledOnce();
+
+		vi.advanceTimersByTime(120_000);
+
+		expect(providers.z21CommandService.getSystemState).toHaveBeenCalledTimes(3);
+	});
+
+	it('keeps the session active while clients remain connected', () => {
+		new Bootstrap(providers).start();
+
+		const { onConnect, onDisconnect } = getConnectionHandlers();
+
+		const firstClient = {};
+		const secondClient = {};
+
+		onConnect(firstClient);
+		onConnect(secondClient);
+
+		providers.z21CommandService.logOff.mockClear();
+
+		onDisconnect(firstClient);
+
+		expect(providers.z21CommandService.logOff).not.toHaveBeenCalled();
+	});
+
+	it('deactivates the session when the last client disconnects', () => {
+		new Bootstrap(providers).start();
+
+		const { onConnect, onDisconnect } = getConnectionHandlers();
+
+		const client = {};
+
+		onConnect(client);
+
+		providers.csInfoOrchestrator.reset.mockClear();
+
+		onDisconnect(client);
+
+		expect(providers.csInfoOrchestrator.reset).toHaveBeenCalledOnce();
+
+		expect(providers.z21CommandService.logOff).toHaveBeenCalledOnce();
+	});
+
+	it('stops the heartbeat when the last client disconnects', () => {
+		new Bootstrap(providers).start();
+
+		const { onConnect, onDisconnect } = getConnectionHandlers();
+
+		const client = {};
+
+		onConnect(client);
+
+		providers.z21CommandService.getSystemState.mockClear();
+
+		onDisconnect(client);
+
+		vi.advanceTimersByTime(120_000);
+
+		expect(providers.z21CommandService.getSystemState).not.toHaveBeenCalled();
+	});
+
+	it('does not log off when disconnecting without an active session', () => {
+		new Bootstrap(providers).start();
+
+		const { onDisconnect } = getConnectionHandlers();
+
+		onDisconnect({});
+
+		expect(providers.z21CommandService.logOff).not.toHaveBeenCalled();
+	});
+
+	it('deactivates an active session during application shutdown', () => {
 		const bootstrap = new Bootstrap(providers);
 
 		bootstrap.start();
 
-		const [, onDisconnect] = providers.wsOnConnection!.mock.calls[0];
+		const { onConnect } = getConnectionHandlers();
 
-		// Clear any calls from start() to ensure clean state
-		(providers.csInfoOrchestrator.reset as Mock).mockClear();
-		(providers.udp.sendLogOff as Mock).mockClear();
-
-		onDisconnect({});
-
-		expect(providers.csInfoOrchestrator.reset).not.toHaveBeenCalled();
-		expect(providers.udp.sendLogOff).not.toHaveBeenCalled();
-	});
-
-	it('returns stable ws client id for same object and unique for different objects', () => {
-		const bootstrap = new Bootstrap(providers) as any;
-
-		const ws1 = {};
-		const ws2 = {};
-
-		const id1a = bootstrap.getWsClientId(ws1);
-		const id1b = bootstrap.getWsClientId(ws1);
-		const id2 = bootstrap.getWsClientId(ws2);
-
-		expect(id1a).toBe(id1b);
-		expect(id1a).not.toBe(id2);
-	});
-
-	it('does nothing when deactivating session that is not active', () => {
-		const bootstrap = new Bootstrap(providers) as any;
-
-		// Ensure mocks are initialized
-		(providers.udp.sendLogOff as Mock).mockClear();
-		(providers.csInfoOrchestrator.reset as Mock).mockClear();
-
-		bootstrap.deactivateZ21Session();
-
-		expect(providers.udp.sendLogOff).not.toHaveBeenCalled();
-		expect(providers.csInfoOrchestrator.reset).not.toHaveBeenCalled();
-	});
-
-	it('stops heartbeat and logoff when stop is called with active session', () => {
-		vi.useFakeTimers();
-
-		const bootstrap = new Bootstrap(providers) as any;
-
-		bootstrap.start();
-		const [, , onConnect] = providers.wsOnConnection!.mock.calls[0];
 		onConnect({});
+
+		providers.z21CommandService.logOff.mockClear();
 
 		bootstrap.stop();
 
-		expect(providers.udp.sendLogOff).toHaveBeenCalledTimes(1);
-		(providers.udp.sendSystemStateGetData as Mock).mockClear();
+		expect(providers.z21CommandService.logOff).toHaveBeenCalledOnce();
+
+		providers.z21CommandService.getSystemState.mockClear();
 
 		vi.advanceTimersByTime(120_000);
-		expect(providers.udp.sendSystemStateGetData).not.toHaveBeenCalled();
+
+		expect(providers.z21CommandService.getSystemState).not.toHaveBeenCalled();
 	});
 
-	it('stop succeeds when session never activated', () => {
-		const bootstrap = new Bootstrap(providers) as any;
-
-		// Ensure mocks are initialized
-		(providers.udp.sendLogOff as Mock).mockClear();
-
-		expect(() => bootstrap.stop()).not.toThrow();
-		expect(providers.udp.sendLogOff).not.toHaveBeenCalled();
-	});
-
-	describe('setBroadcast', () => {
-		it('diasable all broadcast flags when config is undefined', () => {
+	describe('broadcast flags', () => {
+		it('uses no broadcast flags when configuration is missing', () => {
 			providers.cfg.z21.broadcastflags = undefined;
-			const bootstrap = new Bootstrap(providers);
 
-			bootstrap['setBroadcast']();
+			new Bootstrap(providers).start();
 
-			expect(providers.udp.sendSetBroadcastFlags).toHaveBeenCalledWith(Z21BroadcastFlag.NONE);
+			const { onConnect } = getConnectionHandlers();
+
+			onConnect({});
+
+			expect(providers.z21CommandService.setBroadcastFlags).toHaveBeenCalledWith(Z21BroadcastFlag.NONE);
 		});
 
-		it('sets only enabled broadcast flags from config', () => {
+		it('combines enabled broadcast flags', () => {
 			providers.cfg.z21.broadcastflags = {
 				basic: true,
 				rMbus: false,
@@ -251,11 +264,14 @@ describe('Bootstrap session lifecycle', () => {
 				locoNetDetector: false,
 				railcomDatachanged: true
 			};
-			const bootstrap = new Bootstrap(providers);
 
-			bootstrap['setBroadcast']();
+			new Bootstrap(providers).start();
 
-			expect(providers.udp.sendSetBroadcastFlags).toHaveBeenCalledWith(
+			const { onConnect } = getConnectionHandlers();
+
+			onConnect({});
+
+			expect(providers.z21CommandService.setBroadcastFlags).toHaveBeenCalledWith(
 				Z21BroadcastFlag.BASIC |
 					Z21BroadcastFlag.RAILCOM |
 					Z21BroadcastFlag.CHANGED_LOCO_INFO |
@@ -264,7 +280,7 @@ describe('Bootstrap session lifecycle', () => {
 			);
 		});
 
-		it('sets no broadcast flags when all config flags are false', () => {
+		it('uses no flags when every configured flag is disabled', () => {
 			providers.cfg.z21.broadcastflags = {
 				basic: false,
 				rMbus: false,
@@ -276,11 +292,14 @@ describe('Bootstrap session lifecycle', () => {
 				locoNetDetector: false,
 				railcomDatachanged: false
 			};
-			const bootstrap = new Bootstrap(providers);
 
-			bootstrap['setBroadcast']();
+			new Bootstrap(providers).start();
 
-			expect(providers.udp.sendSetBroadcastFlags).toHaveBeenCalledWith(Z21BroadcastFlag.NONE);
+			const { onConnect } = getConnectionHandlers();
+
+			onConnect({});
+
+			expect(providers.z21CommandService.setBroadcastFlags).toHaveBeenCalledWith(Z21BroadcastFlag.NONE);
 		});
 	});
 });

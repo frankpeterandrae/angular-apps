@@ -3,16 +3,16 @@
  * All rights reserved.
  */
 
-import { Injectable, signal } from '@angular/core';
-import { PROTOCOL_VERSION, type ClientToServer, type ServerToClient } from '@application-platform/protocol';
+import { computed, Injectable, signal } from '@angular/core';
+import { MessageValidator, PROTOCOL_VERSION, type ClientToServer, type ServerToClient } from '@application-platform/protocol';
 
-type Pending = {
-	resolve: (msg: ServerToClient) => void;
-	reject: (err: Error) => void;
+type PendingRequest = {
+	resolve: (message: ServerToClient) => void;
+	reject: (error: Error) => void;
 	timer: ReturnType<typeof setTimeout>;
 };
 
-type MsgHandler = (msg: ServerToClient) => void;
+type MessageHandler = (message: ServerToClient) => void;
 
 /**
  * Service that manages a WebSocket connection to the server.
@@ -22,12 +22,16 @@ type MsgHandler = (msg: ServerToClient) => void;
 	providedIn: 'root'
 })
 export class WsClientService {
-	public status = signal<'disconnected' | 'connected'>('disconnected');
-	public lastMessage = signal<string>('');
+	public readonly status = signal<'disconnected' | 'connected'>('disconnected');
+
+	private readonly messages = signal<ServerToClient[]>([]);
+	public readonly lastMessage = computed(() => JSON.stringify(this.messages(), null, 2));
 
 	private ws?: WebSocket;
-	private readonly pending = new Map<string, Pending>();
-	private readonly handlers = new Set<MsgHandler>();
+
+	private readonly pending = new Map<string, PendingRequest>();
+
+	private readonly handlers = new Set<MessageHandler>();
 
 	constructor() {
 		this.connect();
@@ -38,18 +42,20 @@ export class WsClientService {
 	 * @param handler - The message handler function
 	 * @returns A function to unregister the handler
 	 */
-	public onMessage(handler: MsgHandler): () => void {
+	public onMessage(handler: MessageHandler): () => void {
 		this.handlers.add(handler);
 		return () => this.handlers.delete(handler);
 	}
 
-	private emit(msg: ServerToClient): void {
-		for (const h of this.handlers) h(msg);
+	private emit(message: ServerToClient): void {
+		for (const handler of this.handlers) {
+			handler(message);
+		}
 	}
 
 	private connect(): void {
-		const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
-		this.ws = new WebSocket(`${proto}//${location.host}/ws`);
+		const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+		this.ws = new WebSocket(`${protocol}//${location.host}/ws`);
 
 		this.ws.onopen = (): void => {
 			this.status.set('connected');
@@ -60,43 +66,41 @@ export class WsClientService {
 			});
 		};
 
-		this.ws.onclose = (): void => this.status.set('disconnected');
+		this.ws.onclose = (): void => {
+			this.status.set('disconnected');
+			this.rejectPendingRequests(new Error('WebSocket connection closed'));
+		};
 
 		this.ws.onmessage = (event): void => {
-			const msg = JSON.parse(event.data) as ServerToClient;
-			const existingMessages = JSON.parse(this.lastMessage() || '[]') as ServerToClient[];
-
-			const allMessages = [...existingMessages, msg];
-
-			this.lastMessage.set(JSON.stringify(allMessages, null, 2));
-			this.handleIncoming(msg);
+			this.handleMessage(event);
 		};
 	}
 
 	/**
-	 * Sends a message to the server.
-	 * @param msg - The ClientToServer message to send
+	 * Sends a protocol message when the WebSocket connection is open.
 	 */
-	public send(msg: ClientToServer): void {
+	public send(message: ClientToServer): boolean {
 		if (this.ws?.readyState !== WebSocket.OPEN) {
-			return;
+			return false;
 		}
-		this.ws.send(JSON.stringify(msg));
+
+		this.ws.send(JSON.stringify(message));
+		return true;
 	}
 
 	/**
 	 * Sends a request message and returns a promise that resolves with the corresponding response.
-	 * @param msgBuilder - Function that builds the request message given a unique requestId
-	 * @param opts - Optional settings for the request
+	 * @param messageBuilder - Function that builds the request message given a unique requestId
+	 * @param options - Optional settings for the request
 	 *  - timeoutMs: Duration in milliseconds to wait for a response before rejecting (default: 50000ms)
 	 * @returns Promise that resolves with the response message of type TOk
 	 */
 	public request<TOk extends ServerToClient>(
-		msgBuilder: (requestId: string) => ClientToServer,
-		opts?: { timeoutMs?: number }
+		messageBuilder: (requestId: string) => ClientToServer,
+		options?: { timeoutMs?: number }
 	): Promise<TOk> {
 		const requestId = crypto.randomUUID();
-		const timeoutMs = opts?.timeoutMs ?? 50000;
+		const timeoutMs = options?.timeoutMs ?? 50_000;
 
 		return new Promise<TOk>((resolve, reject) => {
 			const timer = globalThis.setTimeout(() => {
@@ -105,27 +109,33 @@ export class WsClientService {
 			}, timeoutMs);
 
 			this.pending.set(requestId, {
-				resolve: (m) => resolve(m as TOk),
+				resolve: (response) => resolve(response as TOk),
 				reject,
 				timer
 			});
 
-			this.send(msgBuilder(requestId));
+			if (this.send(messageBuilder(requestId))) {
+				return;
+			}
+
+			globalThis.clearTimeout(timer);
+			this.pending.delete(requestId);
+			reject(new Error('WebSocket is not connected'));
 		});
 	}
 
 	/**
 	 * Handles incoming messages from the server.
-	 * @param msg - The incoming ServerToClient message
+	 * @param message - The incoming ServerToClient message
 	 */
-	private handleIncoming(msg: ServerToClient): void {
-		this.emit(msg);
+	private handleIncoming(message: ServerToClient): void {
+		this.emit(message);
 
-		if (msg.type !== 'programming.replay.cv.result' && msg.type !== 'programming.replay.cv.nack') {
+		if (message.type !== 'programming.replay.cv.result' && message.type !== 'programming.replay.cv.nack') {
 			return;
 		}
 
-		const requestId = msg.payload.requestId;
+		const requestId = message.payload.requestId;
 		const pending = this.pending.get(requestId);
 		if (!pending) {
 			return;
@@ -134,10 +144,37 @@ export class WsClientService {
 		globalThis.clearTimeout(pending.timer);
 		this.pending.delete(requestId);
 
-		if (msg.type === 'programming.replay.cv.result') {
-			pending.resolve(msg);
+		if (message.type === 'programming.replay.cv.result') {
+			pending.resolve(message);
 		} else {
-			pending.reject(new Error(msg.payload.error));
+			pending.reject(new Error(message.payload.error));
 		}
+	}
+
+	private rejectPendingRequests(error: Error): void {
+		for (const pending of this.pending.values()) {
+			globalThis.clearTimeout(pending.timer);
+			pending.reject(error);
+		}
+
+		this.pending.clear();
+	}
+
+	private handleMessage(event: MessageEvent): void {
+		let parsed: unknown;
+
+		try {
+			parsed = JSON.parse(event.data);
+		} catch {
+			return;
+		}
+
+		if (!MessageValidator.isServerToClientMessage(parsed)) {
+			return;
+		}
+
+		this.messages.update((messages) => [...messages, parsed]);
+
+		this.handleIncoming(parsed);
 	}
 }

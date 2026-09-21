@@ -3,6 +3,7 @@
  * All rights reserved.
  */
 
+export * from './event-name';
 export * from './event-types';
 export * from './loco/loco-info-event';
 export * from './programming';
@@ -16,5 +17,5 @@ export * from './system/z21-hwinfo-event';
 export * from './system/z21-status-event';
 export * from './system/z21-stopped-event';
 export * from './system/z21-version-event';
-export * from './unkown/unknown-lan-x-event';
-export * from './unkown/unknown-x-bus-event';
+export * from './unknown/unknown-lan-x-event';
+export * from './unknown/unknown-x-bus-event';

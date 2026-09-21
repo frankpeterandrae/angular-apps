@@ -8,120 +8,210 @@ import path from 'node:path';
 
 import { CommandStationInfo, LocoManager } from '@application-platform/domain';
 import type { ServerToClient } from '@application-platform/protocol';
-import { createStaticFileServer, WsServer } from '@application-platform/server-utils';
-import { Z21CommandService, Z21Udp } from '@application-platform/z21';
-import { createConsoleLogger, ServerConfig, type Logger } from '@application-platform/z21-shared';
+import { StaticFileServer, WsServer } from '@application-platform/server-utils';
+import {
+	LanXCommandResolver,
+	LanXDecoder,
+	LocoEncoder,
+	ProgrammingEncoder,
+	SystemEncoder,
+	SystemInfoDecoder,
+	SystemStateDecoder,
+	TurnoutEncoder,
+	Z21Codec,
+	Z21CommandService,
+	Z21DatasetEventMapper,
+	Z21Udp
+} from '@application-platform/z21';
+import { createConsoleLogger, type Logger, type ServerConfig } from '@application-platform/z21-shared';
 
 import { Z21EventHandler } from '../handler/z21-event-handler';
-import { loadConfig } from '../infra/config/config';
+import { ServerConfigLoader } from '../infra/config/server-config-loader';
 import { AppWsServer } from '../infra/ws/app-websocket-server';
 import { CommandStationInfoOrchestrator } from '../services/command-station-info-orchestrator';
 import { CvProgrammingService } from '../services/cv-programming-service';
 
 export type Providers = {
-	/**
-	 * Loads server configuration (HTTP port, Z21 connection details, safety flags).
-	 */
 	cfg: ServerConfig;
-
-	/**
-	 * Application logger.
-	 */
 	logger: Logger;
-
-	/**
-	 * HTTP server that serves static files from `publicDir`.
-	 */
 	httpServer: http.Server;
-
-	/**
-	 * Application WebSocket server wrapper that handles session handshake,
-	 * validation, and message routing.
-	 */
 	wsServer: AppWsServer;
-
-	/**
-	 * Z21 UDP gateway used to communicate with the digital command station.
-	 */
 	udp: Z21Udp;
-
 	commandStationInfo: CommandStationInfo;
-
-	/**
-	 * Z21 service wrapper around the UDP gateway for higher-level operations.
-	 */
 	z21CommandService: Z21CommandService;
-
-	/**
-	 * Orchestrates command station info updates and synchronization.
-	 */
 	csInfoOrchestrator: CommandStationInfoOrchestrator;
-
-	/**
-	 * Manages locomotive states (speed, direction, functions).
-	 */
 	locoManager: LocoManager;
-
-	/**
-	 * Z21 inbound event handler:
-	 * - Updates track status (power/shortCircuit/e-stop)
-	 * - Broadcasts datasets and derived events to connected clients
-	 */
 	z21EventHandler: Z21EventHandler;
-
-	/**
-	 * CV programming service for reading/writing decoder CVs.
-	 */
 	cvProgrammingService: CvProgrammingService;
 };
 
+const CV_PROGRAMMING_TIMEOUT_MS = 5000;
 /**
- * Creates all application providers/services.
- * @param cfg - Server configuration (defaults to loaded config)
- * @returns Providers object with all initialized services
+ * Creates the application dependency graph.
  */
-export function createProviders(cfg = loadConfig()): Providers {
-	const logger = createConsoleLogger({
-		level: cfg.dev?.logLevel ?? 'debug',
-		pretty: cfg.dev?.pretty ?? true,
-		context: { app: 'server' }
-	});
+export class ProviderFactory {
+	constructor(private readonly configLoader = new ServerConfigLoader()) {}
 
-	const publicDir = path.resolve(process.cwd(), 'public');
-	const httpServer = http.createServer(createStaticFileServer(publicDir));
+	/**
+	 * Creates all application providers.
+	 *
+	 * @param configOverride - Optional configuration used instead of loading it from disk.
+	 * @returns Fully initialized application providers.
+	 */
+	public create(configOverride?: ServerConfig): Providers {
+		const cfg = configOverride ?? this.configLoader.load();
 
-	const udp = new Z21Udp(cfg.z21.host, cfg.z21.udpPort, logger.child({ component: 'z21.udp' }));
-	const wsServer = new AppWsServer(new WsServer(httpServer), logger.child({ component: 'ws.server' }));
+		const logger = this.createLogger(cfg);
 
-	const commandStationInfo = new CommandStationInfo();
+		const { httpServer, wsServer } = this.createServerInfrastructure(logger);
 
-	const z21CommandService = new Z21CommandService(udp, logger.child({ component: 'z21.service' }));
+		const { udp, codec, z21CommandService } = this.createZ21Infrastructure(cfg, logger);
 
-	const csInfoOrchestrator = new CommandStationInfoOrchestrator(commandStationInfo, z21CommandService);
-	const cvProgrammingService = new CvProgrammingService(z21CommandService, 5000);
-	const locoManager = new LocoManager();
+		const commandStationInfo = new CommandStationInfo();
 
-	const broadcast = (msg: ServerToClient): void => wsServer.broadcast(msg);
-	const z21EventHandler = new Z21EventHandler(
-		broadcast,
+		const locoManager = new LocoManager();
+
+		const csInfoOrchestrator = new CommandStationInfoOrchestrator(commandStationInfo, z21CommandService);
+
+		const cvProgrammingService = new CvProgrammingService(z21CommandService, CV_PROGRAMMING_TIMEOUT_MS);
+
+		const z21EventHandler = this.createZ21EventHandler({
+			wsServer,
+			logger,
+			codec,
+			locoManager,
+			commandStationInfo,
+			csInfoOrchestrator,
+			cvProgrammingService
+		});
+
+		return {
+			cfg,
+			logger,
+			httpServer,
+			wsServer,
+			udp,
+			commandStationInfo,
+			z21CommandService,
+			csInfoOrchestrator,
+			locoManager,
+			z21EventHandler,
+			cvProgrammingService
+		};
+	}
+
+	private createLogger(cfg: ServerConfig): Logger {
+		return createConsoleLogger({
+			level: cfg.dev?.logLevel ?? 'debug',
+			pretty: cfg.dev?.pretty ?? true,
+			context: {
+				app: 'server'
+			}
+		});
+	}
+
+	private createServerInfrastructure(logger: Logger): {
+		httpServer: http.Server;
+		wsServer: AppWsServer;
+	} {
+		const publicDir = path.resolve(process.cwd(), 'public');
+
+		const staticFileServer = new StaticFileServer(publicDir);
+
+		const httpServer = http.createServer(staticFileServer.handle);
+
+		const wsServer = new AppWsServer(
+			new WsServer(httpServer),
+			logger.child({
+				component: 'ws.server'
+			})
+		);
+
+		return {
+			httpServer,
+			wsServer
+		};
+	}
+
+	private createZ21Infrastructure(
+		cfg: ServerConfig,
+		logger: Logger
+	): {
+		udp: Z21Udp;
+		codec: Z21Codec;
+		z21CommandService: Z21CommandService;
+	} {
+		const udp = new Z21Udp(
+			cfg.z21.host,
+			cfg.z21.udpPort,
+			logger.child({
+				component: 'z21.udp'
+			})
+		);
+
+		const codec = new Z21Codec();
+
+		const z21CommandService = new Z21CommandService(
+			udp,
+			logger.child({
+				component: 'z21.service'
+			}),
+			new LocoEncoder(codec),
+			new ProgrammingEncoder(codec),
+			new SystemEncoder(codec),
+			new TurnoutEncoder(codec)
+		);
+
+		return {
+			udp,
+			codec,
+			z21CommandService
+		};
+	}
+
+	private createZ21EventHandler({
+		wsServer,
+		logger,
+		codec,
 		locoManager,
-		logger.child({ component: 'z21.handler' }),
 		commandStationInfo,
 		csInfoOrchestrator,
 		cvProgrammingService
-	);
+	}: {
+		wsServer: AppWsServer;
+		logger: Logger;
+		codec: Z21Codec;
+		locoManager: LocoManager;
+		commandStationInfo: CommandStationInfo;
+		csInfoOrchestrator: CommandStationInfoOrchestrator;
+		cvProgrammingService: CvProgrammingService;
+	}): Z21EventHandler {
+		const resolver = new LanXCommandResolver();
 
-	return {
-		cfg,
-		commandStationInfo,
-		csInfoOrchestrator,
-		cvProgrammingService,
-		httpServer,
-		locoManager,
-		logger,
-		udp,
-		wsServer,
-		z21CommandService,
-		z21EventHandler
-	};
+		const lanXDecoder = new LanXDecoder(resolver);
+
+		const systemInfoDecoder = new SystemInfoDecoder();
+
+		const systemStateDecoder = new SystemStateDecoder();
+
+		const datasetEventMapper = new Z21DatasetEventMapper(lanXDecoder, systemInfoDecoder, systemStateDecoder);
+
+		const broadcast = (message: ServerToClient): void => {
+			wsServer.broadcast(message);
+		};
+
+		return new Z21EventHandler(
+			broadcast,
+			locoManager,
+			logger.child({
+				component: 'z21.handler'
+			}),
+			commandStationInfo,
+			csInfoOrchestrator,
+			cvProgrammingService,
+			codec,
+			datasetEventMapper,
+			systemStateDecoder
+		);
+	}
 }

@@ -8,57 +8,65 @@ import type { ServerToClient } from '@application-platform/protocol';
 import type { Direction } from '@application-platform/z21-shared';
 
 /**
- * Z21 UI state store
+ * Stores and updates the state used by the Z21 UI.
  */
-@Injectable({ providedIn: 'root' })
+@Injectable({
+	providedIn: 'root'
+})
 export class Z21UiStore {
-	// UI state
-	public powerOn = signal(false);
+	public readonly powerOn = signal(false);
 
-	// loco state (für aktuell ausgewählte addr)
-	public selectedAddr = signal(1845);
-	public draggingSpeed = signal(false);
+	public readonly selectedAddr = signal(1845);
+	public readonly draggingSpeed = signal(false);
 
-	public speedUi = signal(0); // 0..1
-	public dir = signal<Direction>('FWD');
-	public functions = signal<Record<number, boolean>>({});
+	public readonly speedUi = signal(0);
+	public readonly dir = signal<Direction>('FWD');
+	public readonly functions = signal<Record<number, boolean>>({});
 
-	// optional: turnout etc.
-	public turnoutAddr = signal(12);
+	public readonly turnoutAddr = signal(12);
 
 	/**
 	 * Update UI state from server-to-client message
-	 * @param msg - The server-to-client protocol message
+	 * @param message - The server-to-client protocol message
 	 */
-	public updateFromServer(msg: ServerToClient): void {
-		switch (msg.type) {
+	public updateFromServer(message: ServerToClient): void {
+		switch (message.type) {
 			case 'system.message.trackpower':
-				this.powerOn.set(msg.payload.powerOn);
+				this.powerOn.set(message.payload.powerOn);
 				break;
 
 			case 'loco.message.state':
-				if (msg.payload.addr === this.selectedAddr()) {
-					if (this.draggingSpeed()) return;
-					this.speedUi.set(this.step128ToUiSpeed(msg.payload.speed));
-					this.dir.set(msg.payload.dir);
-					this.functions.set(msg.payload.fns);
-				}
+				this.updateLocoState(message);
 				break;
 
 			case 'switching.message.turnout.state':
-				// no-op for now
-				break;
-
+			case 'programming.replay.cv.nack':
+			case 'programming.replay.cv.result':
+			case 'server.replay.session.ready':
+			case 'feedback.message.changed':
+			case 'loco.message.eStop':
+			case 'system.message.z21.code':
+			case 'system.message.firmware.version':
+			case 'system.message.hardware.info':
+			case 'system.message.stop':
+			case 'system.message.x.bus.version':
+			case 'system.message.z21.rx':
 			default:
 				break;
 		}
 	}
 
-	/**
-	 * Convert UI speed (0..1) to step128 (0..126)
-	 */
+	private updateLocoState(message: Extract<ServerToClient, { type: 'loco.message.state' }>): void {
+		if (message.payload.addr !== this.selectedAddr() || this.draggingSpeed()) {
+			return;
+		}
+
+		this.speedUi.set(this.step128ToUiSpeed(message.payload.speed));
+		this.dir.set(message.payload.dir);
+		this.functions.set(message.payload.fns);
+	}
+
 	private step128ToUiSpeed(step: number): number {
-		// bei dir: 0..126 (oder 0..127) -> 0..1
 		return Math.max(0, Math.min(1, step / 126));
 	}
 }

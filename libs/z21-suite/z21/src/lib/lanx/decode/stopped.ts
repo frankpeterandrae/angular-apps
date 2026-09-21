@@ -3,20 +3,25 @@
  * All rights reserved.
  */
 
-import { type Z21Event } from '@application-platform/z21-shared';
+import { Z21EventName, type Z21StoppedEvent } from '@application-platform/z21-shared';
 
 /**
- * Decodes a LAN X payload indicating that the command station has stopped.
- *
- * @returns An array containing a single event of type 'system.event.stopped'.
+ * Decodes LAN-X stopped notifications.
  */
-export function decodeLanXStoppedPayload(): Extract<Z21Event, { event: 'system.event.stopped' }>[] {
-	return [
-		{
-			event: 'system.event.stopped',
-			payload: {
-				raw: [] // No additional data in the payload
+export class LanXStoppedDecoder {
+	/**
+	 * Creates the event emitted when the command station reports a stop.
+	 *
+	 * @returns Stopped event.
+	 */
+	public decode(): Z21StoppedEvent[] {
+		return [
+			{
+				event: Z21EventName.STOPPED,
+				payload: {
+					raw: []
+				}
 			}
-		}
-	];
+		];
+	}
 }
