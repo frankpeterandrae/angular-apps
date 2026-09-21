@@ -3,35 +3,31 @@
  * All rights reserved.
  */
 
-import type { LanXCommandKey, Z21Event } from '@application-platform/z21-shared';
+import { Z21EventName, type CvNackEvent, type LanXCommandKey } from '@application-platform/z21-shared';
 
 /**
- * Decodes a LAN_X CV NACK (negative acknowledgement) payload.
- * @param command - The LAN_X command key
- * @returns Array containing a CV NACK event, or empty array if command is not recognized
+ * Decodes LAN-X CV programming failures.
  */
-export function decodeLanXCvNackPayload(command: LanXCommandKey): Extract<Z21Event, { event: 'programming.event.cv.nack' }>[] {
-	if (command === 'LAN_X_CV_NACK') {
+export class LanXCvNackDecoder {
+	/**
+	 * Decodes a CV negative acknowledgement.
+	 *
+	 * @param command - LAN-X CV NACK command.
+	 * @returns CV NACK event, or no event for unsupported commands.
+	 */
+	public decode(command: LanXCommandKey): CvNackEvent[] {
+		if (command !== 'LAN_X_CV_NACK' && command !== 'LAN_X_CV_NACK_SC') {
+			return [];
+		}
+
 		return [
 			{
-				event: 'programming.event.cv.nack',
+				event: Z21EventName.CV_NACK,
 				payload: {
-					shortCircuit: false,
-					raw: [] // No raw data available in this case
-				}
-			}
-		];
-	} else if (command === 'LAN_X_CV_NACK_SC') {
-		return [
-			{
-				event: 'programming.event.cv.nack',
-				payload: {
-					shortCircuit: true,
-					raw: [] // No raw data available in this case
+					shortCircuit: command === 'LAN_X_CV_NACK_SC',
+					raw: []
 				}
 			}
 		];
 	}
-
-	return [];
 }

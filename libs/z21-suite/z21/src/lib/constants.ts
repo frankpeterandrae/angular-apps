@@ -46,7 +46,7 @@ export const enum Z21BroadcastFlag {
 /**
  * Bitmask for extracting the MSB portion of an X-BUS address byte.
  */
-export const enum AddessByteMask {
+export const enum AddressByteMask {
 	/** Upper 6 bits of a 14-bit locomotive address. */
 	MSB = 0x3f
 }
@@ -58,7 +58,7 @@ export const enum SpeedByteMask {
 	/** Direction bit set for forward travel. */
 	DIRECTION_FORWARD = 0x80,
 	/** Direction bit cleared for reverse travel. */
-	DIRECTION_REWARD = 0x00,
+	DIRECTION_REVERSE = 0x00,
 	/** Mask for the 7-bit speed value. */
 	VALUE = 0x7f
 }

@@ -1,0 +1,1110 @@
+
+> @application-platform/source@0.0.0 test
+> nx run-many -t test --all
+
+
+[7m[1m[36m NX [39m[22m[27m  [36mRunning target [1mtest[22m for 33 projects:[39m
+
+[2m-[22m stream-overlay-paint-data-access
+[2m-[22m paint-protocol
+[2m-[22m paint-selector
+[2m-[22m stream-deck-paint-selector
+[2m-[22m stream-overlay-data-access
+[2m-[22m homepage-feature
+[2m-[22m stream-overlay-dashboard
+[2m-[22m stream-overlay-paint-api
+[2m-[22m server-utils
+[2m-[22m stream-overlay
+[2m-[22m stream-overlay-server
+[2m-[22m colour-rack
+[2m-[22m renderer-3d
+[2m-[22m starmap-data-access
+[2m-[22m protocol
+[2m-[22m demo-feature
+[2m-[22m stream-overlay-ui
+[2m-[22m domain
+[2m-[22m shared-ui
+[2m-[22m z21-shared
+[2m-[22m shared-ui-theme
+[2m-[22m data-db
+[2m-[22m starmap-domain
+[2m-[22m starmap-editor
+[2m-[22m config
+[2m-[22m z21
+[2m-[22m paint
+[2m-[22m starmap-map
+[2m-[22m z21-server
+[2m-[22m homepage
+[2m-[22m starmap
+[2m-[22m z21-ui
+[2m-[22m demo
+
+[2m[36m[39m[22m
+[32m√[39m  [2mnx run[22m paint:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m shared-ui:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m shared-ui-theme:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m config:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m z21-shared:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m paint-protocol:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m starmap-domain:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m stream-overlay-data-access:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m paint-selector:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m starmap-data-access:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m starmap-map:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m renderer-3d:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m stream-overlay-paint-api:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m starmap-editor:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m demo-feature:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m stream-overlay-dashboard:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m stream-overlay:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m data-db:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m domain:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m server-utils:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m starmap:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m stream-overlay-paint-data-access:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m colour-rack:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m homepage-feature:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m stream-overlay-ui:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m homepage:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m demo:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m stream-overlay-server:test  [2m[existing outputs match the cache, left as is][22m
+[32m√[39m  [2mnx run[22m stream-deck-paint-selector:test  [2m[existing outputs match the cache, left as is][22m
+
+[2m> [22m[2mnx run[22m protocol:test
+
+[1m[33mThe `@nx/vitest:test` executor is deprecated and will be removed in Nx v24. Run `nx g @nx/vitest:convert-to-inferred` to migrate to the `@nx/vitest/plugin` inferred targets. See https://nx.dev/docs/guides/tasks--caching/convert-to-inferred for details.[39m[22m
+[33mThe plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the [1mresolve.tsconfigPaths[22m option. You can remove the plugin and set [1mresolve.tsconfigPaths: true[22m in your Vite config instead.[39m
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mD:/dev/src/application-platform/libs/z21-suite/protocol[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mD:/dev/src/application-platform/libs/z21-suite/protocol[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [31m×[39m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.drive[32m 6[2mms[22m[39m
+[31m   → expected false to be true // Object.is equality[39m
+ [31m×[39m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.eStop[32m 1[2mms[22m[39m
+[31m   → expected false to be true // Object.is equality[39m
+ [31m×[39m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.function.set[32m 0[2mms[22m[39m
+[31m   → expected false to be true // Object.is equality[39m
+ [31m×[39m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.function.toggle[32m 0[2mms[22m[39m
+[31m   → expected false to be true // Object.is equality[39m
+ [31m×[39m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.stop.all[32m 0[2mms[22m[39m
+[31m   → expected false to be true // Object.is equality[39m
+ [31m×[39m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type programming.command.cv.read[32m 0[2mms[22m[39m
+[31m   → expected false to be true // Object.is equality[39m
+ [31m×[39m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type programming.command.cv.write[32m 0[2mms[22m[39m
+[31m   → expected false to be true // Object.is equality[39m
+ [31m×[39m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type programming.command.pom.cv.read[32m 0[2mms[22m[39m
+[31m   → expected false to be true // Object.is equality[39m
+ [31m×[39m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type programming.command.pom.cv.write[32m 0[2mms[22m[39m
+[31m   → expected false to be true // Object.is equality[39m
+ [31m×[39m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type server.command.session.hello[32m 0[2mms[22m[39m
+[31m   → expected false to be true // Object.is equality[39m
+ [31m×[39m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type switching.command.turnout.set[32m 0[2mms[22m[39m
+[31m   → expected false to be true // Object.is equality[39m
+ [31m×[39m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type system.command.trackpower.set[32m 0[2mms[22m[39m
+[31m   → expected false to be true // Object.is equality[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:15:3[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects known server-to-client message types[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:34:5[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:34:5[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:34:5[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:34:5[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:34:5[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:34:5[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:34:5[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:34:5[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:34:5[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:34:5[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:34:5[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:34:5[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [31m×[39m src/lib/message/messages.spec.ts[2m:38:3[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mvalidates only the message discriminator[32m 0[2mms[22m[39m
+[31m   → expected false to be true // Object.is equality[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:46:3[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts a valid locomotive drive command[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:61:3[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects the legacy speed property[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:75:26[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid speed step -1[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:75:26[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid speed step 127[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:75:26[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mrejects invalid speed step 1.5[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type feedback.message.changed[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type loco.message.eStop[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type loco.message.state[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type programming.replay.cv.nack[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type programming.replay.cv.result[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type server.replay.session.ready[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type switching.message.turnout.state[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type system.message.firmware.version[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type system.message.hardware.info[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type system.message.stop[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type system.message.trackpower[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type system.message.x.bus.version[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type system.message.z21.code[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:91:47[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22maccepts known server-to-client type system.message.z21.rx[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:95:3[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mrejects known client-to-server message types[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:114:5[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:114:5[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:114:5[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:114:5[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:114:5[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:114:5[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:114:5[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:114:5[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:114:5[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:114:5[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:114:5[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:114:5[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mrejects invalid value %p[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/message/messages.spec.ts[2m:118:3[22m[2m > [22mMessageValidator[2m > [22misServerToClientMessage[2m > [22mvalidates only the message discriminator[32m 0[2mms[22m[39m
+ [31m❯[39m src/lib/message/messages.spec.ts [2m([22m[2m59 tests[22m[2m | [22m[31m13 failed[39m[2m)[22m[32m 15[2mms[22m[39m
+[31m       [31m×[31m accepts known client-to-server type loco.command.drive[39m[32m 6[2mms[22m[39m
+[31m       [31m×[31m accepts known client-to-server type loco.command.eStop[39m[32m 1[2mms[22m[39m
+[31m       [31m×[31m accepts known client-to-server type loco.command.function.set[39m[32m 0[2mms[22m[39m
+[31m       [31m×[31m accepts known client-to-server type loco.command.function.toggle[39m[32m 0[2mms[22m[39m
+[31m       [31m×[31m accepts known client-to-server type loco.command.stop.all[39m[32m 0[2mms[22m[39m
+[31m       [31m×[31m accepts known client-to-server type programming.command.cv.read[39m[32m 0[2mms[22m[39m
+[31m       [31m×[31m accepts known client-to-server type programming.command.cv.write[39m[32m 0[2mms[22m[39m
+[31m       [31m×[31m accepts known client-to-server type programming.command.pom.cv.read[39m[32m 0[2mms[22m[39m
+[31m       [31m×[31m accepts known client-to-server type programming.command.pom.cv.write[39m[32m 0[2mms[22m[39m
+[31m       [31m×[31m accepts known client-to-server type server.command.session.hello[39m[32m 0[2mms[22m[39m
+[31m       [31m×[31m accepts known client-to-server type switching.command.turnout.set[39m[32m 0[2mms[22m[39m
+[31m       [31m×[31m accepts known client-to-server type system.command.trackpower.set[39m[32m 0[2mms[22m[39m
+       [32m✓[39m rejects known server-to-client message types[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+[31m       [31m×[31m validates only the message discriminator[39m[32m 0[2mms[22m[39m
+       [32m✓[39m accepts a valid locomotive drive command[32m 0[2mms[22m[39m
+       [32m✓[39m rejects the legacy speed property[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid speed step -1[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid speed step 127[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid speed step 1.5[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type feedback.message.changed[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type loco.message.eStop[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type loco.message.state[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type programming.replay.cv.nack[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type programming.replay.cv.result[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type server.replay.session.ready[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type switching.message.turnout.state[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type system.message.firmware.version[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type system.message.hardware.info[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type system.message.stop[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type system.message.trackpower[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type system.message.x.bus.version[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type system.message.z21.code[32m 0[2mms[22m[39m
+       [32m✓[39m accepts known server-to-client type system.message.z21.rx[32m 0[2mms[22m[39m
+       [32m✓[39m rejects known client-to-server message types[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m rejects invalid value %p[32m 0[2mms[22m[39m
+       [32m✓[39m validates only the message discriminator[32m 0[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 13 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.drive
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.eStop
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.function.set
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.function.toggle
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.stop.all
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type programming.command.cv.read
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type programming.command.cv.write
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type programming.command.pom.cv.read
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type programming.command.pom.cv.write
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type server.command.session.hello
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type switching.command.turnout.set
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type system.command.trackpower.set
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m src/lib/message/messages.spec.ts:[2m12:63[22m[39m
+    [90m 10|[39m  [34mdescribe[39m([32m'isClientToServerMessage'[39m[33m,[39m () [33m=>[39m {
+    [90m 11|[39m   it.each(Object.keys(CLIENT_TO_SERVER_TYPES))('accepts known client-t…
+    [90m 12|[39m    expect(MessageValidator.isClientToServerMessage({ type })).toBe(tru…
+    [90m   |[39m                                                               [31m^[39m
+    [90m 13|[39m   })[33m;[39m
+    [90m 14|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:38:3[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mvalidates only the message discriminator
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m src/lib/message/messages.spec.ts:[2m43:6[22m[39m
+    [90m 41|[39m      type[33m:[39m [32m'loco.command.drive'[39m
+    [90m 42|[39m     })
+    [90m 43|[39m    )[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m   |[39m      [31m^[39m
+    [90m 44|[39m   })[33m;[39m
+    [90m 45|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/13]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m13 failed[39m[22m[2m | [22m[1m[32m46 passed[39m[22m[90m (59)[39m
+[2m   Start at [22m 10:59:07
+[2m   Duration [22m 2.56s[2m (transform 56ms, setup 24ms, import 109ms, tests 15ms, environment 1.92s)[22m
+
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 13 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.drive
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.eStop
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.function.set
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.function.toggle
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type loco.command.stop.all
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type programming.command.cv.read
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type programming.command.cv.write
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type programming.command.pom.cv.read
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type programming.command.pom.cv.write
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type server.command.session.hello
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type switching.command.turnout.set
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:11:47[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22maccepts known client-to-server type system.command.trackpower.set
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m src/lib/message/messages.spec.ts:[2m12:63[22m[39m
+    [90m 10|[39m  [34mdescribe[39m([32m'isClientToServerMessage'[39m[33m,[39m () [33m=>[39m {
+    [90m 11|[39m   it.each(Object.keys(CLIENT_TO_SERVER_TYPES))('accepts known client-t…
+    [90m 12|[39m    expect(MessageValidator.isClientToServerMessage({ type })).toBe(tru…
+    [90m   |[39m                                                               [31m^[39m
+    [90m 13|[39m   })[33m;[39m
+    [90m 14|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/message/messages.spec.ts[2m:38:3[22m[2m > [22mMessageValidator[2m > [22misClientToServerMessage[2m > [22mvalidates only the message discriminator
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m src/lib/message/messages.spec.ts:[2m43:6[22m[39m
+    [90m 41|[39m      type[33m:[39m [32m'loco.command.drive'[39m
+    [90m 42|[39m     })
+    [90m 43|[39m    )[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m   |[39m      [31m^[39m
+    [90m 44|[39m   })[33m;[39m
+    [90m 45|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/13]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m13 failed[39m[22m[2m | [22m[1m[32m46 passed[39m[22m[90m (59)[39m
+[2m   Start at [22m 10:59:07
+[2m   Duration [22m 2.57s[2m (transform 56ms, setup 24ms, import 109ms, tests 15ms, environment 1.92s)[22m
+
+[1m[7m[35m HTML [39m[27m[22m [35mReport is generated[39m
+[2m       You can run [22m[1mnpx vite preview --outDir ../../../test-result/libs/z21-suite/protocol[22m[2m to see the test results.[22m
+
+[2m> [22m[2mnx run[22m z21:test
+
+[1m[33mThe `@nx/vitest:test` executor is deprecated and will be removed in Nx v24. Run `nx g @nx/vitest:convert-to-inferred` to migrate to the `@nx/vitest/plugin` inferred targets. See https://nx.dev/docs/guides/tasks--caching/convert-to-inferred for details.[39m[22m
+[33mThe plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the [1mresolve.tsconfigPaths[22m option. You can remove the plugin and set [1mresolve.tsconfigPaths: true[22m in your Vite config instead.[39m
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mD:/dev/src/application-platform/libs/z21-suite/z21[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mD:/dev/src/application-platform/libs/z21-suite/z21[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [32m✓[39m src/lib/udp/udp.spec.ts[2m:69:3[22m[2m > [22mZ21Udp[2m > [22mstart[2m > [22mbinds the socket to the default listen port[32m 6[2mms[22m[39m
+ [32m✓[39m src/lib/udp/udp.spec.ts[2m:77:3[22m[2m > [22mZ21Udp[2m > [22mstart[2m > [22mbinds the socket to a custom listen port[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/udp/udp.spec.ts[2m:83:3[22m[2m > [22mZ21Udp[2m > [22mstart[2m > [22mdoes not start twice[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/udp/udp.spec.ts[2m:92:3[22m[2m > [22mZ21Udp[2m > [22mstart[2m > [22memits received datagrams[32m 2[2mms[22m[39m
+ [32m✓[39m src/lib/udp/udp.spec.ts[2m:118:3[22m[2m > [22mZ21Udp[2m > [22mstart[2m > [22mlogs received datagrams[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/udp/udp.spec.ts[2m:140:3[22m[2m > [22mZ21Udp[2m > [22msendRaw[2m > [22msends the datagram to the configured endpoint[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/udp/udp.spec.ts[2m:148:3[22m[2m > [22mZ21Udp[2m > [22msendRaw[2m > [22mlogs the target endpoint and payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/udp/udp.spec.ts[2m:165:3[22m[2m > [22mZ21Udp[2m > [22mstop[2m > [22mdoes nothing when not started[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/udp/udp.spec.ts[2m:171:3[22m[2m > [22mZ21Udp[2m > [22mstop[2m > [22mcloses the socket and removes its listeners[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/udp/udp.spec.ts[2m:181:3[22m[2m > [22mZ21Udp[2m > [22mstop[2m > [22memits close errors[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/udp/udp.spec.ts[2m:197:3[22m[2m > [22mZ21Udp[2m > [22mstop[2m > [22mcan be started again after stopping[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/udp/udp.spec.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/programming/programming-encoder.spec.ts[2m:17:3[22m[2m > [22mProgrammingEncoder[2m > [22mreadCv[2m > [22mencodes a CV read command[32m 3[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/programming/programming-encoder.spec.ts[2m:31:3[22m[2m > [22mProgrammingEncoder[2m > [22mwriteCv[2m > [22mencodes CV address and value[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/programming/programming-encoder.spec.ts[2m:44:21[22m[2m > [22mProgrammingEncoder[2m > [22mvalidation[2m > [22mrejects CV address 0[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/programming/programming-encoder.spec.ts[2m:44:21[22m[2m > [22mProgrammingEncoder[2m > [22mvalidation[2m > [22mrejects CV address 1025[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/programming/programming-encoder.spec.ts[2m:48:21[22m[2m > [22mProgrammingEncoder[2m > [22mvalidation[2m > [22mrejects CV value -1[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/programming/programming-encoder.spec.ts[2m:48:21[22m[2m > [22mProgrammingEncoder[2m > [22mvalidation[2m > [22mrejects CV value 256[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/programming/programming-encoder.spec.ts[2m:54:3[22m[2m > [22mProgrammingEncoder[2m > [22mPOM[2m > [22mencodes zero-based POM CV read address[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/programming/programming-encoder.spec.ts[2m:58:3[22m[2m > [22mProgrammingEncoder[2m > [22mPOM[2m > [22mencodes zero-based POM CV write payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/programming/programming-encoder.spec.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/turnout/turnout-encoder.spec.ts[2m:16:2[22m[2m > [22mTurnoutEncoder[2m > [22mencodes turnout information request[32m 4[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/turnout/turnout-encoder.spec.ts[2m:53:4[22m[2m > [22mTurnoutEncoder[2m > [22mencodes turnout control byte 128[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/turnout/turnout-encoder.spec.ts[2m:53:4[22m[2m > [22mTurnoutEncoder[2m > [22mencodes turnout control byte 129[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/turnout/turnout-encoder.spec.ts[2m:53:4[22m[2m > [22mTurnoutEncoder[2m > [22mencodes turnout control byte 136[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/turnout/turnout-encoder.spec.ts[2m:53:4[22m[2m > [22mTurnoutEncoder[2m > [22mencodes turnout control byte 169[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/turnout/turnout-encoder.spec.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/lib/helper/x-bus-encoder.spec.ts[2m:11:2[22m[2m > [22mencodeZ21LanFrame[2m > [22mencodes a frame without payload[32m 3[2mms[22m[39m
+ [32m✓[39m src/lib/helper/x-bus-encoder.spec.ts[2m:17:2[22m[2m > [22mencodeZ21LanFrame[2m > [22mencodes header and payload[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/helper/x-bus-encoder.spec.ts[2m:25:2[22m[2m > [22mencodeZ21LanFrame[2m > [22mtreats an empty payload like no payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/helper/x-bus-encoder.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/status-changed.spec.ts[2m:17:2[22m[2m > [22mLanXStatusDecoder[2m > [22mdecodes central status flags[32m 2[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/status-changed.spec.ts[2m:34:2[22m[2m > [22mLanXStatusDecoder[2m > [22mdecodes short circuit state[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/status-changed.spec.ts[2m:41:2[22m[2m > [22mLanXStatusDecoder[2m > [22mreturns no event for an incomplete payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/status-changed.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/stopped.spec.ts[2m:11:2[22m[2m > [22mLanXStoppedDecoder[2m > [22mcreates a stopped event[32m 3[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/stopped.spec.ts [2m([22m[2m1 test[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/system/system-encoder.spec.ts[2m:41:13[22m[2m > [22mSystemEncoder[2m > [22m'getFirmwareVersion' encodes 'LAN_X_GET_FIRMWARE_VERSION'[32m 3[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/system/system-encoder.spec.ts[2m:41:13[22m[2m > [22mSystemEncoder[2m > [22m'getStatus' encodes 'LAN_X_GET_STATUS'[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/system/system-encoder.spec.ts[2m:41:13[22m[2m > [22mSystemEncoder[2m > [22m'stop' encodes 'LAN_X_SET_STOP'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/system/system-encoder.spec.ts[2m:41:13[22m[2m > [22mSystemEncoder[2m > [22m'trackPowerOff' encodes 'LAN_X_SET_TRACK_POWER_OFF'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/system/system-encoder.spec.ts[2m:41:13[22m[2m > [22mSystemEncoder[2m > [22m'trackPowerOn' encodes 'LAN_X_SET_TRACK_POWER_ON'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/system/system-encoder.spec.ts[2m:41:13[22m[2m > [22mSystemEncoder[2m > [22m'getVersion' encodes 'LAN_X_GET_VERSION'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/system/system-encoder.spec.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/version.spec.ts[2m:23:4[22m[2m > [22mLanXVersionDecoder[2m > [22mformats X-Bus version 48 as 'V3.0'[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/version.spec.ts[2m:23:4[22m[2m > [22mLanXVersionDecoder[2m > [22mformats X-Bus version 54 as 'V3.6'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/version.spec.ts[2m:23:4[22m[2m > [22mLanXVersionDecoder[2m > [22mformats X-Bus version 64 as 'V4.0'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/version.spec.ts[2m:23:4[22m[2m > [22mLanXVersionDecoder[2m > [22mformats X-Bus version 137 as 'V8.9'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/version.spec.ts[2m:23:4[22m[2m > [22mLanXVersionDecoder[2m > [22mformats X-Bus version +0 as 'Unknown'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/version.spec.ts[2m:29:2[22m[2m > [22mLanXVersionDecoder[2m > [22mdecodes version and command station identifier[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/version.spec.ts[2m:45:2[22m[2m > [22mLanXVersionDecoder[2m > [22mreturns no event for an incomplete payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/version.spec.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/firmware-version.spec.ts[2m:21:2[22m[2m > [22mLanXFirmwareVersionDecoder[2m > [22mdecodes firmware version from DB1 and DB2[32m 3[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/firmware-version.spec.ts[2m:34:2[22m[2m > [22mLanXFirmwareVersionDecoder[2m > [22mdecodes BCD version values[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/firmware-version.spec.ts[2m:41:2[22m[2m > [22mLanXFirmwareVersionDecoder[2m > [22mreturns no event for incomplete payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/firmware-version.spec.ts[2m:45:2[22m[2m > [22mLanXFirmwareVersionDecoder[2m > [22msupports maximum BCD values[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/firmware-version.spec.ts[2m:52:2[22m[2m > [22mLanXFirmwareVersionDecoder[2m > [22mcopies the raw payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/firmware-version.spec.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/lib/event/datasets-to-events.spec.ts[2m:42:2[22m[2m > [22mZ21DatasetEventMapper[2m > [22mmaps system state datasets[32m 3[2mms[22m[39m
+ [32m✓[39m src/lib/event/datasets-to-events.spec.ts[2m:60:2[22m[2m > [22mZ21DatasetEventMapper[2m > [22mmaps X-Bus datasets[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/event/datasets-to-events.spec.ts[2m:74:2[22m[2m > [22mZ21DatasetEventMapper[2m > [22mmaps hardware information datasets[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/event/datasets-to-events.spec.ts[2m:106:2[22m[2m > [22mZ21DatasetEventMapper[2m > [22mmaps code datasets[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/event/datasets-to-events.spec.ts[2m:123:2[22m[2m > [22mZ21DatasetEventMapper[2m > [22mmaps broadcast flag datasets[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/event/datasets-to-events.spec.ts[2m:156:4[22m[2m > [22mZ21DatasetEventMapper[2m > [22mreturns no events for diagnostic dataset 'ds.unknown'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/event/datasets-to-events.spec.ts[2m:156:4[22m[2m > [22mZ21DatasetEventMapper[2m > [22mreturns no events for diagnostic dataset 'ds.bad_xor'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/event/datasets-to-events.spec.ts[2m:160:2[22m[2m > [22mZ21DatasetEventMapper[2m > [22mmaps serial number datasets[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/event/datasets-to-events.spec.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/dispatch.spec.ts[2m:30:13[22m[2m > [22mLanXCommandResolver[2m > [22mresolves TURNOUT_INFO with [][32m 3[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/dispatch.spec.ts[2m:30:13[22m[2m > [22mLanXCommandResolver[2m > [22mresolves TURNOUT_INFO with [ 1 ][32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/dispatch.spec.ts[2m:30:13[22m[2m > [22mLanXCommandResolver[2m > [22mresolves TURNOUT_INFO with [ 1, 2 ][32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/dispatch.spec.ts[2m:34:2[22m[2m > [22mLanXCommandResolver[2m > [22mresolves commands using xBusCmd[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/dispatch.spec.ts[2m:38:2[22m[2m > [22mLanXCommandResolver[2m > [22mresolves commands identified by header only[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/dispatch.spec.ts[2m:42:2[22m[2m > [22mLanXCommandResolver[2m > [22mreturns unknown for unsupported commands[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/dispatch.spec.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/track-power.spec.ts[2m:42:13[22m[2m > [22mLanXTrackPowerDecoder[2m > [22mdecodes 'LAN_X_BC_TRACK_POWER_OFF'[32m 4[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/track-power.spec.ts[2m:42:13[22m[2m > [22mLanXTrackPowerDecoder[2m > [22mdecodes 'LAN_X_BC_TRACK_POWER_ON'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/track-power.spec.ts[2m:42:13[22m[2m > [22mLanXTrackPowerDecoder[2m > [22mdecodes 'LAN_X_BC_PROGRAMMING_MODE'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/track-power.spec.ts[2m:42:13[22m[2m > [22mLanXTrackPowerDecoder[2m > [22mdecodes 'LAN_X_BC_TRACK_SHORT_CIRCUIT'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/track-power.spec.ts[2m:54:2[22m[2m > [22mLanXTrackPowerDecoder[2m > [22mreturns the command as raw data[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/track-power.spec.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-state-decoder.spec.ts[2m:12:2[22m[2m > [22mSystemStateDecoder[2m > [22mdecodes a complete system state payload[32m 3[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-state-decoder.spec.ts[2m:28:22[22m[2m > [22mSystemStateDecoder[2m > [22mrejects payload length 0[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-state-decoder.spec.ts[2m:28:22[22m[2m > [22mSystemStateDecoder[2m > [22mrejects payload length 15[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-state-decoder.spec.ts[2m:28:22[22m[2m > [22mSystemStateDecoder[2m > [22mrejects payload length 17[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-state-decoder.spec.ts[2m:32:2[22m[2m > [22mSystemStateDecoder[2m > [22mderives central and extended track flags[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-state-decoder.spec.ts[2m:61:2[22m[2m > [22mSystemStateDecoder[2m > [22mderives normal operating state when no flags are set[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-state-decoder.spec.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-info-decoder.spec.ts[2m:15:3[22m[2m > [22mSystemInfoDecoder[2m > [22mdecodeHardwareInfo[2m > [22mdecodes known hardware and firmware version[32m 3[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-info-decoder.spec.ts[2m:27:3[22m[2m > [22mSystemInfoDecoder[2m > [22mdecodeHardwareInfo[2m > [22mreturns UNKNOWN for an unknown hardware type[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-info-decoder.spec.ts[2m:33:3[22m[2m > [22mSystemInfoDecoder[2m > [22mdecodeHardwareInfo[2m > [22mreturns version 0.0 for invalid BCD data[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-info-decoder.spec.ts[2m:42:3[22m[2m > [22mSystemInfoDecoder[2m > [22mdecodeBroadcastFlags[2m > [22mdecodes combined broadcast flags[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-info-decoder.spec.ts[2m:55:3[22m[2m > [22mSystemInfoDecoder[2m > [22mdecodeBroadcastFlags[2m > [22mdetects NONE[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-info-decoder.spec.ts[2m:61:3[22m[2m > [22mSystemInfoDecoder[2m > [22mdecodeBroadcastFlags[2m > [22mstores the raw flags as little-endian bytes[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/system/system-info-decoder.spec.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/loco-info.spec.ts[2m:19:2[22m[2m > [22mLanXLocoInfoDecoder[2m > [22mdecodes locomotive information[32m 3[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/loco-info.spec.ts[2m:54:2[22m[2m > [22mLanXLocoInfoDecoder[2m > [22mreturns no event for an incomplete payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/loco-info.spec.ts[2m:58:2[22m[2m > [22mLanXLocoInfoDecoder[2m > [22mcopies the raw payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/loco-info.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/decoder.spec.ts[2m:95:2[22m[2m > [22mLanXDecoder[2m > [22mdelegates payload-based commands to the matching decoder[32m 5[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/decoder.spec.ts[2m:112:2[22m[2m > [22mLanXDecoder[2m > [22mpasses the resolved command to command-based decoders[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/decoder.spec.ts[2m:122:2[22m[2m > [22mLanXDecoder[2m > [22mroutes programming NACK commands[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/decoder.spec.ts[2m:132:2[22m[2m > [22mLanXDecoder[2m > [22mroutes programming result payloads[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/decoder.spec.ts[2m:142:2[22m[2m > [22mLanXDecoder[2m > [22mroutes firmware version payloads[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/decoder.spec.ts[2m:152:2[22m[2m > [22mLanXDecoder[2m > [22mroutes status payloads[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/decoder.spec.ts[2m:162:2[22m[2m > [22mLanXDecoder[2m > [22mroutes stopped commands[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/decoder.spec.ts[2m:170:2[22m[2m > [22mLanXDecoder[2m > [22mroutes turnout information payloads[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/decoder.spec.ts[2m:180:2[22m[2m > [22mLanXDecoder[2m > [22mroutes X-Bus version payloads[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/decoder.spec.ts[2m:190:2[22m[2m > [22mLanXDecoder[2m > [22mreturns no events when no decoder is registered[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/decoder.spec.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/loco/loco-encoder.spec.ts[2m:45:5[22m[2m > [22mLocoEncoder[2m > [22mdrive[2m > [22mencodes speed step +0[32m 5[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/loco/loco-encoder.spec.ts[2m:45:5[22m[2m > [22mLocoEncoder[2m > [22mdrive[2m > [22mencodes speed step 1[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/loco/loco-encoder.spec.ts[2m:45:5[22m[2m > [22mLocoEncoder[2m > [22mdrive[2m > [22mencodes speed step 126[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/loco/loco-encoder.spec.ts[2m:45:5[22m[2m > [22mLocoEncoder[2m > [22mdrive[2m > [22mencodes speed step 1[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/loco/loco-encoder.spec.ts[2m:61:26[22m[2m > [22mLocoEncoder[2m > [22mdrive[2m > [22mrejects invalid speed step -1[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/loco/loco-encoder.spec.ts[2m:61:26[22m[2m > [22mLocoEncoder[2m > [22mdrive[2m > [22mrejects invalid speed step 127[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/loco/loco-encoder.spec.ts[2m:61:26[22m[2m > [22mLocoEncoder[2m > [22mdrive[2m > [22mrejects invalid speed step 128[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/loco/loco-encoder.spec.ts[2m:66:2[22m[2m > [22mLocoEncoder[2m > [22mencodes locomotive emergency stop[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/loco/loco-encoder.spec.ts[2m:78:3[22m[2m > [22mLocoEncoder[2m > [22msetFunction[2m > [22mencodes function number and switch type[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/loco/loco-encoder.spec.ts[2m:91:20[22m[2m > [22mLocoEncoder[2m > [22msetFunction[2m > [22mrejects invalid function number -1[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/loco/loco-encoder.spec.ts[2m:91:20[22m[2m > [22mLocoEncoder[2m > [22msetFunction[2m > [22mrejects invalid function number 32[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/loco/loco-encoder.spec.ts[2m:96:2[22m[2m > [22mLocoEncoder[2m > [22mencodes locomotive information request[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/encoder/loco/loco-encoder.spec.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/turnout-info.spec.ts[2m:34:4[22m[2m > [22mLanXTurnoutInfoDecoder[2m > [22mdecodes turnout state 1[32m 3[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/turnout-info.spec.ts[2m:34:4[22m[2m > [22mLanXTurnoutInfoDecoder[2m > [22mdecodes turnout state 2[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/turnout-info.spec.ts[2m:34:4[22m[2m > [22mLanXTurnoutInfoDecoder[2m > [22mdecodes turnout state +0[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/turnout-info.spec.ts[2m:34:4[22m[2m > [22mLanXTurnoutInfoDecoder[2m > [22mdecodes turnout state 3[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/turnout-info.spec.ts[2m:42:2[22m[2m > [22mLanXTurnoutInfoDecoder[2m > [22mreturns the decoded turnout event[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/turnout-info.spec.ts[2m:57:2[22m[2m > [22mLanXTurnoutInfoDecoder[2m > [22mreturns no event for an incomplete payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/turnout-info.spec.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/programming/cv-decoders.spec.ts[2m:24:14[22m[2m > [22mCV programming decoders[2m > [22mLanXCvNackDecoder[2m > [22mdecodes 'LAN_X_CV_NACK'[32m 2[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/programming/cv-decoders.spec.ts[2m:24:14[22m[2m > [22mCV programming decoders[2m > [22mLanXCvNackDecoder[2m > [22mdecodes 'LAN_X_CV_NACK_SC'[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/programming/cv-decoders.spec.ts[2m:36:3[22m[2m > [22mCV programming decoders[2m > [22mLanXCvNackDecoder[2m > [22mreturns no event for unsupported commands[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/programming/cv-decoders.spec.ts[2m:64:5[22m[2m > [22mCV programming decoders[2m > [22mLanXCvResultDecoder[2m > [22mdecodes CV 1[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/programming/cv-decoders.spec.ts[2m:64:5[22m[2m > [22mCV programming decoders[2m > [22mLanXCvResultDecoder[2m > [22mdecodes CV 29[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/programming/cv-decoders.spec.ts[2m:64:5[22m[2m > [22mCV programming decoders[2m > [22mLanXCvResultDecoder[2m > [22mdecodes CV 1024[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/programming/cv-decoders.spec.ts[2m:72:3[22m[2m > [22mCV programming decoders[2m > [22mLanXCvResultDecoder[2m > [22mpreserves the raw payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/programming/cv-decoders.spec.ts[2m:87:3[22m[2m > [22mCV programming decoders[2m > [22mLanXCvResultDecoder[2m > [22mreturns no event for incomplete data[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/programming/cv-decoders.spec.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:53:3[22m[2m > [22mZ21Codec[2m > [22mX-Bus frames[2m > [22mparses an X-Bus frame and removes the checksum[32m 3[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:67:3[22m[2m > [22mZ21Codec[2m > [22mX-Bus frames[2m > [22mreports a checksum mismatch and still returns the X-Bus dataset[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:86:3[22m[2m > [22mZ21Codec[2m > [22mX-Bus frames[2m > [22msupports an X-Bus frame without data bytes[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:98:3[22m[2m > [22mZ21Codec[2m > [22mX-Bus frames[2m > [22mreturns an unknown dataset for a too-short X-Bus payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:111:3[22m[2m > [22mZ21Codec[2m > [22msystem state frames[2m > [22mparses a 16-byte system state payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:123:3[22m[2m > [22mZ21Codec[2m > [22msystem state frames[2m > [22mreturns an unknown dataset for an invalid payload length[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:136:3[22m[2m > [22mZ21Codec[2m > [22mhardware information frames[2m > [22mparses hardware type and firmware version[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:148:3[22m[2m > [22mZ21Codec[2m > [22mhardware information frames[2m > [22mreturns an unknown dataset for an invalid payload length[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:158:3[22m[2m > [22mZ21Codec[2m > [22mcode frames[2m > [22mparses the Z21 code[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:169:3[22m[2m > [22mZ21Codec[2m > [22mcode frames[2m > [22mreturns an unknown dataset for an invalid payload length[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:179:3[22m[2m > [22mZ21Codec[2m > [22mbroadcast flag frames[2m > [22mparses broadcast flags[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:193:3[22m[2m > [22mZ21Codec[2m > [22mbroadcast flag frames[2m > [22mreturns an unknown dataset for an invalid payload length[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:203:3[22m[2m > [22mZ21Codec[2m > [22mmalformed frames[2m > [22mreturns an unknown dataset for an unsupported header[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:213:3[22m[2m > [22mZ21Codec[2m > [22mmalformed frames[2m > [22mreturns no datasets for an empty buffer[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:217:3[22m[2m > [22mZ21Codec[2m > [22mmalformed frames[2m > [22mreturns no datasets when the buffer is shorter than a frame header[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:221:3[22m[2m > [22mZ21Codec[2m > [22mmalformed frames[2m > [22mstops parsing when the declared frame length is below the minimum[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:225:3[22m[2m > [22mZ21Codec[2m > [22mmalformed frames[2m > [22mstops parsing when a frame extends beyond the datagram[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:231:3[22m[2m > [22mZ21Codec[2m > [22mmultiple frames[2m > [22mparses concatenated frames in order[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:253:3[22m[2m > [22mZ21Codec[2m > [22mserial number frames[2m > [22mparses the Z21 serial number[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts[2m:267:3[22m[2m > [22mZ21Codec[2m > [22mserial number frames[2m > [22mreturns an unknown dataset for an invalid payload length[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/codec/codec.spec.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:46:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeDccAddress[2m > [22mbasic address decoding[2m > [22mdecodes address from MSB and LSB bytes[32m 2[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:52:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeDccAddress[2m > [22mbasic address decoding[2m > [22mdecodes minimum address[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:58:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeDccAddress[2m > [22mbasic address decoding[2m > [22mdecodes maximum address[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:64:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeDccAddress[2m > [22mbasic address decoding[2m > [22mdecodes address with non-zero MSB[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:72:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeDccAddress[2m > [22mbit masking[2m > [22mmasks out upper bits of MSB byte[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:78:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeDccAddress[2m > [22mbit masking[2m > [22mdecodes address with MSB containing only address bits[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:92:6[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22mspeed step detection[2m > [22mdecodes 14 speed steps[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:92:6[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22mspeed step detection[2m > [22mdecodes 28 speed steps[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:92:6[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22mspeed step detection[2m > [22mdecodes 128 speed steps[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:101:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22mdirection decoding[2m > [22mdecodes forward direction when direction bit is set[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:107:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22mdirection decoding[2m > [22mdecodes reverse direction when direction bit is not set[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:115:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22mspeed value decoding[2m > [22mdecodes emergency stop when speed value is 1[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:122:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22mspeed value decoding[2m > [22mdecodes normal stop when speed value is 0[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:129:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22mspeed value decoding[2m > [22mdecodes speed by subtracting 1 from raw value when greater than 1[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:136:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22mspeed value decoding[2m > [22mdecodes maximum speed value[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:144:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22mloco type flags[2m > [22mdecodes MM loco flag when set[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:150:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22mloco type flags[2m > [22mdecodes MM loco flag when not set[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:158:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22moccupied flag[2m > [22mdecodes occupied flag when set[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:164:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22moccupied flag[2m > [22mdecodes occupied flag when not set[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:172:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeSpeed[2m > [22mcombined decoding[2m > [22mdecodes all flags together[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:192:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mempty function data[2m > [22mreturns empty function map when no function bytes present[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:200:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mempty function data[2m > [22mreturns empty map when start index is beyond array bounds[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:210:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mF0 to F4 decoding[2m > [22mdecodes F0 to F4 from first function byte[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:225:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mspecial flags[2m > [22mdecodes double traction flag when set[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:232:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mspecial flags[2m > [22mdecodes smartsearch flag when set[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:241:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mF5 to F12 decoding[2m > [22mdecodes F5 to F12 from second function byte[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:259:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mF13 to F20 decoding[2m > [22mdecodes F13 to F20 from third function byte[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:277:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mF21 to F28 decoding[2m > [22mdecodes F21 to F28 from fourth function byte[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:295:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mF29 to F31 decoding[2m > [22mdecodes F29 to F31 from fifth function byte[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:308:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mall functions combined[2m > [22mdecodes all functions when all bytes present and all bits set[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:318:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mall functions combined[2m > [22mdecodes no functions when all bytes present and all bits cleared[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:330:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mstart index handling[2m > [22muses correct start index to read function bytes[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:339:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mpartial function data[2m > [22mhandles partial function data with only first two bytes[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:349:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mpartial function data[2m > [22mhandles partial function data with only first three bytes[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:363:4[22m[2m > [22mpayload decode helpers[2m > [22mdecodeFunctions[2m > [22mpartial function data[2m > [22mhandles partial function data with only first four bytes[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:382:3[22m[2m > [22mpayload decode helpers[2m > [22mdecodeCvAddress[2m > [22mdecodes CV address with +1 offset from MSB and LSB bytes[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:390:3[22m[2m > [22mpayload decode helpers[2m > [22mdecodeCvAddress[2m > [22mdecodes maximum CV address when MSB and LSB are 0xff[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts[2m:395:3[22m[2m > [22mpayload decode helpers[2m > [22mdecodeCvAddress[2m > [22mapplies FULL_BYTE_MASK to MSB (masks out higher bits)[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/lanx/decode/_shared.spec.ts [2m([22m[2m38 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:73:14[22m[2m > [22mZ21CommandService[2m > [22mtrack power[2m > [22muses 'trackPowerOn' when power is true[32m 7[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:73:14[22m[2m > [22mZ21CommandService[2m > [22mtrack power[2m > [22muses 'trackPowerOff' when power is false[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:87:27[22m[2m > [22mZ21CommandService[2m > [22mlocomotive commands[2m > [22mdelegates speed step 0 to the locomotive encoder[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:87:27[22m[2m > [22mZ21CommandService[2m > [22mlocomotive commands[2m > [22mdelegates speed step 1 to the locomotive encoder[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:87:27[22m[2m > [22mZ21CommandService[2m > [22mlocomotive commands[2m > [22mdelegates speed step 47 to the locomotive encoder[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:87:27[22m[2m > [22mZ21CommandService[2m > [22mlocomotive commands[2m > [22mdelegates speed step 126 to the locomotive encoder[32m 0[2mms[22m[39m
+ [31m×[39m src/lib/services/z21-command-service.spec.ts[2m:99:25[22m[2m > [22mZ21CommandService[2m > [22mlocomotive commands[2m > [22mrejects normalized speed -0.01[32m 5[2mms[22m[39m
+[31m   → expected [Function] to throw error including 'out of range' but got 'Cannot read properties of undefined (…'[39m
+ [31m×[39m src/lib/services/z21-command-service.spec.ts[2m:99:25[22m[2m > [22mZ21CommandService[2m > [22mlocomotive commands[2m > [22mrejects normalized speed 1.01[32m 1[2mms[22m[39m
+[31m   → expected [Function] to throw error including 'out of range' but got 'Cannot read properties of undefined (…'[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:103:3[22m[2m > [22mZ21CommandService[2m > [22mlocomotive commands[2m > [22mdelegates locomotive function commands[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:115:3[22m[2m > [22mZ21CommandService[2m > [22mlocomotive commands[2m > [22mdelegates locomotive information requests[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:127:3[22m[2m > [22mZ21CommandService[2m > [22mlocomotive commands[2m > [22mdelegates locomotive emergency stop[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:141:3[22m[2m > [22mZ21CommandService[2m > [22mturnout commands[2m > [22mdelegates turnout information requests[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:153:3[22m[2m > [22mZ21CommandService[2m > [22mturnout commands[2m > [22mactivates and deactivates a turnout after the pulse duration[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:175:3[22m[2m > [22mZ21CommandService[2m > [22mturnout commands[2m > [22mreplaces an existing turnout pulse timer[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:193:3[22m[2m > [22mZ21CommandService[2m > [22mturnout commands[2m > [22muses default turnout options[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:211:3[22m[2m > [22mZ21CommandService[2m > [22mprogramming commands[2m > [22mdelegates CV reads[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:223:3[22m[2m > [22mZ21CommandService[2m > [22mprogramming commands[2m > [22mdelegates CV writes[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:245:14[22m[2m > [22mZ21CommandService[2m > [22msystem commands[2m > [22mgetXBusVersion delegates to SystemEncoder.getVersion[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:245:14[22m[2m > [22mZ21CommandService[2m > [22msystem commands[2m > [22mgetStatus delegates to SystemEncoder.getStatus[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:245:14[22m[2m > [22mZ21CommandService[2m > [22msystem commands[2m > [22msetStop delegates to SystemEncoder.stop[32m 1[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:245:14[22m[2m > [22mZ21CommandService[2m > [22msystem commands[2m > [22mgetFirmwareVersion delegates to SystemEncoder.getFirmwareVersion[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:245:14[22m[2m > [22mZ21CommandService[2m > [22msystem commands[2m > [22mgetHardwareInfo delegates to SystemEncoder.getHardwareInfo[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:245:14[22m[2m > [22mZ21CommandService[2m > [22msystem commands[2m > [22mgetCode delegates to SystemEncoder.getCode[32m 0[2mms[22m[39m
+ [32m✓[39m src/lib/services/z21-command-service.spec.ts[2m:245:14[22m[2m > [22mZ21CommandService[2m > [22msystem commands[2m > [22mgetBroadcastFlags delegates to SystemEncoder.getBroadcastFlags[32m 0[2mms[22m[39m
+ [31m❯[39m src/lib/services/z21-command-service.spec.ts [2m([22m[2m24 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[32m 28[2mms[22m[39m
+       [32m✓[39m uses 'trackPowerOn' when power is true[32m 7[2mms[22m[39m
+       [32m✓[39m uses 'trackPowerOff' when power is false[32m 1[2mms[22m[39m
+       [32m✓[39m delegates speed step 0 to the locomotive encoder[32m 1[2mms[22m[39m
+       [32m✓[39m delegates speed step 1 to the locomotive encoder[32m 1[2mms[22m[39m
+       [32m✓[39m delegates speed step 47 to the locomotive encoder[32m 1[2mms[22m[39m
+       [32m✓[39m delegates speed step 126 to the locomotive encoder[32m 0[2mms[22m[39m
+[31m       [31m×[31m rejects normalized speed -0.01[39m[32m 5[2mms[22m[39m
+[31m       [31m×[31m rejects normalized speed 1.01[39m[32m 1[2mms[22m[39m
+       [32m✓[39m delegates locomotive function commands[32m 1[2mms[22m[39m
+       [32m✓[39m delegates locomotive information requests[32m 1[2mms[22m[39m
+       [32m✓[39m delegates locomotive emergency stop[32m 1[2mms[22m[39m
+       [32m✓[39m delegates turnout information requests[32m 0[2mms[22m[39m
+       [32m✓[39m activates and deactivates a turnout after the pulse duration[32m 1[2mms[22m[39m
+       [32m✓[39m replaces an existing turnout pulse timer[32m 1[2mms[22m[39m
+       [32m✓[39m uses default turnout options[32m 0[2mms[22m[39m
+       [32m✓[39m delegates CV reads[32m 1[2mms[22m[39m
+       [32m✓[39m delegates CV writes[32m 0[2mms[22m[39m
+       [32m✓[39m getXBusVersion delegates to SystemEncoder.getVersion[32m 0[2mms[22m[39m
+       [32m✓[39m getStatus delegates to SystemEncoder.getStatus[32m 0[2mms[22m[39m
+       [32m✓[39m setStop delegates to SystemEncoder.stop[32m 1[2mms[22m[39m
+       [32m✓[39m getFirmwareVersion delegates to SystemEncoder.getFirmwareVersion[32m 0[2mms[22m[39m
+       [32m✓[39m getHardwareInfo delegates to SystemEncoder.getHardwareInfo[32m 0[2mms[22m[39m
+       [32m✓[39m getCode delegates to SystemEncoder.getCode[32m 0[2mms[22m[39m
+       [32m✓[39m getBroadcastFlags delegates to SystemEncoder.getBroadcastFlags[32m 0[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/lib/services/z21-command-service.spec.ts[2m:99:25[22m[2m > [22mZ21CommandService[2m > [22mlocomotive commands[2m > [22mrejects normalized speed -0.01
+[41m[1m FAIL [22m[49m src/lib/services/z21-command-service.spec.ts[2m:99:25[22m[2m > [22mZ21CommandService[2m > [22mlocomotive commands[2m > [22mrejects normalized speed 1.01
+[31m[1mAssertionError[22m: expected [Function] to throw error including 'out of range' but got 'Cannot read properties of undefined (…'[39m
+
+Expected: [32m"out of range"[39m
+Received: [31m"Cannot read properties of undefined (reading 'toString')"[39m
+
+[36m [2m❯[22m src/lib/services/z21-command-service.spec.ts:[2m100:73[22m[39m
+    [90m 98|[39m
+    [90m 99|[39m   it[33m.[39m[34meach[39m([[33m-[39m[34m0.01[39m[33m,[39m [34m1.01[39m])([32m'rejects normalized speed %s'[39m[33m,[39m (speed) [33m=>[39m {
+    [90m100|[39m    expect(() => services.service.setLocoDrive(3, speed, Direction.FWD)…
+    [90m   |[39m                                                                         [31m^[39m
+    [90m101|[39m   })[33m;[39m
+    [90m102|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m21 passed[39m[22m[90m (22)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m199 passed[39m[22m[90m (201)[39m
+[2m   Start at [22m 10:59:07
+[2m   Duration [22m 2.82s[2m (transform 3.48s, setup 297ms, import 6.08s, tests 181ms, environment 42.63s)[22m
+
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/lib/services/z21-command-service.spec.ts[2m:99:25[22m[2m > [22mZ21CommandService[2m > [22mlocomotive commands[2m > [22mrejects normalized speed -0.01
+[41m[1m FAIL [22m[49m src/lib/services/z21-command-service.spec.ts[2m:99:25[22m[2m > [22mZ21CommandService[2m > [22mlocomotive commands[2m > [22mrejects normalized speed 1.01
+[31m[1mAssertionError[22m: expected [Function] to throw error including 'out of range' but got 'Cannot read properties of undefined (…'[39m
+
+Expected: [32m"out of range"[39m
+Received: [31m"Cannot read properties of undefined (reading 'toString')"[39m
+
+[36m [2m❯[22m src/lib/services/z21-command-service.spec.ts:[2m100:73[22m[39m
+    [90m 98|[39m
+    [90m 99|[39m   it[33m.[39m[34meach[39m([[33m-[39m[34m0.01[39m[33m,[39m [34m1.01[39m])([32m'rejects normalized speed %s'[39m[33m,[39m (speed) [33m=>[39m {
+    [90m100|[39m    expect(() => services.service.setLocoDrive(3, speed, Direction.FWD)…
+    [90m   |[39m                                                                         [31m^[39m
+    [90m101|[39m   })[33m;[39m
+    [90m102|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m21 passed[39m[22m[90m (22)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m199 passed[39m[22m[90m (201)[39m
+[2m   Start at [22m 10:59:07
+[2m   Duration [22m 2.82s[2m (transform 3.48s, setup 297ms, import 6.08s, tests 181ms, environment 42.63s)[22m
+
+[1m[7m[35m HTML [39m[27m[22m [35mReport is generated[39m
+[2m       You can run [22m[1mnpx vite preview --outDir ../../../test-result/libs/z21-suite/z21[22m[2m to see the test results.[22m
+
+[2m> [22m[2mnx run[22m z21-server:test
+
+[1m[33mThe `@nx/vitest:test` executor is deprecated and will be removed in Nx v24. Run `nx g @nx/vitest:convert-to-inferred` to migrate to the `@nx/vitest/plugin` inferred targets. See https://nx.dev/docs/guides/tasks--caching/convert-to-inferred for details.[39m[22m
+[33mThe plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the [1mresolve.tsconfigPaths[22m option. You can remove the plugin and set [1mresolve.tsconfigPaths: true[22m in your Vite config instead.[39m
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mD:/dev/src/application-platform/apps/z21-server[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mD:/dev/src/application-platform/apps/z21-server[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [32m✓[39m src/main.spec.ts[2m:76:2[22m[2m > [22mmain[2m > [22mcreates providers and starts the application[32m 33[2mms[22m[39m
+ [32m✓[39m src/main.spec.ts[2m:88:2[22m[2m > [22mmain[2m > [22mregisters shutdown handlers[32m 1[2mms[22m[39m
+ [32m✓[39m src/main.spec.ts[2m:96:2[22m[2m > [22mmain[2m > [22mstops the application on SIGINT[32m 0[2mms[22m[39m
+ [32m✓[39m src/main.spec.ts[2m:106:2[22m[2m > [22mmain[2m > [22mstops the application on SIGTERM[32m 0[2mms[22m[39m
+ [32m✓[39m src/main.spec.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 36[2mms[22m[39m
+ [32m✓[39m src/infra/config/server-config-loader.spec.ts[2m:37:2[22m[2m > [22mloadConfig[2m > [22mreturns defaults when the config file cannot be read[32m 3[2mms[22m[39m
+ [32m✓[39m src/infra/config/server-config-loader.spec.ts[2m:54:2[22m[2m > [22mloadConfig[2m > [22mreturns defaults when the config file contains invalid JSON[32m 1[2mms[22m[39m
+ [32m✓[39m src/infra/config/server-config-loader.spec.ts[2m:69:2[22m[2m > [22mloadConfig[2m > [22muses the path from Z21_CONFIG when configured[32m 1[2mms[22m[39m
+ [32m✓[39m src/infra/config/server-config-loader.spec.ts[2m:81:2[22m[2m > [22mloadConfig[2m > [22muses config.json from the current working directory by default[32m 1[2mms[22m[39m
+ [32m✓[39m src/infra/config/server-config-loader.spec.ts[2m:91:2[22m[2m > [22mloadConfig[2m > [22mmerges top-level and nested configuration with defaults[32m 0[2mms[22m[39m
+ [32m✓[39m src/infra/config/server-config-loader.spec.ts[2m:120:2[22m[2m > [22mloadConfig[2m > [22mpreserves development configuration[32m 0[2mms[22m[39m
+ [32m✓[39m src/infra/config/server-config-loader.spec.ts[2m:138:2[22m[2m > [22mloadConfig[2m > [22mignores invalid top-level configuration values[32m 0[2mms[22m[39m
+ [32m✓[39m src/infra/config/server-config-loader.spec.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts[2m:36:2[22m[2m > [22mCommandStationInfoOrchestrator[2m > [22mrequests firmware information first[32m 3[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts[2m:48:2[22m[2m > [22mCommandStationInfoOrchestrator[2m > [22mdoes not resend an in-flight request before the retry timeout[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts[2m:55:2[22m[2m > [22mCommandStationInfoOrchestrator[2m > [22mretries an in-flight request after the retry timeout[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts[2m:65:2[22m[2m > [22mCommandStationInfoOrchestrator[2m > [22mrequests hardware information for firmware 1.20 or newer[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts[2m:79:2[22m[2m > [22mCommandStationInfoOrchestrator[2m > [22mrequests hardware information for firmware major versions above 1[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts[2m:91:2[22m[2m > [22mCommandStationInfoOrchestrator[2m > [22mrequests the X-Bus version for firmware older than 1.20[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts[2m:105:46[22m[2m > [22mCommandStationInfoOrchestrator[2m > [22mrequests the command station code for z21_START[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts[2m:105:46[22m[2m > [22mCommandStationInfoOrchestrator[2m > [22mrequests the command station code for z21_SMALL[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts[2m:119:2[22m[2m > [22mCommandStationInfoOrchestrator[2m > [22mdoes not request the command station code for hardware that does not require it[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts[2m:133:2[22m[2m > [22mCommandStationInfoOrchestrator[2m > [22mallows an acknowledged request to be sent again[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts[2m:145:2[22m[2m > [22mCommandStationInfoOrchestrator[2m > [22mresets pending request state[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts[2m:154:2[22m[2m > [22mCommandStationInfoOrchestrator[2m > [22msequences firmware, hardware info and code requests[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts[2m:179:2[22m[2m > [22mCommandStationInfoOrchestrator[2m > [22mdoes not continue the sequence until firmware information is available[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/command-station-info-orchestrator.spec.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:48:3[22m[2m > [22mCvProgrammingService[2m > [22mreadCv[2m > [22msends a read command and resolves with the matching result[32m 4[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:61:3[22m[2m > [22mCvProgrammingService[2m > [22mreadCv[2m > [22mignores results for another CV address[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:74:3[22m[2m > [22mCvProgrammingService[2m > [22mreadCv[2m > [22mrejects when the operation times out[32m 1[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:82:3[22m[2m > [22mCvProgrammingService[2m > [22mreadCv[2m > [22mrejects when the command station sends a NACK[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:90:3[22m[2m > [22mCvProgrammingService[2m > [22mreadCv[2m > [22mrejects with a specific error for programming-track short circuits[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:100:3[22m[2m > [22mCvProgrammingService[2m > [22mwriteCv[2m > [22msends a write command and resolves after the matching result[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:112:3[22m[2m > [22mCvProgrammingService[2m > [22mqueue[2m > [22mruns only one CV operation at a time[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:122:3[22m[2m > [22mCvProgrammingService[2m > [22mqueue[2m > [22mstarts the next queued operation after a successful result[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:143:3[22m[2m > [22mCvProgrammingService[2m > [22mqueue[2m > [22mstarts the next queued operation after a NACK[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:162:3[22m[2m > [22mCvProgrammingService[2m > [22mqueue[2m > [22mstarts the next queued operation after a timeout[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:181:3[22m[2m > [22mCvProgrammingService[2m > [22mqueue[2m > [22mpreserves queue order across reads and writes[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:203:3[22m[2m > [22mCvProgrammingService[2m > [22mevents[2m > [22mignores events when no operation is active[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:209:3[22m[2m > [22mCvProgrammingService[2m > [22mevents[2m > [22mignores unrelated Z21 events while an operation is active[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:231:3[22m[2m > [22mCvProgrammingService[2m > [22mevents[2m > [22mignores late events after an operation has completed[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts[2m:244:2[22m[2m > [22mCvProgrammingService[2m > [22muses the configured timeout[32m 0[2mms[22m[39m
+ [32m✓[39m src/services/cv-programming-service.spec.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:81:2[22m[2m > [22mZ21EventHandler[2m > [22mparses incoming datagrams and maps usable datasets to events[32m 3[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:100:3[22m[2m > [22mZ21EventHandler[2m > [22mdiagnostic datasets[2m > [22mlogs unknown frames without mapping them[32m 1[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:128:3[22m[2m > [22mZ21EventHandler[2m > [22mdiagnostic datasets[2m > [22mlogs invalid X-Bus checksums without mapping them[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:155:2[22m[2m > [22mZ21EventHandler[2m > [22mbroadcasts serial information received from the mapper[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:192:2[22m[2m > [22mZ21EventHandler[2m > [22mprocesses a system state event exactly once[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:239:67[22m[2m > [22mZ21EventHandler[2m > [22mupdates track state for system.event.track.power events[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:239:67[22m[2m > [22mZ21EventHandler[2m > [22mupdates track state for system.event.status events[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:269:2[22m[2m > [22mZ21EventHandler[2m > [22mupdates the locomotive manager and broadcasts locomotive state[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:325:2[22m[2m > [22mZ21EventHandler[2m > [22mbroadcasts turnout state[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:351:2[22m[2m > [22mZ21EventHandler[2m > [22mstores and broadcasts X-Bus version information[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:395:2[22m[2m > [22mZ21EventHandler[2m > [22mdoes not derive a hardware type from unrelated X-Bus command station ids[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:416:2[22m[2m > [22mZ21EventHandler[2m > [22mstores firmware information and acknowledges it before requesting more data[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:452:2[22m[2m > [22mZ21EventHandler[2m > [22mstores hardware information and acknowledges it before requesting more data[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:482:2[22m[2m > [22mZ21EventHandler[2m > [22mstores and broadcasts the command station code[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:509:2[22m[2m > [22mZ21EventHandler[2m > [22mbroadcasts a global emergency-stop event[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:546:25[22m[2m > [22mZ21EventHandler[2m > [22mforwards 'programming.event.cv.result' to the CV programming service[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:546:25[22m[2m > [22mZ21EventHandler[2m > [22mforwards 'programming.event.cv.nack' to the CV programming service[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:559:2[22m[2m > [22mZ21EventHandler[2m > [22mlogs unknown LAN-X events[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts[2m:587:2[22m[2m > [22mZ21EventHandler[2m > [22mlogs unknown X-Bus events with their payload[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/z21-event-handler.spec.ts [2m([22m[2m19 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m src/infra/ws/app-websocket-server.spec.ts[2m:44:2[22m[2m > [22mAppWsServer[2m > [22msends session-ready before invoking the connect handler[32m 4[2mms[22m[39m
+ [32m✓[39m src/infra/ws/app-websocket-server.spec.ts[2m:73:2[22m[2m > [22mAppWsServer[2m > [22mforwards valid protocol messages[32m 1[2mms[22m[39m
+ [32m✓[39m src/infra/ws/app-websocket-server.spec.ts[2m:95:2[22m[2m > [22mAppWsServer[2m > [22mrejects malformed JSON[32m 1[2mms[22m[39m
+ [32m✓[39m src/infra/ws/app-websocket-server.spec.ts[2m:112:2[22m[2m > [22mAppWsServer[2m > [22mrejects JSON that is not a valid client protocol message[32m 0[2mms[22m[39m
+ [32m✓[39m src/infra/ws/app-websocket-server.spec.ts[2m:134:2[22m[2m > [22mAppWsServer[2m > [22minvokes the disconnect handler[32m 0[2mms[22m[39m
+ [32m✓[39m src/infra/ws/app-websocket-server.spec.ts[2m:144:2[22m[2m > [22mAppWsServer[2m > [22mlogs rejected asynchronous message handlers[32m 63[2mms[22m[39m
+ [32m✓[39m src/infra/ws/app-websocket-server.spec.ts[2m:169:2[22m[2m > [22mAppWsServer[2m > [22mdelegates sendToClient to the underlying server[32m 0[2mms[22m[39m
+ [32m✓[39m src/infra/ws/app-websocket-server.spec.ts[2m:184:2[22m[2m > [22mAppWsServer[2m > [22mdelegates broadcast to the underlying server[32m 0[2mms[22m[39m
+ [32m✓[39m src/infra/ws/app-websocket-server.spec.ts[2m:199:2[22m[2m > [22mAppWsServer[2m > [22mdelegates close to the underlying server[32m 0[2mms[22m[39m
+ [32m✓[39m src/infra/ws/app-websocket-server.spec.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 72[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.session.spec.ts[2m:99:2[22m[2m > [22mBootstrap Z21 session[2m > [22mactivates the Z21 session when the first client connects[32m 4[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.session.spec.ts[2m:115:2[22m[2m > [22mBootstrap Z21 session[2m > [22mdoes not activate the session again for additional clients[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.session.spec.ts[2m:138:2[22m[2m > [22mBootstrap Z21 session[2m > [22mrequests system state every minute while the session is active[32m 1[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.session.spec.ts[2m:156:2[22m[2m > [22mBootstrap Z21 session[2m > [22mkeeps the session active while clients remain connected[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.session.spec.ts[2m:174:2[22m[2m > [22mBootstrap Z21 session[2m > [22mdeactivates the session when the last client disconnects[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.session.spec.ts[2m:192:2[22m[2m > [22mBootstrap Z21 session[2m > [22mstops the heartbeat when the last client disconnects[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.session.spec.ts[2m:210:2[22m[2m > [22mBootstrap Z21 session[2m > [22mdoes not log off when disconnecting without an active session[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.session.spec.ts[2m:220:2[22m[2m > [22mBootstrap Z21 session[2m > [22mdeactivates an active session during application shutdown[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.session.spec.ts[2m:243:3[22m[2m > [22mBootstrap Z21 session[2m > [22mbroadcast flags[2m > [22muses no broadcast flags when configuration is missing[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.session.spec.ts[2m:255:3[22m[2m > [22mBootstrap Z21 session[2m > [22mbroadcast flags[2m > [22mcombines enabled broadcast flags[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.session.spec.ts[2m:283:3[22m[2m > [22mBootstrap Z21 session[2m > [22mbroadcast flags[2m > [22muses no flags when every configured flag is disabled[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.session.spec.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts[2m:103:3[22m[2m > [22mBootstrap[2m > [22mstart[2m > [22mstarts UDP and HTTP services[32m 4[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts[2m:115:3[22m[2m > [22mBootstrap[2m > [22mstart[2m > [22muses the configured UDP listen port[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts[2m:123:3[22m[2m > [22mBootstrap[2m > [22mstart[2m > [22mwires incoming UDP datagrams to the Z21 event handler[32m 1[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts[2m:142:3[22m[2m > [22mBootstrap[2m > [22mstart[2m > [22mwires WebSocket handlers[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts[2m:150:3[22m[2m > [22mBootstrap[2m > [22mclient messages[2m > [22mdelegates locomotive drive commands through the client message handler[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts[2m:178:3[22m[2m > [22mBootstrap[2m > [22mclient connection[2m > [22mrequests configured locomotive information[32m 1[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts[2m:196:3[22m[2m > [22mBootstrap[2m > [22mclient connection[2m > [22mdoes not request locomotive information when already subscribed[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts[2m:212:3[22m[2m > [22mBootstrap[2m > [22mclient connection[2m > [22mdoes not subscribe when no development locomotive is configured[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts[2m:226:3[22m[2m > [22mBootstrap[2m > [22mclient disconnect[2m > [22mstops and broadcasts all locomotives when safety is enabled[32m 1[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts[2m:279:3[22m[2m > [22mBootstrap[2m > [22mclient disconnect[2m > [22mdoes not stop locomotives when safety is disabled[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts[2m:293:3[22m[2m > [22mBootstrap[2m > [22mclient disconnect[2m > [22mdoes not broadcast when no locomotives were stopped[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts[2m:307:3[22m[2m > [22mBootstrap[2m > [22mstop[2m > [22mstops UDP, WebSocket and HTTP servers[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts[2m:320:3[22m[2m > [22mBootstrap[2m > [22mstop[2m > [22mcontinues shutdown when individual services throw[32m 1[2mms[22m[39m
+ [32m✓[39m src/bootstrap/bootstrap.spec.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:72:2[22m[2m > [22mClientMessageHandler[2m > [22mignores session hello messages[32m 2[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:84:2[22m[2m > [22mClientMessageHandler[2m > [22msets track power and broadcasts the requested state[32m 1[2mms[22m[39m
+ [31m×[39m src/handler/client-message-handler.spec.ts[2m:113:3[22m[2m > [22mClientMessageHandler[2m > [22mlocomotive drive[2m > [22mupdates local state immediately and sends the drive command after the throttle interval[32m 4[2mms[22m[39m
+[31m   → expected "vi.fn()" to be called with arguments: [ 5, 0.5, 'REV' ][90m
+
+Received:
+
+[1m  1st vi.fn() call:
+
+[22m[2m  [[22m
+[2m    5,[22m
+[32m-   0.5,[90m
+[31m+   undefined,[90m
+[2m    "REV",[22m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+ [31m×[39m src/handler/client-message-handler.spec.ts[2m:153:3[22m[2m > [22mClientMessageHandler[2m > [22mlocomotive drive[2m > [22msends only the most recent pending drive command for one locomotive[32m 1[2mms[22m[39m
+[31m   → expected "vi.fn()" to be called with arguments: [ 5, 0.8, 'REV' ][90m
+
+Received:
+
+[1m  1st vi.fn() call:
+
+[22m[2m  [[22m
+[2m    5,[22m
+[32m-   0.8,[90m
+[31m+   undefined,[90m
+[2m    "REV",[22m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:185:3[22m[2m > [22mClientMessageHandler[2m > [22mlocomotive drive[2m > [22mcancels a pending drive when emergency stop is requested[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:221:4[22m[2m > [22mClientMessageHandler[2m > [22msets a locomotive function and broadcasts the resulting state[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:221:4[22m[2m > [22mClientMessageHandler[2m > [22msets a locomotive function and broadcasts the resulting state[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:257:2[22m[2m > [22mClientMessageHandler[2m > [22mtoggles a locomotive function based on the current state[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:295:13[22m[2m > [22mClientMessageHandler[2m > [22msets turnout state using the corresponding port[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:295:13[22m[2m > [22mClientMessageHandler[2m > [22msets turnout state using the corresponding port[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:316:2[22m[2m > [22mClientMessageHandler[2m > [22muses the default turnout pulse duration[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:334:2[22m[2m > [22mClientMessageHandler[2m > [22msends the global stop command[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:346:3[22m[2m > [22mClientMessageHandler[2m > [22mCV programming[2m > [22mreplies with the CV result after a successful read[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:375:3[22m[2m > [22mClientMessageHandler[2m > [22mCV programming[2m > [22mreplies with a nack when reading a CV fails[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:398:3[22m[2m > [22mClientMessageHandler[2m > [22mCV programming[2m > [22mreplies with the written value after a successful write[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:425:3[22m[2m > [22mClientMessageHandler[2m > [22mCV programming[2m > [22mreplies with a nack when writing a CV fails[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:450:91[22m[2m > [22mClientMessageHandler[2m > [22mignores unsupported programming.command.pom.cv.read commands[32m 0[2mms[22m[39m
+ [32m✓[39m src/handler/client-message-handler.spec.ts[2m:450:91[22m[2m > [22mClientMessageHandler[2m > [22mignores unsupported programming.command.pom.cv.write commands[32m 0[2mms[22m[39m
+ [31m❯[39m src/handler/client-message-handler.spec.ts [2m([22m[2m18 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[32m 13[2mms[22m[39m
+     [32m✓[39m ignores session hello messages[32m 2[2mms[22m[39m
+     [32m✓[39m sets track power and broadcasts the requested state[32m 1[2mms[22m[39m
+[31m       [31m×[31m updates local state immediately and sends the drive command after the throttle interval[39m[32m 4[2mms[22m[39m
+[31m       [31m×[31m sends only the most recent pending drive command for one locomotive[39m[32m 1[2mms[22m[39m
+       [32m✓[39m cancels a pending drive when emergency stop is requested[32m 0[2mms[22m[39m
+     [32m✓[39m sets a locomotive function and broadcasts the resulting state[32m 0[2mms[22m[39m
+     [32m✓[39m sets a locomotive function and broadcasts the resulting state[32m 0[2mms[22m[39m
+     [32m✓[39m toggles a locomotive function based on the current state[32m 0[2mms[22m[39m
+     [32m✓[39m sets turnout state using the corresponding port[32m 0[2mms[22m[39m
+     [32m✓[39m sets turnout state using the corresponding port[32m 0[2mms[22m[39m
+     [32m✓[39m uses the default turnout pulse duration[32m 0[2mms[22m[39m
+     [32m✓[39m sends the global stop command[32m 0[2mms[22m[39m
+       [32m✓[39m replies with the CV result after a successful read[32m 0[2mms[22m[39m
+       [32m✓[39m replies with a nack when reading a CV fails[32m 0[2mms[22m[39m
+       [32m✓[39m replies with the written value after a successful write[32m 0[2mms[22m[39m
+       [32m✓[39m replies with a nack when writing a CV fails[32m 0[2mms[22m[39m
+     [32m✓[39m ignores unsupported programming.command.pom.cv.read commands[32m 0[2mms[22m[39m
+     [32m✓[39m ignores unsupported programming.command.pom.cv.write commands[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/providers.spec.ts[2m:33:2[22m[2m > [22mcreateProviders[2m > [22muses the supplied configuration[32m 2[2mms[22m[39m
+ [32m✓[39m src/bootstrap/providers.spec.ts[2m:42:2[22m[2m > [22mcreateProviders[2m > [22mcreates the application provider graph[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/providers.spec.ts[2m:55:2[22m[2m > [22mcreateProviders[2m > [22mcreates the HTTP and logging infrastructure[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/providers.spec.ts[2m:64:2[22m[2m > [22mcreateProviders[2m > [22mloads configuration when no override is supplied[32m 1[2mms[22m[39m
+ [32m✓[39m src/bootstrap/providers.spec.ts[2m:76:2[22m[2m > [22mcreateProviders[2m > [22mdoes not load configuration when an override is supplied[32m 0[2mms[22m[39m
+ [32m✓[39m src/bootstrap/providers.spec.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/handler/client-message-handler.spec.ts[2m:113:3[22m[2m > [22mClientMessageHandler[2m > [22mlocomotive drive[2m > [22mupdates local state immediately and sends the drive command after the throttle interval
+[31m[1mAssertionError[22m: expected "vi.fn()" to be called with arguments: [ 5, 0.5, 'REV' ][90m
+
+Received:
+
+[1m  1st vi.fn() call:
+
+[22m[2m  [[22m
+[2m    5,[22m
+[32m-   0.5,[90m
+[31m+   undefined,[90m
+[2m    "REV",[22m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+[36m [2m❯[22m src/handler/client-message-handler.spec.ts:[2m133:33[22m[39m
+    [90m131|[39m    )[33m;[39m
+    [90m132|[39m
+    [90m133|[39m    [34mexpect[39m(locoManager[33m.[39msetSpeed)[33m.[39m[34mtoHaveBeenCalledWith[39m([34m5[39m[33m,[39m [34m0.5[39m[33m,[39m [32m'REV'[39m)[33m;[39m
+    [90m   |[39m                                 [31m^[39m
+    [90m134|[39m
+    [90m135|[39m    [34mexpect[39m(z21Service[33m.[39msetLocoDrive)[33m.[39mnot[33m.[39m[34mtoHaveBeenCalled[39m()[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/handler/client-message-handler.spec.ts[2m:153:3[22m[2m > [22mClientMessageHandler[2m > [22mlocomotive drive[2m > [22msends only the most recent pending drive command for one locomotive
+[31m[1mAssertionError[22m: expected "vi.fn()" to be called with arguments: [ 5, 0.8, 'REV' ][90m
+
+Received:
+
+[1m  1st vi.fn() call:
+
+[22m[2m  [[22m
+[2m    5,[22m
+[32m-   0.8,[90m
+[31m+   undefined,[90m
+[2m    "REV",[22m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+[36m [2m❯[22m src/handler/client-message-handler.spec.ts:[2m182:36[22m[39m
+    [90m180|[39m    [34mexpect[39m(z21Service[33m.[39msetLocoDrive)[33m.[39m[34mtoHaveBeenCalledOnce[39m()[33m;[39m
+    [90m181|[39m
+    [90m182|[39m    [34mexpect[39m(z21Service[33m.[39msetLocoDrive)[33m.[39m[34mtoHaveBeenCalledWith[39m([34m5[39m[33m,[39m [34m0.8[39m[33m,[39m [32m'REV'[39m)[33m;[39m
+    [90m   |[39m                                    [31m^[39m
+    [90m183|[39m   })[33m;[39m
+    [90m184|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m9 passed[39m[22m[90m (10)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m112 passed[39m[22m[90m (114)[39m
+[2m   Start at [22m 10:59:11
+[2m   Duration [22m 923ms[2m (transform 2.03s, setup 0ms, import 3.65s, tests 179ms, environment 1ms)[22m
+
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/handler/client-message-handler.spec.ts[2m:113:3[22m[2m > [22mClientMessageHandler[2m > [22mlocomotive drive[2m > [22mupdates local state immediately and sends the drive command after the throttle interval
+[31m[1mAssertionError[22m: expected "vi.fn()" to be called with arguments: [ 5, 0.5, 'REV' ][90m
+
+Received:
+
+[1m  1st vi.fn() call:
+
+[22m[2m  [[22m
+[2m    5,[22m
+[32m-   0.5,[90m
+[31m+   undefined,[90m
+[2m    "REV",[22m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+[36m [2m❯[22m src/handler/client-message-handler.spec.ts:[2m133:33[22m[39m
+    [90m131|[39m    )[33m;[39m
+    [90m132|[39m
+    [90m133|[39m    [34mexpect[39m(locoManager[33m.[39msetSpeed)[33m.[39m[34mtoHaveBeenCalledWith[39m([34m5[39m[33m,[39m [34m0.5[39m[33m,[39m [32m'REV'[39m)[33m;[39m
+    [90m   |[39m                                 [31m^[39m
+    [90m134|[39m
+    [90m135|[39m    [34mexpect[39m(z21Service[33m.[39msetLocoDrive)[33m.[39mnot[33m.[39m[34mtoHaveBeenCalled[39m()[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/handler/client-message-handler.spec.ts[2m:153:3[22m[2m > [22mClientMessageHandler[2m > [22mlocomotive drive[2m > [22msends only the most recent pending drive command for one locomotive
+[31m[1mAssertionError[22m: expected "vi.fn()" to be called with arguments: [ 5, 0.8, 'REV' ][90m
+
+Received:
+
+[1m  1st vi.fn() call:
+
+[22m[2m  [[22m
+[2m    5,[22m
+[32m-   0.8,[90m
+[31m+   undefined,[90m
+[2m    "REV",[22m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+[36m [2m❯[22m src/handler/client-message-handler.spec.ts:[2m182:36[22m[39m
+    [90m180|[39m    [34mexpect[39m(z21Service[33m.[39msetLocoDrive)[33m.[39m[34mtoHaveBeenCalledOnce[39m()[33m;[39m
+    [90m181|[39m
+    [90m182|[39m    [34mexpect[39m(z21Service[33m.[39msetLocoDrive)[33m.[39m[34mtoHaveBeenCalledWith[39m([34m5[39m[33m,[39m [34m0.8[39m[33m,[39m [32m'REV'[39m)[33m;[39m
+    [90m   |[39m                                    [31m^[39m
+    [90m183|[39m   })[33m;[39m
+    [90m184|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m9 passed[39m[22m[90m (10)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m112 passed[39m[22m[90m (114)[39m
+[2m   Start at [22m 10:59:11
+[2m   Duration [22m 929ms[2m (transform 2.03s, setup 0ms, import 3.65s, tests 179ms, environment 1ms)[22m
+
+[1m[7m[35m HTML [39m[27m[22m [35mReport is generated[39m
+[2m       You can run [22m[1mnpx vite preview --outDir ../../test-result/apps/z21-server[22m[2m to see the test results.[22m
+
+[2m> [22m[2mnx run[22m z21-ui:test
+
+[37mUsing Vitest configuration file: D:\dev\src\application-platform\apps\z21-ui\vitest.config.mts[39m
+[33m❯[39m Building...
+[32m✔[39m Building...
+[37mApplication bundle generation complete. [3.224 seconds] - 2026-10-01T08:59:11.056Z
+[39m
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mD:/dev/src/application-platform[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90mD:/dev/src/application-platform[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/i18n/i18n.spec.ts[2m:11:2[22m[2m > [22mi18nTextModules[2m > [22mshould be defined[32m 2[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/i18n/i18n.spec.ts[2m:15:2[22m[2m > [22mi18nTextModules[2m > [22mshould be an object[32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/i18n/i18n.spec.ts[2m:19:2[22m[2m > [22mi18nTextModules[2m > [22mshould be empty or contain expected structure[32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/i18n/i18n.spec.ts[2m:26:2[22m[2m > [22mi18nTextModules[2m > [22mshould export from index[32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/i18n/i18n.spec.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.routes.spec.ts[2m:11:2[22m[2m > [22mappRoutes[2m > [22mshould be an array[32m 2[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.routes.spec.ts[2m:15:2[22m[2m > [22mappRoutes[2m > [22mshould be of type Route[][32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.routes.spec.ts[2m:22:2[22m[2m > [22mappRoutes[2m > [22mshould export routes from module[32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.routes.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/z21-ui-store.service.spec.ts[2m:18:2[22m[2m > [22mZ21UiStore[2m > [22mupdates powerOn when receiving system.message.trackpower messages[32m 2[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/z21-ui-store.service.spec.ts[2m:28:2[22m[2m > [22mZ21UiStore[2m > [22mapplies loco state to ui when addr matches selectedAddr and not dragging[32m 1[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/z21-ui-store.service.spec.ts[2m:43:2[22m[2m > [22mZ21UiStore[2m > [22mdoes not apply loco state when addr does not match selectedAddr[32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/z21-ui-store.service.spec.ts[2m:58:2[22m[2m > [22mZ21UiStore[2m > [22mignores loco updates when draggingSpeed is true[32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/z21-ui-store.service.spec.ts[2m:73:2[22m[2m > [22mZ21UiStore[2m > [22mconverts step values to ui speed and clamps extremes correctly[32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/z21-ui-store.service.spec.ts[2m:99:2[22m[2m > [22mZ21UiStore[2m > [22mreplaces functions mapping when a loco state message is received[32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/z21-ui-store.service.spec.ts[2m:113:2[22m[2m > [22mZ21UiStore[2m > [22mignores switching.message.turnout.state messages without side effects[32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/z21-ui-store.service.spec.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.config.spec.ts[2m:11:2[22m[2m > [22mappConfig[2m > [22mshould be defined[32m 2[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.config.spec.ts[2m:15:2[22m[2m > [22mappConfig[2m > [22mshould be of type ApplicationConfig[32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.config.spec.ts[2m:20:2[22m[2m > [22mappConfig[2m > [22mshould have providers array[32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.config.spec.ts[2m:24:2[22m[2m > [22mappConfig[2m > [22mshould include zone-less change detection provider[32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.config.spec.ts[2m:31:2[22m[2m > [22mappConfig[2m > [22mshould include router provider[32m 0[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.config.spec.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/ws-client.service.spec.ts[2m:49:2[22m[2m > [22mWsClientService[2m > [22msends hello message on open with correct protocol version and clientName[32m 16[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/ws-client.service.spec.ts[2m:65:2[22m[2m > [22mWsClientService[2m > [22mdoes not call underlying WebSocket.send when socket is not open[32m 2[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/ws-client.service.spec.ts[2m:89:2[22m[2m > [22mWsClientService[2m > [22mserializes messages when sending over an open socket[32m 2[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/ws-client.service.spec.ts[2m:99:2[22m[2m > [22mWsClientService[2m > [22minvokes registered handlers for incoming messages and updates lastMessage signal[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/ws-client.service.spec.ts[2m:123:2[22m[2m > [22mWsClientService[2m > [22mrequest resolves when a matching programming.replay.cv.result is received[32m 2[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/ws-client.service.spec.ts[2m:139:2[22m[2m > [22mWsClientService[2m > [22mrequest rejects when a matching programming.replay.cv.nack is received[32m 2[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/ws-client.service.spec.ts[2m:153:2[22m[2m > [22mWsClientService[2m > [22mrequest times out if no response is received within timeoutMs[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/ws-client.service.spec.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 33[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:75:2[22m[2m > [22mAppComponent[2m > [22mshould create the app[32m 35[2mms[22m[39m
+ [31m×[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:80:2[22m[2m > [22mAppComponent[2m > [22mshould set speed signal and send loco.command.drive when websocket is open[32m 8[2mms[22m[39m
+[31m   → expected undefined to be 69 // Object.is equality[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:109:2[22m[2m > [22mAppComponent[2m > [22mshould not send messages when websocket is not open[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:125:2[22m[2m > [22mAppComponent[2m > [22mshould send function set command with correct payload[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:144:2[22m[2m > [22mAppComponent[2m > [22mshould send turnout command including pulseMs[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:163:2[22m[2m > [22mAppComponent[2m > [22mshould register ws onMessage handler and update store when a server message is received[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:187:2[22m[2m > [22mAppComponent[2m > [22mshould toggle power and send commands when websocket is open[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:208:2[22m[2m > [22mAppComponent[2m > [22mupdateFromServer handles loco.message.state updating when addr matches and draggingSpeed false[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:224:2[22m[2m > [22mAppComponent[2m > [22mupdateFromServer does not update speed when draggingSpeed is true[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:237:2[22m[2m > [22mAppComponent[2m > [22mreadCv sets cvValue on success and clears cvError[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:251:2[22m[2m > [22mAppComponent[2m > [22mreadCv sets cvError on failure and clears cvValue[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:261:2[22m[2m > [22mAppComponent[2m > [22mwriteCv guards against null cvValue[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:272:2[22m[2m > [22mAppComponent[2m > [22mwriteCv clears cvError on success and reports errors on failure[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:288:2[22m[2m > [22mAppComponent[2m > [22msendEStop emits a loco.command.eStop message[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:305:2[22m[2m > [22mAppComponent[2m > [22msetLocoNumber and draggingSpeed update store signals[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:315:2[22m[2m > [22mAppComponent[2m > [22mnumericKeySort orders numeric keys and prefers non-numeric before numeric[32m 3[2mms[22m[39m
+ [31m❯[39m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts [2m([22m[2m16 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 99[2mms[22m[39m
+     [32m✓[39m should create the app[32m 35[2mms[22m[39m
+[31m     [31m×[31m should set speed signal and send loco.command.drive when websocket is open[39m[32m 8[2mms[22m[39m
+     [32m✓[39m should not send messages when websocket is not open[32m 5[2mms[22m[39m
+     [32m✓[39m should send function set command with correct payload[32m 5[2mms[22m[39m
+     [32m✓[39m should send turnout command including pulseMs[32m 4[2mms[22m[39m
+     [32m✓[39m should register ws onMessage handler and update store when a server message is received[32m 4[2mms[22m[39m
+     [32m✓[39m should toggle power and send commands when websocket is open[32m 4[2mms[22m[39m
+     [32m✓[39m updateFromServer handles loco.message.state updating when addr matches and draggingSpeed false[32m 4[2mms[22m[39m
+     [32m✓[39m updateFromServer does not update speed when draggingSpeed is true[32m 5[2mms[22m[39m
+     [32m✓[39m readCv sets cvValue on success and clears cvError[32m 4[2mms[22m[39m
+     [32m✓[39m readCv sets cvError on failure and clears cvValue[32m 3[2mms[22m[39m
+     [32m✓[39m writeCv guards against null cvValue[32m 3[2mms[22m[39m
+     [32m✓[39m writeCv clears cvError on success and reports errors on failure[32m 3[2mms[22m[39m
+     [32m✓[39m sendEStop emits a loco.command.eStop message[32m 3[2mms[22m[39m
+     [32m✓[39m setLocoNumber and draggingSpeed update store signals[32m 3[2mms[22m[39m
+     [32m✓[39m numericKeySort orders numeric keys and prefers non-numeric before numeric[32m 3[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:80:2[22m[2m > [22mAppComponent[2m > [22mshould set speed signal and send loco.command.drive when websocket is open
+[31m[1mAssertionError[22m: expected undefined to be 69 // Object.is equality[39m
+
+[32m- Expected:[39m
+69
+
+[31m+ Received:[39m
+undefined
+
+[36m [2m❯[22m apps/z21-ui/src/app/app.component.spec.ts:[2m105:30[22m[39m
+    [90m103|[39m   [34mexpect[39m(send[33m.[39mpayload[33m.[39maddr)[33m.[39m[34mtoBe[39m(comp[33m.[39mstore[33m.[39m[34mselectedAddr[39m())[33m;[39m
+    [90m104|[39m   [90m// speed should be 0..126 rounded[39m
+    [90m105|[39m   [34mexpect[39m(send[33m.[39mpayload[33m.[39mspeed)[33m.[39m[34mtoBe[39m([33mMath[39m[33m.[39m[34mround[39m([34m0.55[39m [33m*[39m [34m126[39m))[33m;[39m
+    [90m   |[39m                              [31m^[39m
+    [90m106|[39m   [34mexpect[39m(send[33m.[39mpayload[33m.[39mdir)[33m.[39m[34mtoBe[39m(comp[33m.[39mstore[33m.[39m[34mdir[39m())[33m;[39m
+    [90m107|[39m  })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m5 passed[39m[22m[90m (6)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m41 passed[39m[22m[90m (42)[39m
+[2m   Start at [22m 10:59:11
+[2m   Duration [22m 1.99s[2m (transform 492ms, setup 2.16s, import 778ms, tests 147ms, environment 4.99s)[22m
+
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m [30m[45m z21-ui [49m[39m apps/z21-ui/src/app/app.component.spec.ts[2m:80:2[22m[2m > [22mAppComponent[2m > [22mshould set speed signal and send loco.command.drive when websocket is open
+[31m[1mAssertionError[22m: expected undefined to be 69 // Object.is equality[39m
+
+[32m- Expected:[39m
+69
+
+[31m+ Received:[39m
+undefined
+
+[36m [2m❯[22m apps/z21-ui/src/app/app.component.spec.ts:[2m105:30[22m[39m
+    [90m103|[39m   [34mexpect[39m(send[33m.[39mpayload[33m.[39maddr)[33m.[39m[34mtoBe[39m(comp[33m.[39mstore[33m.[39m[34mselectedAddr[39m())[33m;[39m
+    [90m104|[39m   [90m// speed should be 0..126 rounded[39m
+    [90m105|[39m   [34mexpect[39m(send[33m.[39mpayload[33m.[39mspeed)[33m.[39m[34mtoBe[39m([33mMath[39m[33m.[39m[34mround[39m([34m0.55[39m [33m*[39m [34m126[39m))[33m;[39m
+    [90m   |[39m                              [31m^[39m
+    [90m106|[39m   [34mexpect[39m(send[33m.[39mpayload[33m.[39mdir)[33m.[39m[34mtoBe[39m(comp[33m.[39mstore[33m.[39m[34mdir[39m())[33m;[39m
+    [90m107|[39m  })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m5 passed[39m[22m[90m (6)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m41 passed[39m[22m[90m (42)[39m
+[2m   Start at [22m 10:59:11
+[2m   Duration [22m 2.00s[2m (transform 492ms, setup 2.16s, import 778ms, tests 147ms, environment 4.99s)[22m
+
+[1m[7m[35m HTML [39m[27m[22m [35mReport is generated[39m
+[2m       You can run [22m[1mnpx vite preview --outDir test-result/apps/z21-ui[22m[2m to see the test results.[22m
+
+[2m[31m[39m[22m
+  Run duration:      6.8s
+  Cache:             29/29 hit (100%)
+  Critical path:     6.7s (1 task)
+  Recoverable time:  154ms (2% of the run)

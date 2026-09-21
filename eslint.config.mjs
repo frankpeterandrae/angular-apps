@@ -338,7 +338,7 @@ export default [
 	},
 
 	// -----------------------------
-	// Type-aware rules (nur server + libs; UI Apps bleiben schnell)
+	// Type-aware rules
 	//
 	...tseslint.config({
 		files: ['apps/**/*.ts', 'libs/**/*.ts'],
@@ -352,6 +352,7 @@ export default [
 		},
 		rules: {
 			'@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
+
 			'@typescript-eslint/no-floating-promises': 'error',
 			'@typescript-eslint/no-misused-promises': 'error',
 			'@typescript-eslint/await-thenable': 'error',

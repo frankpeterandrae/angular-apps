@@ -22,18 +22,18 @@
 		(pointercancel)="draggingSpeed(false)"
 		(input)="setSpeed(+$any($event.target).value)"
 	/>
-	<button (click)="sendEStop()">Stop</button>
-	<button (click)="store.dir.set(store.dir() === 'FWD' ? 'REV' : 'FWD')">Dir: {{ store.dir() }}</button>
+	<button id="loco-estop" (click)="sendEStop()">Stop</button>
+	<button id="loco-direction" (click)="store.dir.set(store.dir() === 'FWD' ? 'REV' : 'FWD')">>Dir: {{ store.dir() }}</button>
 	@for (fn of store.functions() | keyvalue: numericKeySort; track fn.key) {
-		<button (click)="sendFn(+fn.key, !fn.value)">F{{ fn.key }}: {{ fn.value }}</button>
+		<button [id]="'loco-function-' + fn.key" (click)="sendFn(+fn.key, !fn.value)">F{{ fn.key }}: {{ fn.value }}</button>
 	}
 </div>
 
 <div style="display: flex; gap: 12px; align-items: center; margin: 12px 0">
 	<label for="turnout">Weiche</label>
 	<input id="turnout" type="number" [value]="store.turnoutAddr()" (input)="store.turnoutAddr.set(+$any($event.target).value)" />
-	<button (click)="sendTurnout(TurnoutState.STRAIGHT)">Gerade</button>
-	<button (click)="sendTurnout(TurnoutState.DIVERGING)">Abzweig</button>
+	<button id="turnout-straight" (click)="sendTurnout(TurnoutState.STRAIGHT)">Gerade</button>
+	<button id="turnout-diverging" (click)="sendTurnout(TurnoutState.DIVERGING)">Abzweig</button>
 </div>
 
 <div style="display: flex; gap: 12px; align-items: center; margin: 12px 0">
@@ -41,12 +41,16 @@
 	<input id="cv" type="number" [value]="cvAddress()" (input)="cvAddress.set(+$any($event.target).value)" />
 	<label for="cvValue">Wert</label>
 	<input id="cvValue" type="number" [value]="cvValue()" (input)="cvValue.set(+$any($event.target).value)" />
-	<button (click)="readCv()">Lesen</button>
-	<button (click)="writeCv()">Schreiben</button>
+	<button id="cv-read" (click)="readCv()">Lesen</button>
+	<button id="cv-write" (click)="writeCv()">Schreiben</button>
+
+	@if (cvError()) {
+		<span id="cv-error">{{ cvError() }}</span>
+	}
 </div>
 
 <div style="display: flex; gap: 12px; align-items: center; margin: 12px 0">
-	<button (click)="togglePower()">
+	<button id="track-power" (click)="togglePower()">
 		Power
 		@if (store.powerOn()) {
 			ON

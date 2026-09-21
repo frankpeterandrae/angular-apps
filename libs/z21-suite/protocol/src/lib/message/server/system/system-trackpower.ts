@@ -3,11 +3,11 @@
  * All rights reserved.
  */
 
-import { PowerPayload } from '@application-platform/z21-shared';
+import type { PowerPayload } from '@application-platform/z21-shared';
 
 import type { Message } from '../../message-types';
 
 /**
- * Reports track power state and optional fault flags.
+ * Reports the current track power and fault state.
  */
 export type SystemTrackPower = Message<'system', 'trackpower', PowerPayload>;

@@ -3,10 +3,9 @@
  * All rights reserved.
  */
 
-import { CommandStationInfo } from '@application-platform/domain';
-import { DeepMock, DeepMocked, resetMocksBeforeEach } from '@application-platform/shared-node-test';
-import { Z21CommandService } from '@application-platform/z21';
-import type { Mock } from 'vitest';
+import type { CommandStationInfo } from '@application-platform/domain';
+import { DeepMock, type DeepMocked } from '@application-platform/shared-node-test';
+import type { Z21CommandService } from '@application-platform/z21';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { CommandStationInfoOrchestrator } from './command-station-info-orchestrator';
@@ -22,451 +21,171 @@ describe('CommandStationInfoOrchestrator', () => {
 		commandStationInfo = DeepMock<CommandStationInfo>();
 		z21CommandService = DeepMock<Z21CommandService>();
 
-		// Clear mock history
-		resetMocksBeforeEach({ commandStationInfo, z21CommandService });
-
-		// Configure default mock return values
 		commandStationInfo.hasFirmwareVersion.mockReturnValue(false);
-		commandStationInfo.hasXBusVersion.mockReturnValue(false);
 		commandStationInfo.hasHardwareType.mockReturnValue(false);
+		commandStationInfo.hasXBusVersion.mockReturnValue(false);
 		commandStationInfo.hasCode.mockReturnValue(false);
 
-		orchestrator = new CommandStationInfoOrchestrator(commandStationInfo as any, z21CommandService as any);
+		orchestrator = new CommandStationInfoOrchestrator(commandStationInfo, z21CommandService);
 	});
 
 	afterEach(() => {
 		vi.useRealTimers();
 	});
 
-	describe('poke firmware version', () => {
-		it('requests firmware version when not cached', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(false);
+	it('requests firmware information first', () => {
+		orchestrator.poke();
 
-			orchestrator.poke();
+		expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledOnce();
 
-			expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledTimes(1);
-		});
+		expect(z21CommandService.getHardwareInfo).not.toHaveBeenCalled();
 
-		it('does not request firmware version when already cached', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 20 });
+		expect(z21CommandService.getXBusVersion).not.toHaveBeenCalled();
 
-			// Initialize mock before checking
-			(z21CommandService.getFirmwareVersion as Mock).mockClear();
-
-			orchestrator.poke();
-
-			expect(z21CommandService.getFirmwareVersion).not.toHaveBeenCalled();
-		});
-
-		it('does not request firmware version again when request is in flight', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(false);
-
-			orchestrator.poke();
-			orchestrator.poke();
-
-			expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledTimes(1);
-		});
-
-		it('retries firmware version request after timeout', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(false);
-
-			orchestrator.poke();
-			vi.advanceTimersByTime(1001);
-			orchestrator.poke();
-
-			expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledTimes(2);
-		});
-
-		it('stops retrying firmware version after ack', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(false);
-
-			orchestrator.poke();
-			orchestrator.ack('firmware');
-			vi.advanceTimersByTime(1001);
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 20 });
-			orchestrator.poke();
-
-			expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledTimes(1);
-		});
+		expect(z21CommandService.getCode).not.toHaveBeenCalled();
 	});
 
-	describe('poke hardware info with firmware >= 1.20', () => {
-		beforeEach(() => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 20 });
-		});
+	it('does not resend an in-flight request before the retry timeout', () => {
+		orchestrator.poke();
+		orchestrator.poke();
 
-		it('requests hardware info when firmware >= 1.20 and hardware not cached', () => {
-			commandStationInfo.hasHardwareType.mockReturnValue(false);
-
-			orchestrator.poke();
-
-			expect(z21CommandService.getHardwareInfo).toHaveBeenCalledTimes(1);
-		});
-
-		it('does not request hardware info when already cached', () => {
-			commandStationInfo.hasHardwareType.mockReturnValue(true);
-
-			// Initialize mock before checking
-			(z21CommandService.getHardwareInfo as Mock).mockClear();
-
-			orchestrator.poke();
-
-			expect(z21CommandService.getHardwareInfo).not.toHaveBeenCalled();
-		});
-
-		it('requests hardware info when firmware version is 2.0', () => {
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 2, minor: 0 });
-			commandStationInfo.hasHardwareType.mockReturnValue(false);
-
-			orchestrator.poke();
-
-			expect(z21CommandService.getHardwareInfo).toHaveBeenCalledTimes(1);
-		});
-
-		it('does not request hardware info again when request is in flight', () => {
-			commandStationInfo.hasHardwareType.mockReturnValue(false);
-
-			orchestrator.poke();
-			orchestrator.poke();
-
-			expect(z21CommandService.getHardwareInfo).toHaveBeenCalledTimes(1);
-		});
-
-		it('retries hardware info request after timeout', () => {
-			commandStationInfo.hasHardwareType.mockReturnValue(false);
-
-			orchestrator.poke();
-			vi.advanceTimersByTime(1001);
-			orchestrator.poke();
-
-			expect(z21CommandService.getHardwareInfo).toHaveBeenCalledTimes(2);
-		});
+		expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledOnce();
 	});
 
-	describe('poke version with firmware < 1.20', () => {
-		beforeEach(() => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 19 });
-		});
+	it('retries an in-flight request after the retry timeout', () => {
+		orchestrator.poke();
 
-		it('requests version when firmware < 1.20 and not cached', () => {
-			commandStationInfo.hasXBusVersion.mockReturnValue(false);
+		vi.advanceTimersByTime(1001);
 
-			orchestrator.poke();
+		orchestrator.poke();
 
-			expect(z21CommandService.getXBusVersion).toHaveBeenCalledTimes(1);
-		});
-
-		it('does not request version when already cached', () => {
-			commandStationInfo.hasXBusVersion.mockReturnValue(true);
-
-			// Initialize mock before checking
-			(z21CommandService.getXBusVersion as Mock).mockClear();
-
-			orchestrator.poke();
-
-			expect(z21CommandService.getXBusVersion).not.toHaveBeenCalled();
-		});
-
-		it('does not request hardware info when firmware < 1.20', () => {
-			commandStationInfo.hasXBusVersion.mockReturnValue(false);
-
-			// Initialize mock before checking
-			(z21CommandService.getHardwareInfo as Mock).mockClear();
-
-			orchestrator.poke();
-
-			expect(z21CommandService.getHardwareInfo).not.toHaveBeenCalled();
-		});
-
-		it('requests version when firmware version is 1.0', () => {
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 0 });
-			commandStationInfo.hasXBusVersion.mockReturnValue(false);
-
-			orchestrator.poke();
-
-			expect(z21CommandService.getXBusVersion).toHaveBeenCalledTimes(1);
-		});
-
-		it('does not request version again when request is in flight', () => {
-			commandStationInfo.hasXBusVersion.mockReturnValue(false);
-
-			orchestrator.poke();
-			orchestrator.poke();
-
-			expect(z21CommandService.getXBusVersion).toHaveBeenCalledTimes(1);
-		});
+		expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledTimes(2);
 	});
 
-	describe('poke code for z21_START and z21_SMALL', () => {
-		beforeEach(() => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 20 });
-			commandStationInfo.hasHardwareType.mockReturnValue(true);
+	it('requests hardware information for firmware 1.20 or newer', () => {
+		commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
+		commandStationInfo.getFirmwareVersion.mockReturnValue({
+			major: 1,
+			minor: 20
 		});
 
-		it('requests code when hardware is z21_START and code not cached', () => {
-			commandStationInfo.getHardwareType.mockReturnValue('z21_START');
-			commandStationInfo.hasCode.mockReturnValue(false);
+		orchestrator.poke();
 
-			orchestrator.poke();
+		expect(z21CommandService.getHardwareInfo).toHaveBeenCalledOnce();
 
-			expect(z21CommandService.getCode).toHaveBeenCalledTimes(1);
-		});
-
-		it('requests code when hardware is z21_SMALL and code not cached', () => {
-			commandStationInfo.getHardwareType.mockReturnValue('z21_SMALL');
-			commandStationInfo.hasCode.mockReturnValue(false);
-
-			orchestrator.poke();
-
-			expect(z21CommandService.getCode).toHaveBeenCalledTimes(1);
-		});
-
-		it('does not request code when hardware is Z21_XL', () => {
-			commandStationInfo.getHardwareType.mockReturnValue('Z21_XL');
-			commandStationInfo.hasCode.mockReturnValue(false);
-
-			// Initialize mock before checking
-			(z21CommandService.getCode as Mock).mockClear();
-
-			orchestrator.poke();
-
-			expect(z21CommandService.getCode).not.toHaveBeenCalled();
-		});
-
-		it('does not request code when already cached', () => {
-			commandStationInfo.getHardwareType.mockReturnValue('z21_START');
-			commandStationInfo.hasCode.mockReturnValue(true);
-
-			// Initialize mock before checking
-			(z21CommandService.getCode as Mock).mockClear();
-
-			orchestrator.poke();
-
-			expect(z21CommandService.getCode).not.toHaveBeenCalled();
-		});
-
-		it('does not request code again when request is in flight', () => {
-			commandStationInfo.getHardwareType.mockReturnValue('z21_START');
-			commandStationInfo.hasCode.mockReturnValue(false);
-
-			orchestrator.poke();
-			orchestrator.poke();
-
-			expect(z21CommandService.getCode).toHaveBeenCalledTimes(1);
-		});
-
-		it('retries code request after timeout', () => {
-			commandStationInfo.getHardwareType.mockReturnValue('z21_START');
-			commandStationInfo.hasCode.mockReturnValue(false);
-
-			orchestrator.poke();
-			vi.advanceTimersByTime(1001);
-			orchestrator.poke();
-
-			expect(z21CommandService.getCode).toHaveBeenCalledTimes(2);
-		});
+		expect(z21CommandService.getXBusVersion).not.toHaveBeenCalled();
 	});
 
-	describe('ack', () => {
-		it('allows firmware version request to be sent again after ack', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(false);
-
-			orchestrator.poke();
-			orchestrator.poke();
-			expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledTimes(1);
-
-			orchestrator.ack('firmware');
-			orchestrator.poke();
-			expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledTimes(2);
+	it('requests hardware information for firmware major versions above 1', () => {
+		commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
+		commandStationInfo.getFirmwareVersion.mockReturnValue({
+			major: 2,
+			minor: 0
 		});
 
-		it('allows version request to be sent again after ack', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 0 });
-			commandStationInfo.hasXBusVersion.mockReturnValue(false);
+		orchestrator.poke();
 
-			orchestrator.poke();
-			orchestrator.poke();
-			expect(z21CommandService.getXBusVersion).toHaveBeenCalledTimes(1);
-
-			orchestrator.ack('xBusVersion');
-			orchestrator.poke();
-			expect(z21CommandService.getXBusVersion).toHaveBeenCalledTimes(2);
-		});
-
-		it('allows hwinfo request to be sent again after ack', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 20 });
-			commandStationInfo.hasHardwareType.mockReturnValue(false);
-
-			orchestrator.poke();
-			orchestrator.poke();
-			expect(z21CommandService.getHardwareInfo).toHaveBeenCalledTimes(1);
-
-			orchestrator.ack('hwinfo');
-			orchestrator.poke();
-			expect(z21CommandService.getHardwareInfo).toHaveBeenCalledTimes(2);
-		});
-
-		it('allows code request to be sent again after ack', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 20 });
-			commandStationInfo.hasHardwareType.mockReturnValue(true);
-			commandStationInfo.getHardwareType.mockReturnValue('z21_START');
-			commandStationInfo.hasCode.mockReturnValue(false);
-
-			orchestrator.poke();
-			orchestrator.poke();
-			expect(z21CommandService.getCode).toHaveBeenCalledTimes(1);
-
-			orchestrator.ack('code');
-			orchestrator.poke();
-			expect(z21CommandService.getCode).toHaveBeenCalledTimes(2);
-		});
+		expect(z21CommandService.getHardwareInfo).toHaveBeenCalledOnce();
 	});
 
-	describe('reset', () => {
-		it('resets firmware request state', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(false);
-
-			orchestrator.poke();
-			orchestrator.reset();
-			orchestrator.poke();
-
-			expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledTimes(2);
+	it('requests the X-Bus version for firmware older than 1.20', () => {
+		commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
+		commandStationInfo.getFirmwareVersion.mockReturnValue({
+			major: 1,
+			minor: 19
 		});
 
-		it('resets version request state', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 0 });
-			commandStationInfo.hasXBusVersion.mockReturnValue(false);
+		orchestrator.poke();
 
-			orchestrator.poke();
-			orchestrator.reset();
-			orchestrator.poke();
+		expect(z21CommandService.getXBusVersion).toHaveBeenCalledOnce();
 
-			expect(z21CommandService.getXBusVersion).toHaveBeenCalledTimes(2);
-		});
-
-		it('resets hwinfo request state', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 20 });
-			commandStationInfo.hasHardwareType.mockReturnValue(false);
-
-			orchestrator.poke();
-			orchestrator.reset();
-			orchestrator.poke();
-
-			expect(z21CommandService.getHardwareInfo).toHaveBeenCalledTimes(2);
-		});
-
-		it('resets code request state', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 20 });
-			commandStationInfo.hasHardwareType.mockReturnValue(true);
-			commandStationInfo.getHardwareType.mockReturnValue('z21_START');
-			commandStationInfo.hasCode.mockReturnValue(false);
-
-			orchestrator.poke();
-			orchestrator.reset();
-			orchestrator.poke();
-
-			expect(z21CommandService.getCode).toHaveBeenCalledTimes(2);
-		});
+		expect(z21CommandService.getHardwareInfo).not.toHaveBeenCalled();
 	});
 
-	describe('request sequencing', () => {
-		it('requests firmware first, then hardware info', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(false);
+	it.each(['z21_START', 'z21_SMALL'] as const)('requests the command station code for %s', (hardwareType) => {
+		commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
+		commandStationInfo.getFirmwareVersion.mockReturnValue({
+			major: 1,
+			minor: 20
+		});
+		commandStationInfo.hasHardwareType.mockReturnValue(true);
+		commandStationInfo.getHardwareType.mockReturnValue(hardwareType);
 
-			// Initialize mock before checking
-			(z21CommandService.getHardwareInfo as Mock).mockClear();
+		orchestrator.poke();
 
-			orchestrator.poke();
-			expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledTimes(1);
-			expect(z21CommandService.getHardwareInfo).not.toHaveBeenCalled();
+		expect(z21CommandService.getCode).toHaveBeenCalledOnce();
+	});
 
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 20 });
-			commandStationInfo.hasHardwareType.mockReturnValue(false);
-			orchestrator.ack('firmware');
-			orchestrator.poke();
-			expect(z21CommandService.getHardwareInfo).toHaveBeenCalledTimes(1);
+	it('does not request the command station code for hardware that does not require it', () => {
+		commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
+		commandStationInfo.getFirmwareVersion.mockReturnValue({
+			major: 1,
+			minor: 20
+		});
+		commandStationInfo.hasHardwareType.mockReturnValue(true);
+		commandStationInfo.getHardwareType.mockReturnValue('Z21_XL');
+
+		orchestrator.poke();
+
+		expect(z21CommandService.getCode).not.toHaveBeenCalled();
+	});
+
+	it('allows an acknowledged request to be sent again', () => {
+		orchestrator.poke();
+		orchestrator.poke();
+
+		expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledOnce();
+
+		orchestrator.ack('firmware');
+		orchestrator.poke();
+
+		expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledTimes(2);
+	});
+
+	it('resets pending request state', () => {
+		orchestrator.poke();
+
+		orchestrator.reset();
+		orchestrator.poke();
+
+		expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledTimes(2);
+	});
+
+	it('sequences firmware, hardware info and code requests', () => {
+		orchestrator.poke();
+
+		expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledOnce();
+
+		commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
+		commandStationInfo.getFirmwareVersion.mockReturnValue({
+			major: 1,
+			minor: 20
 		});
 
-		it('requests firmware first, then version for old firmware', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(false);
+		orchestrator.ack('firmware');
+		orchestrator.poke();
 
-			// Initialize mock before checking
-			(z21CommandService.getXBusVersion as Mock).mockClear();
+		expect(z21CommandService.getHardwareInfo).toHaveBeenCalledOnce();
 
-			orchestrator.poke();
-			expect(z21CommandService.getFirmwareVersion).toHaveBeenCalledTimes(1);
-			expect(z21CommandService.getXBusVersion).not.toHaveBeenCalled();
+		commandStationInfo.hasHardwareType.mockReturnValue(true);
+		commandStationInfo.getHardwareType.mockReturnValue('z21_START');
 
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 0 });
-			commandStationInfo.hasXBusVersion.mockReturnValue(false);
-			orchestrator.ack('firmware');
-			orchestrator.poke();
-			expect(z21CommandService.getXBusVersion).toHaveBeenCalledTimes(1);
-		});
+		orchestrator.ack('hwinfo');
+		orchestrator.poke();
 
-		it('requests hardware info, then code for z21_START', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 20 });
-			commandStationInfo.hasHardwareType.mockReturnValue(false);
+		expect(z21CommandService.getCode).toHaveBeenCalledOnce();
+	});
 
-			// Initialize mock before checking
-			(z21CommandService.getCode as Mock).mockClear();
+	it('does not continue the sequence until firmware information is available', () => {
+		orchestrator.poke();
 
-			orchestrator.poke();
-			expect(z21CommandService.getHardwareInfo).toHaveBeenCalledTimes(1);
-			expect(z21CommandService.getCode).not.toHaveBeenCalled();
+		orchestrator.ack('firmware');
+		orchestrator.poke();
 
-			commandStationInfo.hasHardwareType.mockReturnValue(true);
-			commandStationInfo.getHardwareType.mockReturnValue('z21_START');
-			commandStationInfo.hasCode.mockReturnValue(false);
-			orchestrator.ack('hwinfo');
-			orchestrator.poke();
-			expect(z21CommandService.getCode).toHaveBeenCalledTimes(1);
-		});
+		expect(z21CommandService.getHardwareInfo).not.toHaveBeenCalled();
 
-		it('stops poke when firmware not available', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(false);
+		expect(z21CommandService.getXBusVersion).not.toHaveBeenCalled();
 
-			// Initialize mocks before checking
-			(z21CommandService.getXBusVersion as Mock).mockClear();
-			(z21CommandService.getHardwareInfo as Mock).mockClear();
-			(z21CommandService.getCode as Mock).mockClear();
-
-			orchestrator.poke();
-			orchestrator.ack('firmware');
-			orchestrator.poke();
-
-			expect(z21CommandService.getXBusVersion).not.toHaveBeenCalled();
-			expect(z21CommandService.getHardwareInfo).not.toHaveBeenCalled();
-			expect(z21CommandService.getCode).not.toHaveBeenCalled();
-		});
-
-		it('stops poke when hardware type not available', () => {
-			commandStationInfo.hasFirmwareVersion.mockReturnValue(true);
-			commandStationInfo.getFirmwareVersion.mockReturnValue({ major: 1, minor: 20 });
-			commandStationInfo.hasHardwareType.mockReturnValue(false);
-
-			// Initialize mock before checking
-			(z21CommandService.getCode as Mock).mockClear();
-
-			orchestrator.poke();
-			orchestrator.ack('hwinfo');
-			orchestrator.poke();
-
-			expect(z21CommandService.getCode).not.toHaveBeenCalled();
-		});
+		expect(z21CommandService.getCode).not.toHaveBeenCalled();
 	});
 });

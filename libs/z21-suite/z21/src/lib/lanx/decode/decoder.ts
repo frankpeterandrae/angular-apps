@@ -5,48 +5,69 @@
 
 import type { LanXCommandKey, XHeader, Z21Event } from '@application-platform/z21-shared';
 
-import { resolveLanXCommand } from '../dispatch';
+import type { LanXCommandResolver } from '../dispatch';
 
-import { decodeLanXFirmwareVersionPayload } from './firmware-version';
-import { decodeLanXLocoInfoPayload } from './loco-info';
-import { decodeLanXCvNackPayload } from './programming/cv-nack';
-import { decodeLanXCvResultPayload } from './programming/cv-result';
-import { decodeLanXStatusChangedPayload } from './status-changed';
-import { decodeLanXStoppedPayload } from './stopped';
-import { decodeLanXTrackPowerPayload } from './track-power';
-import { decodeLanXTurnoutInfoPayload } from './turnout-info';
-import { decodeLanXVersionPayload } from './version';
+import { LanXFirmwareVersionDecoder } from './firmware-version';
+import { LanXLocoInfoDecoder } from './loco-info';
+import { LanXCvNackDecoder } from './programming/cv-nack';
+import { LanXCvResultDecoder } from './programming/cv-result';
+import { LanXStatusDecoder } from './status-changed';
+import { LanXStoppedDecoder } from './stopped';
+import { LanXTrackPowerDecoder } from './track-power';
+import { LanXTurnoutInfoDecoder } from './turnout-info';
+import { LanXVersionDecoder } from './version';
 
-export type LanXPayloadDecoder = (command: LanXCommandKey, payload: Uint8Array) => Z21Event[];
+type LanXPayloadDecoder = (command: LanXCommandKey, payload: Uint8Array) => Z21Event[];
 
-// Stepwise refactor: only LAN_X_LOCO_INFO is migrated for now.
+const firmwareVersionDecoder = new LanXFirmwareVersionDecoder();
+const locoInfoDecoder = new LanXLocoInfoDecoder();
+const cvNackDecoder = new LanXCvNackDecoder();
+const cvResultDecoder = new LanXCvResultDecoder();
+const statusDecoder = new LanXStatusDecoder();
+const stoppedDecoder = new LanXStoppedDecoder();
+const trackPowerDecoder = new LanXTrackPowerDecoder();
+const turnoutInfoDecoder = new LanXTurnoutInfoDecoder();
+const versionDecoder = new LanXVersionDecoder();
+
 const DECODERS: Partial<Record<LanXCommandKey, LanXPayloadDecoder>> = {
-	LAN_X_BC_PROGRAMMING_MODE: (cmd) => decodeLanXTrackPowerPayload(cmd),
-	LAN_X_BC_STOPPED: () => decodeLanXStoppedPayload(),
-	LAN_X_BC_TRACK_POWER_OFF: (cmd) => decodeLanXTrackPowerPayload(cmd),
-	LAN_X_BC_TRACK_POWER_ON: (cmd) => decodeLanXTrackPowerPayload(cmd),
-	LAN_X_BC_TRACK_SHORT_CIRCUIT: (cmd) => decodeLanXTrackPowerPayload(cmd),
-	LAN_X_CV_NACK: (cmd) => decodeLanXCvNackPayload(cmd),
-	LAN_X_CV_NACK_SC: (cmd) => decodeLanXCvNackPayload(cmd),
-	LAN_X_CV_RESULT: (_, payload) => decodeLanXCvResultPayload(payload),
-	LAN_X_GET_FIRMWARE_VERSION_ANSWER: (_, payload) => decodeLanXFirmwareVersionPayload(payload),
-	LAN_X_GET_VERSION_ANSWER: (_, payload) => decodeLanXVersionPayload(payload),
-	LAN_X_LOCO_INFO: (_, payload) => decodeLanXLocoInfoPayload(payload),
-	LAN_X_STATUS_CHANGED: (_, payload) => decodeLanXStatusChangedPayload(payload),
-	LAN_X_TURNOUT_INFO: (_, payload) => decodeLanXTurnoutInfoPayload(payload)
+	LAN_X_BC_PROGRAMMING_MODE: (cmd) => trackPowerDecoder.decode('LAN_X_BC_PROGRAMMING_MODE'),
+	LAN_X_BC_STOPPED: () => stoppedDecoder.decode(),
+	LAN_X_BC_TRACK_POWER_OFF: () => trackPowerDecoder.decode('LAN_X_BC_TRACK_POWER_OFF'),
+	LAN_X_BC_TRACK_POWER_ON: () => trackPowerDecoder.decode('LAN_X_BC_TRACK_POWER_ON'),
+	LAN_X_BC_TRACK_SHORT_CIRCUIT: () => trackPowerDecoder.decode('LAN_X_BC_TRACK_SHORT_CIRCUIT'),
+	LAN_X_CV_NACK: (cmd) => cvNackDecoder.decode(cmd),
+	LAN_X_CV_NACK_SC: (cmd) => cvNackDecoder.decode(cmd),
+	LAN_X_CV_RESULT: (_, payload) => cvResultDecoder.decode(payload),
+	LAN_X_GET_FIRMWARE_VERSION_ANSWER: (_, payload) => firmwareVersionDecoder.decode(payload),
+	LAN_X_GET_VERSION_ANSWER: (_, payload) => versionDecoder.decode(payload),
+	LAN_X_LOCO_INFO: (_, payload) => locoInfoDecoder.decode(payload),
+	LAN_X_STATUS_CHANGED: (_, payload) => statusDecoder.decode(payload),
+	LAN_X_TURNOUT_INFO: (_, payload) => turnoutInfoDecoder.decode(payload)
 };
 
 /**
- * Decodes the LAN X payload from raw X-Bus data.
- *
- * @param xHeader - The X-Bus header value.
- * @param payload - Raw X-Bus data bytes.
- *
- * @returns Array of Z21Event entries produced from the dataset.
+ * Decodes LAN-X payloads into higher-level Z21 events.
  */
-export function decodeLanXPayload(xHeader: XHeader, payload: Uint8Array): Z21Event[] {
-	const command = resolveLanXCommand(xHeader, payload);
-	const fn = DECODERS[command];
-	if (!fn) return [];
-	return fn(command, payload);
+export class LanXDecoder {
+	/**
+	 * Creates a LAN-X payload decoder.
+	 *
+	 * @param resolver - Resolver used to identify LAN-X commands.
+	 */
+	constructor(private readonly resolver: LanXCommandResolver) {}
+
+	/**
+	 * Decodes an X-Bus payload into higher-level Z21 events.
+	 *
+	 * @param xHeader - X-Bus header.
+	 * @param payload - X-Bus payload bytes.
+	 * @returns Events produced by the matching decoder.
+	 */
+	public decode(xHeader: XHeader, payload: Uint8Array): Z21Event[] {
+		const command = this.resolver.resolve(xHeader, payload);
+
+		const decoder = DECODERS[command];
+
+		return decoder?.(command, payload) ?? [];
+	}
 }

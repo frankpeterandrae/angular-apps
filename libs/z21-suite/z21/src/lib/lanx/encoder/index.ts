@@ -3,13 +3,7 @@
  * All rights reserved.
  */
 
-export * from './loco/drive';
-export * from './loco/estop';
-export * from './loco/function';
-export * from './loco/info';
-export * from './system/firmware-version';
-export * from './system/status';
-export * from './system/stop';
-export * from './system/track-power';
-export * from './system/version';
-export * from './trunout/turnout';
+export * from './loco/loco-encoder';
+export * from './programming/programming-encoder';
+export * from './system/system-encoder';
+export * from './turnout/turnout-encoder';
