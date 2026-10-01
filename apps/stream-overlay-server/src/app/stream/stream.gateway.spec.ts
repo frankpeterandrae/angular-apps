@@ -3,11 +3,11 @@
  * All rights reserved.
  */
 
-import { StreamEvent, StreamState } from '@application-platform/interfaces';
+import { type StreamState, StreamEvent } from '@application-platform/interfaces';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { WebSocket } from 'ws';
 
-import { StreamStateService } from './stream-state.service';
+import type { StreamStateService } from './stream-state.service';
 import { StreamGateway } from './stream.gateway';
 
 describe('StreamGateway', () => {

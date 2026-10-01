@@ -3,9 +3,9 @@
  * All rights reserved.
  */
 
-import { Planet } from './planet.model';
-import { Position3d } from './position.model';
-import { Star } from './star.model';
+import type { Planet } from './planet.model';
+import type { Position3d } from './position.model';
+import type { Star } from './star.model';
 
 export interface StarSystem {
 	id: string;

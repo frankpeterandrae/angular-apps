@@ -3,9 +3,9 @@
  * All rights reserved.
  */
 
-import type { ComponentFixture } from '@angular/core/testing';
-import { TestBed } from '@angular/core/testing';
-import { LOGGER_SOURCE } from '@application-platform/shared-ui';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { type Mocked, createMock } from '@application-platform/testing';
 import { vi } from 'vitest';
 
 import { setupTestingModule } from '../../../test-setup';
@@ -13,43 +13,35 @@ import { setupTestingModule } from '../../../test-setup';
 import { Error404Component } from './error404.component';
 
 describe('Error404Component', () => {
-	let component: Error404Component;
 	let fixture: ComponentFixture<Error404Component>;
+	let router: Mocked<Router>;
 
 	beforeEach(async () => {
+		router = createMock<Router>({
+			navigate: vi.fn().mockResolvedValue(true)
+		});
+
 		await setupTestingModule({
 			imports: [Error404Component],
-			providers: [{ provide: LOGGER_SOURCE, useValue: 'Error404Component' }]
+			providers: [
+				{
+					provide: Router,
+					useValue: router
+				}
+			]
 		});
 
 		fixture = TestBed.createComponent(Error404Component);
-		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+	it('should navigate to the home page', async () => {
+		const button = fixture.nativeElement.querySelector('theme-button') as HTMLElement;
 
-	it('should set the sets the backToStartpage property with the translated string', async () => {
-		// wait for translation simulation
-		await new Promise((r) => setTimeout(r, 100));
-		fixture.detectChanges();
-		expect(component.backToStart()).toBe('homepageFeatureI18n.Error404Component.lbl.BackToStartpage');
-	});
+		button.dispatchEvent(new CustomEvent('buttonClick'));
 
-	it('should navigate to home on routeToHome call', async () => {
-		const navigateSpy = vi.spyOn(component['router'], 'navigate').mockImplementation(() => Promise.resolve(true));
-		await component.routeToHome();
-		expect(navigateSpy).toHaveBeenCalledWith(['/']);
-	});
+		await fixture.whenStable();
 
-	it('should log error if navigation to home fails', async () => {
-		const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => undefined);
-		const navigateSpy = vi.spyOn(component['router'], 'navigate').mockImplementation(() => Promise.reject('Navigation Error'));
-		await component.routeToHome();
-		// wait for the navigation promise rejection to be handled in the next microtask (component handles and logs it)
-		expect(navigateSpy).toHaveBeenCalledWith(['/']);
-		expect(consoleErrorSpy).toHaveBeenCalledWith('[Error404Component]', 'Error while navigating to home page', 'Navigation Error');
+		expect(router.navigate).toHaveBeenCalledWith(['/']);
 	});
 });

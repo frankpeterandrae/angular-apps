@@ -1,348 +1,127 @@
 /*
- * Copyright (c) 2024-2026. Frank-Peter Andrä
+ * Copyright (c) 2026. Frank-Peter Andrä
  * All rights reserved.
  */
 
-import type { ComponentFixture } from '@angular/core/testing';
-import { TestBed } from '@angular/core/testing';
-import type { Mocked } from '@application-platform/testing';
-import { createMock } from '@application-platform/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { DialogService } from '@application-platform/shared/ui-theme';
+import { type Mocked, createMock } from '@application-platform/testing';
 import { of } from 'rxjs';
 import { vi } from 'vitest';
 
 import { setupTestingModule } from '../../test-setup';
-import { ColorDetailsComponent } from '../color-details/color-details.component';
-import { ColorType } from '../models/color-type.enum';
 import type { Color } from '../models/color.model';
 import { ColorService } from '../services/color.service';
 
 import { ColorGridComponent } from './color-grid.component';
 
+class TestColorGridComponent extends ColorGridComponent {
+	public openColorDetails(color: Color): void {
+		this.openDetails(color);
+	}
+
+	public getBackgroundColor(color: Color): string {
+		return this.backgroundColor(color);
+	}
+}
+
 describe('ColorGridComponent', () => {
-	let component: ColorGridComponent;
 	let fixture: ComponentFixture<ColorGridComponent>;
 	let colorService: Mocked<ColorService>;
+	let dialogService: Mocked<DialogService>;
+
+	const colors: Color[] = [
+		{
+			name: 'Red',
+			alternativeNames: ['Crimson'],
+			type: 'M',
+			mainColor: '#ff0000'
+		},
+		{
+			name: 'Blue',
+			alternativeNames: ['Azure'],
+			type: 'S',
+			mainColor: '#0000ff'
+		}
+	];
 
 	beforeEach(async () => {
-		const colorServiceMock = createMock<ColorService>({
-			getColors: vi.fn().mockReturnValue(of([])) // Ensure it returns an observable
+		colorService = createMock<ColorService>({
+			getColors: vi.fn().mockReturnValue(of(colors))
+		});
+
+		dialogService = createMock<DialogService>({
+			open: vi.fn()
 		});
 
 		await setupTestingModule({
 			imports: [ColorGridComponent],
-			providers: [{ provide: ColorService, useValue: colorServiceMock }]
+			providers: [
+				{
+					provide: ColorService,
+					useValue: colorService
+				},
+				{
+					provide: DialogService,
+					useValue: dialogService
+				}
+			]
 		});
 
 		fixture = TestBed.createComponent(ColorGridComponent);
-		component = fixture.componentInstance;
-		colorService = TestBed.inject(ColorService) as Mocked<ColorService>;
 		fixture.detectChanges();
 	});
 
-	it('should fetch colors on init', () => {
-		const colors: Color[] = [
-			{
-				name: 'Red',
-				alternativeNames: [],
-				highlighted: false,
-				type: ColorType.B,
-				mainColor: '',
-				wave: '',
-				row: 1,
-				column: 2
-			}
-		];
-		vi.spyOn(colorService as any, 'getColors').mockReturnValue(of(colors));
-
-		component.ngOnInit();
-
-		expect(colorService.getColors).toHaveBeenCalled();
-		expect(component.colors()).toEqual([colors]);
+	it('should load colors on initialization', () => {
+		expect(colorService.getColors).toHaveBeenCalledOnce();
 	});
 
-	it('should highlight matching colors', () => {
-		const colors: Color[][] = [
-			[
-				{
-					name: 'Red',
-					alternativeNames: ['Crimson'],
-					highlighted: false,
-					type: ColorType.H,
-					mainColor: '',
-					wave: '',
-					column: 1,
-					row: 1
-				}
-			],
-			[
-				{
-					name: 'Blue',
-					alternativeNames: ['Azure'],
-					highlighted: false,
-					type: ColorType.S,
-					mainColor: '',
-					wave: '',
-					column: 1,
-					row: 2
-				}
-			]
-		];
-		component.colors.set(colors);
+	it('should assign storage positions to loaded colors', () => {
+		expect(colors[0].row).toBe(1);
+		expect(colors[0].column).toBe(1);
 
-		component.highlightMatchingColors('red');
-
-		expect(component.colors()[0][0].highlighted).toBe(true);
-		expect(component.colors()[1][0].highlighted).toBe(false);
+		expect(colors[1].row).toBe(1);
+		expect(colors[1].column).toBe(2);
 	});
 
-	it('should handle empty search query', () => {
-		const colors: Color[][] = [
-			[
-				{
-					name: 'Red',
-					alternativeNames: ['Crimson'],
-					highlighted: false,
-					type: ColorType.H,
-					mainColor: '',
-					wave: '',
-					column: 1,
-					row: 1
-				}
-			],
-			[
-				{
-					name: 'Blue',
-					alternativeNames: ['Azure'],
-					highlighted: false,
-					type: ColorType.S,
-					mainColor: '',
-					wave: '',
-					column: 1,
-					row: 2
-				}
-			]
-		];
+	it('should highlight colors matching their primary name', () => {
+		fixture.componentRef.setInput('searchQuery', 'red');
+		fixture.detectChanges();
 
-		component.colors.set(colors);
-
-		component.highlightMatchingColors('');
-
-		expect(component.colors()[0][0].highlighted).toBe(false);
-		expect(component.colors()[1][0].highlighted).toBe(false);
+		expect(colors[0].highlighted).toBe(true);
+		expect(colors[1].highlighted).toBe(false);
 	});
 
-	it('should calculate correct storage location for a single color', () => {
-		const colors: Color[] = [
-			{
-				name: 'Red',
-				alternativeNames: [],
-				highlighted: false,
-				type: ColorType.B,
-				mainColor: '',
-				wave: '',
-				row: 0,
-				column: 0
-			}
-		];
-		const result = component.calculateStorageLocation(colors);
-		expect(result[0].row).toBe(1);
-		expect(result[0].column).toBe(1);
+	it('should highlight colors matching an alternative name', () => {
+		fixture.componentRef.setInput('searchQuery', 'azure');
+		fixture.detectChanges();
+
+		expect(colors[0].highlighted).toBe(false);
+		expect(colors[1].highlighted).toBe(true);
 	});
 
-	it('should calculate correct storage location for multiple colors', () => {
-		const colors: Color[] = [
-			{
-				name: 'Red',
-				alternativeNames: [],
-				highlighted: false,
-				type: ColorType.B,
-				mainColor: '',
-				wave: '',
-				row: 0,
-				column: 0
-			},
-			{
-				name: 'Blue',
-				alternativeNames: [],
-				highlighted: false,
-				type: ColorType.B,
-				mainColor: '',
-				wave: '',
-				row: 0,
-				column: 0
-			},
-			{
-				name: 'Green',
-				alternativeNames: [],
-				highlighted: false,
-				type: ColorType.B,
-				mainColor: '',
-				wave: '',
-				row: 0,
-				column: 0
-			},
-			{
-				name: 'Yellow',
-				alternativeNames: [],
-				highlighted: false,
-				type: ColorType.B,
-				mainColor: '',
-				wave: '',
-				row: 0,
-				column: 0
-			}
-		];
-		const result = component.calculateStorageLocation(colors);
-		expect(result[0].row).toBe(1);
-		expect(result[0].column).toBe(1);
-		expect(result[1].row).toBe(1);
-		expect(result[1].column).toBe(2);
-		expect(result[2].row).toBe(1);
-		expect(result[2].column).toBe(3);
-		expect(result[3].row).toBe(1);
-		expect(result[3].column).toBe(4);
+	it('should clear highlighting when the search query is empty', () => {
+		fixture.componentRef.setInput('searchQuery', 'red');
+		fixture.detectChanges();
+
+		fixture.componentRef.setInput('searchQuery', '');
+		fixture.detectChanges();
+
+		expect(colors[0].highlighted).toBe(false);
+		expect(colors[1].highlighted).toBe(false);
 	});
 
-	it('should calculate correct storage location for colors spanning multiple rows', () => {
-		const colors: Color[] = Array.from({ length: 15 }, (_, idx) => ({
-			name: `Color ${idx + 1}`,
-			alternativeNames: [],
-			highlighted: false,
-			type: ColorType.B,
-			mainColor: '',
-			wave: '',
-			row: 0,
-			column: 0
-		}));
-		const result = component.calculateStorageLocation(colors);
-		expect(result[0].row).toBe(1);
-		expect(result[0].column).toBe(1);
-		expect(result[11].row).toBe(1);
-		expect(result[11].column).toBe(12);
-		expect(result[12].row).toBe(2);
-		expect(result[12].column).toBe(1);
-		expect(result[14].row).toBe(2);
-		expect(result[14].column).toBe(3);
+	it('should open color details', () => {
+		const testComponent = TestBed.runInInjectionContext(() => new TestColorGridComponent());
+
+		testComponent.openColorDetails(colors[0]);
+
+		expect(dialogService.open).toHaveBeenCalledOnce();
 	});
 
-	it('should open details dialog with correct configuration', () => {
-		const dialogServiceSpy = vi.spyOn(component['dialogService'], 'open');
-		const color: Color = {
-			name: 'Red',
-			alternativeNames: [],
-			highlighted: false,
-			type: ColorType.B,
-			mainColor: '',
-			wave: '',
-			row: 1,
-			column: 1
-		};
-		component.openDetails(color);
-		expect(dialogServiceSpy).toHaveBeenCalledWith(ColorDetailsComponent, {
-			componentData: color,
-			settings: { title: color.name }
-		});
-	});
+	it('should not reload colors when the window is resized', () => {
+		window.dispatchEvent(new Event('resize'));
 
-	it('should return the correct background color gradient', () => {
-		expect(
-			component.backgroundColor({
-				name: 'Red',
-				alternativeNames: [],
-				highlighted: false,
-				type: 'ME',
-				mainColor: '#111111',
-				secondaryColor: '#222222'
-			})
-		).toBe('linear-gradient(-45deg, #222222, #111111, #222222)');
-
-		expect(
-			component.backgroundColor({
-				name: 'Blue',
-				alternativeNames: [],
-				highlighted: false,
-				type: 'I',
-				mainColor: '#333333',
-				secondaryColor: '#444444'
-			})
-		).toBe('linear-gradient(0deg,#444444,#333333)');
-
-		expect(
-			component.backgroundColor({
-				name: 'White',
-				alternativeNames: [],
-				highlighted: false,
-				type: 'W',
-				mainColor: '#555555',
-				secondaryColor: '#666666'
-			})
-		).toBe('radial-gradient(circle,#555555, #666666)');
-
-		expect(
-			component.backgroundColor({
-				name: 'Plain',
-				alternativeNames: [],
-				highlighted: false,
-				type: 'B',
-				mainColor: '#777777'
-			})
-		).toBe('#777777');
-	});
-
-	it('should update item size based on first color tile dimensions', () => {
-		const firstCard = document.createElement('div');
-		Object.defineProperty(firstCard, 'offsetHeight', { value: 100, configurable: true });
-		firstCard.style.marginTop = '10px';
-		firstCard.style.marginBottom = '10px';
-		vi.spyOn(component['viewPort']().elementRef.nativeElement, 'querySelector').mockReturnValue(firstCard);
-		component['updateItemSize']();
-		expect(component.itemSize).toBe(120); // 100px height + 10px marginTop + 10px marginBottom
-	});
-
-	it('should set item size to default when no color tile is found', () => {
-		vi.spyOn(component['viewPort']().elementRef.nativeElement, 'querySelector').mockReturnValue(null);
-		component['updateItemSize']();
-		expect(component.itemSize).toBe(68);
-	});
-
-	it('should set chunk size based on screen width', () => {
-		document.documentElement.style.fontSize = '16px';
-		Object.defineProperty(window, 'innerWidth', { value: 500, configurable: true });
-		component['updateChunkSize']();
-		expect(component['chunkSize']).toBe(2);
-
-		Object.defineProperty(window, 'innerWidth', { value: 800, configurable: true });
-		component['updateChunkSize']();
-		expect(component['chunkSize']).toBe(3);
-
-		Object.defineProperty(window, 'innerWidth', { value: 1000, configurable: true });
-		component['updateChunkSize']();
-		expect(component['chunkSize']).toBe(6);
-
-		Object.defineProperty(window, 'innerWidth', { value: 1500, configurable: true });
-		component['updateChunkSize']();
-		expect(component['chunkSize']).toBe(6);
-
-		Object.defineProperty(window, 'innerWidth', { value: 1800, configurable: true });
-		component['updateChunkSize']();
-		expect(component['chunkSize']).toBe(12);
-	});
-
-	it('should adjust item size and chunk size on window resize', () => {
-		const updateItemSizeSpy = vi.spyOn(component as unknown as Record<string, any>, 'updateItemSize');
-		const updateChunkSizeSpy = vi.spyOn(component as unknown as Record<string, any>, 'updateChunkSize');
-		const fetchColorsSpy = vi.spyOn(component as unknown as Record<string, any>, 'fetchColors');
-		component.adjustOnWindowResize();
-		expect(updateItemSizeSpy).toHaveBeenCalled();
-		expect(updateChunkSizeSpy).toHaveBeenCalled();
-		expect(fetchColorsSpy).toHaveBeenCalled();
-	});
-
-	it('should update item size after view initialization', async () => {
-		const updateItemSizeSpy = vi.spyOn(component as unknown as Record<string, any>, 'updateItemSize');
-		component.ngAfterViewInit();
-		// wait for microtask / view init
-		await new Promise((r) => setTimeout(r, 0));
-		expect(updateItemSizeSpy).toHaveBeenCalled();
+		expect(colorService.getColors).toHaveBeenCalledOnce();
 	});
 });

@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { StarMap } from '@application-platform/starmap-domain';
+import type { StarMap } from '@application-platform/starmap-domain';
 
 export interface StarMapFile {
 	version: 1;

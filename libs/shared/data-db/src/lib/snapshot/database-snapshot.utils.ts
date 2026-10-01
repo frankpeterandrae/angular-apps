@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Db } from '../db';
+import type { Db } from '../db';
 
 /**
  * Quotes an SQLite identifier.

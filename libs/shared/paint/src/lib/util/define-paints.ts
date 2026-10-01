@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Paint, PaintSourceDefinition } from '../model/paint.model';
+import type { Paint, PaintSourceDefinition } from '../model/paint.model';
 
 /**
  * Maps paint SKUs to fully identified paints of a specific brand.

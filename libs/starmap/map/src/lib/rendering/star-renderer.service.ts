@@ -453,7 +453,19 @@ export class StarRendererService {
 			case 'M':
 				return 'M_END';
 
-			default:
+			case 'M_END':
+			case 'F_III':
+			case 'G_III':
+			case 'K_III':
+			case 'M_III':
+			case 'F_I':
+			case 'G_I':
+			case 'K_I':
+			case 'M_I':
+			case 'BD':
+			case 'WD':
+			case 'NS':
+			case 'BH':
 				return null;
 		}
 	}

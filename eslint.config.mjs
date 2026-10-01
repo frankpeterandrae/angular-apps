@@ -341,7 +341,7 @@ export default [
 	// Type-aware rules
 	//
 	...tseslint.config({
-		files: ['apps/**/*.ts', 'libs/**/*.ts'],
+		files: ['**/app/**/*.ts', '**/lib/**/*.ts'],
 		languageOptions: {
 			parserOptions: {
 				projectService: true,
@@ -352,7 +352,7 @@ export default [
 		},
 		rules: {
 			'@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
-
+			'import/no-duplicates': ['error', { 'prefer-inline': true }],
 			'@typescript-eslint/no-floating-promises': 'error',
 			'@typescript-eslint/no-misused-promises': 'error',
 			'@typescript-eslint/await-thenable': 'error',

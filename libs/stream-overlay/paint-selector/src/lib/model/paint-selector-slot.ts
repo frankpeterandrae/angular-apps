@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { PaintSelectorButton } from './paint-selector-button';
+import type { PaintSelectorButton } from './paint-selector-button';
 
 /**
  * Represents one position in the paint selector grid.

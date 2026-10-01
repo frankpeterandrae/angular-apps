@@ -4,8 +4,7 @@
  */
 
 import { provideHttpClient } from '@angular/common/http';
-import type { ApplicationConfig } from '@angular/core';
-import { provideBrowserGlobalErrorListeners } from '@angular/core';
+import { type ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { FEATURE_TOGGLES } from '@application-platform/config';
 import { BrowserFilePersistenceService, FILE_PERSISTENCE } from '@application-platform/shared-ui';

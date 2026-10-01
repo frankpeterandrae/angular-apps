@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Routes } from '@angular/router';
+import type { Routes } from '@angular/router';
 
 /**
  * Route configuration for the stream overlay UI application.

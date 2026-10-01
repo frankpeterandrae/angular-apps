@@ -4,7 +4,7 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { StarSystem } from '@application-platform/starmap-domain';
+import type { StarSystem } from '@application-platform/starmap-domain';
 import { Group, Mesh, MeshBasicMaterial, Object3D, Scene, SphereGeometry } from 'three';
 import { vi } from 'vitest';
 

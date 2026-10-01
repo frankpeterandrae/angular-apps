@@ -6,7 +6,7 @@
 import { Pipe, PipeTransform, Signal } from '@angular/core';
 
 /**
- * UnwrapSignalPipe is an Angular pipe that handles a given value as string or as signal.
+ * Resolves a string or string signal to its current value.
  */
 @Pipe({ name: 'themeUnwrapSignal' })
 export class UnwrapSignalPipe implements PipeTransform {

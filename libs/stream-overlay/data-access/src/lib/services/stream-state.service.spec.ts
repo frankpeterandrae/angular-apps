@@ -4,7 +4,7 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { StreamEvent, StreamState } from '@application-platform/interfaces';
+import { type StreamState, StreamEvent } from '@application-platform/interfaces';
 import { Subject } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 

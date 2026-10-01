@@ -2,7 +2,7 @@
  * Copyright (c) 2026. Frank-Peter Andrä
  * All rights reserved.
  */
-import { PaintSelectorFilter } from './paint-selector-filter';
+import type { PaintSelectorFilter } from './paint-selector-filter';
 
 /**
  * Describes the current navigation state of the paint selector.

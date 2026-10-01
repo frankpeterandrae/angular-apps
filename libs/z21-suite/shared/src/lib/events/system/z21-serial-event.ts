@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Domain } from '../../types';
+import type { Domain } from '../../types';
 import type { Event } from '../event';
 
 export type Z21SerialEvent = Event<

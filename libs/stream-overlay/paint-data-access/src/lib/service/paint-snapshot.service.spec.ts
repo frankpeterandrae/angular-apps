@@ -11,14 +11,9 @@ const { exportDatabaseSnapshotMock } = vi.hoisted(() => ({
 	exportDatabaseSnapshotMock: vi.fn()
 }));
 
-vi.mock('@application-platform/data-db', async (importOriginal) => {
-	const original = await importOriginal<typeof import('@application-platform/data-db')>();
-
-	return {
-		...original,
-		exportDatabaseSnapshot: exportDatabaseSnapshotMock
-	};
-});
+vi.mock('@application-platform/data-db', () => ({
+	exportDatabaseSnapshot: exportDatabaseSnapshotMock
+}));
 
 vi.mock('node:fs', () => ({
 	default: {

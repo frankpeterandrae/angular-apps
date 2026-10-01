@@ -4,7 +4,7 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { Nebula, NebulaType } from '@application-platform/starmap-domain';
+import type { Nebula, NebulaType } from '@application-platform/starmap-domain';
 import { MeshBasicMaterial, Scene, ShaderMaterial } from 'three';
 import { MarchingCubes } from 'three/addons/objects/MarchingCubes.js';
 import { vi } from 'vitest';

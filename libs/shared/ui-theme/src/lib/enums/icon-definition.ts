@@ -3,6 +3,7 @@
  * All rights reserved.
  */
 
+/** Available SVG icon resource identifiers. */
 export enum IconDefinition {
 	ATTENTION = 'theme/svg/attention',
 	BRUSH = 'theme/svg/paintbrush',

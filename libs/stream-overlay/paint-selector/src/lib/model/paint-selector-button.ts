@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Paint, PaintBrandDefinition, PaintColorGroup } from '@application-platform/paint';
+import type { Paint, PaintBrandDefinition, PaintColorGroup } from '@application-platform/paint';
 
 /**
  * Describes the content and behavior of a button in the paint selector grid.

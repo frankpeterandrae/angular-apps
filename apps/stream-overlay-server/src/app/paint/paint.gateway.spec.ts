@@ -3,13 +3,13 @@
  * All rights reserved.
  */
 
-import { Paint } from '@application-platform/paint';
-import { PaintRecentSelectionRepository } from '@application-platform/paint-data-access';
+import type { Paint } from '@application-platform/paint';
+import type { PaintRecentSelectionRepository } from '@application-platform/paint-data-access';
 import { PaintEvent } from '@application-platform/paint-protocol';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { WebSocket } from 'ws';
 
-import { PaintStateService } from './paint-state.service';
+import type { PaintStateService } from './paint-state.service';
 import { PaintGateway } from './paint.gateway';
 
 describe('PaintGateway', () => {

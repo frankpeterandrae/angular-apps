@@ -6,21 +6,21 @@ export const i18nTextModules = {
 			PageNotFoundDescription: 'Error404Component.lbl.PageNotFoundDescription'
 		}
 	},
-	HeroComponent: {
-		lbl: {
-			Contact: 'HeroComponent.lbl.Contact',
-			Paragraph1: 'HeroComponent.lbl.Paragraph1',
-			Paragraph2: 'HeroComponent.lbl.Paragraph2',
-			Paragraph3: 'HeroComponent.lbl.Paragraph3',
-			Quote: 'HeroComponent.lbl.Quote',
-			ReworkHint: 'HeroComponent.lbl.ReworkHint',
-			Title: 'HeroComponent.lbl.Title'
-		}
-	},
 	HomeComponent: {
 		meta: {
 			Description: 'HomeComponent.meta.Description',
 			Title: 'HomeComponent.meta.Title'
+		}
+	},
+	HomeIntroComponent: {
+		lbl: {
+			Contact: 'HomeIntroComponent.lbl.Contact',
+			Paragraph1: 'HomeIntroComponent.lbl.Paragraph1',
+			Paragraph2: 'HomeIntroComponent.lbl.Paragraph2',
+			Paragraph3: 'HomeIntroComponent.lbl.Paragraph3',
+			Quote: 'HomeIntroComponent.lbl.Quote',
+			ReworkHint: 'HomeIntroComponent.lbl.ReworkHint',
+			Title: 'HomeIntroComponent.lbl.Title'
 		}
 	}
 };

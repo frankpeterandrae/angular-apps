@@ -72,7 +72,7 @@ export class NebulaRendererService {
 					depthWrite: false
 				});
 
-			default:
+			case 'cloud':
 				return new MeshBasicMaterial({
 					color: nebula.color,
 					transparent: true,

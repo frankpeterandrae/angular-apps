@@ -4,10 +4,10 @@
  */
 
 import { HttpTestingController } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { STAR_MAP_WORKSPACE, StarMapStore, StarMapWorkspace } from '@application-platform/starmap-data-access';
-import { StarMap } from '@application-platform/starmap-domain';
+import { type StarMapWorkspace, STAR_MAP_WORKSPACE, StarMapStore } from '@application-platform/starmap-data-access';
+import type { StarMap } from '@application-platform/starmap-domain';
 
 import { setupTestingModule } from '../test-setup';
 
@@ -73,10 +73,6 @@ describe('App', () => {
 
 	afterEach(() => {
 		httpTesting.verify();
-	});
-
-	it('should create', () => {
-		expect(component).toBeTruthy();
 	});
 
 	it('should load the initial map', async () => {

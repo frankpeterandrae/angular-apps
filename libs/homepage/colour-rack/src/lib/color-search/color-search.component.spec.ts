@@ -3,8 +3,9 @@
  * All rights reserved.
  */
 
-import type { ComponentFixture } from '@angular/core/testing';
-import { TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { IconDefinition, InputComponent } from '@application-platform/shared/ui-theme';
 import { vi } from 'vitest';
 
 import { setupTestingModule } from '../../test-setup';
@@ -25,14 +26,29 @@ describe('ColorSearchComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
+	it('should emit the entered search term', () => {
+		const searchEventSpy = vi.spyOn(component.searchEvent, 'emit');
+
+		const input = fixture.debugElement.query(By.directive(InputComponent)).componentInstance as InputComponent;
+
+		input.valueChange.emit('blue');
+
+		expect(searchEventSpy).toHaveBeenCalledWith('blue');
 	});
 
-	it('should emit searchEvent with the provided search term', () => {
-		const searchTerm = 'blue';
+	it('should emit an empty search term', () => {
 		const searchEventSpy = vi.spyOn(component.searchEvent, 'emit');
-		component.onSearchTermChange(searchTerm);
-		expect(searchEventSpy).toHaveBeenCalledWith(searchTerm);
+
+		const input = fixture.debugElement.query(By.directive(InputComponent)).componentInstance as InputComponent;
+
+		input.valueChange.emit('');
+
+		expect(searchEventSpy).toHaveBeenCalledWith('');
+	});
+
+	it('should render the search input with a search icon', () => {
+		const input = fixture.debugElement.query(By.directive(InputComponent)).componentInstance as InputComponent;
+
+		expect(input.icon()).toBe(IconDefinition.SEARCH);
 	});
 });

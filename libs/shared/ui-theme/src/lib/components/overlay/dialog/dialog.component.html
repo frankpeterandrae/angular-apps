@@ -1,0 +1,42 @@
+<!--
+  ~ Copyright (c) 2024-2026. Frank-Peter Andrä
+  ~ All rights reserved.
+  -->
+
+<div class="fpa-pos-fix fpa-back-drop" (click)="close()" (keydown.escape)="close()" aria-hidden="true"></div>
+
+<dialog
+	class="fpa-flex fpa-flex-column fpa-bg-light-shades fpa-box-shadow fpa-dark-text fpa-p-1 dialog-container"
+	aria-labelledby="dialog-title"
+>
+	<header class="fpa-flex fpa-flex-row fpa-flex-justify-space-between fpa-border-bottom fpa-border-themed-info fpa-mb-05 fpa-p-05">
+		<h2 id="dialog-title">{{ data.settings.title }}</h2>
+
+		<theme-button (buttonClick)="close()" [color]="undefined" [icon]="IconDefinition.CLOSE" />
+	</header>
+
+	<div class="fpa-p-05 dialog-content">
+		@if (data.settings.content) {
+			{{ data.settings.content }}
+		}
+
+		<ng-content />
+	</div>
+
+	<footer class="fpa-flex fpa-flex-row fpa-flex-justify-flex-end fpa-border-top fpa-border-themed-info fpa-mt-05 fpa-p-05">
+		@if (data.settings.type === DialogType.CONFIRM) {
+			<theme-button
+				(buttonClick)="decline()"
+				[color]="ButtonColorDefinition.DEFAULT"
+				[buttonText]="data.settings.declineText ?? 'Abbrechen'"
+			/>
+			<theme-button
+				(buttonClick)="accept()"
+				[color]="ButtonColorDefinition.DANGER"
+				[buttonText]="data.settings.acceptText ?? 'Bestätigen'"
+			/>
+		} @else {
+			<theme-button (buttonClick)="close()" [color]="ButtonColorDefinition.SUCCESS" [buttonText]="'Schließen'"></theme-button>
+		}
+	</footer>
+</dialog>

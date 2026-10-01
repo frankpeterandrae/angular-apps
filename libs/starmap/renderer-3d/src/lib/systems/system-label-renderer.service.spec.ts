@@ -4,8 +4,8 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { StarSystem } from '@application-platform/starmap-domain';
-import { Group, Scene } from 'three';
+import type { StarSystem } from '@application-platform/starmap-domain';
+import { type Group, Scene } from 'three';
 import { CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
 import { setupTestingModule } from '../../test-setup';

@@ -3,8 +3,8 @@
  * All rights reserved.
  */
 
-import { Db, withTx } from '@application-platform/data-db';
-import { PaintId } from '@application-platform/paint';
+import { type Db, withTx } from '@application-platform/data-db';
+import type { PaintId } from '@application-platform/paint';
 
 /**
  * Persists and retrieves recently selected paints.

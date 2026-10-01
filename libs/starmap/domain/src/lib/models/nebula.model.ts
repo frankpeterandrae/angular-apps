@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Position3d } from './position.model';
+import type { Position3d } from './position.model';
 
 export type NebulaType = 'cloud' | 'outline' | 'haze';
 

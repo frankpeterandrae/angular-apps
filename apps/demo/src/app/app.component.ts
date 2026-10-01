@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { AfterViewInit, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {
 	DropdownOption,
@@ -13,88 +13,48 @@ import {
 	IconDefinition
 } from '@application-platform/shared/ui-theme';
 
-/**
- * The root component of the demo application.
- */
+type Theme = 'homepage' | 'z21';
+
+/** Root component of the demo application. */
 @Component({
 	imports: [RouterOutlet, HeaderComponent, DropdownSelectComponent, FooterComponent],
 	selector: 'demo-root',
 	templateUrl: './app.component.html'
 })
-export class AppComponent implements AfterViewInit {
-	private readonly id = 'homepage-theme';
-	private link = document.getElementById(this.id) as HTMLLinkElement | null;
+export class AppComponent {
+	private readonly themeStylesheetId = 'homepage-theme';
+	private themeStylesheet = document.getElementById(this.themeStylesheetId) as HTMLLinkElement | null;
 
-	/** The title of the application. */
-	public title = 'demo';
+	protected readonly selectedTheme = signal<Theme>('homepage');
 
-	public selectedTheme = signal<'homepage' | 'z21'>('homepage');
+	protected readonly themeOptions: DropdownOption<Theme>[] = [
+		{ value: 'homepage', label: 'Homepage', icon: IconDefinition.COMPUTER },
+		{ value: 'z21', label: 'Z21', icon: IconDefinition.Z21 }
+	];
 
-	public readonly opts = signal<DropdownOption<'homepage' | 'z21'>[]>([]);
-
-	/**
-	 * Constructor
-	 *
-	 * Initializes the sidebar menu items and sets the default theme.
-	 * Avoid heavy DOM work here — `setTheme` only creates/appends a link element.
-	 */
 	constructor() {
 		this.setTheme('homepage');
 	}
 
-	/**
-	 * Angular lifecycle hook AfterViewInit
-	 *
-	 * Sets the dropdown options after the view has been initialized. This ensures
-	 * that any child components receiving `opts` as input will observe the
-	 * populated options after initial rendering.
-	 */
-	ngAfterViewInit(): void {
-		this.opts.set([
-			{ value: 'homepage', label: 'Homepage', icon: IconDefinition.COMPUTER },
-			{ value: 'z21', label: 'Z21', icon: IconDefinition.Z21 }
-		]);
-	}
-
-	/**
-	 * setTheme
-	 *
-	 * Ensures a <link id="{this.id}"> exists in document.head that points to the
-	 * stylesheet for the requested theme bundle, then updates its href to
-	 * switch the stylesheet.
-	 *
-	 * Implementation details:
-	 * - If a link element with the configured id already exists, it is reused.
-	 * - Otherwise a new <link rel="stylesheet"> element is created and appended.
-	 * - The method accepts `bundleName` which may be null; the computed URL uses
-	 *   the pattern `${bundleName}-theme.css`. If `bundleName` is null the href
-	 *   becomes `'null-theme.css'` — callers should normally pass a valid bundleName.
-	 *
-	 * @param bundleName - The base name of the theme bundle (e.g. 'homepage', 'z21'),
-	 *                     or null if no specific bundle is requested.
-	 */
-	public setTheme(bundleName: 'homepage' | 'z21' | null): void {
-		if (bundleName) {
-			this.selectedTheme.set(bundleName);
+	protected setTheme(theme: Theme | null): void {
+		if (theme === null) {
+			return;
 		}
-		const themeBundleName = `${bundleName}-theme`;
 
-		// Always prefer an element that exists in the document (tests may remove the
-		// element from document.head but the instance may still hold a reference).
-		const existing = document.getElementById(this.id) as HTMLLinkElement | null;
+		this.selectedTheme.set(theme);
+
+		const existing = document.getElementById(this.themeStylesheetId) as HTMLLinkElement | null;
 		if (existing) {
-			this.link = existing;
+			this.themeStylesheet = existing;
 		}
 
-		// If we don't have a link or the previously stored link was removed from the
-		// document (not connected), create and append a new one.
-		if (!this.link?.isConnected) {
-			this.link = document.createElement('link');
-			this.link.id = this.id;
-			this.link.rel = 'stylesheet';
-			document.head.appendChild(this.link);
+		if (!this.themeStylesheet?.isConnected) {
+			this.themeStylesheet = document.createElement('link');
+			this.themeStylesheet.id = this.themeStylesheetId;
+			this.themeStylesheet.rel = 'stylesheet';
+			document.head.appendChild(this.themeStylesheet);
 		}
 
-		this.link.href = `${themeBundleName}.css`;
+		this.themeStylesheet.href = `${theme}-theme.css`;
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024. Frank-Peter Andrä
+ * Copyright (c) 2024-2026. Frank-Peter Andrä
  * All rights reserved.
  */
 
@@ -11,5 +11,7 @@ export enum ColorType {
 	W = 'Wash',
 	G = 'Glaze',
 	E = 'Effect',
-	B = 'Bright'
+	B = 'Bright',
+	I = 'Ink',
+	DA = 'Dark Arts'
 }

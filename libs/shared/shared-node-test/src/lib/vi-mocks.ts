@@ -5,7 +5,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Mocked, MockedFunction, vi } from 'vitest';
+import { type Mocked, type MockedFunction, vi } from 'vitest';
 
 export type DeepMocked<T> = T extends (...args: any[]) => any
 	? MockedFunction<T>

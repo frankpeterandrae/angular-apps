@@ -5,9 +5,7 @@
 
 import type { ButtonConfigModel } from './button-config.model';
 
+/** Configures the buttons rendered by a button bar. */
 export interface ButtonBarConfig {
-	/**
-	 * Array of button configurations for the button bar.
-	 */
 	buttons: ButtonConfigModel[];
 }

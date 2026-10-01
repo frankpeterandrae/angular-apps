@@ -27,6 +27,5 @@ export type Description = {
 	description?: string;
 	usage?: string;
 	language?: string;
-	deprecated?: boolean;
 	definition?: Table;
 };

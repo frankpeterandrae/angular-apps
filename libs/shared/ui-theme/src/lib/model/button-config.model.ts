@@ -5,6 +5,7 @@
 
 import type { ButtonColorDefinition, IconDefinition } from '../enums';
 
+/** Configures a button rendered by shared UI components. */
 export interface ButtonConfigModel {
 	buttonText: string;
 
@@ -12,7 +13,7 @@ export interface ButtonConfigModel {
 	icon?: IconDefinition;
 
 	/** Color definition for the button. */
-	color: ButtonColorDefinition | undefined;
+	color?: ButtonColorDefinition;
 
 	/** Flag to determine if the icon should be displayed at the end. */
 	iconEnd?: boolean;

@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { PaintApiService } from '@application-platform/stream-overlay-paint-api';
 import { of } from 'rxjs';
@@ -47,10 +47,6 @@ describe('PaintEditorComponent', () => {
 		component = fixture.componentInstance;
 
 		fixture.detectChanges();
-	});
-
-	it('should create', () => {
-		expect(component).toBeTruthy();
 	});
 
 	it('should load brands and paints on creation', () => {

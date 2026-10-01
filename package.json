@@ -35,7 +35,9 @@
 		"watch:shared-styles": "node scripts/watch-css.js",
 		"desktop:starmap": "nx run starmap:desktop-dev",
 		"build:starmap:desktop": "nx run starmap:desktop-build",
-		"sonar:pr-findings": "tsx tools/sonar/get-pr-findings.ts"
+		"sonar:pr-findings": "tsx tools/sonar/get-pr-findings.ts",
+		"coverage:report": "tsx tools/coverage/report.ts",
+		"coverage:pr": "tsx tools/coverage/pr.ts"
 	},
 	"private": true,
 	"dependencies": {

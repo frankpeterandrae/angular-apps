@@ -2,7 +2,7 @@
  * Copyright (c) 2026. Frank-Peter Andrä
  * All rights reserved.
  */
-import { Routes } from '@angular/router';
+import type { Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 

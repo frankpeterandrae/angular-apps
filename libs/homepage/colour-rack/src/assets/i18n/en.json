@@ -9,7 +9,7 @@
 			"Wave": "Wave"
 		}
 	},
-	"ColorGridComponent": {
+	"ColorGrid": {
 		"lbl": {
 			"TwoThinCoats": "Two Thin Coats"
 		}
@@ -29,10 +29,8 @@
 			"ColorSearchDescription": "Users can use a color input to search for specific colors. The search results are displayed in a grid.",
 			"Description": "I have created an overview of Duncan Rhodes' Two Thin Coats colors on this page.",
 			"FunctionsDescription": "This page offers the following functions",
-			"Titel": "Paint rack"
-		}
-	},
-	"ColorSearchContainerComponent": {
+			"Title": "Paint rack"
+		},
 		"meta": {
 			"Description": "Discover Duncan Rhodes' worlds of color: Search, select and learn details about Two Thin Coats colors in an interactive grid.",
 			"Title": "Frank-Peter Andrä - Color rack of frankpeterandrae.de"

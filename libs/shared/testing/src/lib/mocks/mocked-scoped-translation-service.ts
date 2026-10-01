@@ -4,8 +4,7 @@
  */
 
 import { signal } from '@angular/core';
-import type { Observable } from 'rxjs';
-import { delay, of } from 'rxjs';
+import { type Observable, delay, of } from 'rxjs';
 import { vi } from 'vitest';
 
 /**

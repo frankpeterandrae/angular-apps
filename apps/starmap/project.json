@@ -35,7 +35,7 @@
 						"output": "assets/editor"
 					}
 				],
-				"styles": ["apps/starmap/src/styles.scss", "libs/shared/ui-theme/src/lib/theme/themed/starmap-theme.scss"]
+				"styles": ["apps/starmap/src/styles.scss", "libs/shared/ui-theme/src/lib/theme/themes/starmap-theme.scss"]
 			},
 			"configurations": {
 				"production": {

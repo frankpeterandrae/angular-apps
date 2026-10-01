@@ -3,9 +3,9 @@
  * All rights reserved.
  */
 
-import { JumpLink } from './jump-link.model';
-import { Nebula } from './nebula.model';
-import { StarSystem } from './star-system.model';
+import type { JumpLink } from './jump-link.model';
+import type { Nebula } from './nebula.model';
+import type { StarSystem } from './star-system.model';
 
 export interface StarMap {
 	id: string;

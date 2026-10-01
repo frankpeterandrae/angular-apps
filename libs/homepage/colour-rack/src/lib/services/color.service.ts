@@ -5,25 +5,22 @@
 
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import type { Observable } from 'rxjs';
 
-import { Color } from '../models/color.model';
+import type { Color } from '../models/color.model';
 
 /**
- * Service to handle color-related operations.
- * Provided in the root module.
+ * Loads colour-rack data from the application assets.
  */
 @Injectable({
 	providedIn: 'root'
 })
 export class ColorService {
 	private readonly http = inject(HttpClient);
-
 	private readonly colorsUrl = 'assets/colour-rack/colors.json';
 
 	/**
-	 * Fetches the list of colors from the JSON file.
-	 * @returns {Observable<Color[]>} An observable containing an array of colors.
+	 * Loads all configured colors.
 	 */
 	public getColors(): Observable<Color[]> {
 		return this.http.get<Color[]>(this.colorsUrl);

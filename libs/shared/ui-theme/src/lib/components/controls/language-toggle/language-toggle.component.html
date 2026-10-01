@@ -1,0 +1,19 @@
+<!--
+  ~ Copyright (c) 2024-2026. Frank-Peter Andrä
+  ~ All rights reserved.
+  -->
+
+<button
+	type="button"
+	class="fpa-button-no-style fpa-p-1"
+	[attr.aria-label]="ariaLabelKey() | fpaSharedUiTranslate: Scopes.THEME"
+	(click)="toggleLanguage()"
+>
+	@if (language() === 'de') {
+		<span aria-hidden="true"><fast-svg [name]="IconDefinition.GERMAN" [size]="'22'" /></span>
+		<span aria-hidden="true"><fast-svg [name]="IconDefinition.ENGLISH_MONOCHROME" [size]="'16'" /></span>
+	} @else {
+		<span aria-hidden="true"><fast-svg [name]="IconDefinition.GERMAN_MONOCHROME" [size]="'16'" /></span>
+		<span aria-hidden="true"><fast-svg [name]="IconDefinition.ENGLISH" [size]="'22'" /></span>
+	}
+</button>

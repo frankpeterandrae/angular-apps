@@ -36,7 +36,7 @@
 	},
 	"Colors": {
 		"lbl": {
-			"ColorsWithoutVariations": "Farben mit Varianten",
+			"ColorsWithoutVariations": "Farben ohne Varianten",
 			"ColorsWithVariations": "Farben mit Varianten",
 			"Description": "Diese Seite zeigt die verfügbaren Farbvarianten im Theme-System. Farben mit Variablen bieten Shades (dunklere Varianten) und Tints (hellere Varianten) für flexible Gestaltung.",
 			"Shades": "Schattierungen",
@@ -46,7 +46,7 @@
 	},
 	"Common": {
 		"lbl": {
-			"ColorVariantions": "Farb-Varianten",
+			"ColorVariations": "Farb-Varianten",
 			"TableHeaderDisabled": "Deaktiviert",
 			"TableHeaderEnabled": "Aktiviert"
 		}
@@ -73,12 +73,13 @@
 			"OptionsDescription": "Array von verfügbaren Optionen zum Auswählen",
 			"PlaceholderDescription": "Platzhaltertext, der angezeigt wird, wenn keine Option ausgewählt ist",
 			"SelectedDescription": "Die aktuell ausgewählte Option oder null",
+			"SelectionChangeDescription": "Callback, wenn sich die Auswahl ändert",
 			"Title": "Dropdown Select"
 		}
 	},
 	"Footer": {
 		"lbl": {
-			"Description": "The <code>theme-footer</code> component displays a small footer section with copyright text and translated labels.",
+			"Description": "Die <code>theme-footer</code> Komponente zeigt einen kleinen Footer-Bereich mit Copyright-Text und übersetzten Beschriftungen an.",
 			"Title": "Footer"
 		}
 	},
@@ -119,14 +120,6 @@
 		"lbl": {
 			"Description": "Die <code>theme-language-toggle</code> Komponente ermöglicht es Benutzern, zwischen den verfügbaren Sprachen (Englisch und Deutsch) mit einer visuellen Flaggen-Anzeige zu wechseln.",
 			"Title": "Language Toggle"
-		}
-	},
-	"Login": {
-		"lbl": {
-			"Description": "Die <code>theme-login</code> Komponente bietet ein vollständiges Login-Formular mit E-Mail- und Passwort-Validierung, integriert mit dem DataConnectionService für die Authentifizierung.",
-			"FormDescription": "Reaktive Formulargruppe mit E-Mail- und Passwort-Steuerelementen mit Validierung",
-			"LoginMethodDescription": "Verarbeitet die Login-Aktion, wenn das Formular gültig ist und sendet die Anmeldeinformationen",
-			"Title": "Login"
 		}
 	},
 	"RangeInput": {

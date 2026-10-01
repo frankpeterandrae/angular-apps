@@ -7,7 +7,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { setupTestingModule } from '../../test-setup';
 
-import { SystemLabelBounds, SystemLabelCollisionService } from './system-label-collision.service';
+import { type SystemLabelBounds, SystemLabelCollisionService } from './system-label-collision.service';
 
 describe('SystemLabelCollisionService', () => {
 	let service: SystemLabelCollisionService;

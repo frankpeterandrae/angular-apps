@@ -4,7 +4,7 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { JumpLinkStatus, StarMap, StarSystem } from '@application-platform/starmap-domain';
+import type { JumpLinkStatus, StarMap, StarSystem } from '@application-platform/starmap-domain';
 
 import { setupTestingModule } from '../../test-setup';
 

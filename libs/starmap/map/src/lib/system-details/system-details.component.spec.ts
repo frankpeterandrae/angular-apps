@@ -3,8 +3,8 @@
  * All rights reserved.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PlanetType, StarSystem } from '@application-platform/starmap-domain';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import type { PlanetType, StarSystem } from '@application-platform/starmap-domain';
 
 import { setupTestingModule } from '../../test-setup';
 

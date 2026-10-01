@@ -6,9 +6,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { Db } from '../db';
+import type { Db } from '../db';
 
-import { DatabaseSnapshotConfig, DatabaseSnapshotRow, DatabaseSnapshotTableConfig } from './database-snapshot.types';
+import type { DatabaseSnapshotConfig, DatabaseSnapshotRow, DatabaseSnapshotTableConfig } from './database-snapshot.types';
 import { getSnapshotTables, quoteIdentifier } from './database-snapshot.utils';
 
 /**

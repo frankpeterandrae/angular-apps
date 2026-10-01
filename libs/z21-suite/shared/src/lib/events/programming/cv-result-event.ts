@@ -3,8 +3,8 @@
  * All rights reserved.
  */
 
-import { Domain } from '../../types';
-import { Event } from '../event';
+import type { Domain } from '../../types';
+import type { Event } from '../event';
 
 export type CvResultPayload = {
 	/** One-based CV address, e.g. CV1 is represented as 1. */

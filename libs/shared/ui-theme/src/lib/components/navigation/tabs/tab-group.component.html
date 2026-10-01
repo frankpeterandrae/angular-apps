@@ -1,0 +1,25 @@
+<!--
+  ~ Copyright (c) 2026. Frank-Peter Andrä
+  ~ All rights reserved.
+  -->
+
+<div role="tablist" class="fpa-flex fpa-flex-row fpa-flex-wrap tab-list">
+	@for (tab of tabs(); track tab) {
+		<div class="tab-list-item" [class.active]="tab.active">
+			<button
+				type="button"
+				role="tab"
+				[attr.aria-selected]="tab.active"
+				[attr.tabindex]="tab.active ? 0 : -1"
+				(click)="selectTab(tab)"
+				(keydown.enter)="selectTab(tab)"
+				(keydown.space)="$event.preventDefault(); selectTab(tab)"
+			>
+				{{ tab.label() }}
+			</button>
+		</div>
+	}
+</div>
+<theme-card>
+	<ng-content />
+</theme-card>

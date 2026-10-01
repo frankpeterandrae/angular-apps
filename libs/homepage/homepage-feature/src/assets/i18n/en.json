@@ -6,7 +6,13 @@
 			"PageNotFoundDescription": "The page you have accessed may no longer exist or may have been moved."
 		}
 	},
-	"HeroComponent": {
+	"HomeComponent": {
+		"meta": {
+			"Description": "Discover the website of Frank-Peter Andrä with topics such as Warhammer, photography and ice hockey. Contact: admin@frankpeterandrae.de",
+			"Title": "Frank-Peter Andrä - Home of frankpeterandrae.de"
+		}
+	},
+	"HomeIntroComponent": {
 		"lbl": {
 			"Contact": "For urgent inquiries, please contact me at:",
 			"Paragraph1": "My name is Frank-Peter Andrä, I have a great enthusiasm for <span class=\"fpa-font-weight-extra-black\">Warhammer</span>, <span class=\"fpa-font-weight-extra-black\">model building</span>, <span class=\"fpa-font-weight-extra-black\">photography</span> and <span class=\"fpa-font-weight-extra-black\">ice hockey</span>. On this page, I would like to introduce my various interests and myself.",
@@ -15,12 +21,6 @@
 			"Quote": "Together, we create epic worlds.",
 			"ReworkHint": "This page is currently undergoing a complete rebuild.",
 			"Title": "Welcome to my website"
-		}
-	},
-	"HomeComponent": {
-		"meta": {
-			"Description": "Discover the website of Frank-Peter Andrä with topics such as Warhammer, photography and ice hockey. Contact: admin@frankpeterandrae.de",
-			"Title": "Frank-Peter Andrä - Home of frankpeterandrae.de"
 		}
 	}
 }

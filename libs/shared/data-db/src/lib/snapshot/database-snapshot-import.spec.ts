@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-import { Db, openDb } from '../db';
+import { type Db, openDb } from '../db';
 
 import { importDatabaseSnapshot } from './database-snapshot-import';
 

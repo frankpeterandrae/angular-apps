@@ -4,7 +4,7 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { StarMap } from '@application-platform/starmap-domain';
+import type { StarMap } from '@application-platform/starmap-domain';
 
 import { setupTestingModule } from '../../test-setup';
 

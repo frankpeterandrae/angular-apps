@@ -4,12 +4,12 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { Nebula } from '@application-platform/starmap-domain';
+import type { Nebula } from '@application-platform/starmap-domain';
 
 import { setupTestingModule } from '../../test-setup';
 
 import { NebulaContourService } from './nebula-contour.service';
-import { RenderedMap } from './render-models';
+import type { RenderedMap } from './render-models';
 
 describe('NebulaContourService', () => {
 	let service: NebulaContourService;

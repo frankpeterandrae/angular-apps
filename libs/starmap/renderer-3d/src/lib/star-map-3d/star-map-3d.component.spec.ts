@@ -3,9 +3,9 @@
  * All rights reserved.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { JumpLink, StarSystem } from '@application-platform/starmap-domain';
-import { PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import type { JumpLink, StarSystem } from '@application-platform/starmap-domain';
+import { type WebGLRenderer, PerspectiveCamera, Scene } from 'three';
 import { vi } from 'vitest';
 
 import { setupTestingModule } from '../../test-setup';

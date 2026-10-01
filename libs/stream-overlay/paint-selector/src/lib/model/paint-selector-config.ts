@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Paint, PaintBrandDefinition, PaintId } from '@application-platform/paint';
+import type { Paint, PaintBrandDefinition, PaintId } from '@application-platform/paint';
 
 /**
  * Configuration used to initialize a PaintSelector instance.

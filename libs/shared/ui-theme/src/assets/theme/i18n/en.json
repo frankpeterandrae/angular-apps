@@ -3,5 +3,11 @@
 		"lbl": {
 			"Copyright": "All rights reserved."
 		}
+	},
+	"LanguageToggleComponent": {
+		"lbl": {
+			"SwitchToEnglish": "Switch to English",
+			"SwitchToGerman": "Switch to German"
+		}
 	}
 }

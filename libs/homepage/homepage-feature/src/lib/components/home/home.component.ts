@@ -3,21 +3,18 @@
  * All rights reserved.
  */
 
-import type { OnInit } from '@angular/core';
-import { Component, inject } from '@angular/core';
+import { type OnInit, Component, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { BaseComponent, LOGGER_SOURCE, Scopes } from '@application-platform/shared-ui';
 import { provideTranslocoScope, translateSignal } from '@jsverse/transloco';
 
 import { i18nTextModules } from '../../i18n/i18n';
-import { HeroComponent } from '../hero/hero.component';
+import { HomeIntroComponent } from '../home-intro/home-intro.component';
 
-/**
- * Component representing the homepage feature.
- */
+/** Renders the homepage and configures its metadata. */
 @Component({
 	selector: 'homepage-feature-home',
-	imports: [HeroComponent],
+	imports: [HomeIntroComponent],
 	providers: [{ provide: LOGGER_SOURCE, useValue: 'HomeComponent' }, provideTranslocoScope(Scopes.HOMEPAGE_FEATURE)],
 	templateUrl: './home.component.html'
 })
@@ -28,12 +25,11 @@ export class HomeComponent extends BaseComponent implements OnInit {
 	private readonly metaTitle = translateSignal(i18nTextModules.HomeComponent.meta.Title);
 	private readonly metaDescription = translateSignal(i18nTextModules.HomeComponent.meta.Description);
 
-	/**
-	 * Lifecycle hook that is called after data-bound properties of a directive are initialized.
-	 * Initializes the component by setting the title and meta description using translations.
-	 */
 	ngOnInit(): void {
 		this.title.setTitle(this.metaTitle());
-		this.meta.addTag({ name: 'description', content: this.metaDescription() });
+		this.meta.addTag({
+			name: 'description',
+			content: this.metaDescription()
+		});
 	}
 }

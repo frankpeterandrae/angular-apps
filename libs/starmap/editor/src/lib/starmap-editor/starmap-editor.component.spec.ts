@@ -3,14 +3,14 @@
  * All rights reserved.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { FEATURE_TOGGLES } from '@application-platform/config';
 import { IconDefinition } from '@application-platform/shared/ui-theme';
 import { BrowserFilePersistenceService, BrowserFileService, FILE_PERSISTENCE } from '@application-platform/shared-ui';
 import { StarMapStore } from '@application-platform/starmap-data-access';
-import { StarMap } from '@application-platform/starmap-domain';
+import type { StarMap } from '@application-platform/starmap-domain';
 import { WebglRendererFactory } from '@application-platform/starmap-renderer-3d';
-import { WebGLRenderer } from 'three';
+import type { WebGLRenderer } from 'three';
 
 import { setupTestingModule } from '../../test-setup';
 
@@ -156,10 +156,6 @@ describe('StarmapEditorComponent', () => {
 
 		fixture.detectChanges();
 		await fixture.whenStable();
-	});
-
-	it('should create', () => {
-		expect(component).toBeTruthy();
 	});
 
 	it('should build menu items from systems and nebulae', () => {
