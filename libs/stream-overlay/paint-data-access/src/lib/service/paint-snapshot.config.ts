@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { DatabaseSnapshotConfig } from '@application-platform/data-db';
+import type { DatabaseSnapshotConfig } from '@application-platform/data-db';
 
 /**
  * Snapshot configuration for paint data.

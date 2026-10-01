@@ -76,10 +76,11 @@ export class NebulaRendererService {
 				path.setAttribute('stroke-width', '18');
 				break;
 
-			default:
+			case 'cloud':
 				path.setAttribute('fill', nebula.color);
 				path.setAttribute('fill-opacity', String(nebula.opacity));
 				path.setAttribute('stroke', 'none');
+				break;
 		}
 	}
 }

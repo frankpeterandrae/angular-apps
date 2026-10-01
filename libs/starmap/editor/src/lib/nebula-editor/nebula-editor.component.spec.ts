@@ -3,8 +3,8 @@
  * All rights reserved.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Nebula } from '@application-platform/starmap-domain';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import type { Nebula } from '@application-platform/starmap-domain';
 
 import { setupTestingModule } from '../../test-setup';
 
@@ -65,10 +65,6 @@ describe('NebulaEditorComponent', () => {
 
 		fixture.detectChanges();
 		await fixture.whenStable();
-	});
-
-	it('should create', () => {
-		expect(component).toBeTruthy();
 	});
 
 	it('should initialize the form from the nebula input', () => {

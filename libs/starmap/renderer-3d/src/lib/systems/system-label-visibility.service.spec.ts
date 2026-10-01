@@ -4,7 +4,7 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { StarSystem } from '@application-platform/starmap-domain';
+import type { StarSystem } from '@application-platform/starmap-domain';
 import { Vector3 } from 'three';
 
 import { setupTestingModule } from '../../test-setup';

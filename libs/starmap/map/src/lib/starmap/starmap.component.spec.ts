@@ -3,9 +3,9 @@
  * All rights reserved.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { StarMapStore } from '@application-platform/starmap-data-access';
-import { StarMap } from '@application-platform/starmap-domain';
+import type { StarMap } from '@application-platform/starmap-domain';
 import { vi } from 'vitest';
 
 import { setupTestingModule } from '../../test-setup';
@@ -108,10 +108,6 @@ describe('StarmapComponent', () => {
 		await fixture.whenStable();
 	});
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
-
 	it('should render the current star map', () => {
 		const svg = fixture.nativeElement.querySelector('.starmap-container svg');
 
@@ -169,8 +165,8 @@ describe('StarmapComponent', () => {
 		expect(fixture.nativeElement.querySelector('starmap-system-details')).toBeNull();
 	});
 
-	it('should export the rendered SVG', () => {
-		component.exportSvg();
+	it('should export the rendered SVG', async () => {
+		await component.exportSvg();
 
 		expect(svgExportService.export).toHaveBeenCalledOnce();
 
@@ -487,7 +483,11 @@ describe('StarmapComponent', () => {
 
 		const container = fixture.nativeElement.querySelector('.starmap-container') as HTMLElement;
 
-		const svg = container.querySelector('svg')!;
+		const svg = container.querySelector('svg');
+		expect(svg).not.toBeNull();
+		if (!svg) {
+			return;
+		}
 
 		configureViewport(viewport);
 

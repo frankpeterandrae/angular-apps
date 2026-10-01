@@ -3,8 +3,8 @@
  * All rights reserved.
  */
 
-import { Broadcastflags, Domain } from '../../types';
-import { Event } from '../event';
+import type { Broadcastflags, Domain } from '../../types';
+import type { Event } from '../event';
 
 export type BroadcastflagEvent = Event<
 	Domain.SYSTEM,

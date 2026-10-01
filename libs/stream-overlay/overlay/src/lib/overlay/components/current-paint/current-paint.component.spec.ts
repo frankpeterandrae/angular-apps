@@ -5,7 +5,7 @@
 
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { Paint } from '@application-platform/paint';
+import type { Paint } from '@application-platform/paint';
 import { PaintService } from '@application-platform/stream-overlay-data-access';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 

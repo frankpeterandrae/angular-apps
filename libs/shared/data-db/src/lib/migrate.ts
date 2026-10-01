@@ -6,7 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { Db, withTx } from './db';
+import { type Db, withTx } from './db';
 
 /**
  * Lists all SQL files in the given directory that match the pattern "NNN_description.sql",

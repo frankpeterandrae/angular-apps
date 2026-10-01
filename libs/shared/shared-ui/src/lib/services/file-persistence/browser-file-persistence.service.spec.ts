@@ -64,6 +64,21 @@ describe('BrowserFilePersistenceService', () => {
 		expect(clickSpy).toHaveBeenCalledOnce();
 	});
 
+	it('should return null when a change event contains no file', async () => {
+		const input = document.createElement('input');
+
+		vi.spyOn(input, 'click').mockImplementation(() => undefined);
+		vi.spyOn(document, 'createElement').mockReturnValue(input);
+
+		const result = service.open({
+			extensions: ['json']
+		});
+
+		input.dispatchEvent(new Event('change'));
+
+		await expect(result).resolves.toBeNull();
+	});
+
 	it('should return the selected file content', async () => {
 		const input = document.createElement('input');
 

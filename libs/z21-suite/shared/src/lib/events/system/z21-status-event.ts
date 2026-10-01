@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Domain, PowerPayload } from '../../types';
-import { Event } from '../event';
+import type { Domain, PowerPayload } from '../../types';
+import type { Event } from '../event';
 
 export type Z21StatusEvent = Event<Domain.SYSTEM, 'status', PowerPayload>;

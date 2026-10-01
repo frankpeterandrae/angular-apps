@@ -36,7 +36,7 @@
 	},
 	"Colors": {
 		"lbl": {
-			"ColorsWithoutVariations": "Colours with variants",
+			"ColorsWithoutVariations": "Colours without variants",
 			"ColorsWithVariations": "Colours with variants",
 			"Description": "This page shows the available color variations in the theme system. Colors with variables offer shades (darker variations) and tints (lighter variations) for flexible design.",
 			"Shades": "Shades",
@@ -46,7 +46,7 @@
 	},
 	"Common": {
 		"lbl": {
-			"ColorVariantions": "Colour variants",
+			"ColorVariations": "Colour variants",
 			"TableHeaderDisabled": "Disabled",
 			"TableHeaderEnabled": "Enabled"
 		}
@@ -73,12 +73,13 @@
 			"OptionsDescription": "Array of available options to select from",
 			"PlaceholderDescription": "Placeholder text displayed when no option is selected",
 			"SelectedDescription": "The currently selected option or null",
+			"SelectionChangeDescription": "Callback when the selection changes",
 			"Title": "Dropdown Select"
 		}
 	},
 	"Footer": {
 		"lbl": {
-			"Description": "Die <code>theme-footer</code> Komponente zeigt einen kleinen Footer-Bereich mit Copyright-Text und übersetzten Beschriftungen an.",
+			"Description": "The <code>theme-footer</code> component displays a small footer section with copyright text and translated labels.",
 			"Title": "Footer"
 		}
 	},
@@ -119,14 +120,6 @@
 		"lbl": {
 			"Description": "The <code>theme-language-toggle</code> component allows users to switch between available languages (English and German) with a visual flag indicator.",
 			"Title": "Language Toggle"
-		}
-	},
-	"Login": {
-		"lbl": {
-			"Description": "The <code>theme-login</code> component provides a complete login form with email and password validation, integrated with the DataConnectionService for authentication.",
-			"FormDescription": "Reactive form group containing email and password controls with validation",
-			"LoginMethodDescription": "Handles the login action when the form is valid and submits credentials",
-			"Title": "Login"
 		}
 	},
 	"RangeInput": {

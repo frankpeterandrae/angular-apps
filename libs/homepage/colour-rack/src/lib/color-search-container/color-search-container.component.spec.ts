@@ -3,11 +3,9 @@
  * All rights reserved.
  */
 
-import type { ComponentFixture } from '@angular/core/testing';
-import { TestBed } from '@angular/core/testing';
-import { Meta, Title } from '@angular/platform-browser';
-import type { Mocked } from '@application-platform/testing';
-import { createMock } from '@application-platform/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { By, Meta, Title } from '@angular/platform-browser';
+import { type Mocked, createMock } from '@application-platform/testing';
 import { vi } from 'vitest';
 
 import { setupTestingModule } from '../../test-setup';
@@ -17,16 +15,21 @@ import { ColorSearchComponent } from '../color-search/color-search.component';
 import { ColorSearchContainerComponent } from './color-search-container.component';
 
 describe('ColorSearchContainerComponent', () => {
-	let component: ColorSearchContainerComponent;
 	let fixture: ComponentFixture<ColorSearchContainerComponent>;
 	let mockMeta: Mocked<Meta>;
 	let mockTitle: Mocked<Title>;
 
 	beforeEach(async () => {
-		mockMeta = createMock<Meta>({ addTag: vi.fn() });
-		mockTitle = createMock<Title>({ setTitle: vi.fn() });
+		mockMeta = createMock<Meta>({
+			addTag: vi.fn()
+		});
+
+		mockTitle = createMock<Title>({
+			setTitle: vi.fn()
+		});
+
 		await setupTestingModule({
-			imports: [ColorSearchContainerComponent, ColorSearchComponent, ColorGridComponent],
+			imports: [ColorSearchContainerComponent],
 			providers: [
 				{ provide: Meta, useValue: mockMeta },
 				{ provide: Title, useValue: mockTitle }
@@ -34,38 +37,41 @@ describe('ColorSearchContainerComponent', () => {
 		});
 
 		fixture = TestBed.createComponent(ColorSearchContainerComponent);
-		component = fixture.componentInstance;
+
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+	it('should pass search terms to the color grid', () => {
+		const search = fixture.debugElement.query(By.directive(ColorSearchComponent)).componentInstance as ColorSearchComponent;
 
-	it('should update search query', () => {
-		const newQuery = 'blue';
-		component.updateSearchQuery(newQuery);
-		expect(component.searchQuery()).toBe(newQuery);
-	});
+		const grid = fixture.debugElement.query(By.directive(ColorGridComponent)).componentInstance as ColorGridComponent;
 
-	it('should initialize search query as empty string', () => {
-		expect(component.searchQuery()).toBe('');
-	});
-
-	it('should handle empty search query update', () => {
-		component.updateSearchQuery('');
-		expect(component.searchQuery()).toBe('');
-	});
-
-	it('should set the title and meta description', async () => {
-		component.ngOnInit();
-		// Wait for translation simulation
-		await new Promise((r) => setTimeout(r, 100));
+		search.searchEvent.emit('blue');
 		fixture.detectChanges();
-		expect(mockTitle.setTitle).toHaveBeenCalledWith('colourRackI18n.ColorSearchContainerComponent.meta.Title');
+
+		expect(grid.searchQuery()).toBe('blue');
+	});
+
+	it('should clear the color grid search when the search term is empty', () => {
+		const search = fixture.debugElement.query(By.directive(ColorSearchComponent)).componentInstance as ColorSearchComponent;
+
+		const grid = fixture.debugElement.query(By.directive(ColorGridComponent)).componentInstance as ColorGridComponent;
+
+		search.searchEvent.emit('blue');
+		fixture.detectChanges();
+
+		search.searchEvent.emit('');
+		fixture.detectChanges();
+
+		expect(grid.searchQuery()).toBe('');
+	});
+
+	it('should set the page metadata', () => {
+		expect(mockTitle.setTitle).toHaveBeenCalledWith('colourRackI18n.ColorSearchContainer.meta.Title');
+
 		expect(mockMeta.addTag).toHaveBeenCalledWith({
 			name: 'description',
-			content: 'colourRackI18n.ColorSearchContainerComponent.meta.Description'
+			content: 'colourRackI18n.ColorSearchContainer.meta.Description'
 		});
 	});
 });

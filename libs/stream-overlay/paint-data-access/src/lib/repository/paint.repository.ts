@@ -3,10 +3,10 @@
  * All rights reserved.
  */
 
-import { Db, withTx } from '@application-platform/data-db';
-import { HexColor, Paint, PaintColorGroup, PaintId } from '@application-platform/paint';
+import { type Db, withTx } from '@application-platform/data-db';
+import type { HexColor, Paint, PaintColorGroup, PaintId } from '@application-platform/paint';
 
-import { PaintSnapshotService } from '../service/paint-snapshot.service';
+import type { PaintSnapshotService } from '../service/paint-snapshot.service';
 
 interface PaintRow {
 	id: PaintId;

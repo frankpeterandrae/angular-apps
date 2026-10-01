@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { PaintColorGroup } from '@application-platform/paint';
+import type { PaintColorGroup } from '@application-platform/paint';
 
 /**
  * Describes the filter used to select paints within a brand.

@@ -3,21 +3,21 @@
  * All rights reserved.
  */
 
-import { LocoInfoEvent } from './loco/loco-info-event';
-import { CvNackEvent, CvResultEvent } from './programming';
-import { TurnoutInfoEvent } from './switching/turnout-info-event';
-import { BroadcastflagEvent } from './system/broadcastflag-event';
-import { SystemStateEvent } from './system/system-state-event';
-import { TrackPowerEvent } from './system/track-power-event';
-import { Z21CodeEvent } from './system/z21-code-event';
-import { Z21FirmwareVersionEvent } from './system/z21-firmware-version-event';
-import { Z21HwinfoEvent } from './system/z21-hwinfo-event';
-import { Z21SerialEvent } from './system/z21-serial-event';
-import { Z21StatusEvent } from './system/z21-status-event';
-import { Z21StoppedEvent } from './system/z21-stopped-event';
-import { Z21VersionEvent } from './system/z21-version-event';
-import { UnknownLanXEvent } from './unknown/unknown-lan-x-event';
-import { UnknownXBusEvent } from './unknown/unknown-x-bus-event';
+import type { LocoInfoEvent } from './loco/loco-info-event';
+import type { CvNackEvent, CvResultEvent } from './programming';
+import type { TurnoutInfoEvent } from './switching/turnout-info-event';
+import type { BroadcastflagEvent } from './system/broadcastflag-event';
+import type { SystemStateEvent } from './system/system-state-event';
+import type { TrackPowerEvent } from './system/track-power-event';
+import type { Z21CodeEvent } from './system/z21-code-event';
+import type { Z21FirmwareVersionEvent } from './system/z21-firmware-version-event';
+import type { Z21HwinfoEvent } from './system/z21-hwinfo-event';
+import type { Z21SerialEvent } from './system/z21-serial-event';
+import type { Z21StatusEvent } from './system/z21-status-event';
+import type { Z21StoppedEvent } from './system/z21-stopped-event';
+import type { Z21VersionEvent } from './system/z21-version-event';
+import type { UnknownLanXEvent } from './unknown/unknown-lan-x-event';
+import type { UnknownXBusEvent } from './unknown/unknown-x-bus-event';
 
 /**
  * Union of all events derived from Z21 protocol data.

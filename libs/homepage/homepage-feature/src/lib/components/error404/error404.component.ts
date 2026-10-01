@@ -11,9 +11,7 @@ import { provideTranslocoScope, translateSignal } from '@jsverse/transloco';
 
 import { i18nTextModules } from '../../i18n/i18n';
 
-/**
- * Component for displaying a 404 error page.
- */
+/** Displays the not-found page and provides navigation back home. */
 @Component({
 	selector: 'homepage-feature-error404',
 	imports: [ButtonComponent, CardComponent, TranslationDirective],
@@ -22,14 +20,11 @@ import { i18nTextModules } from '../../i18n/i18n';
 })
 export class Error404Component extends BaseComponent {
 	private readonly router = inject(Router);
-	public readonly i18nTextModules = i18nTextModules;
-	public readonly ButtonColorDefinition = ButtonColorDefinition;
-	public readonly backToStart = translateSignal(i18nTextModules.Error404Component.lbl.BackToStartpage);
+	protected readonly i18nTextModules = i18nTextModules;
+	protected readonly ButtonColorDefinition = ButtonColorDefinition;
+	protected readonly backToStart = translateSignal(i18nTextModules.Error404Component.lbl.BackToStartpage);
 
-	/**
-	 * Navigates to the home page.
-	 */
-	public async routeToHome(): Promise<void> {
+	protected async routeToHome(): Promise<void> {
 		try {
 			await this.router.navigate(['/']);
 		} catch (error) {

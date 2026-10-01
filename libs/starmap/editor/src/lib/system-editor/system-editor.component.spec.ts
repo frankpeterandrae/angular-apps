@@ -3,8 +3,8 @@
  * All rights reserved.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { JumpLink, StarSystem } from '@application-platform/starmap-domain';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import type { JumpLink, StarSystem } from '@application-platform/starmap-domain';
 
 import { setupTestingModule } from '../../test-setup';
 
@@ -88,10 +88,6 @@ describe('SystemEditorComponent', () => {
 
 		fixture.detectChanges();
 		await fixture.whenStable();
-	});
-
-	it('should create', () => {
-		expect(component).toBeTruthy();
 	});
 
 	it('should initialize the form from the selected system', () => {

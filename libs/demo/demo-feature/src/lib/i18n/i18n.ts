@@ -46,7 +46,7 @@ export const i18nTextModules = {
 	},
 	Common: {
 		lbl: {
-			ColorVariantions: 'Common.lbl.ColorVariantions',
+			ColorVariations: 'Common.lbl.ColorVariations',
 			TableHeaderDisabled: 'Common.lbl.TableHeaderDisabled',
 			TableHeaderEnabled: 'Common.lbl.TableHeaderEnabled'
 		}
@@ -73,6 +73,7 @@ export const i18nTextModules = {
 			OptionsDescription: 'Dropdown.lbl.OptionsDescription',
 			PlaceholderDescription: 'Dropdown.lbl.PlaceholderDescription',
 			SelectedDescription: 'Dropdown.lbl.SelectedDescription',
+			SelectionChangeDescription: 'Dropdown.lbl.SelectionChangeDescription',
 			Title: 'Dropdown.lbl.Title'
 		}
 	},
@@ -119,14 +120,6 @@ export const i18nTextModules = {
 		lbl: {
 			Description: 'LanguageToggle.lbl.Description',
 			Title: 'LanguageToggle.lbl.Title'
-		}
-	},
-	Login: {
-		lbl: {
-			Description: 'Login.lbl.Description',
-			FormDescription: 'Login.lbl.FormDescription',
-			LoginMethodDescription: 'Login.lbl.LoginMethodDescription',
-			Title: 'Login.lbl.Title'
 		}
 	},
 	RangeInput: {

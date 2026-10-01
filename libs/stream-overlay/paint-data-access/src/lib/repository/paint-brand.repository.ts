@@ -3,10 +3,10 @@
  * All rights reserved.
  */
 
-import { Db } from '@application-platform/data-db';
-import { PaintBrandDefinition } from '@application-platform/paint';
+import type { Db } from '@application-platform/data-db';
+import type { PaintBrandDefinition } from '@application-platform/paint';
 
-import { PaintSnapshotService } from '../service/paint-snapshot.service';
+import type { PaintSnapshotService } from '../service/paint-snapshot.service';
 
 interface PaintBrandRow {
 	id: string;

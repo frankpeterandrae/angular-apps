@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Type } from '@angular/core';
+import type { Type } from '@angular/core';
 import type { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [

@@ -2,8 +2,8 @@
  * Copyright (c) 2026. Frank-Peter Andrä
  * All rights reserved.
  */
-import { Db, exportDatabaseSnapshot } from '@application-platform/data-db';
-import { Logger, OnApplicationShutdown } from '@nestjs/common';
+import { type Db, exportDatabaseSnapshot } from '@application-platform/data-db';
+import { type OnApplicationShutdown, Logger } from '@nestjs/common';
 
 import { paintSnapshotConfig } from './paint-snapshot.config';
 

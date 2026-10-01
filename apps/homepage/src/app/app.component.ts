@@ -3,12 +3,16 @@
  * All rights reserved.
  */
 
-import type { OnInit } from '@angular/core';
-import { Component, inject } from '@angular/core';
+import { Component, inject, type OnInit } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
-import type { MenuItem } from '@application-platform/shared/ui-theme';
-import { FooterComponent, HeaderComponent, IconDefinition, LanguageToggleComponent } from '@application-platform/shared/ui-theme';
+import {
+	FooterComponent,
+	HeaderComponent,
+	IconDefinition,
+	LanguageToggleComponent,
+	type MenuItem
+} from '@application-platform/shared/ui-theme';
 import { Logger } from '@application-platform/shared-ui';
 import { translateSignal } from '@jsverse/transloco';
 
@@ -17,9 +21,7 @@ import { environment } from '../environments/environment';
 
 import { i18nTextModules } from './i18n/i18n';
 
-/**
- * The root component of the application.
- */
+/** Root component of the homepage application. */
 @Component({
 	imports: [RouterOutlet, HeaderComponent, FooterComponent, LanguageToggleComponent],
 	selector: 'fpa-root',
@@ -30,15 +32,12 @@ export class AppComponent implements OnInit {
 	private readonly meta = inject(Meta);
 
 	private readonly homeLabel = translateSignal(i18nTextModules.AppComponent.menu.lbl.Home);
-	private readonly paintRack = translateSignal(i18nTextModules.AppComponent.menu.lbl.PaintRack);
-	private readonly inDevelopment = translateSignal(i18nTextModules.AppComponent.menu.lbl.InDevelopment);
-	private readonly test = translateSignal(i18nTextModules.AppComponent.menu.lbl.Test);
-	private readonly demo: string = 'DEMO';
+	private readonly paintRackLabel = translateSignal(i18nTextModules.AppComponent.menu.lbl.PaintRack);
+	private readonly inDevelopmentLabel = translateSignal(i18nTextModules.AppComponent.menu.lbl.InDevelopment);
+	private readonly testLabel = translateSignal(i18nTextModules.AppComponent.menu.lbl.Test);
 
 	/**
-	 * The menu items are provided via a getter that reads translation signals.
-	 * When the signals update (language change), Angular will re-evaluate the getter
-	 * and update the bound child component.
+	 * Returns the menu items for the application header.
 	 */
 	public get menuItems(): MenuItem[] {
 		return [
@@ -50,7 +49,7 @@ export class AppComponent implements OnInit {
 			},
 			{
 				id: 'paint-rack',
-				label: this.paintRack(),
+				label: this.paintRackLabel(),
 				icon: IconDefinition.BRUSH,
 				route: '/paint-rack'
 			},
@@ -59,21 +58,18 @@ export class AppComponent implements OnInit {
 				: [
 						{
 							id: 'dev',
-							label: this.inDevelopment(),
+							label: this.inDevelopmentLabel(),
 							icon: IconDefinition.BRUSH,
 							route: '/dev',
 							children: [
-								{ id: 'test', label: this.test(), route: '/dev/test' },
-								{ id: 'demo', label: this.demo, route: '/dev/demo' }
+								{ id: 'test', label: this.testLabel(), route: '/dev/test' },
+								{ id: 'demo', label: 'DEMO', route: '/dev/demo' }
 							]
 						}
 					])
 		];
 	}
 
-	/**
-	 * Creates an instance of AppComponent.
-	 */
 	constructor() {
 		this.meta.addTags([
 			{ name: 'robots', content: 'index, follow' },
@@ -84,9 +80,6 @@ export class AppComponent implements OnInit {
 		]);
 	}
 
-	/**
-	 * Initializes the component and sets up the menu items with translations.
-	 */
 	ngOnInit(): void {
 		if (environment.production) {
 			Logger.setProductionMode({ disable: true });

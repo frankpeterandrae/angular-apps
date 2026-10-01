@@ -67,9 +67,6 @@ export class NebulaContourService {
 
 		const [firstContour, ...remainingContours] = validContours;
 
-		if (!firstContour) {
-			return '';
-		}
 
 		const outerContour = remainingContours.reduce(
 			(largest, current) => (this.getContourArea(current) > this.getContourArea(largest) ? current : largest),

@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Paint, PaintBrandDefinition } from '@application-platform/paint';
+import type { Paint, PaintBrandDefinition } from '@application-platform/paint';
 
 import { PaintSelector } from './paint-selector';
 

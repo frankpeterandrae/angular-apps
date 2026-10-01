@@ -3,6 +3,7 @@
  * All rights reserved.
  */
 
+/** Available theme color variants. */
 export enum ColorDefinition {
 	LIGHT_SHADES = 'light-shades',
 	LIGHT_SHADES_HIGHLIGHT = 'light-shades-highlight',

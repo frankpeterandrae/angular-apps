@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Paint } from '@application-platform/paint';
+import type { Paint } from '@application-platform/paint';
 
 import { PaintStateService } from './paint-state.service';
 

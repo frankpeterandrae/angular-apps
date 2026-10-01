@@ -3,14 +3,20 @@
  * All rights reserved.
  */
 
-import { Paint, PaintBrandDefinition, PaintColorGroupDefinition, paintColorGroups, PaintId } from '@application-platform/paint';
+import {
+	type Paint,
+	type PaintBrandDefinition,
+	type PaintColorGroupDefinition,
+	type PaintId,
+	paintColorGroups
+} from '@application-platform/paint';
 
-import { PaintSelectorAction } from './model/paint-selector-action';
-import { PaintSelectorButton } from './model/paint-selector-button';
-import { PaintSelectorConfig } from './model/paint-selector-config';
-import { PaintSelectorFilter } from './model/paint-selector-filter';
-import { PaintSelectorSlot } from './model/paint-selector-slot';
-import { PaintSelectorView } from './model/paint-selector-view';
+import type { PaintSelectorAction } from './model/paint-selector-action';
+import type { PaintSelectorButton } from './model/paint-selector-button';
+import type { PaintSelectorConfig } from './model/paint-selector-config';
+import type { PaintSelectorFilter } from './model/paint-selector-filter';
+import type { PaintSelectorSlot } from './model/paint-selector-slot';
+import type { PaintSelectorView } from './model/paint-selector-view';
 import {
 	PAINT_SELECTOR_BACK_SLOT,
 	PAINT_SELECTOR_CLEAR_SLOT,
@@ -82,7 +88,7 @@ export class PaintSelector {
 	 * Handles a button press.
 	 */
 	public press(index: number): PaintSelectorAction {
-		const slot = this.slots[index];
+		const slot = this.slots.at(index);
 
 		if (!slot) {
 			return {

@@ -1,0 +1,26 @@
+<!--
+  ~ Copyright (c) 2024-2026. Frank-Peter Andrä
+  ~ All rights reserved.
+  -->
+
+<button
+	class="fpa-button fpa-px-1 fpa-py-05"
+	[type]="type()"
+	[ngClass]="[color() ? 'fpa-' + color() : 'fpa-no-color', ...buttonClasses, disabled() ? 'fpa-disabled' : '']"
+	[attr.aria-expanded]="ariaExpanded()"
+	[attr.aria-haspopup]="ariaHaspopup()"
+	(click)="handleClick()"
+	(keydown)="keydownEvent.emit($event)"
+	[disabled]="disabled()"
+>
+	<div class="fpa-flex fpa-flex-row" [ngClass]="contentClasses" [class.fpa-flex-row-reverse]="iconEnd()">
+		@if (icon(); as iconName) {
+			<fast-svg [name]="iconName" [size]="'16'" />
+		}
+		@if (buttonText()) {
+			<span class="fpa-flex-align-content-center">
+				{{ buttonText() }}
+			</span>
+		}
+	</div>
+</button>

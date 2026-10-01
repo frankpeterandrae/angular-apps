@@ -12,9 +12,7 @@ import { ColorGridComponent } from '../color-grid/color-grid.component';
 import { ColorSearchComponent } from '../color-search/color-search.component';
 import { i18nTextModules } from '../i18n/i18n';
 
-/**
- * Component for the color search container.
- */
+/** Coordinates the color search and color grid. */
 @Component({
 	selector: 'cr-color-search-container',
 	templateUrl: './color-search-container.component.html',
@@ -24,30 +22,24 @@ import { i18nTextModules } from '../i18n/i18n';
 export class ColorSearchContainerComponent implements OnInit {
 	private readonly meta = inject(Meta);
 	private readonly title = inject(Title);
-	public readonly i18nTextModules = i18nTextModules;
 
-	private readonly metaTitle = translateSignal(i18nTextModules.ColorSearchContainerComponent.meta.Title);
-	private readonly metaDescription = translateSignal(i18nTextModules.ColorSearchContainerComponent.meta.Description);
+	private readonly metaTitle = translateSignal(i18nTextModules.ColorSearchContainer.meta.Title);
 
-	/**
-	 * Lifecycle hook that is called after data-bound properties of a directive are initialized.
-	 * Initializes the component by setting the title and meta description using translations.
-	 */
+	private readonly metaDescription = translateSignal(i18nTextModules.ColorSearchContainer.meta.Description);
+
+	protected readonly i18nTextModules = i18nTextModules;
+	protected readonly searchQuery = signal('');
+
 	ngOnInit(): void {
 		this.title.setTitle(this.metaTitle());
-		this.meta.addTag({ name: 'description', content: this.metaDescription() });
+
+		this.meta.addTag({
+			name: 'description',
+			content: this.metaDescription()
+		});
 	}
 
-	/**
-	 * Signal to hold the search query.
-	 */
-	public searchQuery = signal('');
-
-	/**
-	 * Updates the search query signal with the provided query.
-	 * @param {string} query - The new search query string.
-	 */
-	public updateSearchQuery(query: string): void {
+	protected updateSearchQuery(query: string): void {
 		this.searchQuery.set(query);
 	}
 }

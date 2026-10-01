@@ -3,11 +3,11 @@
  * All rights reserved.
  */
 
-import type { ComponentFixture } from '@angular/core/testing';
-import { TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import { DropdownSelectComponent } from '@application-platform/shared/ui-theme';
+import { afterEach } from 'vitest';
 
 import { setupTestingModule } from '../test-setup';
 
@@ -17,83 +17,52 @@ describe('AppComponent', () => {
 	let fixture: ComponentFixture<AppComponent>;
 
 	beforeEach(async () => {
-		// Prevent Angular from trying to resolve external templateUrl/styleUrls during tests
-		TestBed.overrideComponent(AppComponent, { set: { template: '<div></div>', styles: [''] } });
-
 		await setupTestingModule({
 			imports: [AppComponent],
-			providers: [
-				{
-					provide: ActivatedRoute,
-					useValue: {
-						params: of({}),
-						snapshot: {
-							paramMap: {
-								/**
-								 * Mocked get.
-								 * @returns Null.
-								 */
-								get: (): any => null
-							}
-						}
-					}
-				}
-			]
+			providers: [provideRouter([])]
 		});
 
 		fixture = TestBed.createComponent(AppComponent);
-	});
-
-	it('should create the app', () => {
-		const app = fixture.componentInstance;
-		expect(app).toBeTruthy();
-	});
-
-	it('should have the correct title', () => {
-		const app = fixture.componentInstance;
-		expect(app.title).toEqual('demo');
-	});
-
-	it('has selectedTheme defaulted to homepage', () => {
-		const app = fixture.componentInstance;
-		expect(app.selectedTheme()).toEqual('homepage');
-	});
-
-	it('populates opts with homepage and z21 options after view init', () => {
-		const app = fixture.componentInstance;
 		fixture.detectChanges();
-		const opts = app.opts();
-		expect(Array.isArray(opts)).toBeTruthy();
-		expect(opts).toHaveLength(2);
-		expect(opts[0].value).toEqual('homepage');
-		expect(opts[1].value).toEqual('z21');
 	});
 
-	it('creates a link element with the expected href when setting a theme', () => {
-		const app = fixture.componentInstance;
-		document.querySelectorAll('#homepage-theme').forEach((n) => n.remove());
-		app.setTheme('z21');
-		const link = document.getElementById('homepage-theme') as HTMLLinkElement | null;
-		expect(link).toBeTruthy();
-		expect(link?.getAttribute('href')).toEqual('z21-theme.css');
+	afterEach(() => {
+		document.getElementById('homepage-theme')?.remove();
 	});
 
-	it('does not create duplicate link elements when setTheme is called multiple times and updates href', () => {
-		const app = fixture.componentInstance;
-		document.querySelectorAll('#homepage-theme').forEach((n) => n.remove());
-		app.setTheme('homepage');
-		app.setTheme('z21');
+	it('should render the application shell', () => {
+		expect(fixture.nativeElement.querySelector('theme-header')).not.toBeNull();
+		expect(fixture.nativeElement.querySelector('router-outlet')).not.toBeNull();
+		expect(fixture.nativeElement.querySelector('theme-footer')).not.toBeNull();
+	});
+
+	it('should ignore an empty theme selection', () => {
+		const dropdown = fixture.debugElement.query(By.directive(DropdownSelectComponent)).componentInstance;
+		const stylesheet = document.getElementById('homepage-theme') as HTMLLinkElement;
+
+		dropdown.selectionChange.emit(null);
+		fixture.detectChanges();
+
+		expect(stylesheet.getAttribute('href')).toBe('homepage-theme.css');
+	});
+
+	it('should switch the theme stylesheet from the dropdown', () => {
+		const dropdown = fixture.debugElement.query(By.directive(DropdownSelectComponent)).componentInstance;
+
+		dropdown.selectionChange.emit('z21');
+		fixture.detectChanges();
+
+		const stylesheet = document.getElementById('homepage-theme') as HTMLLinkElement | null;
+		expect(stylesheet?.getAttribute('href')).toBe('z21-theme.css');
+	});
+
+	it('should reuse the existing theme stylesheet', () => {
+		const dropdown = fixture.debugElement.query(By.directive(DropdownSelectComponent)).componentInstance;
+
+		dropdown.selectionChange.emit('z21');
+		dropdown.selectionChange.emit('homepage');
+
 		expect(document.querySelectorAll('#homepage-theme')).toHaveLength(1);
-		const link = document.getElementById('homepage-theme') as HTMLLinkElement | null;
-		expect(link?.getAttribute('href')).toEqual('z21-theme.css');
-	});
-
-	it('handles a null bundleName by setting href to null-theme.css', () => {
-		const app = fixture.componentInstance;
-		document.querySelectorAll('#homepage-theme').forEach((n) => n.remove());
-		app.setTheme(null);
-		const link = document.getElementById('homepage-theme') as HTMLLinkElement | null;
-		expect(link).toBeTruthy();
-		expect(link?.getAttribute('href')).toEqual('null-theme.css');
+		expect((document.getElementById('homepage-theme') as HTMLLinkElement).getAttribute('href')).toBe('homepage-theme.css');
 	});
 });

@@ -3,9 +3,9 @@
  * All rights reserved.
  */
 
-import { LogLevel } from '../logging/logger';
+import type { LogLevel } from '../logging/logger';
 
-import { Broadcastflags } from './constants';
+import type { Broadcastflags } from './constants';
 
 /**
  * Server configuration shape loaded from config.json or environment.

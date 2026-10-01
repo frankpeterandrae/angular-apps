@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { HardwareType } from '@application-platform/z21-shared';
+import type { HardwareType } from '@application-platform/z21-shared';
 
 export type XBusVersion = {
 	xBusVersion: number;

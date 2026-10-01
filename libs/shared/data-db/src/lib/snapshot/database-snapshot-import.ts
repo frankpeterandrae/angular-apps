@@ -6,9 +6,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { Db, withTx } from '../db';
+import { type Db, withTx } from '../db';
 
-import { DatabaseSnapshotConfig, DatabaseSnapshotRow, DatabaseSnapshotTableConfig } from './database-snapshot.types';
+import type { DatabaseSnapshotConfig, DatabaseSnapshotRow, DatabaseSnapshotTableConfig } from './database-snapshot.types';
 import { getSnapshotTables, getTableColumns, quoteIdentifier } from './database-snapshot.utils';
 interface ForeignKeyViolation {
 	table: string;

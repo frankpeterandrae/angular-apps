@@ -21,8 +21,29 @@
       <sourceFolder url="file://$MODULE_DIR$/apps/z21-server-e2e/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/z21-suite/server-utils/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/z21-suite/shared/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/libs/demo/demo-feature/src/assets" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/shared/paint/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/apps/starmap-e2e/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/apps/starmap/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/apps/stream-deck-paint-selector/de.frankpeterandrae.paint-selector.sdPlugin" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/apps/stream-deck-paint-selector/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/apps/stream-overlay-server/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/apps/stream-overlay-ui-e2e/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/apps/stream-overlay-ui/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/shared/config/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/shared/data-db/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/shared/shared-node-test/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/starmap/data-access/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/starmap/domain/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/starmap/editor/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/starmap/map/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/starmap/renderer-3d/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/stream-overlay/dashboard/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/stream-overlay/data-access/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/stream-overlay/overlay/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/stream-overlay/paint-api/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/stream-overlay/paint-data-access/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/stream-overlay/paint-protocol/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/stream-overlay/paint-selector/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.angular" />
       <excludeFolder url="file://$MODULE_DIR$/.github" />
       <excludeFolder url="file://$MODULE_DIR$/.husky" />
@@ -37,6 +58,7 @@
       <excludeFolder url="file://$MODULE_DIR$/test-results" />
       <excludeFolder url="file://$MODULE_DIR$/dist" />
       <excludeFolder url="file://$MODULE_DIR$/apps/starmap/src-tauri/target" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/starmap/src-tauri" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { MapBounds } from '@application-platform/starmap-domain';
+import type { MapBounds } from '@application-platform/starmap-domain';
 
 export interface SvgPoint {
 	x: number;

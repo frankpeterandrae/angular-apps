@@ -3,9 +3,9 @@
  * All rights reserved.
  */
 
-import type { Route } from '@angular/router';
+import type { Routes } from '@angular/router';
 
-export const appRoutes: Route[] = [
+export const appRoutes: Routes = [
 	{ path: '', redirectTo: 'demo/button', pathMatch: 'full' },
 	{ path: 'demo', loadChildren: () => import('@application-platform/demo-feature').then((m) => m.demoFeatureRoutes) }
 ];

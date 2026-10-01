@@ -4,8 +4,7 @@
  */
 
 import { provideHttpClient, withXhr } from '@angular/common/http';
-import type { ApplicationConfig } from '@angular/core';
-import { provideZonelessChangeDetection } from '@angular/core';
+import { type ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { createTranslocoConfig } from '@application-platform/config';
 import { ScopedTranslationServiceInterface } from '@application-platform/interfaces';
@@ -17,48 +16,14 @@ import { environment } from '../environments/environment';
 
 import { appRoutes } from './app.routes';
 
-/**
- * Application configuration object.
- */
 export const appConfig: ApplicationConfig = {
 	providers: [
-		/**
-		 * Provides zone less change detection
-		 */
 		provideZonelessChangeDetection(),
-
-		/**
-		 * Provides the router configuration.
-		 */
 		provideRouter(appRoutes),
-
-		/**
-		 * Provides the HTTP client.
-		 */
 		provideHttpClient(withXhr()),
-
-		/**
-		 * Provides the FastSVG configuration.
-		 * @param {string} path - The path/name of the SVG file.
-		 * Can be in format 'icon-name' (default location) or 'libName/icon-name' (library-specific location).
-		 * @returns {string} The URL to the SVG file.
-		 */
 		provideFastSVG({
-			/**
-			 * Generates the URL for the SVG file.
-			 * Supports library-specific paths like 'libA/icon-name' or default paths like 'icon-name'.
-			 * @param {string} path - The path/name of the SVG file.
-			 * @returns {string} The URL to the SVG file.
-			 */
-			url: (path: string): string => {
-				// If path contains a slash, it's already a library-specific path (e.g., 'libA/icon-name')
-				// Otherwise, assume default svg assets location (e.g., 'icon-name' -> 'svg/icon-name')
-				return path.includes('/') ? `/assets/${path}.svg` : `/assets/svg/${path}.svg`;
-			}
+			url: (path: string): string => (path.includes('/') ? `/assets/${path}.svg` : `/assets/svg/${path}.svg`)
 		}),
-		/**
-		 * Provides the Transloco configuration.
-		 */
 		provideTransloco({
 			config: createTranslocoConfig(environment.production),
 			loader: TranslocoHttpLoader

@@ -2,19 +2,17 @@
   ~ Copyright (c) 2024-2026. Frank-Peter Andrä
   ~ All rights reserved.
   -->
-<h2><span [fpaSharedUiTranslate]="i18nTextModules.ColorGridComponent.lbl.TwoThinCoats"></span></h2>
+<h2><span [fpaSharedUiTranslate]="i18nTextModules.ColorGrid.lbl.TwoThinCoats"></span></h2>
 <cdk-virtual-scroll-viewport [itemSize]="itemSize" [minBufferPx]="itemSize" [maxBufferPx]="itemSize" class="mobile-height fpa-flex-grow-1">
 	<div *cdkVirtualFor="let colorItems of colors()" class="fpa-grid-12 fpa-gap-05 fpa-mb-05 fpa-mr-05">
 		@for (color of colorItems; track color.name) {
-			<a
+			<button
+				type="button"
 				class="color-tile fpa-grid-col-end-6 fpa-grid-col-end-sm-4 fpa-grid-col-end-md-2 fpa-grid-col-end-lg-2 fpa-grid-col-end-xl-1"
 				[ngStyle]="{
 					background: backgroundColor(color)
 				}"
 				(click)="openDetails(color)"
-				(keydown.enter)="openDetails(color)"
-				(keydown.space)="openDetails(color)"
-				tabindex="0"
 			>
 				<div class="color-name fpa-dark-text fpa-text-shadow-light">
 					<h3>{{ color.name }}</h3>
@@ -26,7 +24,7 @@
 				@if (searchQuery() && !color.highlighted) {
 					<div class="grayed-out"></div>
 				}
-			</a>
+			</button>
 		}
 	</div>
 </cdk-virtual-scroll-viewport>

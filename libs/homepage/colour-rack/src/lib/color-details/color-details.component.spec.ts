@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2024-2026. Frank-Peter Andrä
+ * Copyright (c) 2026. Frank-Peter Andrä
  * All rights reserved.
  */
 
 import { OverlayRef } from '@angular/cdk/overlay';
-import type { ComponentFixture } from '@angular/core/testing';
-import { TestBed } from '@angular/core/testing';
-import type { DialogConfigModel } from '@application-platform/shared/ui-theme';
-import { DIALOG_DATA } from '@application-platform/shared/ui-theme';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
+import { type DialogConfigModel, DIALOG_DATA, DialogType } from '@application-platform/shared/ui-theme';
 import { vi } from 'vitest';
 
 import { setupTestingModule } from '../../test-setup';
@@ -16,49 +14,103 @@ import type { Color } from '../models/color.model';
 import { ColorDetailsComponent } from './color-details.component';
 
 describe('ColorDetailsComponent', () => {
-	let component: ColorDetailsComponent;
-	let fixture: ComponentFixture<ColorDetailsComponent>;
-	let overlayRefMock: OverlayRef & { dispose?: ReturnType<typeof vi.fn> };
+	const defaultColor: Color = {
+		name: 'Test Color',
+		alternativeNames: ['Alternative One', 'Alternative Two'],
+		type: 'S-ME',
+		mainColor: '#123456',
+		wave: '2',
+		sku: '12345',
+		barcode: '987654321',
+		row: 3,
+		column: 4
+	};
 
-	beforeEach(async () => {
-		overlayRefMock = {
-			dispose: vi.fn()
-		} as unknown as OverlayRef & { dispose?: ReturnType<typeof vi.fn> };
-
-		const mockDialogData: DialogConfigModel<any> = {
-			componentData: undefined,
-			settings: { title: 'Test Dialog' }
+	async function createFixture(color: Color = defaultColor): Promise<ComponentFixture<ColorDetailsComponent>> {
+		const dialogData: DialogConfigModel<Color> = {
+			componentData: color,
+			settings: {
+				title: 'Color Details',
+				type: DialogType.INFO
+			}
 		};
 
 		await setupTestingModule({
 			imports: [ColorDetailsComponent],
 			providers: [
-				{ provide: OverlayRef, useValue: overlayRefMock },
-				{ provide: DIALOG_DATA, useValue: mockDialogData }
+				{
+					provide: OverlayRef,
+					useValue: {
+						dispose: vi.fn()
+					}
+				},
+				{
+					provide: DIALOG_DATA,
+					useValue: dialogData
+				}
 			]
 		});
 
-		fixture = TestBed.createComponent(ColorDetailsComponent);
-		component = fixture.componentInstance;
+		const fixture = TestBed.createComponent(ColorDetailsComponent);
+
 		fixture.detectChanges();
+
+		return fixture;
+	}
+
+	it('should render the color details', async () => {
+		const fixture = await createFixture();
+		const text = fixture.nativeElement.textContent;
+
+		expect(text).toContain('12345');
+		expect(text).toContain('Alternative One');
+		expect(text).toContain('Alternative Two');
+		expect(text).toContain('Shadow-Metallic');
+		expect(text).toContain('2');
+		expect(text).toContain('987654321');
+		expect(text).toContain('3 - 4');
 	});
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
+	it('should display Unknown for unsupported color types', async () => {
+		const fixture = await createFixture({
+			...defaultColor,
+			type: 'UNKNOWN' as Color['type']
+		});
+
+		expect(fixture.nativeElement.textContent).toContain('Unknown');
 	});
 
-	it('should return correct color type when valid types are provided', () => {
-		component.data.componentData = { type: 'S' } as Color;
-		expect(component.colorType()).toBe('Shadow');
+	it('should display ink colors', async () => {
+		const fixture = await createFixture({
+			...defaultColor,
+			type: 'I'
+		});
+
+		expect(fixture.nativeElement.textContent).toContain('Ink');
 	});
 
-	it('should return correct color type when valid combined types are provided', () => {
-		component.data.componentData = { type: 'S-ME' } as Color;
-		expect(component.colorType()).toBe('Shadow-Metallic');
+	it('should display Dark Arts colors', async () => {
+		const fixture = await createFixture({
+			...defaultColor,
+			type: 'DA'
+		});
+
+		expect(fixture.nativeElement.textContent).toContain('Dark Arts');
 	});
 
-	it('should return "Unknown" when invalid types are provided', () => {
-		component.data.componentData = { type: 'Metallic' } as Color;
-		expect(component.colorType()).toBe('Unknown');
+	it('should display placeholders for missing sku and barcode', async () => {
+		const fixture = await createFixture({
+			...defaultColor,
+			sku: undefined,
+			barcode: undefined
+		});
+
+		const element = fixture.nativeElement as HTMLElement;
+		const values = Array.from(element.querySelectorAll<HTMLElement>('.fpa-grid-col-end-10 p')).map((item) =>
+			item.textContent?.trim()
+		);
+
+		expect(values[0]).toBe('-');
+		expect(values[5]).toBe('-');
 	});
 });

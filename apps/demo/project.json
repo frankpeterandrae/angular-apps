@@ -34,12 +34,12 @@
 				"styles": [
 					"apps/demo/src/styles.scss",
 					{
-						"input": "libs/shared/ui-theme/src/lib/theme/themed/homepage-theme.scss",
+						"input": "libs/shared/ui-theme/src/lib/theme/themes/homepage-theme.scss",
 						"inject": false,
 						"bundleName": "homepage-theme"
 					},
 					{
-						"input": "libs/shared/ui-theme/src/lib/theme/themed/z21-theme.scss",
+						"input": "libs/shared/ui-theme/src/lib/theme/themes/z21-theme.scss",
 						"inject": false,
 						"bundleName": "z21-theme"
 					}

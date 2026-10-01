@@ -4,8 +4,8 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { STAR_MAP_WORKSPACE, StarMapFileService, StarMapStore, StarMapWorkspace } from '@application-platform/starmap-data-access';
-import { StarMap } from '@application-platform/starmap-domain';
+import { type StarMapWorkspace, STAR_MAP_WORKSPACE, StarMapFileService, StarMapStore } from '@application-platform/starmap-data-access';
+import type { StarMap } from '@application-platform/starmap-domain';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { StarMapAutosaveService } from './star-map-autosave.service';

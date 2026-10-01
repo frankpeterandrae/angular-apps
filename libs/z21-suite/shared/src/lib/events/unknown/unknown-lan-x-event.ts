@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { Domain } from '../../types';
-import { Event } from '../event';
+import type { Domain } from '../../types';
+import type { Event } from '../event';
 
 export type UnknownLanXEvent = Event<Domain.UNKNOWN, 'lan_x', { xHeader: number; bytes: number[] }>;

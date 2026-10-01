@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024. Frank-Peter Andrä
+ * Copyright (c) 2024-2026. Frank-Peter Andrä
  * All rights reserved.
  */
 
@@ -12,8 +12,10 @@
 	.color-tile {
 		position: relative;
 		width: 100%;
-		padding-top: 100%; // For square tiles
+		padding: 100% 0 0;
+		border: 0;
 		cursor: pointer;
+		text-align: inherit;
 	}
 
 	.color-name {

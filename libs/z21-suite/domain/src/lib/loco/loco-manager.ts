@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { LocoInfoEventPayload, type Direction } from '@application-platform/z21-shared';
+import { type Direction, type LocoInfoEventPayload } from '@application-platform/z21-shared';
 
 export type LocoState = {
 	speed: number;

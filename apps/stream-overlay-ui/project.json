@@ -30,7 +30,7 @@
 						"output": "assets/stream-overlay"
 					}
 				],
-				"styles": ["apps/stream-overlay-ui/src/styles.scss", "libs/shared/ui-theme/src/lib/theme/themed/stream-overlay.scss"]
+				"styles": ["apps/stream-overlay-ui/src/styles.scss", "libs/shared/ui-theme/src/lib/theme/themes/stream-overlay.scss"]
 			},
 			"configurations": {
 				"production": {

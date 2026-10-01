@@ -3,6 +3,7 @@
  * All rights reserved.
  */
 
+/** Available checkbox color variants. */
 export enum CheckboxColorDefinition {
 	LIGHT_SHADES = 'light-shades',
 	LIGHT_ACCENT = 'light-accent',

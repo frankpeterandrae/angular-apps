@@ -3,50 +3,33 @@
  * All rights reserved.
  */
 
-import { describe, expect, it } from 'vitest';
+import { environment } from '../environments/environment';
 
 import { appRoutes } from './app.routes';
 
 describe('appRoutes', () => {
-	it('should be an array', () => {
-		expect(Array.isArray(appRoutes)).toBe(true);
+	it('should lazy load the homepage', () => {
+		const route = appRoutes.find(({ path }) => path === '');
+
+		expect(route?.loadComponent).toBeTypeOf('function');
 	});
 
-	it('should be of type Route[]', () => {
-		expect(appRoutes).toBeDefined();
-		appRoutes.forEach((route) => {
-			expect(typeof route).toBe('object');
-		});
+	it('should configure the paint rack route with scoped providers', () => {
+		const route = appRoutes.find(({ path }) => path === 'paint-rack');
+
+		expect(route?.loadComponent).toBeTypeOf('function');
+		expect(route?.providers).toBeDefined();
 	});
 
-	it('should export routes from module', () => {
-		expect(appRoutes).toBeTruthy();
+	it('should expose development routes only outside production', () => {
+		const route = appRoutes.find(({ path }) => path === 'dev');
+
+		expect(Boolean(route)).toBe(!environment.production);
 	});
 
-	it('should define home route', () => {
-		const homeRoute = appRoutes.find((r) => r.path === '');
-		expect(homeRoute).toBeDefined();
-	});
+	it('should lazy load the not-found page for unknown routes', () => {
+		const route = appRoutes.find(({ path }) => path === '**');
 
-	it('should have lazy loaded components', () => {
-		const lazyRoutes = appRoutes.filter((r) => r.loadComponent);
-		expect(lazyRoutes.length).toBeGreaterThan(0);
-	});
-
-	it('should define paint-rack route', () => {
-		const paintRackRoute = appRoutes.find((r) => r.path === 'paint-rack');
-		expect(paintRackRoute).toBeDefined();
-		expect(paintRackRoute?.loadComponent).toBeDefined();
-	});
-
-	it('should have wildcard route for 404', () => {
-		const wildcardRoute = appRoutes.find((r) => r.path === '**');
-		expect(wildcardRoute).toBeDefined();
-		expect(wildcardRoute?.loadComponent).toBeDefined();
-	});
-
-	it('should have providers on paint-rack route', () => {
-		const paintRackRoute = appRoutes.find((r) => r.path === 'paint-rack');
-		expect(paintRackRoute?.providers).toBeDefined();
+		expect(route?.loadComponent).toBeTypeOf('function');
 	});
 });

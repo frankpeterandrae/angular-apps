@@ -4,12 +4,12 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { NebulaType, StarMap } from '@application-platform/starmap-domain';
+import type { NebulaType, StarMap } from '@application-platform/starmap-domain';
 
 import { setupTestingModule } from '../../test-setup';
 
 import { NebulaRendererService } from './nebula-renderer.service';
-import { RenderedMap } from './render-models';
+import type { RenderedMap } from './render-models';
 
 describe('NebulaRendererService', () => {
 	let service: NebulaRendererService;

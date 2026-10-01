@@ -4,9 +4,9 @@
  */
 
 import { signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { StreamState } from '@application-platform/interfaces';
+import type { StreamState } from '@application-platform/interfaces';
 import { StreamStateService } from '@application-platform/stream-overlay-data-access';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 

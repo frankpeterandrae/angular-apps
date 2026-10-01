@@ -9,9 +9,9 @@ export const i18nTextModules = {
 			Wave: 'ColorDetails.lbl.Wave'
 		}
 	},
-	ColorGridComponent: {
+	ColorGrid: {
 		lbl: {
-			TwoThinCoats: 'ColorGridComponent.lbl.TwoThinCoats'
+			TwoThinCoats: 'ColorGrid.lbl.TwoThinCoats'
 		}
 	},
 	ColorSearch: {
@@ -29,13 +29,11 @@ export const i18nTextModules = {
 			ColorSearchDescription: 'ColorSearchContainer.lbl.ColorSearchDescription',
 			Description: 'ColorSearchContainer.lbl.Description',
 			FunctionsDescription: 'ColorSearchContainer.lbl.FunctionsDescription',
-			Titel: 'ColorSearchContainer.lbl.Titel'
-		}
-	},
-	ColorSearchContainerComponent: {
+			Title: 'ColorSearchContainer.lbl.Title'
+		},
 		meta: {
-			Description: 'ColorSearchContainerComponent.meta.Description',
-			Title: 'ColorSearchContainerComponent.meta.Title'
+			Description: 'ColorSearchContainer.meta.Description',
+			Title: 'ColorSearchContainer.meta.Title'
 		}
 	}
 };

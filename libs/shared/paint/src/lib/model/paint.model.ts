@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-import { PaintColorGroup } from './paint-color-group.model';
+import type { PaintColorGroup } from './paint-color-group.model';
 
 /**
  * Hexadecimal color value.

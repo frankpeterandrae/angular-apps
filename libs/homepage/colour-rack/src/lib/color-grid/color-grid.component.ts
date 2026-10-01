@@ -6,10 +6,8 @@
 import type { NumberInput } from '@angular/cdk/coercion';
 import { CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { NgStyle } from '@angular/common';
-import type { AfterViewInit, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Component, HostListener, inject, input, signal, viewChild } from '@angular/core';
-import type { DialogConfigModel } from '@application-platform/shared/ui-theme';
-import { DialogService } from '@application-platform/shared/ui-theme';
+import { type AfterViewInit, type OnChanges, type OnInit, Component, HostListener, inject, input, signal, viewChild } from '@angular/core';
+import { type DialogConfigModel, DialogService, DialogType } from '@application-platform/shared/ui-theme';
 import { LOGGER_SOURCE, Scopes, TranslationDirective } from '@application-platform/shared-ui';
 import { provideTranslocoScope } from '@jsverse/transloco';
 
@@ -31,9 +29,9 @@ import { ColorService } from '../services/color.service';
 export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 	private readonly colorService = inject(ColorService);
 	private readonly dialogService = inject(DialogService);
-	public readonly i18nTextModules = i18nTextModules;
+	protected readonly i18nTextModules = i18nTextModules;
 
-	public readonly viewPort = viewChild.required(CdkVirtualScrollViewport);
+	protected readonly viewPort = viewChild.required(CdkVirtualScrollViewport);
 	/**
 	 * The search query used to filter and highlight colors.
 	 */
@@ -42,61 +40,50 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 	/**
 	 * The list of colors to be displayed in the grid.
 	 */
-	public colors = signal<Color[][]>([]);
-	public itemSize: NumberInput = 68;
+	protected readonly colors = signal<Color[][]>([]);
+	protected itemSize: NumberInput = 68;
+	private readonly allColors = signal<Color[]>([]);
 	private chunkSize = 12;
 
-	/**
-	 * Adjusts the item size, chunk size, and fetches colors when the window is resized.
-	 */
 	@HostListener('window:resize')
-	public adjustOnWindowResize(): void {
+	protected adjustOnWindowResize(): void {
 		this.updateItemSize();
 		this.updateChunkSize();
-		this.fetchColors();
+		this.updateColorChunks();
 	}
 
-	/**
-	 * Lifecycle hook that is called after data-bound properties are initialized.
-	 */
 	ngOnInit(): void {
 		this.updateChunkSize();
 		this.fetchColors();
 	}
 
-	/**
-	 * Lifecycle hook that is called when any data-bound property of a directive changes.
-	 * @param {SimpleChanges} changes - The changes in the data-bound properties.
-	 */
-	ngOnChanges(changes: SimpleChanges): void {
+	ngOnChanges(): void {
 		this.highlightMatchingColors(this.searchQuery() || '');
 	}
 
-	/**
-	 * Lifecycle hook that is called after a component's view has been fully initialized.
-	 * This is used to perform any additional initialization tasks that require the view to be fully rendered.
-	 */
-	public ngAfterViewInit(): void {
+	ngAfterViewInit(): void {
 		setTimeout(() => {
 			this.updateItemSize();
 		});
 	}
 
-	/**
-	 * Fetches the colors from the ColorService and updates the colors list.
-	 */
 	private fetchColors(): void {
 		this.colorService.getColors().subscribe((colors) => {
 			this.calculateStorageLocation(colors);
-			const chunkSize = this.chunkSize;
-			const colorChunks: Color[][] = [];
-			for (let i = 0; i < colors.length; i += chunkSize) {
-				colorChunks.push(colors.slice(i, i + chunkSize));
-			}
-			this.colors.set(colorChunks);
-
-			this.highlightMatchingColors(this.searchQuery() || '');
+			this.allColors.set(colors);
+			this.updateColorChunks();
+			this.highlightMatchingColors(this.searchQuery() ?? '');
 		});
+	}
+
+	private updateColorChunks(): void {
+		const chunks: Color[][] = [];
+
+		for (let index = 0; index < this.allColors().length; index += this.chunkSize) {
+			chunks.push(this.allColors().slice(index, index + this.chunkSize));
+		}
+
+		this.colors.set(chunks);
 	}
 
 	/**
@@ -112,12 +99,7 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 		});
 	}
 
-	/**
-	 * Calculates the storage location of each color based on its index.
-	 * @param {Color[]} colors - The array of colors to calculate storage locations for.
-	 * @returns {Color[]} - The array of colors with updated storage locations.
-	 */
-	public calculateStorageLocation(colors: Color[]): Color[] {
+	private calculateStorageLocation(colors: Color[]): Color[] {
 		colors.forEach((color, idx) => {
 			color.row = Math.floor(idx / 12) + 1;
 			color.column = (idx % 12) + 1;
@@ -125,19 +107,12 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 		return colors;
 	}
 
-	/**
-	 * Opens the details dialog for a given color.
-	 * @param {Color} color - The color for which to open the details' dialog.
-	 */
-	public openDetails(color: Color): void {
-		const dialogConfig: DialogConfigModel<Color> = { componentData: color, settings: { title: color.name } };
+	protected openDetails(color: Color): void {
+		const dialogConfig: DialogConfigModel<Color> = { componentData: color, settings: { title: color.name, type: DialogType.INFO } };
 
 		this.dialogService.open(ColorDetailsComponent, dialogConfig);
 	}
 
-	/**
-	 * Updates the item size based on the first color tile's dimensions.
-	 */
 	private updateItemSize(): void {
 		const firstCard: HTMLElement | null = this.viewPort().elementRef.nativeElement.querySelector('.color-tile');
 		if (firstCard) {
@@ -148,34 +123,23 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 		this.updateChunkSize();
 	}
 
-	/**
-	 * Calculates the chunk size based on the screen width.
-	 */
 	private updateChunkSize(): void {
 		const win = globalThis as unknown as Window;
 		const screenWidth = win.innerWidth / Number.parseFloat(win.getComputedStyle(document.documentElement).fontSize);
 		if (screenWidth <= 40) {
-			//40*16 = 640
 			this.chunkSize = 2; // xs
 		} else if (screenWidth <= 56.25) {
-			// 56.25*16 = 900
 			this.chunkSize = 3; // sm
 		} else if (screenWidth <= 78.125) {
-			// 78.125*16 = 1250
 			this.chunkSize = 6; // md
 		} else if (screenWidth <= 100) {
-			// 100*16 = 1600
 			this.chunkSize = 6; // lg
 		} else {
 			this.chunkSize = 12; // xl
 		}
 	}
 
-	/**
-	 * Get the correct background color with the correct gradient.
-	 * @param color
-	 */
-	public backgroundColor(color: Color): string | undefined {
+	protected backgroundColor(color: Color): string {
 		if (color.secondaryColor) {
 			switch (color.type) {
 				case 'ME':
@@ -188,7 +152,12 @@ export class ColorGridComponent implements AfterViewInit, OnInit, OnChanges {
 					return `linear-gradient(0deg,${color.secondaryColor},${color.mainColor})`;
 				case 'W':
 					return `radial-gradient(circle,${color.mainColor}, ${color.secondaryColor})`;
-				default:
+				case 'M':
+				case 'S':
+				case 'H':
+				case 'E':
+				case 'B':
+				case 'DA':
 					return color.mainColor;
 			}
 		}

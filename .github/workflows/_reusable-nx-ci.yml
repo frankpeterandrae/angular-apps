@@ -164,6 +164,10 @@ jobs:
             npx nx affected --target=test --base='${{ steps.affected-base.outputs.base }}' --head='${{ inputs.head }}' --configuration=ci
           fi
 
+      - name: Merge coverage reports
+        if: ${{ inputs.mode == 'main' || steps.ci-changes.outputs.run_ci == 'true' }}
+        run: npm run coverage:report
+
       - name: Detect affected E2E projects
         id: affected-e2e
         if: ${{ inputs.mode != 'main' && steps.ci-changes.outputs.run_ci == 'true' }}

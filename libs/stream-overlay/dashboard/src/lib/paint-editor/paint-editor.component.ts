@@ -11,6 +11,7 @@ import {
 	ButtonComponent,
 	DialogComponent,
 	DialogService,
+	DialogType,
 	IconDefinition,
 	InputComponent,
 	SelectComponent
@@ -229,6 +230,7 @@ export class PaintEditorComponent {
 			componentData: paint,
 			settings: {
 				title: 'Farbe löschen',
+				type: DialogType.CONFIRM,
 				content: `Soll "${paint.name}" wirklich gelöscht werden?`,
 				acceptText: 'Löschen',
 				declineText: 'Abbrechen',
