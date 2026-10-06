@@ -5,9 +5,11 @@
 
 import { expect, test } from '@playwright/test';
 
-test('has title', async ({ page }) => {
+test('loads the starmap editor', async ({ page }) => {
 	await page.goto('/');
 
-	// Expect h1 to contain a substring.
-	expect(await page.locator('body').innerText()).toContain('NEUES SYSTEM');
+	const editor = page.locator('starmap-editor-container');
+
+	await expect(editor).toBeVisible();
+	await expect(editor.locator('starmap-container')).toBeVisible();
 });

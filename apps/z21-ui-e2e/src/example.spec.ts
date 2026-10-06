@@ -5,9 +5,8 @@
 
 import { expect, test } from '@playwright/test';
 
-test('has title', async ({ page }) => {
+test('shows the Z21 UI', async ({ page }) => {
 	await page.goto('/');
 
-	// Expect h1 to contain a substring.
-	expect(await page.locator('h1').innerText()).toContain('Z21 UI');
+	await expect(page.locator('h1')).toContainText('Z21 UI');
 });

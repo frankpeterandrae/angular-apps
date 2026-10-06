@@ -10,13 +10,13 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
 	root: import.meta.dirname,
-	cacheDir: resolve(process.cwd(), 'node_modules/.vite/apps/stream-deck-paint-selector'),
+	cacheDir: resolve(process.cwd(), 'node_modules/.vite/apps/streamdeck/paint-selector-plugin'),
 	plugins: [tsconfigPaths()],
 	test: {
 		environment: 'node',
 		globals: true,
 		reporters: ['html', 'default', 'verbose'],
-		outputFile: resolve(process.cwd(), 'test-result/apps/stream-deck-paint-selector/index.html'),
+		outputFile: resolve(process.cwd(), 'test-result/apps/streamdeck/paint-selector-plugin/index.html'),
 		include: ['src/**/*.spec.ts', 'src/**/*.test.ts'],
 		passWithNoTests: true,
 		coverage: {
