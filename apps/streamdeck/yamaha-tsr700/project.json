@@ -1,0 +1,124 @@
+{
+	"name": "streamdeck-yamaha-tsr700",
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "apps/streamdeck/yamaha-tsr700/src",
+	"projectType": "application",
+	"tags": ["platform:node", "scope:yamaha", "type:app"],
+	"targets": {
+		"build": {
+			"executor": "@nx/esbuild:esbuild",
+			"outputs": ["{options.outputPath}"],
+			"defaultConfiguration": "production",
+			"options": {
+				"platform": "node",
+				"outputPath": "dist/apps/streamdeck/yamaha-tsr700/build",
+				"format": ["esm"],
+				"bundle": true,
+				"main": "apps/streamdeck/yamaha-tsr700/src/main.ts",
+				"tsConfig": "apps/streamdeck/yamaha-tsr700/tsconfig.app.json",
+				"assets": [],
+				"esbuildOptions": {
+					"sourcemap": true,
+					"outExtension": {
+						".js": ".js"
+					},
+					"banner": {
+						"js": "import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);"
+					}
+				},
+				"external": [],
+				"thirdParty": true,
+				"target": "node24"
+			},
+			"configurations": {
+				"development": {},
+				"production": {
+					"esbuildOptions": {
+						"sourcemap": false,
+						"outExtension": {
+							".js": ".js"
+						},
+						"banner": {
+							"js": "import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);"
+						}
+					}
+				}
+			}
+		},
+		"package-plugin": {
+			"executor": "nx:run-commands",
+			"dependsOn": ["build"],
+			"options": {
+				"commands": [
+					"shx rm -rf dist/apps/streamdeck/yamaha-tsr700/de.frankpeterandrae.yamaha.sdPlugin",
+					"shx mkdir -p dist/apps/streamdeck/yamaha-tsr700/de.frankpeterandrae.yamaha.sdPlugin/bin",
+					"shx cp apps/streamdeck/yamaha-tsr700/de.frankpeterandrae.yamaha.sdPlugin/manifest.json dist/apps/streamdeck/yamaha-tsr700/de.frankpeterandrae.yamaha.sdPlugin/",
+					"shx cp -r apps/streamdeck/yamaha-tsr700/de.frankpeterandrae.yamaha.sdPlugin/imgs dist/apps/streamdeck/yamaha-tsr700/de.frankpeterandrae.yamaha.sdPlugin/",
+					"shx cp -r apps/streamdeck/yamaha-tsr700/de.frankpeterandrae.yamaha.sdPlugin/ui dist/apps/streamdeck/yamaha-tsr700/de.frankpeterandrae.yamaha.sdPlugin/",
+					"shx cp dist/apps/streamdeck/yamaha-tsr700/build/main.js dist/apps/streamdeck/yamaha-tsr700/de.frankpeterandrae.yamaha.sdPlugin/bin/plugin.mjs"
+				],
+				"parallel": false
+			}
+		},
+		"link-plugin": {
+			"executor": "nx:run-commands",
+			"dependsOn": ["package-plugin"],
+			"options": {
+				"command": "npx streamdeck link dist/apps/streamdeck/yamaha-tsr700/de.frankpeterandrae.yamaha.sdPlugin"
+			}
+		},
+		"restart-plugin": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "npx streamdeck restart de.frankpeterandrae.yamaha"
+			}
+		},
+		"deploy-plugin": {
+			"executor": "nx:run-commands",
+			"dependsOn": ["package-plugin"],
+			"options": {
+				"command": "npx streamdeck restart de.frankpeterandrae.yamaha"
+			}
+		},
+		"pack-plugin": {
+			"executor": "nx:run-commands",
+			"dependsOn": ["test", "typecheck", "check-plugin"],
+			"options": {
+				"command": "npx streamdeck pack dist/apps/streamdeck/yamaha-tsr700/de.frankpeterandrae.yamaha.sdPlugin --output dist/apps/streamdeck/yamaha-tsr700 --force --no-update-check"
+			}
+		},
+		"test": {
+			"executor": "@nx/vitest:test",
+			"options": {
+				"tsConfig": "apps/streamdeck/yamaha-tsr700/tsconfig.spec.json",
+				"vitestConfig": "apps/streamdeck/yamaha-tsr700/vitest.config.mts",
+				"reportsDirectory": "test-result/apps/streamdeck/yamaha-tsr700/coverage",
+				"passWithNoTests": true
+			},
+			"outputs": ["{options.reportsDirectory}"]
+		},
+		"typecheck": {
+			"executor": "nx:noop",
+			"dependsOn": ["typecheck-app", "typecheck-test"]
+		},
+		"typecheck-test": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "npx tsc -p {projectRoot}/tsconfig.spec.json --noEmit"
+			}
+		},
+		"typecheck-app": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "npx tsc -p {projectRoot}/tsconfig.app.json --noEmit"
+			}
+		},
+		"check-plugin": {
+			"executor": "nx:run-commands",
+			"dependsOn": ["package-plugin"],
+			"options": {
+				"command": "node apps/streamdeck/yamaha-tsr700/tools/check-plugin.mjs"
+			}
+		}
+	}
+}

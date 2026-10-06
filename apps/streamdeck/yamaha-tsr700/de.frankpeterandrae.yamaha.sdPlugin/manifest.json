@@ -1,0 +1,142 @@
+{
+	"$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
+	"Name": "Yamaha TSR-700",
+	"Version": "0.1.0.0",
+	"Author": "Frank-Peter Andrae",
+	"Actions": [
+		{
+			"Name": "Power On",
+			"UUID": "de.frankpeterandrae.yamaha.power-on",
+			"Icon": "imgs/actions/power-on/icon",
+			"Tooltip": "Power on the receiver.",
+			"PropertyInspectorPath": "ui/power-on.html",
+			"Controllers": ["Keypad"],
+			"States": [
+				{
+					"Image": "imgs/actions/power-on/key",
+					"TitleAlignment": "middle"
+				}
+			]
+		},
+		{
+			"Name": "Volume",
+			"UUID": "de.frankpeterandrae.yamaha.volume",
+			"Icon": "imgs/actions/volume-up/icon",
+			"Tooltip": "Increase or decrease the zone volume.",
+			"PropertyInspectorPath": "ui/volume.html",
+			"Controllers": ["Keypad"],
+			"States": [
+				{
+					"Image": "imgs/actions/volume-up/key",
+					"TitleAlignment": "bottom"
+				}
+			]
+		},
+		{
+			"Name": "Mute",
+			"UUID": "de.frankpeterandrae.yamaha.mute",
+			"Icon": "imgs/actions/mute/icon",
+			"Tooltip": "Mute the zone.",
+			"PropertyInspectorPath": "ui/mute.html",
+			"Controllers": ["Keypad"],
+			"States": [
+				{
+					"Image": "imgs/actions/mute/mute",
+					"TitleAlignment": "bottom"
+				}
+			]
+		},
+		{
+			"Name": "Source",
+			"UUID": "de.frankpeterandrae.yamaha.input",
+			"Icon": "imgs/actions/input/icon",
+			"Tooltip": "Select the source for the zone.",
+			"PropertyInspectorPath": "ui/input.html",
+			"Controllers": ["Keypad"],
+			"States": [
+				{
+					"Image": "imgs/actions/input/icon",
+					"TitleAlignment": "bottom"
+				}
+			]
+		},
+		{
+			"Name": "All Standby",
+			"UUID": "de.frankpeterandrae.yamaha.power-off-all",
+			"Icon": "imgs/actions/power-off-all/icon",
+			"Tooltip": "Switch all power zones of the configured Yamaha AVR to standby",
+			"Controllers": ["Keypad"],
+			"States": [
+				{
+					"Image": "imgs/actions/power-off-all/key",
+					"Title": "All\nStandby"
+				}
+			]
+		},
+		{
+			"Name": "Scene",
+			"UUID": "de.frankpeterandrae.yamaha.scene",
+			"Icon": "imgs/actions/scene/icon",
+			"Tooltip": "Recall a Yamaha scene",
+			"Controllers": ["Keypad"],
+			"PropertyInspectorPath": "ui/scene.html",
+			"States": [
+				{
+					"Image": "imgs/actions/scene/key",
+					"Title": "Scene"
+				}
+			]
+		},
+		{
+			"Name": "NetUSB Media Control",
+			"UUID": "de.frankpeterandrae.yamaha.net-usb-media-control",
+			"Icon": "imgs/actions/net-usb-media-control/icon",
+			"Tooltip": "Control NetUSB playback on the configured Yamaha AVR",
+			"Controllers": ["Keypad"],
+			"PropertyInspectorPath": "ui/net-usb-media-control.html",
+			"States": [
+				{
+					"Image": "imgs/actions/net-usb-media-control/play-pause",
+					"Title": "Play /\nPause"
+				}
+			]
+		},
+		{
+			"Name": "Now Playing",
+			"UUID": "de.frankpeterandrae.yamaha.now-playing",
+			"Icon": "imgs/actions/now-playing/icon",
+			"Tooltip": "Show current NetUSB playback information",
+			"Controllers": ["Keypad"],
+			"States": [
+				{
+					"Image": "imgs/actions/now-playing/default",
+					"Title": ""
+				}
+			]
+		}
+	],
+	"Category": "Yamaha TSR-700",
+	"CategoryIcon": "imgs/plugin/category-icon",
+	"CodePath": "bin/plugin.mjs",
+	"Description": "Elgato Stream Deck Plugin for Yamaha TSR-700 / RX-V6A receivers",
+	"Icon": "imgs/plugin/marketplace",
+	"SDKVersion": 3,
+	"Software": {
+		"MinimumVersion": "7.1"
+	},
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "12"
+		},
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+	"Nodejs": {
+		"Version": "24",
+		"Debug": "enabled"
+	},
+	"UUID": "de.frankpeterandrae.yamaha"
+}

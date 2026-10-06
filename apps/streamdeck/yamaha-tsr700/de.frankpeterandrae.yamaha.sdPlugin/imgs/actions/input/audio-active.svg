@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     width="64"
+     height="64"
+     fill="none"
+     shape-rendering="geometricPrecision">
+
+    <rect x="1" y="1" width="62" height="62" fill="none" stroke="#e38b20" stroke-width="2"/>
+    <path d="M37 8v33a9 9 0 1 1-4-7.5V14l17 5v10l-13-4"
+          fill="#fff"/>
+
+</svg>
