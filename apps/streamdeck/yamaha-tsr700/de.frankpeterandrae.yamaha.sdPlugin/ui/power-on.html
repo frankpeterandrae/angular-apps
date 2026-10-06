@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+	<head lang="en">
+		<title>Power On Settings</title>
+		<meta charset="utf-8" />
+		<script src="https://sdpi-components.dev/releases/v4/sdpi-components.js"></script>
+	</head>
+
+	<body>
+		<sdpi-item label="Receiver IP">
+			<sdpi-textfield global setting="receiverAddress" placeholder="192.168.178.67"></sdpi-textfield>
+		</sdpi-item>
+
+		<sdpi-item label="Zone">
+			<sdpi-select setting="zone" default="main" datasource="getPowerZones" loading="Loading zones..." show-refresh hot-reload>
+			</sdpi-select>
+		</sdpi-item>
+	</body>
+</html>

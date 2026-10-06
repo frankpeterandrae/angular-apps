@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+	<head lang="en">
+		<title>NetUSB Media Control</title>
+		<meta charset="utf-8" />
+		<script src="https://sdpi-components.dev/releases/v4/sdpi-components.js"></script>
+	</head>
+	<body>
+		<sdpi-item label="Receiver IP">
+			<sdpi-textfield global setting="receiverAddress" placeholder="192.168.178.67"></sdpi-textfield>
+		</sdpi-item>
+
+		<sdpi-item label="Command">
+			<sdpi-select setting="command" default="play_pause">
+				<option value="play_pause">Play / Pause</option>
+				<option value="play">Play</option>
+				<option value="pause">Pause</option>
+				<option value="stop">Stop</option>
+				<option value="previous">Previous</option>
+				<option value="next">Next</option>
+				<option value="fast_reverse">Fast Reverse</option>
+				<option value="fast_forward">Fast Forward</option>
+			</sdpi-select>
+		</sdpi-item>
+	</body>
+</html>

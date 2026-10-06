@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     width="64"
+     height="64"
+     fill="none"
+     shape-rendering="geometricPrecision">
+
+    <path d="M14 22h28v26H14z" fill="#fff"/>
+    <path d="M42 26h10v18H42z" fill="#fff"/>
+    <path d="M44 29h6v3h-6zM44 38h6v3h-6z" fill="#111"/>
+    <path d="M14 27h-5v16h5"
+          stroke="#fff" stroke-width="3"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+</svg>

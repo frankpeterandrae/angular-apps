@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     width="64"
+     height="64"
+     fill="none"
+     shape-rendering="geometricPrecision">
+
+    <rect x="10" y="15" width="44" height="34" rx="2"
+          stroke="#fff" stroke-width="3"/>
+    <path d="M17 15v34M47 15v34"
+          stroke="#fff" stroke-width="2.4"/>
+    <path d="M10 23h7M10 32h7M10 41h7
+           M47 23h7M47 32h7M47 41h7"
+          stroke="#fff" stroke-width="2.4"/>
+    <path d="M37 8v33a9 9 0 1 1-4-7.5V14l17 5v10l-13-4"
+          transform="translate(6 8) scale(0.70)"
+          fill="#fff"/>
+
+</svg>
